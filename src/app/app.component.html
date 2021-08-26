@@ -1,8 +1,43 @@
-<h1>KSB-SCIP App</h1>
-<!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) -->
-<nav>
-  <ul>
-    <li><a routerLink="/purchase-order-line-item.component" routerLinkActive="active">Purchase Order</a></li>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarText"
+    aria-controls="navbarText"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li>
+        <a
+          class="nav-link"
+          routerLink="/purchase-order-line-item.component"
+          routerLinkActive="active"
+          >Purchase Order</a
+        >
+      </li>
+    </ul>
+    <span class="navbar-text"> logout </span>
+  </div>
 </nav>
+<div class="card">
+  <div class="card-body">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Recipient's username"
+        aria-label="Recipient's username"
+        aria-describedby="basic-addon2"
+      />
+    </div>
+    <button type="button" class="btn btn-primary btn-lg">Login</button>
+    <button type="button" class="btn btn-secondary btn-lg">Request New Token</button>
+  </div>
+</div>
+
 <router-outlet></router-outlet>
