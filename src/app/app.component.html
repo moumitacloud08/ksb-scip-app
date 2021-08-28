@@ -24,7 +24,7 @@
     <span class="navbar-text"> logout </span>
   </div>
 </nav-->
-<div class="row login-box">
+<div class="row login-box" *ngIf="!isLoggenIn">
   <div class="row">
     <div class="col-md-12">
       <p class="p1"><b>Enter the token number</b></p>
@@ -35,17 +35,16 @@
   </div>
   <div class="row">
     <div class="col-md-12 login-input">
-      <form>
+      <form #f="ngForm" (ngSubmit)="authenticate(f)">
         <p><b>Please enter the token number</b></p>
-        <div class="form-group" style="width: 370px">
+        <div class="form-group" style="width: 370px" >
           <input
             type="text"
             class="form-control form-control-lg"
-            placeholder="Enter token"
-          />
+            placeholder="Enter token"  name="tokenInput" ngModel required #tokenInput="ngModel"/>
         </div>
         <p>
-          <button class="button button1">Login</button>
+          <button  class="button button1">Login</button>
           <button class="button button2">Request new token</button>
         </p>
       </form>
