@@ -14,6 +14,6 @@ export class AppComponent {
 
   authenticate(){
     this.isLoggenIn=true;
-    this.router.navigateByUrl('/purchase-order-line-item.component');
+    this.router.navigateByUrl('/purchase-order-line-item');
   }
 }
