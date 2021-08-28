@@ -24,19 +24,32 @@
     <span class="navbar-text"> logout </span>
   </div>
 </nav-->
-<div class="card" *ngIf="!isLoggenIn">
-  <div class="card-body">
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Recipient's username"
-        aria-label="Recipient's username"
-        aria-describedby="basic-addon2"
-      />
+<div class="row login-box">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="p1"><b>Enter the token number</b></p>
+      <p class="p2">
+        The token number has been sent to your email address supplier@test.com
+      </p>
     </div>
-    <button type="button" class="btn btn-primary btn-lg"  (click)="authenticate()">Login</button>
-    <button type="button" class="btn btn-secondary btn-lg">Request New Token</button>
+  </div>
+  <div class="row">
+    <div class="col-md-12 login-input">
+      <form>
+        <p><b>Please enter the token number</b></p>
+        <div class="form-group" style="width: 370px">
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            placeholder="Enter token"
+          />
+        </div>
+        <p>
+          <button class="button button1">Login</button>
+          <button class="button button2">Request new token</button>
+        </p>
+      </form>
+    </div>
   </div>
 </div>
 

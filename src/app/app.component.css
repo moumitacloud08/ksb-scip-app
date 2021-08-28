@@ -1,0 +1,52 @@
+.login-box {
+  margin-top: 200px;
+  margin-bottom: 90px;
+  margin-right: 100px;
+  margin-left: 400px;
+}
+.login-field {
+  padding: 5px 5px 5px 5px;
+}
+.p1 {
+  padding: 1px 10px 2px 0px;
+  margin: 0px 5px -6px 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.3em;
+}
+.p2 {
+  padding: 0px 6px 0px 3px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #76838f;
+}
+.login-input {
+  margin-top: 50px;
+  margin-bottom: 70px;
+  margin-right: 500px;
+  margin-left: 5px;
+}
+.button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 14px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 3px 16px 2px 2px;
+  cursor: pointer;
+}
+.button1 {
+  background-color: #343a40;
+}
+.button2 {
+  background-color: #f8f9fa;
+  color: #a49898;
+  border: 1px solid #9a9fa4;
+}
+
+input::placeholder {
+    color: #abbbcbb5;
+    font-size: 0.700em;
+    font-family: Arial, Helvetica, sans-serif;
+  }
