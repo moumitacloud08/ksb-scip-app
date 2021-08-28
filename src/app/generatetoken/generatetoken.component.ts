@@ -10,6 +10,9 @@ export class GeneratetokenComponent implements OnInit {
   constructor(public appComponent: AppComponent) {
     appComponent.isLoggenIn = true;
   }
-
+  imageSrc = 'assets/Image/MaskGroup2.png' 
+  imageAlt = 'Token'
+  iconSrc = 'assets/Image/Image 14.png' 
+  iconAlt = 'KSB'
   ngOnInit(): void {}
 }
