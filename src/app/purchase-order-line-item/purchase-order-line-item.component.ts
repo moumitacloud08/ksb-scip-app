@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from '.././app.component';
 
 @Component({
   selector: 'app-purchase-order-line-item',
@@ -7,17 +8,63 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PurchaseOrderLineItemComponent implements OnInit {
 
-  constructor() { }
+  constructor(public appComponent: AppComponent) {
+    appComponent.isLoggenIn = true;
+   }
 
   ngOnInit(): void {
   }
 
-  elements: any = [
-    {id: 1, first: 'Mark', last: 'Otto', handle: '@mdo'},
-    {id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat'},
-    {id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter'},
-  ];
+  elements: any = [ {
+    "statisticalGoodsNumber" : 5,
+    "CASNumber" : 5,
+    "purchaseOrderNumber" : 0,
+    "scipNumber" : 1,
+    "lineItemNumber" : 6,
+    "scipRelevent" : "Yes",
+    "materialCategory" : "materialCategory",
+    "submitStatus" : "submitted"
+  }, {
+    "statisticalGoodsNumber" : 5,
+    "CASNumber" : 5,
+    "purchaseOrderNumber" : 0,
+    "scipNumber" : 1,
+    "lineItemNumber" : 6,
+    "scipRelevent" : "Yes",
+    "materialCategory" : "materialCategory",
+    "submitStatus" : "submitted"
+  },
+  {
+    "statisticalGoodsNumber" : 5,
+    "CASNumber" : 5,
+    "purchaseOrderNumber" : 0,
+    "scipNumber" : 1,
+    "lineItemNumber" : 6,
+    "scipRelevent" : "Yes",
+    "materialCategory" : "materialCategory",
+    "submitStatus" : "submitted"
+  },
+  {
+    "statisticalGoodsNumber" : 9,
+    "CASNumber" : 5,
+    "purchaseOrderNumber" : 0,
+    "scipNumber" : 1,
+    "lineItemNumber" : 6,
+    "scipRelevent" : "Yes",
+    "materialCategory" : "materialCategory",
+    "submitStatus" : "submitted"
+  },
+  {
+    "statisticalGoodsNumber" : 7,
+    "CASNumber" : 5,
+    "purchaseOrderNumber" : 0,
+    "scipNumber" : 1,
+    "lineItemNumber" : 6,
+    "scipRelevent" : "Yes",
+    "materialCategory" : "materialCategory",
+    "submitStatus" : "submitted"
+  } ];
 
-  headElements = ['ID', 'First', 'Last', 'Handle'];
+  headElements = ['Purchase Order', 'Line Item', 'SCIP Relevant', 'SCIP No.', 'Statistical Goods No', 'CAS No', 'Material Category','Action'];
 
 }

@@ -58,3 +58,8 @@ input::placeholder {
     font-size: 0.700em;
     font-family: Arial, Helvetica, sans-serif;
   }
+  @media screen and (max-width: 800px) {
+    .login-box {
+      width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+    }
+  }
