@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +10,30 @@ import {NgForm} from '@angular/forms';
 export class AppComponent {
   title = 'ksb-scip-app';
   isLoggenIn: boolean = false;
+  isWrongInput: boolean = false;
+  isBlankInput: boolean = false;
+  token: String = '';
 
   constructor(private router: Router) {}
 
   authenticate(f: NgForm) {
-    this.isLoggenIn = true;
+    this.isWrongInput = false;
     if (f.value.tokenInput != '') {
-      console.log('Input Token: ' + f.value.tokenInput);
+      this.token = f.value.tokenInput;
+      console.log('Input Token: ' + this.token);
+      if (this.token == 'abc') {
+        this.isLoggenIn = true;
+        this.isWrongInput = false;
+        this.router.navigateByUrl('/purchase-order-line-item');
+      }else{
+        this.isWrongInput = true;
+        this.isLoggenIn = false;
+        this.isBlankInput = false;
+      }
     } else {
-      alert('Fill the name first!!!');
+      this.isWrongInput = false;
+      this.isBlankInput = true;
+      this.isLoggenIn = false;
     }
-    this.router.navigateByUrl('/purchase-order-line-item');
   }
-    
 }

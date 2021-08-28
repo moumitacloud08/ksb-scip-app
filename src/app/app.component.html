@@ -40,13 +40,16 @@
         <div class="form-group" style="width: 370px" >
           <input
             type="text"
-            class="form-control form-control-lg"
-            placeholder="Enter token"  name="tokenInput" ngModel required #tokenInput="ngModel"/>
+            class="form-control text-line form-control-lg"
+            placeholder="Enter token"  name="tokenInput" ngModel  #tokenInput="ngModel" [ngClass]="{'red-border-class': isWrongInput || isBlankInput}"/>
         </div>
         <p>
           <button  class="button button1">Login</button>
-          <button class="button button2">Request new token</button>
+          <button type="button" class="button button2">Request new token</button>
         </p>
+        <p class="p3" *ngIf="!isLoggenIn && isBlankInput">Please enter the token number</p>
+        <p class="p3" *ngIf="!isLoggenIn && isWrongInput">Wrong Input! Only 2 attempts remain. Please verify the token again or request for new token</p>
+
       </form>
     </div>
   </div>

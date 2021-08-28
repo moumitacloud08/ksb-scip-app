@@ -18,6 +18,14 @@
   font-family: Arial, Helvetica, sans-serif;
   color: #76838f;
 }
+.p3 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #e03737;
+}
+.red-border-class{
+  border:1px solid red;
+  color:red;
+}
 .login-input {
   margin-top: 50px;
   margin-bottom: 70px;
