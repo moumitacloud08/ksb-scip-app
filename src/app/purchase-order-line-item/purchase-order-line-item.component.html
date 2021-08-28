@@ -1,10 +1,10 @@
 
 <div class="row hd-part">
   <div class="col-md-8">
-    <p>Please input the SCIP or the statistical and CAS numbers against purchased order line item</p>
+    <p><b>Please input the SCIP or the statistical and CAS numbers against purchased order line item</b></p>
   </div>
   <div class="col-md-4">
-    <input type=text class="form-control text-box-pos"/>
+    <input type=text class="form-control text-box-pos" placeholder="Search by SCIP Statistical Goods or CAS no."/>
   </div>
 </div>
 <div class="row">
@@ -17,7 +17,7 @@
       </thead>
       <tbody>
           <tr *ngFor="let el of elements" class="table-row">
-              <th scope="row">{{el.purchaseOrderNumber}}</th>
+              <td align="left">{{el.purchaseOrderNumber}}</td>
               <td>{{el.lineItemNumber}}</td>
               <td>{{el.scipRelevent}}</td>
               <td>{{el.scipNumber}}</td>

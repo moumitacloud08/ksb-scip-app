@@ -18,7 +18,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   elements: any = [ {
     "statisticalGoodsNumber" : 5,
     "CASNumber" : 5,
-    "purchaseOrderNumber" : 0,
+    "purchaseOrderNumber" : 45654756,
     "scipNumber" : 1,
     "lineItemNumber" : 6,
     "scipRelevent" : "Yes",
@@ -27,7 +27,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }, {
     "statisticalGoodsNumber" : 5,
     "CASNumber" : 5,
-    "purchaseOrderNumber" : 0,
+    "purchaseOrderNumber" : 45654756,
     "scipNumber" : 1,
     "lineItemNumber" : 6,
     "scipRelevent" : "Yes",
@@ -37,7 +37,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   {
     "statisticalGoodsNumber" : 5,
     "CASNumber" : 5,
-    "purchaseOrderNumber" : 0,
+    "purchaseOrderNumber" : 45654756,
     "scipNumber" : 1,
     "lineItemNumber" : 6,
     "scipRelevent" : "Yes",
@@ -47,7 +47,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   {
     "statisticalGoodsNumber" : 9,
     "CASNumber" : 5,
-    "purchaseOrderNumber" : 0,
+    "purchaseOrderNumber" : 45654756,
     "scipNumber" : 1,
     "lineItemNumber" : 6,
     "scipRelevent" : "Yes",
@@ -57,7 +57,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   {
     "statisticalGoodsNumber" : 7,
     "CASNumber" : 5,
-    "purchaseOrderNumber" : 0,
+    "purchaseOrderNumber" : 45654756,
     "scipNumber" : 1,
     "lineItemNumber" : 6,
     "scipRelevent" : "Yes",
