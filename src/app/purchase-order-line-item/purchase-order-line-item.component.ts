@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '.././app.component';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-purchase-order-line-item',
@@ -7,7 +8,7 @@ import { AppComponent } from '.././app.component';
   styleUrls: ['./purchase-order-line-item.component.css']
 })
 export class PurchaseOrderLineItemComponent implements OnInit {
-
+  faPlus = faPlus;
   constructor(public appComponent: AppComponent) {
     appComponent.isLoggenIn = true;
    }

@@ -1,43 +1,55 @@
-.table-row{
-    height: 50px;
-    padding: 7px 5px 7px 5px;
-    background-color: #e9ecef99;
-    border: 6px solid white
+.table-row {
+  height: 50px;
+  padding: 7px 5px 7px 5px;
+  background-color: #e9ecef99;
+  border: 6px solid white;
 }
 .table {
-    width: 88%;
-    color: #212529;
-    margin: 0px 0px 0px 105px;
+  width: 88%;
+  color: #212529;
+  margin: 0px 0px 0px 105px;
 }
-.hd-part{
-    margin: 110px 0px 0px 99px;
+.hd-part {
+  margin: 110px 0px 0px 99px;
 }
-.text-box-pos{
-    position: absolute;
-    right: 77px;
-    top: -10px;
+.text-box-pos {
+  position: absolute;
+  right: 77px;
+  top: -10px;
 }
 .button {
-    background-color: #4caf50; /* Green */
-    border: none;
-    color: white;
-    padding: 14px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    margin: 3px 16px 2px 2px;
-    cursor: pointer;
-  }
-  .button1 {
-    background-color: #343a40;
-  }
-  .button2 {
-    background-color: #f8f9fa;
-    color: #a49898;
-    border: 1px solid #9a9fa4;
-  }
-  .button-box{
-    margin-left: 106px;
-    margin-top: 16px;
-  }
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 14px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 3px 16px 2px 2px;
+  cursor: pointer;
+}
+.button1 {
+  background-color: #343a40;
+}
+.button2 {
+  background-color: #f8f9fa;
+  color: #a49898;
+  border: 1px solid #9a9fa4;
+}
+.button-box {
+  margin-left: 106px;
+  margin-top: 16px;
+}
+.p1 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.table tbody td {
+  font-family: Arial, Helvetica, sans-serif;
+}
+input::placeholder {
+  color: #abbbcbb5;
+  font-size: 0.700em;
+  font-family: Arial, Helvetica, sans-serif;
+}

@@ -1,5 +1,5 @@
 .login-box {
-  margin-top: 200px;
+  margin-top: 150px;
   margin-bottom: 90px;
   margin-right: 100px;
   margin-left: 400px;
@@ -21,6 +21,10 @@
 .p3 {
   font-family: Arial, Helvetica, sans-serif;
   color: #e03737;
+}
+.p4 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #62e293;
 }
 .red-border-class{
   border:1px solid red;
@@ -58,6 +62,10 @@ input::placeholder {
     font-size: 0.700em;
     font-family: Arial, Helvetica, sans-serif;
   }
+  .icon-img{
+    width: 75px;
+}
+  
   @media screen and (max-width: 800px) {
     .login-box {
       width: 100%; /* The width is 100%, when the viewport is 800px or smaller */

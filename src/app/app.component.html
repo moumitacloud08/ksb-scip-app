@@ -1,4 +1,4 @@
-<!--nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isLoggenIn">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isLoggenIn">
   <button
     class="navbar-toggler"
     type="button"
@@ -13,17 +13,48 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li>
+        <img class="icon-img" [src]="iconSrc" [alt]="iconAlt" />
+      </li>
+      <!-- <li>
         <a
           class="nav-link"
           routerLink="/purchase-order-line-item"
           routerLinkActive="active"
           >Purchase Order</a
         >
-      </li>
+      </li> -->
     </ul>
-    <span class="navbar-text"> logout </span>
+    <span class="navbar-text"> <a type="button" (click)="logout()"><fa-icon [icon]="faSignOutAlt"></fa-icon></a> </span>
   </div>
-</nav-->
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="!isLoggenIn">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarText"
+    aria-controls="navbarText"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li>
+        <img class="icon-img" [src]="iconSrc" [alt]="iconAlt" />
+      </li>
+      <!-- <li>
+        <a
+          class="nav-link"
+          routerLink="/purchase-order-line-item"
+          routerLinkActive="active"
+          >Purchase Order</a
+        >
+      </li> -->
+    </ul>
+  </div>
+</nav>
 <div class="row login-box" *ngIf="!isLoggenIn">
   <div class="row">
     <div class="col-md-12">
@@ -45,11 +76,11 @@
         </div>
         <p>
           <button  class="button button1">Login</button>
-          <button type="button" class="button button2">Request new token</button>
+          <button type="button" class="button button2" (click)="requestNewToken()">Request new token</button>
         </p>
         <p class="p3" *ngIf="!isLoggenIn && isBlankInput">Please enter the token number</p>
         <p class="p3" *ngIf="!isLoggenIn && isWrongInput">Wrong Input! Only 2 attempts remain. Please verify the token again or request for new token</p>
-
+        <p class="p4" *ngIf="!isLoggenIn && !isBlankInput && !isWrongInput && isSent">Requested token has been sent to your email address supplier@test.com</p>
       </form>
     </div>
   </div>
