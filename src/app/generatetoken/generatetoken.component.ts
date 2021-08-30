@@ -8,7 +8,8 @@ import { AppComponent } from '.././app.component';
 })
 export class GeneratetokenComponent implements OnInit {
   constructor(public appComponent: AppComponent) {
-    appComponent.isLoggenIn = true;
+    appComponent.isLoggenIn = false;
+    appComponent.isGenerateTokenPage = true;
   }
   imageSrc = 'assets/Image/MaskGroup2.png' 
   imageAlt = 'Token'

@@ -15,6 +15,7 @@ export class AppComponent {
   isWrongInput: boolean = false;
   isBlankInput: boolean = false;
   isSent: boolean = false;
+  isGenerateTokenPage: boolean = false;
   token: String = '';
   faSignOutAlt = faSignOutAlt;
 
