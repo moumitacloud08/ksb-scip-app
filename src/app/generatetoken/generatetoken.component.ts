@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '.././app.component';
+import {GeneratetokenService } from '.././generatetoken.service'
+import { Message } from '.././message';
 
 @Component({
   selector: 'app-generatetoken',
@@ -7,7 +9,7 @@ import { AppComponent } from '.././app.component';
   styleUrls: ['./generatetoken.component.css'],
 })
 export class GeneratetokenComponent implements OnInit {
-  constructor(public appComponent: AppComponent) {
+  constructor(public appComponent: AppComponent, private generatetokenService: GeneratetokenService) {
     appComponent.isLoggenIn = false;
     appComponent.isGenerateTokenPage = true;
   }
@@ -15,5 +17,10 @@ export class GeneratetokenComponent implements OnInit {
   imageAlt = 'Token'
   iconSrc = 'assets/Image/Image 14.png' 
   iconAlt = 'KSB'
+  messages: Message[] = [];
+  generateToken() {
+    this.generatetokenService.generateToken()
+    .subscribe();
+  }
   ngOnInit(): void {}
 }
