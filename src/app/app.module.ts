@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { PurchaseOrderLineItemComponent } from './purchase-order-line-item/purchase-order-line-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GeneratetokenComponent } from './generatetoken/generatetoken.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PurchaseOrderLineItemComponent,
-    GeneratetokenComponent
+    GeneratetokenComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -12,48 +12,18 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 export class AppComponent {
   title = 'ksb-scip-app';
   isLoggenIn: boolean = false;
-  isWrongInput: boolean = false;
-  isBlankInput: boolean = false;
-  isSent: boolean = false;
   isGenerateTokenPage: boolean = false;
-  token: String = '';
-  faSignOutAlt = faSignOutAlt;
-
-  constructor(private router: Router) {}
   iconSrc = 'assets/Image/Image 14.png' 
   iconAlt = 'KSB'
+  faSignOutAlt = faSignOutAlt;
+ 
 
-  authenticate(f: NgForm) {
-    this.isWrongInput = false;
-    if (f.value.tokenInput != '') {
-      this.token = f.value.tokenInput;
-      console.log('Input Token: ' + this.token);
-      if (this.token == 'abc') {
-        this.isLoggenIn = true;
-        this.isWrongInput = false;
-        this.router.navigateByUrl('/purchase-order-line-item');
-      }else{
-        this.isWrongInput = true;
-        this.isLoggenIn = false;
-        this.isBlankInput = false;
-      }
-    } else {
-      this.isWrongInput = false;
-      this.isBlankInput = true;
-      this.isLoggenIn = false;
-    }
-  }
-  requestNewToken() {
-    this.isWrongInput = false;
-    this.isBlankInput = false;
-    this.isLoggenIn = false;
-    this.isSent = true;
-  }
+  constructor(private router: Router) {}
+
+
+  
   logout() {
-    this.isWrongInput = false;
-    this.isBlankInput = false;
     this.isLoggenIn = false;
-    this.isSent = false;
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/login');
   }
 }
