@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '.././app.component';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus,faGreaterThan,faLessThan,faFilePdf } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-purchase-order-line-item',
@@ -9,6 +9,11 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class PurchaseOrderLineItemComponent implements OnInit {
   faPlus = faPlus;
+  faLessThan = faLessThan;
+  faGreaterThan = faGreaterThan;
+  faFilePdf = faFilePdf;
+  iconPlusCircle = 'assets/Image/pluscircle.png' 
+  iconPlusAlt="add"
   constructor(public appComponent: AppComponent) {
     appComponent.isLoggenIn = true;
    }

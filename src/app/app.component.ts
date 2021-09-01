@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt,faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +16,10 @@ export class AppComponent {
   iconSrc = 'assets/Image/Image 14.png' 
   iconAlt = 'KSB'
   faSignOutAlt = faSignOutAlt;
+  faUser=faUser;
+  
+  usericon = 'assets/Image/usericon.png' 
+  userAlt = 'John'
  
 
   constructor(private router: Router) {}

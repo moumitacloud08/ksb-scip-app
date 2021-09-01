@@ -12,6 +12,8 @@ th {
 }
 td {
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.90rem;
 }
 .table-th {
   height: 50px;
@@ -63,4 +65,42 @@ input::placeholder {
   box-sizing: border-box;
   border: 1px solid #adb5bd;
   outline: none;
+}
+.pagination-box {
+  position: absolute;
+  left: 1268px;
+  padding-top: 11px;
+}
+.page-style {
+  line-height: 0.25;
+  padding: 0.5rem 0.35rem;
+}
+.icon-class {
+  color: #007bff;
+  position: relative;
+  top: -6%;
+}
+.button {
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 3px;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white;
+  color: #1563b6;
+  padding: 9px 17px;
+  border: 2px solid #1563b6;
+  position: absolute;
+  top: 85px;
+  right: 100px;
+}
+.plus-class{
+  width:30px
 }

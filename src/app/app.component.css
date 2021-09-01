@@ -2,7 +2,7 @@
 .nav-bar {
   height: 98px;
   border: 2px solid #e9ecef99;
-  width: 102%;
+  width: 100%;
 }
 
 .p1 {
@@ -58,7 +58,10 @@ input::placeholder {
     margin: -29px 9px 2px 76px;
     height: 57px;
 }
-  
+.usericon-class{
+  width:30px
+}
+
   @media screen and (max-width: 800px) {
     .login-box {
       width: 100%; /* The width is 100%, when the viewport is 800px or smaller */

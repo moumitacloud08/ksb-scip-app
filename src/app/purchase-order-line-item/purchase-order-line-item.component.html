@@ -1,51 +1,75 @@
-
 <div class="row hd-part">
   <div class="col-md-8 ptext">
     <p class="p1"><b>SCIP Information</b></p>
-    <p class="p2">Please input the SCIP or the statistical and CAS numbers against purchased order line item</p>
-    <input type=text class="text-border-class" name="scip" id=scip placeholder="Search by SCIP no, Statistical goods no, CAS no"/>
-
+    <p class="p2">
+      Please input the SCIP or the statistical and CAS numbers against purchased
+      order line item
+    </p>
+    <input
+      type="text"
+      class="text-border-class"
+      name="scip"
+      id="scip"
+      placeholder="Search by SCIP no, Statistical goods no, CAS no"
+    />
   </div>
-  <!-- <div class="col-md-4">
-    <input type=text class="form-control text-box-pos" placeholder="Search by SCIP Statistical Goods or CAS no."/>
-  </div> -->
+  <div class="col-md-4">
+    <button type="button" class="button button1"><fa-icon [icon]="faFilePdf"  ></fa-icon>&nbsp;&nbsp;Download SCIP Data</button>
+  </div>
 </div>
 <div class="row">
   <div class="col-md-12">
-    <table class="table ">
+    <table class="table">
       <thead class="table-th">
-        <tr >
-          <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+        <tr>
+          <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
         </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let el of elements" class="table-row">
-              <td>{{el.purchaseOrderNumber}}</td>
-              <td>{{el.lineItemNumber}}</td>
-              <td>{{el.scipRelevent}}</td>
-              <td>{{el.scipNumber}}</td>
-              <td>{{el.statisticalGoodsNumber}}</td>
-              <td>{{el.CASNumber}}</td>
-              <td>{{el.materialCategory}}</td>
-              <td><a><fa-icon [icon]="faPlus"></fa-icon></a></td>
-            </tr>
-       
+        <tr *ngFor="let el of elements" class="table-row">
+          <td>{{ el.purchaseOrderNumber }}</td>
+          <td>{{ el.lineItemNumber }}</td>
+          <td>{{ el.scipRelevent }}</td>
+          <td>{{ el.scipNumber }}</td>
+          <td>{{ el.statisticalGoodsNumber }}</td>
+          <td>{{ el.CASNumber }}</td>
+          <td>{{ el.materialCategory }}</td>
+          <td>
+            <a><img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class"/></a>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12 pagination-box">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <li class="page-item">
+          <a
+            ><fa-icon [icon]="faLessThan" size="xs" class="icon-class"></fa-icon
+          ></a>
+        </li>
+        &nbsp;&nbsp;
+        <li class="page-item"><a class="page-link page-style">1</a></li>
+        &nbsp;
+        <li class="page-item"><a class="page-link page-style">2</a></li>
+        &nbsp;
+        <li class="page-item"><a class="page-link page-style">3</a></li>
+        &nbsp;
+        <li class="page-item"><a class="page-link page-style">4</a></li>
+        &nbsp;&nbsp;
+        <li class="page-item">
+          <a
+            ><fa-icon
+              [icon]="faGreaterThan"
+              size="xs"
+              class="icon-class"
+            ></fa-icon
+          ></a>
+        </li>
       </ul>
     </nav>
   </div>
-  
 </div>
-    
