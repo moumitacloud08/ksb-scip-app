@@ -1,17 +1,20 @@
 
 <div class="row hd-part">
-  <div class="col-md-8">
-    <p class="p1"><b>Please input the SCIP or the statistical and CAS numbers against purchased order line item</b></p>
+  <div class="col-md-8 ptext">
+    <p class="p1"><b>SCIP Information</b></p>
+    <p class="p2">Please input the SCIP or the statistical and CAS numbers against purchased order line item</p>
+    <input type=text class="text-border-class" name="scip" id=scip placeholder="Search by SCIP no, Statistical goods no, CAS no"/>
+
   </div>
-  <div class="col-md-4">
+  <!-- <div class="col-md-4">
     <input type=text class="form-control text-box-pos" placeholder="Search by SCIP Statistical Goods or CAS no."/>
-  </div>
+  </div> -->
 </div>
 <div class="row">
   <div class="col-md-12">
-    <table class="table">
-      <thead>
-        <tr class="table-row">
+    <table class="table ">
+      <thead class="table-th">
+        <tr >
           <th *ngFor="let head of headElements" scope="col">{{head}} </th>
         </tr>
       </thead>
@@ -32,11 +35,16 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6">
-    <p class="button-box">
-      <button  type="button" class="button button1">Submit</button>
-      <button type="button" class="button button2">Cancel</button>
-    </p>
+  <div class="col-md-12">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
   </div>
   
 </div>
