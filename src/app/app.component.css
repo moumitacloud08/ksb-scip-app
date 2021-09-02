@@ -61,6 +61,11 @@ input::placeholder {
 .usericon-class{
   width:30px
 }
+.navbar-text-pos{
+  position: absolute;
+    top: 29px;
+    right: 50px;
+}
 
   @media screen and (max-width: 800px) {
     .login-box {

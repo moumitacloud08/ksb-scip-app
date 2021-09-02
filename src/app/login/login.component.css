@@ -37,7 +37,7 @@
   margin-top: 60px;
   margin-bottom: 70px;
   margin-right: 0px;
-  margin-left: 900px;
+  margin-left: 887px;
 }
 .box-token {
   position: absolute;
@@ -50,7 +50,7 @@ input::placeholder {
   padding: 25px 20px 25px 35px;
 }
 .text-border-class {
-  width: 95%;
+  width: 93%;
   padding: 6px 13px 11px 1px;
   margin: 0px 2px;
   box-sizing: border-box;

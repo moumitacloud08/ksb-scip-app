@@ -97,12 +97,54 @@ input::placeholder {
 .button1 {
   background-color: white;
   color: #1563b6;
-  padding: 9px 17px;
+  padding: 4px 7px;
   border: 2px solid #1563b6;
   position: absolute;
-  top: 85px;
-  right: 100px;
+  top: 84px;
+  right: 94px;
+
 }
+
 .plus-class{
   width:30px
 }
+.pdf-class{
+  width:20px
+}
+.scip-download-class{
+  padding: 6px;
+}
+a.page-style:hover {
+  background-color: #007bff;
+}
+.btn-secondary {
+  color: black;
+  background-color: white;
+  border-color: white;
+}
+.list-menu{
+  position: absolute;
+  transform: translate3d(42px, -116px, 0px);
+  top: 0px;
+  left: 0px;
+  will-change: transform;
+  /* position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem; */
+}
+
+
