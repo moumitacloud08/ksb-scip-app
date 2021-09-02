@@ -28,6 +28,6 @@ export class AppComponent {
   
   logout() {
     this.isLoggenIn = false;
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/');
   }
 }

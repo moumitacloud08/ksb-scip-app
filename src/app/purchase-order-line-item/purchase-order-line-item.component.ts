@@ -28,9 +28,6 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   isCatergoryList: Boolean = true;
   selectedCat: string = '';
-  // showMaterialCatList() {
-  //   this.isCatergoryList = !this.isCatergoryList;
-  // }
   selectMaterial(item, parentIndex, elements) {
 
     this.isCatergoryList = true;
@@ -40,12 +37,6 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     if (item !='' && item != 'materialCategory') {
       elements[parentIndex].isSelected = true;
       elements[parentIndex].selectedCat = item;
-      // for (var i = 0; i < materialCatList.length; i++) {
-      //   if (i == index) {
-      //     this.isCatergoryList = true;
-      //     this.selectedCat = item;
-      //   }
-      // }     
     }
   }
 

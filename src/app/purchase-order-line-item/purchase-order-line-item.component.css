@@ -10,12 +10,12 @@
 th {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.90rem;
+  font-size: 0.875rem;
 }
 td {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.90rem;
+  font-size: 0.875rem;
 }
 .table-th {
   height: 50px;
@@ -48,6 +48,7 @@ p {
 .p2 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.85rem;
+  color: #6d7a87f7;
   /* position: absolute;
     top: 30px; */
 }
@@ -76,6 +77,7 @@ input::placeholder {
 .page-style {
   line-height: 0.25;
   padding: 0.5rem 0.35rem;
+  color: #a8bfd7;
 }
 .icon-class {
   color: #007bff;

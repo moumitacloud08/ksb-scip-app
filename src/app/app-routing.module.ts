@@ -7,7 +7,8 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   { path: 'purchase-order-line-item', component: PurchaseOrderLineItemComponent },
   { path: 'generatetoken', component: GeneratetokenComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent }
 ];
 
 @NgModule({
