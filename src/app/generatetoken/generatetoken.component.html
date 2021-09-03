@@ -1,20 +1,20 @@
-
 <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <img class="ksb-img" [src]="imageSrc" [alt]="imageAlt" />
+  <div class="row">
+    <div class="col-md-8">
+      <img class="ksb-img" [src]="imageSrc" [alt]="imageAlt" />
+    </div>
+    <div class="col-md-4 box">
+      <div class="row box-icon">
+        <img class="icon-img" [src]="iconSrc" [alt]="iconAlt" />
+        <p>SCIP vendor platform application</p>
       </div>
-      <div class="col-md-4 box">
-        <div class="row box-icon">
-            <img class="icon-img" [src]="iconSrc" [alt]="iconAlt" />
-            <p>SCIP vendor platform application</p>
-        </div>
-        <div class="row box-token">
-            <p class="p1"><b>Generate the token number</b></p>
-            <p class="p2">Please generate the token number first to access SCIP information 
-            It will be sent to email address supplier@test.com</p>
-            <p><button type="button" class="button button1" (click)="generateToken()">Generate the token</button></p>
-        </div>
+      <div class="row box-token">
+        <p class="p1"><b>Generate the token number</b></p>
+        <p class="p2">Please generate the token number first to access SCIP information
+          It will be sent to email address supplier@test.com</p>
+        <p><button type="button" class="button button1" (click)="generateToken()">Generate the token</button></p>
+        <p class="p3" *ngIf="!isGenerated && responseCode != '' && responseCode != '200'" style="color:red">Login Failed </p>
       </div>
     </div>
   </div>
+</div>

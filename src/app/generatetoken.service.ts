@@ -4,6 +4,7 @@ import { Message } from './message';
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
+import * as cons from './constants'
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -41,7 +42,7 @@ export class GeneratetokenService {
       return this.of(result as T);
     };
   }
-  private tokenUrl = 'http://localhost:9002/scip/login/requestNewToken?po=123';  // URL to web api
+  private tokenUrl = cons.BASE_URL+'/login/requestNewToken?purchaseOrder=12345';  // URL to web api
 
   generateToken(): Observable<Message[]> {
     return this.http.get<Message[]>(this.tokenUrl,httpOptions);
