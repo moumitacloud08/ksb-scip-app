@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Message } from './message';
+import { Message } from '../message.model';
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
-import * as cons from './constants'
+import * as cons from '../constants';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'Basic ' + btoa('ksb:ksb')
+   
+    'api_token': '123456789'
   })
 };
 
-
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class GeneratetokenService {
+export class LoginService {
+
   constructor(
     private messageService: MessageService,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient) { }
 
 
-  /** Log a HeroService message with the MessageService */
+    /** Log a HeroService message with the MessageService */
   private log(message: string) {
     this.messageService.add(`TokenService: ${message}`);
   }
@@ -42,12 +42,16 @@ export class GeneratetokenService {
       return this.of(result as T);
     };
   }
-  private tokenUrl = cons.BASE_URL+'/login/requestNewToken?purchaseOrder=12345';  // URL to web api
+  private tokenUrl = cons.BASE_URL+'/login/authenticateVendor?purchaseOrder=';  // URL to web api
 
-  generateToken(): Observable<Message[]> {
-    return this.http.get<Message[]>(this.tokenUrl,httpOptions);
+  login(token : String): Observable<Message[]> {
+    console.log('Input Token in Service: ' + token);
+
+    if(token == ''){
+      console.log('token blank ' );
+      return this.http.get<Message[]>(this.tokenUrl,httpOptions);
+    }
+    console.log('tokenUrl ' + this.tokenUrl);
+    return this.http.get<Message[]>(this.tokenUrl+token,httpOptions);
   }
-
-
-  
 }

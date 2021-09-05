@@ -32,10 +32,10 @@ export class GenerateTokenComponent implements OnInit {
           this.router.navigateByUrl('/login');
         } else if (this.response.code == 400) {
           this.isGenerated = false;
-          this.message = 'Login Failed';
+          this.message = 'Token Generated';
         } else {
           this.isGenerated = false;
-          this.message = 'Login Failed';
+          this.message = 'Token Generate Failed';
         }
       },
       (err) => {}
