@@ -1,0 +1,38 @@
+<nav class="navbar">  
+    <!-- *ngIf="isLoggenIn && !isGenerateTokenPage" -->
+    <!-- <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarText"
+      aria-controls="navbarText"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+    <div class="navbar-content" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li>
+          <div class="ksblogo-bg">
+            <div class="ksb-logoimg"><img src="../../assets/images/Image 14.png" alt="KSB"></div>
+            <div class="ksb-logotxt"><p>SCIP Vendor Platform Application</p></div>
+          </div>
+        </li>
+        <!-- <li>
+          <a
+            class="nav-link"
+            routerLink="/purchase-order-line-item"
+            routerLinkActive="active"
+            >Purchase Order</a
+          >
+        </li> -->
+      </ul>
+      <div class="navbar-text navbar-text-pos">
+         <a type="button" (click)="logout()">
+          <img  src="../../assets/images/usericon.png" alt="John" class="usericon"/>
+          <span>Welcome, John Doe</span>
+        </a>
+      </div>
+    </div>
+  </nav>

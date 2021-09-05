@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppComponent } from '.././app.component';
 import {
   faPlus,
   faGreaterThan,
@@ -10,25 +9,27 @@ import {
 @Component({
   selector: 'app-purchase-order-line-item',
   templateUrl: './purchase-order-line-item.component.html',
-  styleUrls: ['./purchase-order-line-item.component.css'],
+  styleUrls: ['./purchase-order-line-item.component.css']
 })
 export class PurchaseOrderLineItemComponent implements OnInit {
   faPlus = faPlus;
   faLessThan = faLessThan;
   faGreaterThan = faGreaterThan;
   faFilePdf = faFilePdf;
-  iconPlusCircle = 'assets/Image/pluscircle.png';
-  iconPlusAlt = 'add';
-  iconPDF = 'assets/Image/pdficon2.png';
-  iconPDFAlt = 'pdf';
-  iconArrow = 'assets/Image/arrowicon.png';
-  iconArrowAlt = 'select';
-  constructor(public appComponent: AppComponent) {
-    appComponent.isLoggenIn = true;
-  }
   isCatergoryList: Boolean = true;
   selectedCat: string = '';
-  selectMaterial(item, parentIndex, elements) {
+  iconPlusCircle = 'assets/images/pluscircle.png';
+  iconPlusAlt = 'add';
+  iconPDF = 'assets/images/pdficon2.png';
+  iconPDFAlt = 'pdf';
+  iconArrow = 'assets/images/arrowicon.png';
+  iconArrowAlt = 'select';
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+  selectMaterial(item: any, parentIndex: any, elements: any) {
 
     this.isCatergoryList = true;
     this.selectedCat = item;
@@ -39,8 +40,6 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       elements[parentIndex].selectedCat = item;
     }
   }
-
-  ngOnInit(): void {}
 
   elements: any = [
     {

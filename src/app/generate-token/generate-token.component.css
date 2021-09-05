@@ -1,0 +1,32 @@
+.box-token {
+    padding: 50px 5px 5px 5px;
+    float: left;
+  }
+  .p1 {
+    font-size: 1.3em;
+    margin: 5px 0px;
+  }
+  .p2 {
+    color: #7D7D7D;
+    font-size: 0.8em;
+  }
+  .p3 {
+    font-size: 0.8em;
+  }
+
+  .button {
+    background-color: #4caf50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .blue-button {
+    background-color: #1563b6;
+  }

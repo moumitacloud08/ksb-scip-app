@@ -1,31 +1,38 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { PurchaseOrderLineItemComponent } from './purchase-order-line-item/purchase-order-line-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { GeneratetokenComponent } from './generatetoken/generatetoken.component';
+
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { GenerateTokenComponent } from './generate-token/generate-token.component';
 import { LoginComponent } from './login/login.component';
 
+import { UtilService } from './util.service';
+import { FormsModule } from '@angular/forms';
+import { PurchaseOrderLineItemComponent } from './purchase-order-line-item/purchase-order-line-item.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    GenerateTokenComponent,
+    LoginComponent,
     PurchaseOrderLineItemComponent,
-    GeneratetokenComponent,
-    LoginComponent
+    DashboardComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
-  providers: [],
+  providers: [UtilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
