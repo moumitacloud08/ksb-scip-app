@@ -10,7 +10,7 @@ import * as cons from '../constants';
 const httpOptions = {
   headers: new HttpHeaders({
    
-    'api_token': '123456789'
+    'api_token': ''
   })
 };
 
@@ -42,16 +42,19 @@ export class LoginService {
       return this.of(result as T);
     };
   }
-  private tokenUrl = cons.BASE_URL+'/login/authenticateVendor?purchaseOrder=';  // URL to web api
+  private tokenUrl = cons.BASE_URL+'/login/authenticateVendor?purchaseOrder=12345';  // URL to web api
 
-  login(token : String): Observable<Message[]> {
+  login(token : string): Observable<Message[]> {
     console.log('Input Token in Service: ' + token);
 
-    if(token == ''){
-      console.log('token blank ' );
-      return this.http.get<Message[]>(this.tokenUrl,httpOptions);
+    if(token != ''){
+      console.log('token not blank ' );
+      httpOptions.headers=new HttpHeaders({
+        'api_token':  token
+      })
+      
     }
     console.log('tokenUrl ' + this.tokenUrl);
-    return this.http.get<Message[]>(this.tokenUrl+token,httpOptions);
+    return this.http.get<Message[]>(this.tokenUrl,httpOptions);
   }
 }

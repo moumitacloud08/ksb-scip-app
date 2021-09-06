@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   isBlankInput: boolean = false;
   isSent: boolean = false;
   isGenerateTokenPage: boolean = false;
-  token: String = '';
+  token: string = '';
 
   constructor(
     private LoginService: LoginService,
@@ -58,7 +58,11 @@ export class LoginComponent implements OnInit {
           this.message = this.response.message;
           this.router.navigateByUrl('/dashboard/purchase-order-line-item');
         } else {
-          this.message = 'Login Failed';
+          this.message = this.response.message;
+          if(this.message == ''){
+            this.message = 'Login Failed';
+          }
+          
           this.isWrongInput = true;
           this.utilService.isLoggenIn = false;
           this.isLoggenIn = this.utilService.isLoggenIn;

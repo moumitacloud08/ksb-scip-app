@@ -67,8 +67,7 @@
         Please enter the token number
       </p -->
       <p class="p3" *ngIf="!isLoggenIn && isWrongInput">
-        Wrong Input! Only 2 attempts remain. Please verify the token again
-        or request for new token
+       {{message}}
       </p>
       <p class="p4" *ngIf="!isLoggenIn && !isBlankInput && !isWrongInput && isSent">
         Requested token has been sent to your email address
