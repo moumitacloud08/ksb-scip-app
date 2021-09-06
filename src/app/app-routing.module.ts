@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PurchaseOrderLineItemComponent } from './purchase-order-line-item/purchase-order-line-item.component';
 import { dashCaseToCamelCase } from '@angular/compiler/src/util';
+import { AuthGuardService as AuthGuard} from './service/auth-guard.service';
 
 const routes: Routes = [
     { 
@@ -18,7 +19,7 @@ const routes: Routes = [
             },
             {
                 path: 'login',
-                component: LoginComponent
+                component: LoginComponent,canActivate:[AuthGuard]
             }
         ]
     },

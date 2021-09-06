@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import {LocalStorageService} from 'ngx-webstorage'
 
 import { UtilService } from '../util.service';
 import { LoginService } from '../service/login.service';
@@ -21,10 +22,15 @@ export class LoginComponent implements OnInit {
   constructor(
     private LoginService: LoginService,
     private utilService: UtilService,
-    private router: Router
+    private router: Router,
+    private localStorageService:LocalStorageService
   ) {}
-
-  ngOnInit(): void {}
+  authToken;
+  ngOnInit(): void {
+    this.authToken=this.localStorageService.retrieve('user').authToken
+    console.log(" this.authToken In login ")
+    console.log(this.authToken)
+  }
   response: any;
   message: string = '';
   responseCode: string = '';

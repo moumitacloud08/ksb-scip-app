@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {NgxWebstorageModule} from 'ngx-webstorage'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { PurchaseOrderLineItemComponent } from './purchase-order-line-item/purchase-order-line-item.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
+import { AuthGuardService } from './service/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -30,9 +32,10 @@ import { HeaderComponent } from './header/header.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxWebstorageModule.forRoot()
   ],
-  providers: [UtilService],
+  providers: [UtilService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

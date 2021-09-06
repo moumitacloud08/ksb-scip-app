@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {LocalStorageService} from 'ngx-webstorage'
 
 import {GeneratetokenService} from '../service/generatetoken.service';
 
@@ -14,14 +15,25 @@ export class GenerateTokenComponent implements OnInit {
   response: any;
   message: string = '';
   responseCode: string='';
-  constructor(private generatetokenService:GeneratetokenService, private router: Router) { }
+  constructor(private generatetokenService:GeneratetokenService, private router: Router,private localStorageService:LocalStorageService) { }
 
   ngOnInit(): void {
+    this.localStorageService.clear('user')
+  }
+  userName: String ='ksb';
+  password: String ='ksb';
+
+  str1 = new String(this.userName); 
+  str2 = new String( ":"+this.password ); 
+  authToken:String = btoa(this.str1.concat(this.str2.toString()))
+  authObject = {
+    authToken:this.authToken,
+    'valid':false
   }
 
   generateToken() {
-    // this.router.navigateByUrl('/login');
-    this.generatetokenService.generateToken().subscribe(
+    
+    this.generatetokenService.generateToken(this.authToken).subscribe(
       (response) => {
         this.response = JSON.parse(JSON.stringify(response));
         console.log(this.response);
@@ -29,12 +41,14 @@ export class GenerateTokenComponent implements OnInit {
         if (this.response.code == 200) {
           this.isGenerated = true;
           this.message = this.response.message;
+          console.log(" authObject In login component ")
+          console.log(this.authObject)
+          this.localStorageService.store('user',this.authObject)
+          this.authObject.valid = true;
           this.router.navigateByUrl('/login');
-        } else if (this.response.code == 400) {
+        }  else {
           this.isGenerated = false;
-          this.message = 'Token Generated';
-        } else {
-          this.isGenerated = false;
+          this.authObject.valid = false;
           this.message = 'Token Generate Failed';
         }
       },

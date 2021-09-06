@@ -7,10 +7,7 @@ import { MessageService } from './message.service';
 import * as cons from '../constants';
 
 const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'Basic ' + btoa('ksb:ksb')
-  })
+  headers: new HttpHeaders({})
 };
 
 
@@ -21,7 +18,9 @@ export class GeneratetokenService {
   constructor(
     private messageService: MessageService,
     private http: HttpClient
-  ) {}
+  ) {
+
+  }
 
 
   /** Log a HeroService message with the MessageService */
@@ -44,7 +43,13 @@ export class GeneratetokenService {
   }
   private tokenUrl = cons.BASE_URL+'/login/requestNewToken?purchaseOrder=12345';  // URL to web api
 
-  generateToken(): Observable<Message[]> {
+  generateToken(authToken:String): Observable<Message[]> {   
+
+    httpOptions.headers=new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': 'Basic ' + authToken
+    })
+    console.log(httpOptions)
     return this.http.get<Message[]>(this.tokenUrl,httpOptions);
   }
 
