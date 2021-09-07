@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import {LocalStorageService} from 'ngx-webstorage'
+import { LocalStorageService } from 'ngx-webstorage';
 
 import { UtilService } from '../util.service';
 import { LoginService } from '../service/login.service';
@@ -23,18 +23,19 @@ export class LoginComponent implements OnInit {
     private LoginService: LoginService,
     private utilService: UtilService,
     private router: Router,
-    private localStorageService:LocalStorageService
+    private localStorageService: LocalStorageService
   ) {}
   authToken;
   ngOnInit(): void {
-    this.authToken=this.localStorageService.retrieve('user').authToken
-    console.log(" this.authToken In login ")
-    console.log(this.authToken)
+    this.authToken = this.localStorageService.retrieve('user').authToken;
+    console.log(' this.authToken In login ');
+    console.log(this.authToken);
   }
   response: any;
   message: string = '';
   responseCode: string = '';
   authenticate(f: NgForm) {
+    console.log(f)
     this.isWrongInput = false;
 
     if (f.value.tokenInput != '') {
@@ -59,10 +60,10 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/dashboard/purchase-order-line-item');
         } else {
           this.message = this.response.message;
-          if(this.message == ''){
+          if (this.message == '') {
             this.message = 'Login Failed';
           }
-          
+
           this.isWrongInput = true;
           this.utilService.isLoggenIn = false;
           this.isLoggenIn = this.utilService.isLoggenIn;

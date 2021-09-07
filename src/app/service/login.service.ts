@@ -34,7 +34,7 @@ export class LoginService {
   private tokenUrl =
     cons.BASE_URL + '/login/authenticateVendor?purchaseOrder=12345'; // URL to web api
 
-  login(token: string): Observable<Message[]> {
+  login(token: string): Observable<any[]> {
     console.log('Input Token in Service: ' + token);
 
     if (token != '') {
@@ -45,7 +45,7 @@ export class LoginService {
     }
     console.log('tokenUrl ' + this.tokenUrl);
     return this.http
-      .get<Message[]>(this.tokenUrl, httpOptions)
+      .get<any[]>(this.tokenUrl, httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
 }
