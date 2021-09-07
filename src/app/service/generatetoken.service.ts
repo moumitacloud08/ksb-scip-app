@@ -1,58 +1,45 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Message } from '../message.model';
-import { Observable } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { MessageService } from './message.service';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import * as cons from '../constants';
 
 const httpOptions = {
-  headers: new HttpHeaders({})
+  headers: new HttpHeaders({}),
 };
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class GeneratetokenService {
   constructor(
-    private messageService: MessageService,
     private http: HttpClient
-  ) {
+  ) {}
 
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
+  private tokenUrl =
+    cons.BASE_URL + '/login/requestNewToken?purchaseOrder=12345'; // URL to web api
 
-
-  /** Log a HeroService message with the MessageService */
-  private log(message: string) {
-    this.messageService.add(`TokenService: ${message}`);
+  generateToken(authToken: String): Observable<Message[]> {
+    httpOptions.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Basic ' + authToken,
+    });
+    console.log(httpOptions);
+    return this.http
+      .get<Message[]>(this.tokenUrl, httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
   }
-   of: any;
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return this.of(result as T);
-    };
-  }
-  private tokenUrl = cons.BASE_URL+'/login/requestNewToken?purchaseOrder=12345';  // URL to web api
-
-  generateToken(authToken:String): Observable<Message[]> {   
-
-    httpOptions.headers=new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'Basic ' + authToken
-    })
-    console.log(httpOptions)
-    return this.http.get<Message[]>(this.tokenUrl,httpOptions);
-  }
-
-
-  
 }
