@@ -16,6 +16,7 @@ import { LoginService } from '../service/login.service';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { NgForm } from '@angular/forms';
+import { Message } from '../message.model';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -23,22 +24,19 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     service = new LoginService(null);
     component = new LoginComponent(service, new UtilService(), null, null);
-    
   });
 
-  it('true should be true ', () => {
-    expect(true).toBe(true);
-  });
-  
-  it('Test authenticate', fakeAsync(() => {
+  it('Test authenticate EqualTo', fakeAsync(() => {
     const testForm = <NgForm>{
-        value: {
-          tokenInput: '123456789',
-        },
-      };
-    const spy = spyOn(service, 'login').and.returnValue(of([1, 2, 3]));
+      value: {
+        tokenInput: '123456789',
+      },
+    };
+
+    let message = [{ code: '200', type: 'String', message: 'Login Success' }];
+    spyOn(service, 'login').and.returnValue(of([message]));
     component.authenticate(testForm);
-    expect(spy).toHaveBeenCalled()
+    expect(component.messages.length).toBe(1);
   }));
 
   it('should create', () => {

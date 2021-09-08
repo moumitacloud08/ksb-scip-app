@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   response: any;
   message: string = '';
   responseCode: string = '';
+  messages: any[] = [];
   authenticate(f: NgForm) {
     console.log(f)
     this.isWrongInput = false;
@@ -48,15 +49,20 @@ export class LoginComponent implements OnInit {
 
     this.LoginService.login(this.token).subscribe(
       (response) => {
+
         this.response = JSON.parse(JSON.stringify(response));
         console.log(this.response);
         this.responseCode = this.response.code;
+
+        //FOR UNIT TESTING
+        this.messages=this.response
 
         if (this.response.code == 200) {
           this.utilService.isLoggenIn = true;
           this.isLoggenIn = this.utilService.isLoggenIn;
           this.isWrongInput = false;
           this.message = this.response.message;
+          
           this.router.navigateByUrl('/dashboard/purchase-order-line-item');
         } else {
           this.message = this.response.message;

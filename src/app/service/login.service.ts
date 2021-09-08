@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Message } from '../message.model';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry,tap } from 'rxjs/operators';
 import * as cons from '../constants';
 
 const httpOptions = {
@@ -46,6 +46,7 @@ export class LoginService {
     console.log('tokenUrl ' + this.tokenUrl);
     return this.http
       .get<any[]>(this.tokenUrl, httpOptions)
-      .pipe(retry(1), catchError(this.handleError));
+      .pipe(tap(data =>
+        console.log('All: ' + JSON.stringify(data))), catchError(this.handleError));
   }
 }
