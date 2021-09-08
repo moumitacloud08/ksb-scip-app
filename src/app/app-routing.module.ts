@@ -29,7 +29,7 @@ const routes: Routes = [
         children:[
             {
                 path: 'purchase-order-line-item',
-                component: PurchaseOrderLineItemComponent
+                component: PurchaseOrderLineItemComponent,canActivate:[AuthGuard]
             }
         ]
     }

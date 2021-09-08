@@ -5,6 +5,7 @@ import {
   faLessThan,
   faFilePdf,
 } from '@fortawesome/free-solid-svg-icons';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-purchase-order-line-item',
@@ -25,9 +26,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   iconArrow = 'assets/images/arrowicon.png';
   iconArrowAlt = 'select';
 
-  constructor() { }
-
+  constructor(private localStorageService: LocalStorageService) { }
+  authToken;
   ngOnInit(): void {
+    this.authToken = this.localStorageService.retrieve('user').authToken;
+    console.log(' this.authToken In login ');
+    console.log(this.authToken);
   }
   selectMaterial(item: any, parentIndex: any, elements: any) {
 
