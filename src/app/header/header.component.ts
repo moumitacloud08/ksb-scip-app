@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'ngx-webstorage'
 
-import { UtilService } from '../util.service';
+import {
+ faSignOutAlt
+} from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-header',
@@ -10,13 +14,14 @@ import { UtilService } from '../util.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router, private utilService: UtilService) { }
+  constructor(private router:Router,private localStorageService: LocalStorageService) { }
+  faSignOutAlt = faSignOutAlt;
 
   ngOnInit(): void {
   }
 
   logout() {
-    this.utilService.isLoggenIn = false;
+    this.localStorageService.clear('user')
     this.router.navigateByUrl('/');
   }
 }

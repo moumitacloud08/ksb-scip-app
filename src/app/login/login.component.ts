@@ -12,7 +12,6 @@ import { LoginService } from '../service/login.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  isLoggenIn: boolean = false;
   isWrongInput: boolean = false;
   isBlankInput: boolean = false;
   isSent: boolean = false;
@@ -58,8 +57,8 @@ export class LoginComponent implements OnInit {
         this.messages=this.response
 
         if (this.response.code == 200) {
-          this.utilService.isLoggenIn = true;
-          this.isLoggenIn = this.utilService.isLoggenIn;
+          
+         
           this.isWrongInput = false;
           this.message = this.response.message;
           
@@ -71,8 +70,6 @@ export class LoginComponent implements OnInit {
           }
 
           this.isWrongInput = true;
-          this.utilService.isLoggenIn = false;
-          this.isLoggenIn = this.utilService.isLoggenIn;
           this.isBlankInput = false;
         }
       },
@@ -82,8 +79,6 @@ export class LoginComponent implements OnInit {
   requestNewToken() {
     this.isWrongInput = false;
     this.isBlankInput = false;
-    this.utilService.isLoggenIn = false;
-    this.isLoggenIn = this.utilService.isLoggenIn;
     this.isSent = true;
   }
 }

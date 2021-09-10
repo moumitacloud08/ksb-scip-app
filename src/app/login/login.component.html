@@ -1,77 +1,27 @@
-<!-- <div class="box-token">
-    <form #f="ngForm" (ngSubmit)="authenticate(f)">
-      <p class="p1"><b>Enter token</b></p>
-      <p class="p2">
-        The token number has been sent to your email address
-        supplier@test.com
-      </p>
-      <div class="form-group">
-        <input
-          type="text"
-          class="text-border-class"
-          placeholder="Enter token number"
-          name="tokenInput"
-          id="tokenInput"
-          ngModel
-          #tokenInput="ngModel"
-          [ngClass]="{ 'red-border-class': isWrongInput || isBlankInput }"
-        />
-      </div>
-      <div>
-        <button class="button blue-button">Login</button>&nbsp;&nbsp;
-        <button
-          type="button"
-          class="button blank-button"
-          (click)="requestNewToken()"
-        >
-          Request new token
-        </button>
-      </div>
-      <p class="p3" *ngIf="!isLoggenIn && isBlankInput">
-        Please enter the token number
-      </p>
-      <p class="p3" *ngIf="!isLoggenIn && isWrongInput">
-        Wrong Input! Only 2 attempts remain. Please verify the token again
-        or request for new token
-      </p>
-      <p
-        class="p4"
-        *ngIf="!isLoggenIn && !isBlankInput && !isWrongInput && isSent"
-      >
-        Requested token has been sent to your email address
-        supplier@test.com
-      </p>
-    </form>
-  </div> -->
-  <div class="login-container">
-    <form #f="ngForm" (ngSubmit)="authenticate(f)">
-      <p class="p1"><b>Enter token</b></p>
-      <p class="p2">
-        The token number has been sent to your email address
-        supplier@test.com
-      </p>
-      <div class="form-group">
-        <input type="text" placeholder="Enter token" name="tokenInput" id="tokenInput" class="text-border-class"  ngModel #tokenInput="ngModel"/>
-      </div>
-      <div class="button-container">
-        <button class="button blue-button">Login</button>&nbsp;&nbsp;
-        <button
-          type="button"
-          class="button blank-button"
-          (click)="requestNewToken()"
-        >
-          Request new token
-        </button>
-      </div>
-      <!--p class="p3" *ngIf="!isLoggenIn && isBlankInput">
+<div class="login-container">
+  <form #f="ngForm" (ngSubmit)="authenticate(f)">
+    <p class="p1"><b>Enter token</b></p>
+    <p class="p2">
+      The token number has been sent to your email address supplier@test.com
+    </p>
+    <div class="form-group">
+      <input type="text" placeholder="Enter token" name="tokenInput" id="tokenInput" class="text-border-class" ngModel
+        #tokenInput="ngModel" />
+    </div>
+    <div class="button-container">
+      <button class="button blue-button">Login</button>&nbsp;&nbsp;
+      <button type="button" class="button blank-button" (click)="requestNewToken()">
+        Request new token
+      </button>
+    </div>
+    <!--p class="p3" *ngIf="!isLoggenIn && isBlankInput">
         Please enter the token number
       </p -->
-      <p class="p3" *ngIf="!isLoggenIn && isWrongInput">
-       {{message}}
-      </p>
-      <p class="p4" *ngIf="!isLoggenIn && !isBlankInput && !isWrongInput && isSent">
-        Requested token has been sent to your email address
-        supplier@test.com
-      </p>
-    </form>
-  </div>
+    <p class="p3" *ngIf="isWrongInput">
+      {{ message }}
+    </p>
+    <p class="p4" *ngIf="!isWrongInput && isSent">
+      Requested token has been sent to your email address supplier@test.com
+    </p>
+  </form>
+</div>
