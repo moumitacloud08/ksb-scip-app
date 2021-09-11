@@ -28,7 +28,11 @@ td {
   font-size: 0.875rem;
   border-bottom: 1px solid #e9ecef99;
 }
-.table td, .table th {
+.table td {
+  padding-top: 1.2rem;
+  padding-bottom: 0.3rem;
+}
+.table th {
   padding-top: 0.30rem;
 }
 .table-th {
@@ -236,4 +240,14 @@ a.page-style:hover {
   color: black;
   background-color: #FB37370D;
   border-color: red;
+}
+.table-text-border-class {
+  width: 41%;
+  padding: 6px 13px 11px 25px;
+  margin: 6px 1px 5px;
+  box-sizing: border-box;
+  border: 1px solid #adb5bd;
+  outline: none;
+  margin-bottom: -15px;
+  margin-top: -6px;
 }
