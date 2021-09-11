@@ -41,8 +41,6 @@ export class GenerateTokenComponent implements OnInit {
         if (this.response.code == 200) {
           this.isGenerated = true;
           this.message = this.response.message;
-          console.log(" authObject In login component ")
-          console.log(this.authObject)
           this.localStorageService.store('user',this.authObject)
           this.authObject.valid = true;
           this.router.navigateByUrl('/login');

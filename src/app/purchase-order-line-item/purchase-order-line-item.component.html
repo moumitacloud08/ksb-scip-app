@@ -33,26 +33,25 @@
           <td>{{ el.statisticalGoodsNumber }}</td>
           <td>{{ el.CASNumber }}</td>
           <td>
+            {{ el.materialCategory }}
 
-
-            <div class="dropdown">
+            <!--div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false" (click)="selectMaterial('','','')">
                 <span *ngIf="el.isSelected == false" style="font-size:  0.875rem;">Material Category</span> <span
                   *ngIf="el.isSelected == true">{{el.selectedCat}}</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <!-- <button class="dropdown-item" type="button"  (click)="selectMaterial('materialCategory','','')">materialCategory</button>-->
-
                 <button class="dropdown-item" type="button" *ngFor="let item of el.materialCategory;index as childIndex"
                   (click)="selectMaterial(item,parentIndex,elements)"><span
                     style="font-size:  0.875rem;">{{item}}</span></button>
 
               </div>
-            </div>
+            </div-->
           </td>
           <td>
-            <a><img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" /></a>
+            <a  *ngIf="el.isAddShow == true"  (click)="editPurchaseorderLine(parentIndex)"><img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" /></a>
+            <a  *ngIf="el.isDeleteShow == true"><img [src]="iconDelete" [alt]="iconDeleteAlt" class="plus-class" /></a>
           </td>
         </tr>
       </tbody>
@@ -61,7 +60,7 @@
   <div class="table-footer">
     <div class="button-container-footer">
       <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal">Save</button>
-      <button type="button" class="button white-button">Cancel</button>
+      <button type="button" class="button white-button" (click)="resetPurchaseorderLine()">Cancel</button>
     </div>
     <div class="row">
       <div class="col-md-12 alert-class">

@@ -19,8 +19,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   faFilePdf = faFilePdf;
   isCatergoryList: Boolean = true;
   selectedCat: string = '';
-  iconPlusCircle = 'assets/images/pluscircle.png';
+  iconPlusCircle = 'assets/images/plus-circle.png';
   iconPlusAlt = 'add';
+  iconDelete = 'assets/images/delete-icon.png';
+  iconDeleteAlt = 'delete';
   iconPDF = 'assets/images/pdficon2.png';
   iconPDFAlt = 'pdf';
   iconArrow = 'assets/images/arrowicon.png';
@@ -30,10 +32,95 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   authToken;
   isPurchaseOrderSaved:boolean;
   responseCode: String = '';
+  headElements:any=[];
+  elements: any = [];
+  elementsTemp: any = [];
+ 
   ngOnInit(): void {
     this.authToken = this.localStorageService.retrieve('user').authToken;
     console.log(' this.authToken In login ');
     console.log(this.authToken);
+
+
+    this.elements = [
+      {
+        statisticalGoodsNumber: 5,
+        CASNumber: 5,
+        purchaseOrderNumber: 45654756,
+        scipNumber: 15657756,
+        lineItemNumber: 6,
+        scipRelevent: 'Yes',
+        // materialCategory: ['sample56', 'sample2', 'sample3'],
+        materialCategory: 'Silver',
+        submitStatus: 'submitted',
+        isAddShow: true,
+        isDeleteShow: false
+      },
+      {
+        statisticalGoodsNumber: 5,
+        CASNumber: 5,
+        purchaseOrderNumber: 45654756,
+        scipNumber: 167657,
+        lineItemNumber: 6,
+        scipRelevent: 'Yes',
+        // materialCategory: ['sample1', 'sample2', 'sample89'],
+        materialCategory: 'Copper',
+        submitStatus: 'submitted',
+        isAddShow: true,
+        isDeleteShow: false
+      },
+      {
+        statisticalGoodsNumber: 5,
+        CASNumber: 5,
+        purchaseOrderNumber: 45654756,
+        scipNumber: 1657435,
+        lineItemNumber: 6,
+        scipRelevent: 'Yes',
+        // materialCategory: ['sample1', 'sample2', 'sample3'],
+        materialCategory: 'Iron',
+        submitStatus: 'submitted',
+        isAddShow: true,
+        isDeleteShow: false
+      },
+      {
+        statisticalGoodsNumber: 9,
+        CASNumber: 5,
+        purchaseOrderNumber: 45654756,
+        scipNumber: 4565771,
+        lineItemNumber: 6,
+        scipRelevent: 'Yes',
+        // materialCategory: ['sample1', 'sample2', 'sample3'],
+        materialCategory: 'Gold',
+        submitStatus: 'submitted',
+        isAddShow: true,
+        isDeleteShow: false
+      },
+      {
+        statisticalGoodsNumber: 7,
+        CASNumber: 5,
+        purchaseOrderNumber: 45654756,
+        scipNumber: 98677761,
+        lineItemNumber: 6,
+        scipRelevent: 'Yes',
+        // materialCategory: ['sample5', 'sample2', 'sample3'],
+        materialCategory: 'Silver',
+        submitStatus: 'submitted',
+        isAddShow: true,
+        isDeleteShow: false
+      },
+    ];
+    
+    this.headElements = [
+      'Purchase Order',
+      'Line Item',
+      'SCIP Relevant',
+      'SCIP No.',
+      'Statistical Goods No',
+      'CAS No',
+      'Material Category',
+      'Action',
+    ];
+    this.elementsTemp = this.elements;
   }
   selectMaterial(item: any, parentIndex: any, elements: any) {
     this.isCatergoryList = true;
@@ -56,77 +143,89 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     }
   }
 
-  elements: any = [
-    {
-      statisticalGoodsNumber: 5,
-      CASNumber: 5,
-      purchaseOrderNumber: 45654756,
-      scipNumber: 1,
-      lineItemNumber: 6,
-      scipRelevent: 'Yes',
-      materialCategory: ['sample56', 'sample2', 'sample3'],
-      submitStatus: 'submitted',
-      isSelected: false,
-      selectedCat: '',
-    },
-    {
-      statisticalGoodsNumber: 5,
-      CASNumber: 5,
-      purchaseOrderNumber: 45654756,
-      scipNumber: 1,
-      lineItemNumber: 6,
-      scipRelevent: 'Yes',
-      materialCategory: ['sample1', 'sample2', 'sample89'],
-      submitStatus: 'submitted',
-      isSelected: false,
-      selectedCat: '',
-    },
-    {
-      statisticalGoodsNumber: 5,
-      CASNumber: 5,
-      purchaseOrderNumber: 45654756,
-      scipNumber: 1,
-      lineItemNumber: 6,
-      scipRelevent: 'Yes',
-      materialCategory: ['sample1', 'sample2', 'sample3'],
-      submitStatus: 'submitted',
-      isSelected: false,
-      selectedCat: '',
-    },
-    {
-      statisticalGoodsNumber: 9,
-      CASNumber: 5,
-      purchaseOrderNumber: 45654756,
-      scipNumber: 1,
-      lineItemNumber: 6,
-      scipRelevent: 'Yes',
-      materialCategory: ['sample1', 'sample2', 'sample3'],
-      submitStatus: 'submitted',
-      isSelected: false,
-      selectedCat: '',
-    },
-    {
-      statisticalGoodsNumber: 7,
-      CASNumber: 5,
-      purchaseOrderNumber: 45654756,
-      scipNumber: 1,
-      lineItemNumber: 6,
-      scipRelevent: 'Yes',
-      materialCategory: ['sample5', 'sample2', 'sample3'],
-      submitStatus: 'submitted',
-      isSelected: false,
-      selectedCat: '',
-    },
-  ];
-
-  headElements = [
-    'Purchase Order',
-    'Line Item',
-    'SCIP Relevant',
-    'SCIP No.',
-    'Statistical Goods No',
-    'CAS No',
-    'Material Category',
-    'Action',
-  ];
+  editPurchaseorderLine(parentIndex) {
+    this.elements[parentIndex].isAddShow = false;
+    this.elements[parentIndex].isDeleteShow = true;
+  }
+  resetPurchaseorderLine() {
+    this.elements = [
+      {
+        statisticalGoodsNumber: 5,
+        CASNumber: 5,
+        purchaseOrderNumber: 45654756,
+        scipNumber: 15657756,
+        lineItemNumber: 6,
+        scipRelevent: 'Yes',
+        // materialCategory: ['sample56', 'sample2', 'sample3'],
+        materialCategory: 'Silver',
+        submitStatus: 'submitted',
+        isAddShow: true,
+        isDeleteShow: false
+      },
+      {
+        statisticalGoodsNumber: 5,
+        CASNumber: 5,
+        purchaseOrderNumber: 45654756,
+        scipNumber: 167657,
+        lineItemNumber: 6,
+        scipRelevent: 'Yes',
+        // materialCategory: ['sample1', 'sample2', 'sample89'],
+        materialCategory: 'Copper',
+        submitStatus: 'submitted',
+        isAddShow: true,
+        isDeleteShow: false
+      },
+      {
+        statisticalGoodsNumber: 5,
+        CASNumber: 5,
+        purchaseOrderNumber: 45654756,
+        scipNumber: 1657435,
+        lineItemNumber: 6,
+        scipRelevent: 'Yes',
+        // materialCategory: ['sample1', 'sample2', 'sample3'],
+        materialCategory: 'Iron',
+        submitStatus: 'submitted',
+        isAddShow: true,
+        isDeleteShow: false
+      },
+      {
+        statisticalGoodsNumber: 9,
+        CASNumber: 5,
+        purchaseOrderNumber: 45654756,
+        scipNumber: 4565771,
+        lineItemNumber: 6,
+        scipRelevent: 'Yes',
+        // materialCategory: ['sample1', 'sample2', 'sample3'],
+        materialCategory: 'Gold',
+        submitStatus: 'submitted',
+        isAddShow: true,
+        isDeleteShow: false
+      },
+      {
+        statisticalGoodsNumber: 7,
+        CASNumber: 5,
+        purchaseOrderNumber: 45654756,
+        scipNumber: 98677761,
+        lineItemNumber: 6,
+        scipRelevent: 'Yes',
+        // materialCategory: ['sample5', 'sample2', 'sample3'],
+        materialCategory: 'Silver',
+        submitStatus: 'submitted',
+        isAddShow: true,
+        isDeleteShow: false
+      },
+    ];
+    
+    this.headElements = [
+      'Purchase Order',
+      'Line Item',
+      'SCIP Relevant',
+      'SCIP No.',
+      'Statistical Goods No',
+      'CAS No',
+      'Material Category',
+      'Action',
+    ];
+  }
+  
 }
