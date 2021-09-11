@@ -10,7 +10,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 @Component({
   selector: 'app-purchase-order-line-item',
   templateUrl: './purchase-order-line-item.component.html',
-  styleUrls: ['./purchase-order-line-item.component.css']
+  styleUrls: ['./purchase-order-line-item.component.css'],
 })
 export class PurchaseOrderLineItemComponent implements OnInit {
   faPlus = faPlus;
@@ -26,22 +26,33 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   iconArrow = 'assets/images/arrowicon.png';
   iconArrowAlt = 'select';
 
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(private localStorageService: LocalStorageService) {}
   authToken;
+  isPurchaseOrderSaved:boolean;
+  responseCode: String = '';
   ngOnInit(): void {
     this.authToken = this.localStorageService.retrieve('user').authToken;
     console.log(' this.authToken In login ');
     console.log(this.authToken);
   }
   selectMaterial(item: any, parentIndex: any, elements: any) {
-
     this.isCatergoryList = true;
     this.selectedCat = item;
     this.isCatergoryList = !this.isCatergoryList;
 
-    if (item !='' && item != 'materialCategory') {
+    if (item != '' && item != 'materialCategory') {
       elements[parentIndex].isSelected = true;
       elements[parentIndex].selectedCat = item;
+    }
+  }
+  errorMessage:string=''
+  savePurchaseorderLine() {
+    this.responseCode='500'
+    if (this.responseCode == '200') {
+      this.isPurchaseOrderSaved=true;
+    } else {
+      this.isPurchaseOrderSaved=false;
+      this.errorMessage ="Something went wrong . Please try after something"
     }
   }
 
@@ -56,7 +67,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       materialCategory: ['sample56', 'sample2', 'sample3'],
       submitStatus: 'submitted',
       isSelected: false,
-      selectedCat: ''
+      selectedCat: '',
     },
     {
       statisticalGoodsNumber: 5,
@@ -68,7 +79,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       materialCategory: ['sample1', 'sample2', 'sample89'],
       submitStatus: 'submitted',
       isSelected: false,
-      selectedCat: ''
+      selectedCat: '',
     },
     {
       statisticalGoodsNumber: 5,
@@ -80,7 +91,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       materialCategory: ['sample1', 'sample2', 'sample3'],
       submitStatus: 'submitted',
       isSelected: false,
-      selectedCat: ''
+      selectedCat: '',
     },
     {
       statisticalGoodsNumber: 9,
@@ -92,7 +103,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       materialCategory: ['sample1', 'sample2', 'sample3'],
       submitStatus: 'submitted',
       isSelected: false,
-      selectedCat: ''
+      selectedCat: '',
     },
     {
       statisticalGoodsNumber: 7,
@@ -104,7 +115,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       materialCategory: ['sample5', 'sample2', 'sample3'],
       submitStatus: 'submitted',
       isSelected: false,
-      selectedCat: ''
+      selectedCat: '',
     },
   ];
 

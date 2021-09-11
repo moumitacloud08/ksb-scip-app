@@ -63,6 +63,14 @@
       <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal">Save</button>
       <button type="button" class="button white-button">Cancel</button>
     </div>
+    <div class="row">
+      <div class="col-md-12 alert-class">
+        <div class="alert alert-danger" role="alert"
+          *ngIf="(!isPurchaseOrderSaved && responseCode !== '' && responseCode !== '200')">
+          {{errorMessage}}
+        </div>
+      </div>
+    </div>
     <div class="pagination-container">
       <nav aria-label="Page navigation example">
         <ul class="pagination">
@@ -105,8 +113,9 @@
             <p>Once Submit You are not able to change it again</p>
           </div>
           <div class="col-md-12 col-part2">
-            <button type="button" class="btn blue-button-modal" data-dismiss="modal">Submit</button>
-            <button type="button" class="btn white-button-modal" data-dismiss="modal">Review Again</button>
+            <button type="button" class="button blue-button-modal" data-dismiss="modal"
+              (click)="savePurchaseorderLine()">Submit</button>
+            <button type="button" class="button white-button-modal" data-dismiss="modal">Review Again</button>
           </div>
         </div>
       </div>
