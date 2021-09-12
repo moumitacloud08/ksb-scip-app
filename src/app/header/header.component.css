@@ -30,7 +30,7 @@
 .navbar-text {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  padding-left: 44.5rem;
+  padding-left: 40.5rem;
   margin-left: 58px;
   margin-right: -138px;
 }
@@ -45,11 +45,12 @@
 }
 .navbar-text-pos2 span {
   position: relative;
+  color: #00569D;
 }
 
 .navbar-text2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
 }
 .logouticon {
   width: 30px;

@@ -27,10 +27,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   iconPDFAlt = 'pdf';
   iconArrow = 'assets/images/arrowicon.png';
   iconArrowAlt = 'select';
+  iconSaved = 'assets/images/save-icon.png';
+  iconSavedAlt = 'success';
 
   constructor(private localStorageService: LocalStorageService) {}
   authToken;
-  isPurchaseOrderSaved:boolean;
+  isPurchaseOrderSaved:boolean=false;
   responseCode: String = '';
   headElements:any=[];
   elements: any = [];
@@ -134,7 +136,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   errorMessage:string=''
   savePurchaseorderLine() {
-    this.responseCode='500'
+    this.responseCode='200'
     if (this.responseCode == '200') {
       this.isPurchaseOrderSaved=true;
     } else {

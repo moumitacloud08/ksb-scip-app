@@ -1,4 +1,4 @@
-<div class="body-container">
+<div class="body-container" *ngIf="!isPurchaseOrderSaved">
   <div class="hd-part">
     <div class="ptext">
       <p class="p1"><b>SCIP Information</b></p>
@@ -31,29 +31,29 @@
           <td>{{ el.scipRelevent }}</td>
           <td><span *ngIf="el.isAddShow == true">{{ el.scipNumber }}</span>
             <div class="form-group" *ngIf="el.isDeleteShow == true">
-              <input type="text"  name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}" class="table-text-border-class"
-              [(ngModel)]="el.scipNumber" />
+              <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
+                class="table-text-border-class" [(ngModel)]="el.scipNumber" />
             </div>
           </td>
           <td>
             <span *ngIf="el.isAddShow == true">{{ el.statisticalGoodsNumber }}</span>
             <div class="form-group" *ngIf="el.isDeleteShow == true">
-              <input type="text"  name="statisticalGoodsNumber{{parentIndex}}" id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
-              [(ngModel)]="el.statisticalGoodsNumber" />
+              <input type="text" name="statisticalGoodsNumber{{parentIndex}}" id="statisticalGoodsNumber{{parentIndex}}"
+                class="table-text-border-class" [(ngModel)]="el.statisticalGoodsNumber" />
             </div>
           </td>
           <td>
             <span *ngIf="el.isAddShow == true">{{ el.CASNumber }}</span>
             <div class="form-group" *ngIf="el.isDeleteShow == true">
-              <input type="text"  name="CASNumber{{parentIndex}}" id="CASNumber{{parentIndex}}" class="table-text-border-class"
-              [(ngModel)]="el.CASNumber" />
+              <input type="text" name="CASNumber{{parentIndex}}" id="CASNumber{{parentIndex}}"
+                class="table-text-border-class" [(ngModel)]="el.CASNumber" />
             </div>
           </td>
           <td>
             <span *ngIf="el.isAddShow == true">{{ el.materialCategory }}</span>
             <div class="form-group" *ngIf="el.isDeleteShow == true">
-              <input type="text"  name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}" class="table-text-border-class"
-              [(ngModel)]="el.materialCategory" />
+              <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
+                class="table-text-border-class" [(ngModel)]="el.materialCategory" />
             </div>
 
             <!--div class="dropdown">
@@ -86,8 +86,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 alert-class">
-        <div class="alert alert-danger" role="alert"
-          *ngIf="(!isPurchaseOrderSaved && responseCode !== '' && responseCode !== '200')">
+        <div class="alert alert-danger" role="alert" *ngIf="(responseCode !== '' && responseCode !== '200')">
           {{errorMessage}}
         </div>
       </div>
@@ -146,4 +145,26 @@
 
     </div>
   </div>
+</div>
+
+
+<div class="body-container" *ngIf="isPurchaseOrderSaved">
+  <div class="message-box">
+
+    <div class="row">
+      <div class="col-md-12"><img [src]="iconSaved" [alt]="iconSavedAlt" class="save-icon-class" /></div>
+      <div class="col-md-12 msg1">
+        <p>Records save successfully</p>
+      </div>
+      <div class="col-md-12 msg2">
+        <p>Your records have been successfully save. </p>
+        <p class="p-3">For further process our team will connect with you</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 msg3"><p>Meanwhile, for recent news and update you can explore the KSB website.</p></div>
+      <div class="col-md-12"><button type="button" class="button white-button-msg">Visit KSB website</button></div>
+    </div>
+  </div>
+
 </div>
