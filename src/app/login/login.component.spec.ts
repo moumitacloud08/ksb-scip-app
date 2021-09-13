@@ -22,7 +22,7 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let service: LoginService;
   beforeEach(() => {
-    service = new LoginService(null);
+    service = new LoginService(null,null);
     component = new LoginComponent(service, new UtilService(), null, null);
   });
 
