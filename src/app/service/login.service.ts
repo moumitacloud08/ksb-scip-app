@@ -36,6 +36,11 @@ export class LoginService {
   private tokenUrl =
     cons.BASE_URL + '/login/authenticateVendor?purchaseOrder=12345'; // URL to web api
 
+  setAuthToken() {
+    let authToken: String = this.localStorageService.retrieve('user').authToken;
+    return authToken;
+  }
+
   login(token: string): Observable<any[]> {
     console.log('Input Token in Service: ' + token);
 
@@ -44,8 +49,7 @@ export class LoginService {
       httpOptions.headers = new HttpHeaders({
         api_token: token,
         'Content-Type': 'application/json',
-        Authorization:
-          'Basic ' + this.localStorageService.retrieve('user').authToken,
+        Authorization: 'Basic ' + this.setAuthToken(),
       });
     }
     console.log('tokenUrl ' + this.tokenUrl);
