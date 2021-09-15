@@ -33,8 +33,9 @@
             <div class="form-group" *ngIf="el.isDeleteShow == true" >
               <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
                 class="table-text-border-class" [(ngModel)]="el.scipNumber"  (keyup)="validateScip($event,el.scipNumber,parentIndex)" />
-                <span *ngIf="el.isInvalid == true" >SCIP no should be 10 digit</span>
+                
             </div>
+            <span class="scip-warn" *ngIf="el.isInvalid == true"  >SCIP no should be 10 digit</span>
           </td>
           <td>
             <span *ngIf="el.isAddShow == true">{{ el.statisticalGoodsNumber }}</span>

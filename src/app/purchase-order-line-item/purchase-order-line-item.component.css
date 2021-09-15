@@ -304,3 +304,13 @@ a.page-style:hover {
   margin-left: -23px;
   margin-top: 7px;
 }
+.scip-warn{
+  border: 2px solid #FB3737;
+    font-size: 0.687rem;
+    /* margin-top: 9px; */
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 6px;
+    padding-left: 3px;
+    margin-left: 17px;
+}
