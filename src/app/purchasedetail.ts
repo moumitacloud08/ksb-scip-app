@@ -19,6 +19,7 @@ export class purchasedetails {
         public submitStatus: string,
         public casnumber: number,
         public isAddShow: boolean = true,
-        public isDeleteShow: boolean = false
+        public isDeleteShow: boolean = false,
+        public isInvalid: boolean = false
       ) {}
   }
