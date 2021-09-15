@@ -16,6 +16,7 @@ import { PurchaseOrderLineItemComponent } from './purchase-order-line-item/purch
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthGuardService } from './service/auth-guard.service';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AuthGuardService } from './service/auth-guard.service';
     FormsModule,
     HttpClientModule,
     FontAwesomeModule,
+    Ng2SearchPipeModule,
     NgxWebstorageModule.forRoot()
   ],
   providers: [UtilService,AuthGuardService],

@@ -7,7 +7,7 @@
         order line item
       </p>
       <input type="text" class="text-border-class" name="scip" id="scip"
-        placeholder="Search by SCIP no, Statistical goods no, CAS no" />
+        placeholder="Search by SCIP no, Statistical goods no, CAS no" [(ngModel)]="searchedKeyword" />
     </div>
     <div class="button-container">
       <button type="button" class="button pdf-btn">
@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let el of results;index as parentIndex" class="table-row">
+        <tr *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row">
           <td>{{ el.purchaseOrderNumber }}</td>
           <td>{{ el.lineItemNumber }}</td>
           <td>{{ el.scipRelavent }}</td>

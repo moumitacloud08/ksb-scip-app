@@ -42,7 +42,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   isPurchaseOrderSaved: boolean = false;
   responseCode: String = '';
   headElements: any = [];
-
+  searchedKeyword: string;
   ngOnInit(): void {
     this.authToken = this.localStorageService.retrieve('user').authToken;
     console.log(' this.authToken In login ');
