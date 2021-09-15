@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
          
           this.isWrongInput = false;
           this.message = this.response.message;
-          
+          this.localStorageService.store('api_token',this.token)
           this.router.navigateByUrl('/dashboard/purchase-order-line-item');
         } else {
           this.message = this.response.message;

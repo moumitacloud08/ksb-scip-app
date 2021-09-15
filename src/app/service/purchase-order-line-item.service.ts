@@ -18,10 +18,16 @@ export class PurchaseOrderLineItemService {
     let authToken: String = this.localStorageService.retrieve('user').authToken;
     return authToken;
   }
+  setAPIToken() {
+    let apiToken: string = this.localStorageService.retrieve('api_token');
+    return apiToken;
+  }
+
+  
   private purchaseOrderURL = cons.BASE_URL + '/purchaseorders/77';
   fetchPurchaseDetails() {
      httpOptions.headers = new HttpHeaders({
-        api_token: '123456789',
+        api_token: this.setAPIToken(),
         'Content-Type': 'application/json',
         Authorization: 'Basic ' + this.setAuthToken(),
       });
