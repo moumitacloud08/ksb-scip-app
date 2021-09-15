@@ -6,6 +6,8 @@ import {
   faFilePdf,
 } from '@fortawesome/free-solid-svg-icons';
 import { LocalStorageService } from 'ngx-webstorage';
+import { PurchaseOrderLineItemService } from '../service/purchase-order-line-item.service';
+import { purchasedetails } from '.././purchasedetail'
 
 @Component({
   selector: 'app-purchase-order-line-item',
@@ -29,14 +31,15 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   iconArrowAlt = 'select';
   iconSaved = 'assets/images/save-icon.png';
   iconSavedAlt = 'success';
-
-  constructor(private localStorageService: LocalStorageService) {}
+  results: purchasedetails[];
+  constructor(private localStorageService: LocalStorageService, private purchaseOrderLineItemService:PurchaseOrderLineItemService) {
+    this.results = [];
+  }
   authToken;
   isPurchaseOrderSaved:boolean=false;
   responseCode: String = '';
   headElements:any=[];
-  elements: any = [];
-  elementsTemp: any = [];
+  
  
   ngOnInit(): void {
     this.authToken = this.localStorageService.retrieve('user').authToken;
@@ -44,73 +47,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     console.log(this.authToken);
 
 
-    this.elements = [
-      {
-        statisticalGoodsNumber: 5,
-        CASNumber: 5,
-        purchaseOrderNumber: 45654756,
-        scipNumber: 15657756,
-        lineItemNumber: 6,
-        scipRelevent: 'Yes',
-        // materialCategory: ['sample56', 'sample2', 'sample3'],
-        materialCategory: 'Silver',
-        submitStatus: 'submitted',
-        isAddShow: true,
-        isDeleteShow: false
-      },
-      {
-        statisticalGoodsNumber: 5,
-        CASNumber: 5,
-        purchaseOrderNumber: 45654756,
-        scipNumber: 167657,
-        lineItemNumber: 6,
-        scipRelevent: 'Yes',
-        // materialCategory: ['sample1', 'sample2', 'sample89'],
-        materialCategory: 'Copper',
-        submitStatus: 'submitted',
-        isAddShow: true,
-        isDeleteShow: false
-      },
-      {
-        statisticalGoodsNumber: 5,
-        CASNumber: 5,
-        purchaseOrderNumber: 45654756,
-        scipNumber: 1657435,
-        lineItemNumber: 6,
-        scipRelevent: 'Yes',
-        // materialCategory: ['sample1', 'sample2', 'sample3'],
-        materialCategory: 'Iron',
-        submitStatus: 'submitted',
-        isAddShow: true,
-        isDeleteShow: false
-      },
-      {
-        statisticalGoodsNumber: 9,
-        CASNumber: 5,
-        purchaseOrderNumber: 45654756,
-        scipNumber: 4565771,
-        lineItemNumber: 6,
-        scipRelevent: 'Yes',
-        // materialCategory: ['sample1', 'sample2', 'sample3'],
-        materialCategory: 'Gold',
-        submitStatus: 'submitted',
-        isAddShow: true,
-        isDeleteShow: false
-      },
-      {
-        statisticalGoodsNumber: 7,
-        CASNumber: 5,
-        purchaseOrderNumber: 45654756,
-        scipNumber: 98677761,
-        lineItemNumber: 6,
-        scipRelevent: 'Yes',
-        // materialCategory: ['sample5', 'sample2', 'sample3'],
-        materialCategory: 'Silver',
-        submitStatus: 'submitted',
-        isAddShow: true,
-        isDeleteShow: false
-      },
-    ];
+    
     
     this.headElements = [
       'Purchase Order',
@@ -122,7 +59,36 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'Material Category',
       'Action',
     ];
-    this.elementsTemp = this.elements;
+    
+
+    this.fetchPurchaseDetails()
+
+  }
+response:any;
+  fetchPurchaseDetails() {
+     this.purchaseOrderLineItemService.fetchPurchaseDetails() .then((data) => {
+      console.log(JSON.stringify(data));
+      this.response = JSON.parse(JSON.stringify(data));
+      this.results = this.response.scipDetails.map(item => {
+        return new purchasedetails(
+          item.lineItemNumber,
+          item.statisticalGoodsNumber,
+          item.purchaseOrderNumber,
+          item.scipNumber,
+          item.scipRelavent,
+          item.materialCategory,
+          item.submitStatus,
+          item.casnumber,
+          item.isAddShow,
+          item.isDeleteShow
+        );
+      });
+      console.log(" <===this.results====>")
+      console.log( JSON.parse(JSON.stringify(this.results)))
+    })
+    .catch((error) => {
+      console.log("Promise rejected with " + JSON.stringify(error));
+    });
   }
   selectMaterial(item: any, parentIndex: any, elements: any) {
     this.isCatergoryList = true;
@@ -146,78 +112,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
 
   editPurchaseorderLine(parentIndex) {
-    this.elements[parentIndex].isAddShow = false;
-    this.elements[parentIndex].isDeleteShow = true;
+    this.results[parentIndex].isAddShow = false;
+    this.results[parentIndex].isDeleteShow = true;
   }
   resetPurchaseorderLine() {
-    this.elements = [
-      {
-        statisticalGoodsNumber: 5,
-        CASNumber: 5,
-        purchaseOrderNumber: 45654756,
-        scipNumber: 15657756,
-        lineItemNumber: 6,
-        scipRelevent: 'Yes',
-        // materialCategory: ['sample56', 'sample2', 'sample3'],
-        materialCategory: 'Silver',
-        submitStatus: 'submitted',
-        isAddShow: true,
-        isDeleteShow: false
-      },
-      {
-        statisticalGoodsNumber: 5,
-        CASNumber: 5,
-        purchaseOrderNumber: 45654756,
-        scipNumber: 167657,
-        lineItemNumber: 6,
-        scipRelevent: 'Yes',
-        // materialCategory: ['sample1', 'sample2', 'sample89'],
-        materialCategory: 'Copper',
-        submitStatus: 'submitted',
-        isAddShow: true,
-        isDeleteShow: false
-      },
-      {
-        statisticalGoodsNumber: 5,
-        CASNumber: 5,
-        purchaseOrderNumber: 45654756,
-        scipNumber: 1657435,
-        lineItemNumber: 6,
-        scipRelevent: 'Yes',
-        // materialCategory: ['sample1', 'sample2', 'sample3'],
-        materialCategory: 'Iron',
-        submitStatus: 'submitted',
-        isAddShow: true,
-        isDeleteShow: false
-      },
-      {
-        statisticalGoodsNumber: 9,
-        CASNumber: 5,
-        purchaseOrderNumber: 45654756,
-        scipNumber: 4565771,
-        lineItemNumber: 6,
-        scipRelevent: 'Yes',
-        // materialCategory: ['sample1', 'sample2', 'sample3'],
-        materialCategory: 'Gold',
-        submitStatus: 'submitted',
-        isAddShow: true,
-        isDeleteShow: false
-      },
-      {
-        statisticalGoodsNumber: 7,
-        CASNumber: 5,
-        purchaseOrderNumber: 45654756,
-        scipNumber: 98677761,
-        lineItemNumber: 6,
-        scipRelevent: 'Yes',
-        // materialCategory: ['sample5', 'sample2', 'sample3'],
-        materialCategory: 'Silver',
-        submitStatus: 'submitted',
-        isAddShow: true,
-        isDeleteShow: false
-      },
-    ];
-    
+    this.fetchPurchaseDetails()
     this.headElements = [
       'Purchase Order',
       'Line Item',
