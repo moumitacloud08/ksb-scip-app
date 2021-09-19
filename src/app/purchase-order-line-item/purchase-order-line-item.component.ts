@@ -158,8 +158,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
 
   editPurchaseorderLine(parentIndex) {
-    this.results[parentIndex].isAddShow = false;
-    this.results[parentIndex].isDeleteShow = true;
+   // this.results[parentIndex].isAddShow = false;
+   // this.results[parentIndex].isDeleteShow = true;
   }
   ClearAllTableData(){
 
