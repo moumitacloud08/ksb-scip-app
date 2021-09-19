@@ -8,6 +8,7 @@ import {
 import { LocalStorageService } from 'ngx-webstorage';
 import { PurchaseOrderLineItemService } from '../service/purchase-order-line-item.service';
 import { purchasedetails } from '.././purchasedetail';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-purchase-order-line-item',
@@ -44,6 +45,19 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   headElements: any = [];
   searchedKeyword: string;
   ngOnInit(): void {
+    $(function () {
+      $('#waypointsTable tr').hover(
+        function () {
+          $(this).addClass('hover');
+         // $(this).children('div.form-group').show();
+        },
+        function () {
+          $(this).removeClass('hover');
+         // $(this).children('div.form-group').hide();
+        }
+      );    
+    });
+
     this.authToken = this.localStorageService.retrieve('user').authToken;
     console.log(' this.authToken In login ');
     console.log(this.authToken);
@@ -60,6 +74,19 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     ];
 
     this.fetchPurchaseDetails();
+  }
+
+  mouseEnter(parentIndex) {
+    this.results[parentIndex].isAddShow = false;
+    this.results[parentIndex].isDeleteShow = true;
+  }
+  mouseLeave(parentIndex) {
+    this.results[parentIndex].isAddShow = true;
+    this.results[parentIndex].isDeleteShow = false;
+  }
+  clickevent(parentIndex) {
+    this.results[parentIndex].isAddShow = false;
+    this.results[parentIndex].isDeleteShow = true;
   }
   response: any;
   fetchPurchaseDetails() {
@@ -90,16 +117,17 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
-  validateScip(event: any,scipNumber:string,parentIndex:number){
-     this.results[parentIndex].scipNumber = Number(this.results[parentIndex].scipNumber.toString().replace(/\D/g,''));
-     if(this.results[parentIndex].scipNumber.toString().length < 10){
-      this.results[parentIndex].isInvalid = true
-     }else{
-      this.results[parentIndex].isInvalid = false
-     }
+  validateScip(event: any, scipNumber: string, parentIndex: number) {
+    this.results[parentIndex].scipNumber = Number(
+      this.results[parentIndex].scipNumber.toString().replace(/\D/g, '')
+    );
+    if (this.results[parentIndex].scipNumber.toString().length < 10) {
+      this.results[parentIndex].isInvalid = true;
+    } else {
+      this.results[parentIndex].isInvalid = false;
+    }
   }
 
-  
   selectMaterial(item: any, parentIndex: any, elements: any) {
     this.isCatergoryList = true;
     this.selectedCat = item;

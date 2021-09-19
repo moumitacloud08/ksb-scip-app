@@ -1,3 +1,13 @@
+<script>
+  jQuery(function() {
+ jQuery('*[id^=product_]').hover(function(){
+   jQuery(this).children("div.tools").show();
+    },function(){
+   jQuery(this).children("div.tools").hide();
+    });
+ });
+
+</script>
 <div class="body-container" *ngIf="!isPurchaseOrderSaved">
   <div class="hd-part">
     <div class="ptext">
@@ -18,23 +28,28 @@
     </div>
   </div>
   <div class="table-container">
-    <table class="table">
+    <table class="table" id="waypointsTable">
       <thead class="table-th">
         <tr>
           <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row">
+        <tr *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row" id="item_{{parentIndex}}">
           <td>{{ el.purchaseOrderNumber }}</td>
           <td>{{ el.lineItemNumber }}</td>
           <td>{{ el.scipRelavent }}</td>
-          <td><span *ngIf="el.isAddShow == true">{{ el.scipNumber }}</span>
-            <div class="form-group" *ngIf="el.isDeleteShow == true" >
-              <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
-                class="table-text-border-class" [(ngModel)]="el.scipNumber"  (keyup)="validateScip($event,el.scipNumber,parentIndex)" />
-                
-            </div>
+          <td>
+            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)">
+              <div class="output-text" *ngIf="el.isAddShow == true"><span>{{ el.scipNumber }}</span></div>
+              <div class="form-group hide-class" *ngIf="el.isDeleteShow == true">
+                <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
+                  class="table-text-border-class" [(ngModel)]="el.scipNumber"
+                  (keyup)="validateScip($event,el.scipNumber,parentIndex)" (click)="clickevent(parentIndex)"/>
+
+              </div>
+            </div> 
+
             <span class="scip-warn" *ngIf="el.isInvalid == true"  >SCIP no should be 10 digit</span>
           </td>
           <td>
@@ -164,7 +179,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12 msg3"><p>Meanwhile, for recent news and update you can explore the KSB website.</p></div>
+      <div class="col-md-12 msg3">
+        <p>Meanwhile, for recent news and update you can explore the KSB website.</p>
+      </div>
       <div class="col-md-12"><button type="button" class="button white-button-msg">Visit KSB website</button></div>
     </div>
   </div>
