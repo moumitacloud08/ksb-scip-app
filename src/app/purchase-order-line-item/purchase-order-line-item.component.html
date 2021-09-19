@@ -1,11 +1,11 @@
 <script>
-  jQuery(function() {
- jQuery('*[id^=product_]').hover(function(){
-   jQuery(this).children("div.tools").show();
-    },function(){
-   jQuery(this).children("div.tools").hide();
+  jQuery(function () {
+    jQuery('*[id^=product_]').hover(function () {
+      jQuery(this).children("div.tools").show();
+    }, function () {
+      jQuery(this).children("div.tools").hide();
     });
- });
+  });
 
 </script>
 <div class="body-container" *ngIf="!isPurchaseOrderSaved">
@@ -35,7 +35,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row" id="item_{{parentIndex}}">
+        <tr *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row"
+          id="item_{{parentIndex}}">
           <td>{{ el.purchaseOrderNumber }}</td>
           <td>{{ el.lineItemNumber }}</td>
           <td>{{ el.scipRelavent }}</td>
@@ -45,33 +46,44 @@
               <div class="form-group hide-class" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
                   class="table-text-border-class" [(ngModel)]="el.scipNumber"
-                  (keyup)="validateScip($event,el.scipNumber,parentIndex)" (click)="clickevent(parentIndex)"/>
+                  (keyup)="validateScip($event,el.scipNumber,parentIndex)" (click)="clickevent(parentIndex)" />
 
               </div>
-            </div> 
+            </div>
 
-            <span class="scip-warn" *ngIf="el.isInvalid == true"  >SCIP no should be 10 digit</span>
+            <span class="scip-warn" *ngIf="el.isInvalid == true">SCIP no should be 10 digit</span>
           </td>
           <td>
-            <span *ngIf="el.isAddShow == true">{{ el.statisticalGoodsNumber }}</span>
-            <div class="form-group" *ngIf="el.isDeleteShow == true">
-              <input type="text" name="statisticalGoodsNumber{{parentIndex}}" id="statisticalGoodsNumber{{parentIndex}}"
-                class="table-text-border-class" [(ngModel)]="el.statisticalGoodsNumber" />
+            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)">
+              <span *ngIf="el.isAddShow == true">{{ el.statisticalGoodsNumber }}</span>
+              <div class="form-group" *ngIf="el.isDeleteShow == true">
+                <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
+                  id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
+                  [(ngModel)]="el.statisticalGoodsNumber" />
+              </div>
             </div>
+
           </td>
           <td>
-            <span *ngIf="el.isAddShow == true">{{ el.casnumber }}</span>
-            <div class="form-group" *ngIf="el.isDeleteShow == true">
-              <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
-                class="table-text-border-class" [(ngModel)]="el.casnumber" />
+            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)">
+              <span *ngIf="el.isAddShow == true">{{ el.casnumber }}</span>
+              <div class="form-group" *ngIf="el.isDeleteShow == true">
+                <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
+                  class="table-text-border-class" [(ngModel)]="el.casnumber" />
+              </div>
             </div>
+
           </td>
           <td>
-            <span *ngIf="el.isAddShow == true">{{ el.materialCategory }}</span>
-            <div class="form-group" *ngIf="el.isDeleteShow == true">
-              <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
-                class="table-text-border-class" [(ngModel)]="el.materialCategory" />
+            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)">
+
+              <span *ngIf="el.isAddShow == true">{{ el.materialCategory }}</span>
+              <div class="form-group" *ngIf="el.isDeleteShow == true">
+                <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
+                  class="table-text-border-class" [(ngModel)]="el.materialCategory" />
+              </div>
             </div>
+
 
             <!--div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
