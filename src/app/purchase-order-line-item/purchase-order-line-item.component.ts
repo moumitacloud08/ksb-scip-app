@@ -32,6 +32,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   iconArrowAlt = 'select';
   iconSaved = 'assets/images/save-icon.png';
   iconSavedAlt = 'success';
+  iconClearData = 'assets/images/clear-icon.png';
+  iconClearDatadAlt = 'clear data';
   results: purchasedetails[];
   activeParentIndex: number;
   constructor(
@@ -59,6 +61,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'CAS No',
       'Material Category',
       'Action',
+      'Clear data'
     ];
 
     this.fetchPurchaseDetails();
@@ -111,7 +114,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
             item.casnumber,
             item.isAddShow,
             item.isDeleteShow,
-            item.isInvalid
+            item.isInvalid,
+            item.isClearData
           );
         });
         console.log(' <===this.results====>');
@@ -157,6 +161,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.results[parentIndex].isAddShow = false;
     this.results[parentIndex].isDeleteShow = true;
   }
+  ClearAllTableData(){
+
+  }
   resetPurchaseorderLine() {
     this.fetchPurchaseDetails();
     this.headElements = [
@@ -168,6 +175,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'CAS No',
       'Material Category',
       'Action',
+      'Clear data'
     ];
   }
 }

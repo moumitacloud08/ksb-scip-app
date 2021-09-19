@@ -100,9 +100,13 @@
             </div-->
           </td>
           <td>
-            <a *ngIf="el.isAddShow == true" (click)="editPurchaseorderLine(parentIndex)"><img [src]="iconPlusCircle"
+            <a  (click)="editPurchaseorderLine(parentIndex)"><img [src]="iconPlusCircle"
                 [alt]="iconPlusAlt" class="plus-class" /></a>
-            <a *ngIf="el.isDeleteShow == true"><img [src]="iconDelete" [alt]="iconDeleteAlt" class="plus-class" /></a>
+            <!-- <a *ngIf="el.isDeleteShow == true"><img [src]="iconDelete" [alt]="iconDeleteAlt" class="plus-class" /></a> -->
+          </td>
+          <td>
+            <a *ngIf="el.isClearData == true"><img [src]="iconClearData"
+                [alt]="iconClearDatadAlt" class="plus-class" /></a>
           </td>
         </tr>
       </tbody>
@@ -111,7 +115,7 @@
   <div class="table-footer">
     <div class="button-container-footer">
       <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal">Save</button>
-      <button type="button" class="button white-button" (click)="resetPurchaseorderLine()" data-toggle="modal" data-target="#myModalClearAll">Cancel</button>
+      <button type="button" class="button white-button" data-toggle="modal" data-target="#myModalClearAll">Clear All</button>
     </div>
     <div class="row">
       <div class="col-md-12 alert-class">
@@ -184,13 +188,13 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12 col-part1">
-            <p><b>Are you sure you want to submit ?</b></p>
-            <p>Once Submit You are not able to change it again</p>
+            <p><b>This will clear all table data</b></p>
+            <p>You can not undo this action again.</p>
           </div>
           <div class="col-md-12 col-part2">
             <button type="button" class="button blue-button-modal" data-dismiss="modal"
-              (click)="savePurchaseorderLine()">Submit</button>
-            <button type="button" class="button white-button-modal" data-dismiss="modal">Review Again</button>
+              (click)="ClearAllTableData()">Delete</button>
+            <button type="button" class="button white-button-modal" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>

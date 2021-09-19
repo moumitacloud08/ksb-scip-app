@@ -20,6 +20,7 @@ export class purchasedetails {
         public casnumber: number,
         public isAddShow: boolean = true,
         public isDeleteShow: boolean = false,
-        public isInvalid: boolean = false
+        public isInvalid: boolean = false,
+        public isClearData: boolean = true
       ) {}
   }
