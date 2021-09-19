@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row"
+        <tr [ngClass]="{'hover':el.isDeleteShow}" *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row"
           id="item_{{parentIndex}}">
           <td>{{ el.purchaseOrderNumber }}</td>
           <td>{{ el.lineItemNumber }}</td>
@@ -205,21 +205,27 @@
 <div class="body-container" *ngIf="isPurchaseOrderSaved">
   <div class="message-box">
 
-    <div class="row">
-      <div class="col-md-12"><img [src]="iconSaved" [alt]="iconSavedAlt" class="save-icon-class" /></div>
-      <div class="col-md-12 msg1">
-        <p>Records save successfully</p>
-      </div>
-      <div class="col-md-12 msg2">
-        <p>Your records have been successfully save. </p>
-        <p class="p-3">For further process our team will connect with you</p>
+    <div class="card card-msg">
+      <div class="card-body">
+        <span><img [src]="iconSaved" [alt]="iconSavedAlt" class="save-icon-class" />3 Records have been successfully saved</span>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12 msg3">
-        <p>Meanwhile, for recent news and update you can explore the KSB website.</p>
+<!-- 
+    <div class="row">      
+      <div class="col-md-12 msg1">
+        <span><img [src]="iconSaved" [alt]="iconSavedAlt" class="save-icon-class" />Records save successfully</span>
       </div>
-      <div class="col-md-12"><button type="button" class="button white-button-msg">Visit KSB website</button></div>
+    
+    </div> -->
+    <div class="row box-msg-class">
+      <div class="col-md-12">
+        <span style="color:#616161">For further process our team will connect with you</span>
+      </div>
+      <div class="col-md-12">
+        <div class=box1><a><span>Download SCIP Data</span></a></div>
+        <div class=box2><a><span>SCIP Login</span></a></div>
+        <div class=box3><a><span>KSB website</span></a></div>
+      </div>
     </div>
   </div>
 

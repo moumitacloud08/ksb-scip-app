@@ -254,9 +254,12 @@ a.page-style:hover {
   /* padding-right: 3px; */
   /* padding-top: 6px; */
   height: 40px;
+  z-index: 1;
 }
 .save-icon-class {
-  height: 60px;
+  height: 24px;
+  width: 24px;
+  color: #08b564;
 }
 .message-box {
   position: absolute;
@@ -304,15 +307,15 @@ a.page-style:hover {
   margin-left: -23px;
   margin-top: 7px;
 }
-.scip-warn{
-  border: 2px solid #FB3737;
-    font-size: 0.687rem;
-    /* margin-top: 9px; */
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-right: 6px;
-    padding-left: 3px;
-    margin-left: 14px;
+.scip-warn {
+  border: 2px solid #fb3737;
+  font-size: 0.687rem;
+  /* margin-top: 9px; */
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 6px;
+  padding-left: 3px;
+  margin-left: 14px;
 }
 
 .output-text {
@@ -334,6 +337,45 @@ a.page-style:hover {
 .output-text:hover + .hide-class {
   display: block;
 } */
-#waypointsTable tr:hover {
-  background-color:#CCDDEB4D
+#waypointsTable tr:hover, #waypointsTable tr.hover {
+  background-color: #ccddeb4d;
+}
+
+.card-msg {
+  width: 1487px;
+  height: 164px;
+  margin-top: -74px;
+  margin-right: -259px;
+  padding-top: 37px;
+}
+.card-body span {
+  margin-left: 297px;
+  padding-left: 214px;
+}
+
+.box-msg-class {
+  margin-top: 53px;
+  margin-left: 517px;
+}
+.box1 {
+  margin-top: 19px;
+  margin-left: -15px;
+  color: #00569d;
+}
+.box2 {
+  margin-left: 138px;
+  margin-bottom: 0px;
+  margin-top: -23px;
+  color: #00569d;
+}
+.box3 {
+  margin-left: 241px;
+  margin-bottom: 0px;
+  margin-top: -24px;
+  color: #00569d;
+}
+
+.row span {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.85rem;
 }

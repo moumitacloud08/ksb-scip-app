@@ -33,6 +33,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   iconSaved = 'assets/images/save-icon.png';
   iconSavedAlt = 'success';
   results: purchasedetails[];
+  activeParentIndex: number;
   constructor(
     private localStorageService: LocalStorageService,
     private purchaseOrderLineItemService: PurchaseOrderLineItemService
@@ -45,19 +46,6 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   headElements: any = [];
   searchedKeyword: string;
   ngOnInit(): void {
-    $(function () {
-      $('#waypointsTable tr').hover(
-        function () {
-          $(this).addClass('hover');
-         // $(this).children('div.form-group').show();
-        },
-        function () {
-          $(this).removeClass('hover');
-         // $(this).children('div.form-group').hide();
-        }
-      );    
-    });
-
     this.authToken = this.localStorageService.retrieve('user').authToken;
     console.log(' this.authToken In login ');
     console.log(this.authToken);
@@ -77,17 +65,33 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
 
   mouseEnter(parentIndex) {
-    this.results[parentIndex].isAddShow = false;
-    this.results[parentIndex].isDeleteShow = true;
+    if(this.activeParentIndex !== parentIndex){
+      this.activeParentIndex = parentIndex;
+      this.resetAllRow();
+      this.results[parentIndex].isAddShow = false;
+      this.results[parentIndex].isDeleteShow = true;
+    }
   }
   mouseLeave(parentIndex) {
-    this.results[parentIndex].isAddShow = true;
-    this.results[parentIndex].isDeleteShow = false;
+    this.activeParentIndex = null;
+    this.resetAllRow();
+    // this.results[parentIndex].isAddShow = true;
+    // this.results[parentIndex].isDeleteShow = false;
   }
   clickevent(parentIndex) {
-    this.results[parentIndex].isAddShow = false;
-    this.results[parentIndex].isDeleteShow = true;
+    if(this.activeParentIndex !== parentIndex){
+      this.activeParentIndex = parentIndex;
+      this.resetAllRow();
+      this.results[parentIndex].isAddShow = false;
+      this.results[parentIndex].isDeleteShow = true;
+    }
   }
+  resetAllRow():void{
+    this.results = this.results.map(res=>{
+      return {...res, isAddShow: true, isDeleteShow: false}
+    });
+  }
+
   response: any;
   fetchPurchaseDetails() {
     this.purchaseOrderLineItemService
