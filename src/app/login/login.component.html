@@ -20,8 +20,13 @@
     <p class="p3" *ngIf="isWrongInput">
       {{ message }}
     </p>
-    <p class="p4" *ngIf="!isWrongInput && isSent">
-      Requested token has been sent to your email address supplier@test.com
-    </p>
+    <div class="success-div">
+     
+      <span class="p4" *ngIf="!isWrongInput && isSent">
+        <img [src]="iconSaved" [alt]="iconSavedAlt" class="save-icon-class" style="height: 23px;width: 23px;"/>
+        The token has been sent to your email address successfully
+      </span>
+    </div>
+    
   </form>
 </div>

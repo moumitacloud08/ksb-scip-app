@@ -111,7 +111,7 @@
   <div class="table-footer">
     <div class="button-container-footer">
       <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal">Save</button>
-      <button type="button" class="button white-button" (click)="resetPurchaseorderLine()">Cancel</button>
+      <button type="button" class="button white-button" (click)="resetPurchaseorderLine()" data-toggle="modal" data-target="#myModalClearAll">Cancel</button>
     </div>
     <div class="row">
       <div class="col-md-12 alert-class">
@@ -176,6 +176,31 @@
   </div>
 </div>
 
+<div class="modal" id="myModalClearAll">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 col-part1">
+            <p><b>Are you sure you want to submit ?</b></p>
+            <p>Once Submit You are not able to change it again</p>
+          </div>
+          <div class="col-md-12 col-part2">
+            <button type="button" class="button blue-button-modal" data-dismiss="modal"
+              (click)="savePurchaseorderLine()">Submit</button>
+            <button type="button" class="button white-button-modal" data-dismiss="modal">Review Again</button>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal-footer">
+        
+      </div> -->
+
+    </div>
+  </div>
+</div>
 
 <div class="body-container" *ngIf="isPurchaseOrderSaved">
   <div class="message-box">

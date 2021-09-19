@@ -34,6 +34,9 @@ export class LoginComponent implements OnInit {
   message: string = '';
   responseCode: string = '';
   messages: any[] = [];
+
+  iconSaved = 'assets/images/save-icon.png';
+  iconSavedAlt = 'success';
   authenticate(f: NgForm) {
     console.log(f)
     this.isWrongInput = false;
