@@ -37,6 +37,8 @@ export class LoginComponent implements OnInit {
 
   iconSaved = 'assets/images/save-icon.png';
   iconSavedAlt = 'success';
+  iconFailed = 'assets/images/warning-icon.png';
+  iconFaileddAlt = 'success';
   authenticate(f: NgForm) {
     console.log(f)
     this.isWrongInput = false;
@@ -67,7 +69,8 @@ export class LoginComponent implements OnInit {
           this.localStorageService.store('api_token',this.token)
           this.router.navigateByUrl('/dashboard/purchase-order-line-item');
         } else {
-          this.message = this.response.message;
+          //this.message = this.response.message;
+          this.message = "Wrong token! 2 attempt remaining and it will block after";
           if (this.message == '') {
             this.message = 'Login Failed';
           }

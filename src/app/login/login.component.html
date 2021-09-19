@@ -5,7 +5,7 @@
       The token number has been sent to your email address supplier@test.com
     </p>
     <div class="form-group">
-      <input type="text" placeholder="Enter token" name="tokenInput" id="tokenInput" class="text-border-class" ngModel
+      <input type="text" placeholder="Enter token" name="tokenInput" id="tokenInput" class="text-border-class" [ngClass]="{'text-border-failed-class': isWrongInput}" ngModel
         #tokenInput="ngModel" />
     </div>
     <div class="button-container">
@@ -17,9 +17,14 @@
     <!--p class="p3" *ngIf="!isLoggenIn && isBlankInput">
         Please enter the token number
       </p -->
-    <p class="p3" *ngIf="isWrongInput">
-      {{ message }}
-    </p>
+      <div class="failed-div">
+
+        <span class="p3" *ngIf="isWrongInput">
+          <img [src]="iconFailed" [alt]="iconFailed" class="save-icon-class" style="height: 23px;width: 23px;"/>
+          {{ message }}
+        </span>
+      </div>
+    
     <div class="success-div">
      
       <span class="p4" *ngIf="!isWrongInput && isSent">
