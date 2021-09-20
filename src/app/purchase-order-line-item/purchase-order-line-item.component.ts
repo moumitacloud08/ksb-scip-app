@@ -68,7 +68,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
 
   mouseEnter(parentIndex) {
-    if(this.activeParentIndex !== parentIndex){
+    if (this.activeParentIndex !== parentIndex) {
       this.activeParentIndex = parentIndex;
       this.resetAllRow();
       this.results[parentIndex].isAddShow = false;
@@ -82,16 +82,16 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // this.results[parentIndex].isDeleteShow = false;
   }
   clickevent(parentIndex) {
-    if(this.activeParentIndex !== parentIndex){
+    if (this.activeParentIndex !== parentIndex) {
       this.activeParentIndex = parentIndex;
       this.resetAllRow();
       this.results[parentIndex].isAddShow = false;
       this.results[parentIndex].isDeleteShow = true;
     }
   }
-  resetAllRow():void{
-    this.results = this.results.map(res=>{
-      return {...res, isAddShow: true, isDeleteShow: false}
+  resetAllRow(): void {
+    this.results = this.results.map(res => {
+      return { ...res, isAddShow: true, isDeleteShow: false }
     });
   }
 
@@ -126,10 +126,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       });
   }
   validateScip(event: any, scipNumber: string, parentIndex: number) {
-    this.results[parentIndex].scipNumber = Number(
-      this.results[parentIndex].scipNumber.toString().replace(/\D/g, '')
-    );
-    if (this.results[parentIndex].scipNumber.toString().length < 10) {
+    this.results[parentIndex].scipNumber =
+      this.results[parentIndex].scipNumber.replace(/\D/g, '')
+    if (this.results[parentIndex].scipNumber.length < 10) {
       this.results[parentIndex].isInvalid = true;
     } else {
       this.results[parentIndex].isInvalid = false;
@@ -158,10 +157,16 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
 
   editPurchaseorderLine(parentIndex) {
-   // this.results[parentIndex].isAddShow = false;
-   // this.results[parentIndex].isDeleteShow = true;
+    // this.results[parentIndex].isAddShow = false;
+    // this.results[parentIndex].isDeleteShow = true;
   }
-  ClearAllTableData(){
+  clearRowData(parentIndex) {
+    this.results[parentIndex].scipNumber = '';
+    this.results[parentIndex].statisticalGoodsNumber = '';
+    this.results[parentIndex].casnumber = '';
+    this.results[parentIndex].materialCategory = '';
+  }
+  ClearAllTableData() {
 
   }
   resetPurchaseorderLine() {

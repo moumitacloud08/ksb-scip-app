@@ -35,55 +35,59 @@
         </tr>
       </thead>
       <tbody>
-        <tr [ngClass]="{'hover':el.isDeleteShow}" *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row"
+        <tr [ngClass]="{'hover':el.isDeleteShow}"
+          *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row"
           id="item_{{parentIndex}}">
           <td>{{ el.purchaseOrderNumber }}</td>
           <td>{{ el.lineItemNumber }}</td>
           <td>{{ el.scipRelavent }}</td>
           <td>
             <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)">
-              <div class="output-text" *ngIf="el.isAddShow == true"><span>{{ el.scipNumber }}</span></div>
+              <div class="output-text" *ngIf="el.isAddShow == true">
+                <span>{{ el.scipNumber }}</span>
+              </div>
               <div class="form-group hide-class" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
                   class="table-text-border-class" [(ngModel)]="el.scipNumber"
                   (keyup)="validateScip($event,el.scipNumber,parentIndex)" (click)="clickevent(parentIndex)" />
-
               </div>
             </div>
-
             <span class="scip-warn" *ngIf="el.isInvalid == true">SCIP no should be 10 digit</span>
           </td>
           <td>
             <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)">
-              <span *ngIf="el.isAddShow == true">{{ el.statisticalGoodsNumber }}</span>
+              <div class="output-text" *ngIf="el.isAddShow == true">
+                <span>{{ el.statisticalGoodsNumber }}</span>
+              </div>             
               <div class="form-group" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
                   id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
-                  [(ngModel)]="el.statisticalGoodsNumber" />
+                  [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)" />
               </div>
             </div>
 
           </td>
           <td>
             <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)">
-              <span *ngIf="el.isAddShow == true">{{ el.casnumber }}</span>
+              <div class="output-text" *ngIf="el.isAddShow == true">
+                <span>{{ el.casnumber }}</span>
+              </div>              
               <div class="form-group" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
-                  class="table-text-border-class" [(ngModel)]="el.casnumber" />
+                  class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)" />
               </div>
             </div>
-
           </td>
           <td>
             <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)">
-
-              <span *ngIf="el.isAddShow == true">{{ el.materialCategory }}</span>
+              <div class="output-text" *ngIf="el.isAddShow == true">
+                <span>{{ el.materialCategory }}</span>
+              </div>              
               <div class="form-group" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
-                  class="table-text-border-class" [(ngModel)]="el.materialCategory" />
+                  class="table-text-border-class" [(ngModel)]="el.materialCategory" (click)="clickevent(parentIndex)" />
               </div>
             </div>
-
 
             <!--div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
@@ -100,13 +104,13 @@
             </div-->
           </td>
           <td>
-            <a  (click)="editPurchaseorderLine(parentIndex)"><img [src]="iconPlusCircle"
-                [alt]="iconPlusAlt" class="plus-class" /></a>
+            <a (click)="editPurchaseorderLine(parentIndex)"><img [src]="iconPlusCircle" [alt]="iconPlusAlt"
+                class="plus-class" /></a>
             <!-- <a *ngIf="el.isDeleteShow == true"><img [src]="iconDelete" [alt]="iconDeleteAlt" class="plus-class" /></a> -->
           </td>
           <td>
-            <a *ngIf="el.isClearData == true"><img [src]="iconClearData"
-                [alt]="iconClearDatadAlt" class="plus-class" /></a>
+            <a *ngIf="el.isClearData == true" (click)="clearRowData(parentIndex)"><img [src]="iconClearData" [alt]="iconClearDatadAlt"
+                class="plus-class" /></a>
           </td>
         </tr>
       </tbody>
@@ -115,7 +119,8 @@
   <div class="table-footer">
     <div class="button-container-footer">
       <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal">Save</button>
-      <button type="button" class="button white-button" data-toggle="modal" data-target="#myModalClearAll">Clear All</button>
+      <button type="button" class="button white-button" data-toggle="modal" data-target="#myModalClearAll">Clear
+        All</button>
     </div>
     <div class="row">
       <div class="col-md-12 alert-class">
@@ -211,10 +216,11 @@
 
     <div class="card card-msg">
       <div class="card-body">
-        <span><img [src]="iconSaved" [alt]="iconSavedAlt" class="save-icon-class" />3 Records have been successfully saved</span>
+        <span><img [src]="iconSaved" [alt]="iconSavedAlt" class="save-icon-class" />3 Records have been successfully
+          saved</span>
       </div>
     </div>
-<!-- 
+    <!-- 
     <div class="row">      
       <div class="col-md-12 msg1">
         <span><img [src]="iconSaved" [alt]="iconSavedAlt" class="save-icon-class" />Records save successfully</span>

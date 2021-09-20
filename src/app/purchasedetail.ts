@@ -11,13 +11,13 @@ export class purchasedetails {
 
     constructor(
         public lineItemNumber: string,
-        public statisticalGoodsNumber: number,
-        public purchaseOrderNumber: number,
-        public scipNumber: number,
+        public statisticalGoodsNumber: string,
+        public purchaseOrderNumber: string,
+        public scipNumber: string,
         public scipRelavent: string,
         public materialCategory: string,
         public submitStatus: string,
-        public casnumber: number,
+        public casnumber: string,
         public isAddShow: boolean = true,
         public isDeleteShow: boolean = false,
         public isInvalid: boolean = false,
