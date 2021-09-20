@@ -167,7 +167,13 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.results[parentIndex].materialCategory = '';
   }
   ClearAllTableData() {
-
+    this.results.forEach(function (value) {
+      console.log(value);
+      value.scipNumber = ''
+      value.casnumber = ''
+      value.statisticalGoodsNumber = ''
+      value.materialCategory = ''
+    });
   }
   resetPurchaseorderLine() {
     this.fetchPurchaseDetails();
