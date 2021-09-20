@@ -318,17 +318,13 @@ a.page-style:hover {
   margin-left: 14px;
 }
 
-.output-text {
+/* .output-text {
   width: 76%;
-  /* padding: 6px 0px 11px 26px; */
-  /* margin: 6px 1px 5px; */
   margin-bottom: -15px;
   margin-top: -11px;
-  margin-right: -13px;
-  /* padding-right: 3px; */
-  /* padding-top: 6px; */
+  margin-right: -20px;
   height: 47px;
-}
+} */
 
 /* .hide-class {
   display: none;
@@ -378,4 +374,7 @@ a.page-style:hover {
 .row span {
   font-family: "Roboto", sans-serif;
   font-size: 0.85rem;
+}
+.modal-body-cutom{
+  padding-bottom: 46px;
 }
