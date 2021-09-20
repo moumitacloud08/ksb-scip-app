@@ -20,7 +20,7 @@
         placeholder="Search by SCIP no, Statistical goods no, CAS no" [(ngModel)]="searchedKeyword" />
     </div>
     <div class="button-container">
-      <button type="button" class="button pdf-btn">
+      <button type="button" class="button pdf-btn" (click)="SavePDF()">
         <img [src]="iconPDF" [alt]="iconPDFAlt" class="pdf-class" />&nbsp;&nbsp;<span
           class="scip-download-class">Download
           SCIP Data</span>
