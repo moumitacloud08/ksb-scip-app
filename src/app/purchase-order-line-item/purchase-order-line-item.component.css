@@ -341,3 +341,22 @@ a.page-style:hover {
 .modal-body-cutom{
   padding-bottom: 46px;
 }
+.cross-warning-class {
+  width: 12px;
+}
+.text-red-border-class{
+  border: 1px solid #FB3737;
+}
+.icon-warning-class{
+  margin-left: -13px;
+    width: 7%;
+}
+.icon-warning-span-class{
+  margin-left: 3px;
+  width: 7%;
+  margin-top:5px;
+  margin-bottom:8px
+}
+.span-red-border-class{
+  color:#FB3737
+}

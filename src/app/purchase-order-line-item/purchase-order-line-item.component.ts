@@ -37,6 +37,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   iconSavedAlt = 'success';
   iconClearData = 'assets/images/clear-icon.png';
   iconClearDatadAlt = 'clear data';
+  crossiconWarning = 'assets/images/warning-cross-icon.png';
+  crossiconWarningdAlt = 'warning';  
+  iconWarning = 'assets/images/warning-icon.png';
+  iconWarningdAlt = 'warning';
   results: purchasedetails[];
   activeParentIndex: number;
   constructor(

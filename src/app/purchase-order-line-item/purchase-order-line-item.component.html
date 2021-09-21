@@ -35,16 +35,22 @@
           <td>
             <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)">
               <div  *ngIf="el.isAddShow == true">
-                <span>{{ el.scipNumber }}</span>
+                <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }} <img  *ngIf="el.isInvalid == true" [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" /></span>
                 <span style="color:#FFFFFF33">text</span>
               </div>
               <div class="form-group" *ngIf="el.isDeleteShow == true">
-                <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
-                  class="table-text-border-class" [(ngModel)]="el.scipNumber"
+                <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}" [ngClass]="{'text-red-border-class':el.isInvalid}"
+                  class="table-text-border-class"  [(ngModel)]="el.scipNumber"
                   (keyup)="validateScip($event,el.scipNumber,parentIndex)" (click)="clickevent(parentIndex)" />
+                  <img  *ngIf="el.isInvalid == true" [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-class" />
               </div>
             </div>
-            <span class="scip-warn" *ngIf="el.isInvalid == true">SCIP no should be 10 digit</span>
+            <div class="scip-warn" *ngIf="el.isInvalid == true && el.isDeleteShow == true">
+              <img [src]="crossiconWarning" [alt]="crossiconWarningdAlt" class="cross-warning-class" />
+              <span>
+                SCIP no should be 10 digit
+              </span>
+            </div>
           </td>
           <td>
             <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)">
