@@ -8,9 +8,9 @@ import {
 import { LocalStorageService } from 'ngx-webstorage';
 import { PurchaseOrderLineItemService } from '../service/purchase-order-line-item.service';
 import { purchasedetails } from '.././purchasedetail';
-import * as $ from 'jquery';
 import { jsPDF } from "jspdf";
 import 'jspdf-autotable';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-purchase-order-line-item',
@@ -40,7 +40,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   activeParentIndex: number;
   constructor(
     private localStorageService: LocalStorageService,
-    private purchaseOrderLineItemService: PurchaseOrderLineItemService
+    private purchaseOrderLineItemService: PurchaseOrderLineItemService,
+    private router: Router,
   ) {
     this.results = [];
   }
@@ -151,7 +152,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   savePurchaseorderLine() {
     this.responseCode = '200';
     if (this.responseCode == '200') {
+      this.localStorageService.clear('user');
+      this.localStorageService.clear('api_token');
       this.isPurchaseOrderSaved = true;
+      this.router.navigateByUrl('/record-success');
     } else {
       this.isPurchaseOrderSaved = false;
       this.errorMessage = 'Something went wrong . Please try after something';
@@ -202,24 +206,24 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   //   [9, 'Sweden', 7.314, 'Stockholm'],
   //   [73, 'Belarus', 5.483, 'Minsk'],
   // ]
-  dataList:any = []
-  head:any = []
-  generateDataForPDF(){
+  dataList: any = []
+  head: any = []
+  generateDataForPDF() {
     let dataTemp = []
     let dataList = []
     this.results.forEach(function (value) {
       //console.log(value);
-      dataTemp = [value.purchaseOrderNumber,value.lineItemNumber,value.scipRelavent, value.scipNumber,value.statisticalGoodsNumber,
-        value.casnumber,value.materialCategory]
+      dataTemp = [value.purchaseOrderNumber, value.lineItemNumber, value.scipRelavent, value.scipNumber, value.statisticalGoodsNumber,
+      value.casnumber, value.materialCategory]
       // dataTemp.push(value.purchaseOrderNumber,value.lineItemNumber,value.scipRelavent, value.scipNumber,value.statisticalGoodsNumber,
       //   value.casnumber,value.materialCategory);
-    
+
       dataList.push(dataTemp);
     });
     console.log(dataList);
     return dataList
   }
-  generateHeaderForPDF(){
+  generateHeaderForPDF() {
     let head = []
     let headElements = [
       'Purchase Order',
@@ -230,7 +234,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'CAS No',
       'Material Category'
     ];
-    head=[headElements]
+    head = [headElements]
     return head;
   }
   public SavePDF() {

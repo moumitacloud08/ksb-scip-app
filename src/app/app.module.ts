@@ -17,6 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { RecordSuccessComponent } from './record-success/record-success.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     LoginComponent,
     PurchaseOrderLineItemComponent,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    RecordSuccessComponent
   ],
   imports: [
     BrowserModule,

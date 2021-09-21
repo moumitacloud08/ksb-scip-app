@@ -17,19 +17,25 @@ export class HeaderComponent implements OnInit {
     private headerService: HeaderService
   ) { }
   faSignOutAlt = faSignOutAlt;
+  isloggedIn:boolean = false;
 
   ngOnInit(): void {
-    this.fetchmailId();
-   }
+    if (this.localStorageService.retrieve("user") != null) {
+      this.isloggedIn = true;
+      this.fetchmailId();
+    }else{
+      this.isloggedIn = false;
+    }
+  }
   response: any;
-  emailId:String;
+  emailId: String;
   fetchmailId() {
     this.headerService
       .fetchmailId()
       .then((data) => {
         this.response = JSON.parse(JSON.stringify(data));
         this.emailId = this.response.vendor.email;
-        console.log("this.emailId : "+this.emailId)
+        console.log("this.emailId : " + this.emailId)
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));

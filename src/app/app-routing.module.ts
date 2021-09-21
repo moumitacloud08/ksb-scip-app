@@ -7,6 +7,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PurchaseOrderLineItemComponent } from './purchase-order-line-item/purchase-order-line-item.component';
 import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 import { AuthGuardService as AuthGuard} from './service/auth-guard.service';
+import { RecordSuccessComponent } from './record-success/record-success.component';
+
 
 const routes: Routes = [
     { 
@@ -33,6 +35,10 @@ const routes: Routes = [
                 //component: PurchaseOrderLineItemComponent,canActivate:[AuthGuard]
             }
         ]
+    },
+    {
+        path: 'record-success',
+        component: RecordSuccessComponent
     }
   ];
   
