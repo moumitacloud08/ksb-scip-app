@@ -68,13 +68,16 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'Statistical Goods No',
       'CAS No',
       'Material Category',
-      'Action',
+      'Add row',
       'Clear data'
     ];
 
     this.fetchPurchaseDetails();
   }
-
+  getSCIPRel(parentIndex,scipRel){
+    // console.log()
+    this.results[parentIndex].scipRelavent=scipRel
+  }
   mouseEnter(parentIndex) {
     if (this.activeParentIndex !== parentIndex) {
       this.activeParentIndex = parentIndex;
@@ -140,8 +143,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           count++;
         })
         this.resultsTemp = this.results
-        console.log(' <===this.results====>');
-        console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
+        //console.log(' <===this.results====>');
+        //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
+        this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
@@ -184,12 +188,14 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   errorMessage: string = '';
   savePurchaseorderLine() {
     console.log(this.resultsTemp);
+    console.log(this.results);
     let dataList = []
     let resultTemp = this.resultsTemp;
     this.results.forEach(function (valueNew) {
       resultTemp.forEach(function (valueOld) {
         if (valueNew.rowId == valueOld.rowId) {
-          if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber || valueNew.casnumber != valueOld.casnumber || valueNew.materialCategory != valueOld.materialCategory) {
+          if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber || 
+            valueNew.casnumber != valueOld.casnumber || valueNew.materialCategory != valueOld.materialCategory || valueNew.scipRelavent != valueOld.scipRelavent) {
             dataList.push(valueNew);
           }
         }
@@ -201,7 +207,21 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     let uniqueDataList = this.removeDuplicates(dataList, "rowId");
     console.log(uniqueDataList)
-    let params = { "scipDetails": uniqueDataList }
+    let dataListFinal = []
+    uniqueDataList.forEach(function (value) {
+      dataListFinal.push({
+        "casnumber": value.casnumber,
+        "lineItemNumber": value.lineItemNumber,
+        "materialCategory": value.materialCategory,
+        "purchaseOrderNumber": value.purchaseOrderNumber,
+        "scipNumber": value.scipNumber,
+        "scipRelavent": value.scipRelavent,
+        "statisticalGoodsNumber": value.statisticalGoodsNumber,
+        "submitStatus": value.submitStatus
+
+      });
+    });
+    let params = { "scipDetails": dataListFinal }
 
     console.log("<=========params==============>")
     console.log(JSON.stringify(params));
