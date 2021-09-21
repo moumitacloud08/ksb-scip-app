@@ -97,7 +97,14 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       return { ...res, isAddShow: true, isDeleteShow: false }
     });
   }
-
+  myVar:boolean=false
+  clearRowData(parentIndex) {
+    this.results[parentIndex].scipNumber = '';
+    this.results[parentIndex].statisticalGoodsNumber = '';
+    this.results[parentIndex].casnumber = '';
+    this.results[parentIndex].materialCategory = '';
+    // this.resetAllRow();
+  }
   response: any;
   fetchPurchaseDetails() {
     this.purchaseOrderLineItemService
@@ -166,12 +173,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // this.results[parentIndex].isAddShow = false;
     // this.results[parentIndex].isDeleteShow = true;
   }
-  clearRowData(parentIndex) {
-    this.results[parentIndex].scipNumber = '';
-    this.results[parentIndex].statisticalGoodsNumber = '';
-    this.results[parentIndex].casnumber = '';
-    this.results[parentIndex].materialCategory = '';
-  }
+  
   ClearAllTableData() {
     this.results.forEach(function (value) {
       console.log(value);

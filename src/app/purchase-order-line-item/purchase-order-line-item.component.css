@@ -306,11 +306,10 @@ a.page-style:hover {
 }
 .scip-warn {
   border: 2px solid #fb3737;
-  font-size: 0.687rem;
-  /* margin-top: 9px; */
+  font-size: 0.587rem;
   padding-top: 4px;
   padding-bottom: 4px;
-  padding-right: 6px;
+  padding-right: 0px;
   padding-left: 3px;
   margin-left: 14px;
 }
