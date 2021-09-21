@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   isBlankInput: boolean = false;
   isSent: boolean = false;
   isGenerateTokenPage: boolean = false;
-  token: string = '';
+  apitoken: string = '';
 
   constructor(
     private LoginService: LoginService,
@@ -24,11 +24,23 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private localStorageService: LocalStorageService
   ) {}
-  authToken;
+  // authToken;
+
   ngOnInit(): void {
-    this.authToken = this.localStorageService.retrieve('user').authToken;
-    console.log(' this.authToken In login ');
-    console.log(this.authToken);
+    // this.authToken = this.localStorageService.retrieve('user').authToken;
+    // console.log(' this.authToken In login ');
+    // console.log(this.authToken);
+    this.localStorageService.clear('user')
+  }
+  userName: String ='ksb';
+  password: String ='ksb';
+
+  str1 = new String(this.userName); 
+  str2 = new String( ":"+this.password ); 
+  authToken:string = btoa(this.str1.concat(this.str2.toString()))
+  authObject = {
+    authToken:this.authToken,
+    'valid':false
   }
   response: any;
   message: string = '';
@@ -44,14 +56,14 @@ export class LoginComponent implements OnInit {
     this.isWrongInput = false;
 
     if (f.value.tokenInput != '') {
-      this.token = f.value.tokenInput;
+      this.apitoken = f.value.tokenInput;
     } else {
-      this.token = '';
+      this.apitoken = '';
     }
 
-    console.log('Input Token: ' + this.token);
+    console.log('Input Token: ' + this.apitoken);
 
-    this.LoginService.login(this.token).subscribe(
+    this.LoginService.login(this.apitoken,this.authToken).subscribe(
       (response) => {
 
         this.response = JSON.parse(JSON.stringify(response));
@@ -66,7 +78,12 @@ export class LoginComponent implements OnInit {
          
           this.isWrongInput = false;
           this.message = this.response.message;
-          this.localStorageService.store('api_token',this.token)
+
+          this.localStorageService.store('user',this.authObject)
+          this.authObject.valid = true;
+
+
+          this.localStorageService.store('api_token',this.apitoken)
           this.router.navigateByUrl('/dashboard/purchase-order-line-item');
         } else {
           //this.message = this.response.message;

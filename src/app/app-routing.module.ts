@@ -15,13 +15,13 @@ const routes: Routes = [
         path: '', 
         component: HomeComponent,
         children: [
+            // {
+            //     path: '',
+            //     component: GenerateTokenComponent
+            // },
             {
                 path: '',
-                component: GenerateTokenComponent
-            },
-            {
-                path: 'login',
-                component: LoginComponent,canActivate:[AuthGuard]
+                component: LoginComponent
             }
         ]
     },
@@ -31,8 +31,8 @@ const routes: Routes = [
         children:[
             {
                 path: 'purchase-order-line-item',
-                component: PurchaseOrderLineItemComponent
-                //component: PurchaseOrderLineItemComponent,canActivate:[AuthGuard]
+                //component: PurchaseOrderLineItemComponent
+                component: PurchaseOrderLineItemComponent,canActivate:[AuthGuard]
             }
         ]
     },

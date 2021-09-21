@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-record-success',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecordSuccessComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void { }
   iconSaved = 'assets/images/save-icon.png';
   iconSavedAlt = 'success';
+  goToLogin(){
+    this.router.navigateByUrl('/');
+  }
 }

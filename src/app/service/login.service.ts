@@ -36,20 +36,17 @@ export class LoginService {
   private tokenUrl =
     cons.BASE_URL + '/login/authenticateVendor?purchaseOrder=12345'; // URL to web api
 
-  setAuthToken() {
-    let authToken: String = this.localStorageService.retrieve('user').authToken;
-    return authToken;
-  }
+  
 
-  login(token: string): Observable<any[]> {
-    console.log('Input Token in Service: ' + token);
+  login(apitoken: string,authToken:string): Observable<any[]> {
+    console.log('Input Token in Service: ' + apitoken);
 
-    if (token != '') {
+    if (apitoken != '' && authToken != ' ') {
       console.log('token not blank ');
       httpOptions.headers = new HttpHeaders({
-        api_token: token,
+        api_token: apitoken,
         'Content-Type': 'application/json',
-        Authorization: 'Basic ' + this.setAuthToken(),
+        Authorization: 'Basic ' + authToken,
       });
     }
     console.log('tokenUrl ' + this.tokenUrl);
