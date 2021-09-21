@@ -10,6 +10,7 @@ export class purchasedetails {
    
 
     constructor(
+        
         public lineItemNumber: string,
         public statisticalGoodsNumber: string,
         public purchaseOrderNumber: string,
@@ -21,6 +22,7 @@ export class purchasedetails {
         public isAddShow: boolean = true,
         public isDeleteShow: boolean = false,
         public isInvalid: boolean = false,
-        public isClearData: boolean = true
+        public isClearData: boolean = true,
+        public rowId: Number = 0,
       ) {}
   }

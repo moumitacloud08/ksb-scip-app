@@ -25,6 +25,7 @@ export class PurchaseOrderLineItemService {
 
   
   private purchaseOrderURL = cons.BASE_URL + '/purchaseorders/77';
+  private purchaseOrderUpdateURL = cons.BASE_URL + '/purchaseorders/9/updatelineitems';
   fetchPurchaseDetails() {
      httpOptions.headers = new HttpHeaders({
         api_token: this.setAPIToken(),
@@ -33,4 +34,12 @@ export class PurchaseOrderLineItemService {
       });
     return this.http.get(this.purchaseOrderURL,httpOptions).toPromise();
   }
+  savePurchaseorderLine(paramObj) {
+    httpOptions.headers = new HttpHeaders({
+       api_token: this.setAPIToken(),
+       'Content-Type': 'application/json',
+       Authorization: 'Basic ' + this.setAuthToken(),
+     });
+   return this.http.put(this.purchaseOrderUpdateURL,paramObj,httpOptions).toPromise();
+ }
 }

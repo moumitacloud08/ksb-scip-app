@@ -1,14 +1,5 @@
-<script>
-  jQuery(function () {
-    jQuery('*[id^=product_]').hover(function () {
-      jQuery(this).children("div.tools").show();
-    }, function () {
-      jQuery(this).children("div.tools").hide();
-    });
-  });
 
-</script>
-<div class="body-container" *ngIf="!isPurchaseOrderSaved">
+<div class="body-container">
   <div class="hd-part">
     <div class="ptext">
       <p class="p1"><b>SCIP Information</b></p>

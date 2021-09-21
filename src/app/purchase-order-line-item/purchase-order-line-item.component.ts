@@ -11,6 +11,7 @@ import { purchasedetails } from '.././purchasedetail';
 import { jsPDF } from "jspdf";
 import 'jspdf-autotable';
 import { Router } from '@angular/router';
+import duplicates from 'find-array-duplicates'
 
 @Component({
   selector: 'app-purchase-order-line-item',
@@ -97,7 +98,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       return { ...res, isAddShow: true, isDeleteShow: false }
     });
   }
-  myVar:boolean=false
+  myVar: boolean = false
   clearRowData(parentIndex) {
     this.results[parentIndex].scipNumber = '';
     this.results[parentIndex].statisticalGoodsNumber = '';
@@ -106,6 +107,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // this.resetAllRow();
   }
   response: any;
+  resultsTemp: purchasedetails[];
   fetchPurchaseDetails() {
     this.purchaseOrderLineItemService
       .fetchPurchaseDetails()
@@ -128,8 +130,14 @@ export class PurchaseOrderLineItemComponent implements OnInit {
             item.isClearData
           );
         });
+        let count = 0;
+        this.results.forEach(function (value) {
+          value.rowId = count;
+          count++;
+        })
+        this.resultsTemp = this.results
         console.log(' <===this.results====>');
-        console.log(JSON.parse(JSON.stringify(this.results)));
+        console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
@@ -155,25 +163,74 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       elements[parentIndex].selectedCat = item;
     }
   }
+
+  removeDuplicates(originalArray, prop) {
+    var newArray = [];
+    var lookupObject = {};
+
+    for (var i in originalArray) {
+      lookupObject[originalArray[i][prop]] = originalArray[i];
+    }
+
+    for (i in lookupObject) {
+      newArray.push(lookupObject[i]);
+    }
+    return newArray;
+  }
   errorMessage: string = '';
   savePurchaseorderLine() {
-    this.responseCode = '200';
-    if (this.responseCode == '200') {
-      this.localStorageService.clear('user');
-      this.localStorageService.clear('api_token');
-      this.isPurchaseOrderSaved = true;
-      this.router.navigateByUrl('/record-success');
-    } else {
-      this.isPurchaseOrderSaved = false;
-      this.errorMessage = 'Something went wrong . Please try after something';
-    }
+    console.log(this.resultsTemp);
+    let dataList = []
+    let resultTemp = this.resultsTemp;
+    this.results.forEach(function (valueNew) {
+      resultTemp.forEach(function (valueOld) {
+        if (valueNew.rowId == valueOld.rowId) {
+          if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber || valueNew.casnumber != valueOld.casnumber || valueNew.materialCategory != valueOld.materialCategory) {
+            dataList.push(valueNew);
+          }
+        }
+
+      });
+    });
+
+    console.log(dataList);
+
+    let uniqueDataList = this.removeDuplicates(dataList, "rowId");
+    console.log(uniqueDataList)
+    let params = { "scipDetails": uniqueDataList }
+
+    console.log("<=========params==============>")
+    console.log(JSON.stringify(params));
+    console.log(params)
+
+    this.purchaseOrderLineItemService
+      .savePurchaseorderLine(params)
+      .then((data) => {
+        console.log(JSON.stringify(data));
+        this.response = JSON.parse(JSON.stringify(data));
+        this.responseCode = this.response.code;
+        //this.responseCode = '200';
+        if (this.responseCode == '200') {
+          this.localStorageService.clear('user');
+          this.localStorageService.clear('api_token');
+          this.isPurchaseOrderSaved = true;
+          this.router.navigateByUrl('/record-success');
+        } else {
+          this.isPurchaseOrderSaved = false;
+          this.errorMessage = 'Something went wrong . Please try after something';
+        }
+      }).catch((error) => {
+        console.log('Promise rejected with ' + JSON.stringify(error));
+      });
+
+
   }
 
   editPurchaseorderLine(parentIndex) {
     // this.results[parentIndex].isAddShow = false;
     // this.results[parentIndex].isDeleteShow = true;
   }
-  
+
   ClearAllTableData() {
     this.results.forEach(function (value) {
       console.log(value);
@@ -197,17 +254,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'Clear data'
     ];
   }
-  // head = [['ID', 'Country', 'Rank', 'Capital']]
 
-  // data = [
-  //   [1, 'Finland', 7.632, 'Helsinki'],
-  //   [2, 'Norway', 7.594, 'Oslo'],
-  //   [3, 'Denmark', 7.555, 'Copenhagen'],
-  //   [4, 'Iceland', 7.495, 'Reykjavík'],
-  //   [5, 'Switzerland', 7.487, 'Bern'],
-  //   [9, 'Sweden', 7.314, 'Stockholm'],
-  //   [73, 'Belarus', 5.483, 'Minsk'],
-  // ]
   dataList: any = []
   head: any = []
   generateDataForPDF() {
