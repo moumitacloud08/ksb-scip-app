@@ -41,6 +41,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   crossiconWarningdAlt = 'warning';  
   iconWarning = 'assets/images/warning-icon.png';
   iconWarningdAlt = 'warning';
+  iconCross = 'assets/images/cross.png';
+  iiconCrossAlt = 'cross';
   results: purchasedetails[];
   activeParentIndex: number;
   constructor(
@@ -77,6 +79,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   getSCIPRel(parentIndex,scipRel){
     // console.log()
     this.results[parentIndex].scipRelavent=scipRel
+  }
+  clearSCIPData(parentIndex){
+    this.results[parentIndex].scipNumber=''
   }
   mouseEnter(parentIndex) {
     if (this.activeParentIndex !== parentIndex) {

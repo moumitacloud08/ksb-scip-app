@@ -348,8 +348,16 @@ a.page-style:hover {
   border: 1px solid #FB3737;
 }
 .icon-warning-class{
+  margin-left: -25px;
+  width: 5%;
+}
+.icon-cross-invalid-class{
+  margin-left: 6px;
+  width: 9%;
+}
+.icon-cross-class{
   margin-left: -13px;
-    width: 7%;
+  width: 9%;
 }
 .icon-warning-span-class{
   margin-left: 3px;

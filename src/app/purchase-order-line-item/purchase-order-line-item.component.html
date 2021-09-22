@@ -28,9 +28,13 @@
           <th>SCIP No</th>
           <th>Statistical Goods No</th>
           <th>CAS No</th>
-          <th><div style="margin-left: -1px;">Material Category</div></th>
+          <th>
+            <div style="margin-left: -1px;">Material Category</div>
+          </th>
           <th>Add row</th>
-          <th><div style="margin-right: 22px;width: 73px;">Clear data</div></th>
+          <th>
+            <div style="margin-right: 22px;width: 73px;">Clear data</div>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -44,7 +48,9 @@
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false" (click)="selectMaterial('','','')">
-                <span style="font-size:  0.875rem;" *ngIf="el.scipRelavent != 'Yes' && el.scipRelavent != 'No'">Select</span> <span>{{el.scipRelavent}}</span>
+                <span style="font-size:  0.875rem;"
+                  *ngIf="el.scipRelavent != 'Yes' && el.scipRelavent != 'No'">Select</span>
+                <span>{{el.scipRelavent}}</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'Yes')">
@@ -57,21 +63,27 @@
             </div>
           </td>
           <td style="width: 15%;">
-            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)" style="margin-left: -21px;">
+            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)"
+              style="margin-left: -21px;">
               <div *ngIf="el.isAddShow == true">
                 <span style="color:#FFFFFF33">text</span>
-                <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }} <img
-                    *ngIf="el.isInvalid == true" [src]="iconWarning" [alt]="iconWarningdAlt"
-                    class="icon-warning-span-class" /></span>
-
+                <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }} 
+                  <img *ngIf="el.isInvalid == true && el.scipNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
+                    class="icon-warning-span-class"/>
+                </span>
               </div>
               <div class="form-group" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
                   [ngClass]="{'text-red-border-class':el.isInvalid}" class="table-text-border-class"
                   [(ngModel)]="el.scipNumber" (keyup)="validateScip($event,el.scipNumber,parentIndex)"
                   (click)="clickevent(parentIndex)" />
-                <img *ngIf="el.isInvalid == true" [src]="iconWarning" [alt]="iconWarningdAlt"
+                <img *ngIf="el.isInvalid == true && el.scipNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
                   class="icon-warning-class" />
+                <a (click)="clearSCIPData(parentIndex)" style="cursor: pointer" *ngIf="el.scipNumber != ''">
+                  <img [ngClass]="{'icon-cross-invalid-class':el.isInvalid, 'icon-cross-class':!el.isInvalid}"
+                    [src]="iconCross" [alt]="iconCross" />
+                </a>
+
               </div>
             </div>
             <div class="scip-warn" *ngIf="el.isInvalid == true && el.isDeleteShow == true">
@@ -82,10 +94,11 @@
             </div>
           </td>
           <td style="width: 15%;">
-            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)" style="margin-left: -21px;">
+            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)"
+              style="margin-left: -21px;">
               <div *ngIf="el.isAddShow == true">
                 <span style="color:#FFFFFF33">text</span>
-                <span>{{ el.statisticalGoodsNumber }}</span>               
+                <span>{{ el.statisticalGoodsNumber }}</span>
               </div>
               <div class="form-group" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
@@ -96,10 +109,11 @@
 
           </td>
           <td style="width: 8%;">
-            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)" style="margin-left: -21px;">
+            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)"
+              style="margin-left: -21px;">
               <div *ngIf="el.isAddShow == true">
                 <span style="color:#FFFFFF33">text</span>
-                <span>{{ el.casnumber }}</span>                
+                <span>{{ el.casnumber }}</span>
               </div>
               <div class="form-group" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
@@ -108,10 +122,11 @@
             </div>
           </td>
           <td style="width: 10%;">
-            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)" style="margin-left: -21px;">
+            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)"
+              style="margin-left: -21px;">
               <div *ngIf="el.isAddShow == true">
                 <span style="color:#FFFFFF33">text</span>
-                <span>{{ el.materialCategory }}</span>               
+                <span>{{ el.materialCategory }}</span>
               </div>
               <div class="form-group" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
