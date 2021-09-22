@@ -6,7 +6,6 @@ import {
 import {
   NgxWebstorageModule,
   LocalStorageService,
-  LocalStorage,
 } from 'ngx-webstorage';
 
 import { LoginService } from './login.service';
@@ -36,15 +35,15 @@ describe('LoginService', () => {
     //httpTestingController = TestBed.get(HttpTestingController);
   });
 
-  it('setAuthToken should be a value', () => {
-    spyOn(localStorageService, 'retrieve').and.returnValue(authObject);
-    expect(service.setAuthToken()).toBe('a3NiOmtzYg==');
-  });
-
+ 
   it('login should return Observable', () => {
     spyOn(localStorageService, 'retrieve').and.returnValue(authObject);
 
-    service.login('123456789').subscribe((value) => {
+    let str1 = new String('ksb'); 
+    let str2 = new String( ":"+'ksb'); 
+    let authToken:string = btoa(str1.concat(str2.toString())) 
+
+    service.login('123456789',authToken).subscribe((value) => {
       expect(value).toBe('observable value');
     });
   });
