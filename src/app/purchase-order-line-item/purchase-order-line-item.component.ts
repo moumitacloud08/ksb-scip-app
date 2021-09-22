@@ -11,7 +11,7 @@ import { purchasedetails } from '.././purchasedetail';
 import { jsPDF } from "jspdf";
 import 'jspdf-autotable';
 import { Router } from '@angular/router';
-import duplicates from 'find-array-duplicates'
+import { UtilService } from '../util.service'
 
 @Component({
   selector: 'app-purchase-order-line-item',
@@ -49,6 +49,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private purchaseOrderLineItemService: PurchaseOrderLineItemService,
     private router: Router,
+    private utilService : UtilService
   ) {
     this.results = [];
   }
@@ -200,6 +201,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     return newArray;
   }
   errorMessage: string = '';
+  updatedRecordCount:Number;
   savePurchaseorderLine() {
     console.log(this.resultsTemp);
     console.log(this.results);
@@ -252,12 +254,15 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           this.localStorageService.clear('user');
           this.localStorageService.clear('api_token');
           this.isPurchaseOrderSaved = true;
+          this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
           this.router.navigateByUrl('/record-success');
         } else {
           this.isPurchaseOrderSaved = false;
           this.errorMessage = 'Something went wrong . Please try after something';
         }
       }).catch((error) => {
+        this.isPurchaseOrderSaved = false;
+          this.errorMessage = 'Something went wrong . Please try after something';
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
 

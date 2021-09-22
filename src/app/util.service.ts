@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class UtilService {
   isLogedIn: boolean = false;
+  updatedRecordCount: String = '';
   constructor() { }
   
   get isLoggenIn(){
@@ -12,5 +13,11 @@ export class UtilService {
   }
   set isLoggenIn(logedIn){
     this.isLogedIn = logedIn;
+  }
+  get updatedRecordCountFunc(){
+    return this.updatedRecordCount;
+  }
+  set updatedRecordCountFunc(updatedRecordCount){
+    this.updatedRecordCount = updatedRecordCount;
   }
 }
