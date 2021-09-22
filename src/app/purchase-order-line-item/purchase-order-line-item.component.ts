@@ -83,6 +83,15 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   clearSCIPData(parentIndex){
     this.results[parentIndex].scipNumber=''
   }
+  clearStatisticalData(parentIndex){
+    this.results[parentIndex].statisticalGoodsNumber=''
+  }
+  clearCasNum(parentIndex){
+    this.results[parentIndex].casnumber=''
+  }
+  clearMatCat(parentIndex){
+    this.results[parentIndex].materialCategory=''
+  }
   mouseEnter(parentIndex) {
     if (this.activeParentIndex !== parentIndex) {
       this.activeParentIndex = parentIndex;

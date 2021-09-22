@@ -104,11 +104,13 @@
                 <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
                   id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
                   [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)" />
+                  <a (click)="clearStatisticalData(parentIndex)" style="cursor: pointer" *ngIf="el.statisticalGoodsNumber != ''">
+                    <img class="icon-cross-class"  [src]="iconCross" [alt]="iconCross" />
+                  </a>
               </div>
             </div>
-
           </td>
-          <td style="width: 8%;">
+          <td style="width: 15%;">
             <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)"
               style="margin-left: -21px;">
               <div *ngIf="el.isAddShow == true">
@@ -118,6 +120,9 @@
               <div class="form-group" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
                   class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)" />
+                  <a (click)="clearCasNum(parentIndex)" style="cursor: pointer" *ngIf="el.casnumber != ''">
+                    <img class="icon-cross-class"  [src]="iconCross" [alt]="iconCross" />
+                  </a>
               </div>
             </div>
           </td>
@@ -130,7 +135,10 @@
               </div>
               <div class="form-group" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
-                  class="table-text-border-class" [(ngModel)]="el.materialCategory" (click)="clickevent(parentIndex)" />
+                  class="table-text-border-class" style="width:107%" [(ngModel)]="el.materialCategory" (click)="clickevent(parentIndex)" />
+                  <a (click)="clearMatCat(parentIndex)" style="cursor: pointer" *ngIf="el.materialCategory != ''">
+                    <img class="icon-cross-class"  [src]="iconCross" [alt]="iconCross" />
+                  </a>
               </div>
             </div>
 
