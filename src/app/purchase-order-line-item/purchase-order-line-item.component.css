@@ -146,6 +146,12 @@ input::placeholder {
 
 .plus-class {
   width: 30px;
+  cursor: pointer
+}
+.clear-icon-class {
+  width: 24px;
+  height: 24px;
+  cursor: pointer
 }
 .pdf-class {
   width: 20px;
@@ -329,42 +335,42 @@ a.page-style:hover {
 .output-text:hover + .hide-class {
   display: block;
 } */
-#waypointsTable tr:hover, #waypointsTable tr.hover {
+#waypointsTable tr:hover,
+#waypointsTable tr.hover {
   background-color: #ccddeb4d;
 }
-
 
 .row span {
   font-family: "Roboto", sans-serif;
   font-size: 0.85rem;
 }
-.modal-body-cutom{
+.modal-body-cutom {
   padding-bottom: 46px;
 }
 .cross-warning-class {
   width: 12px;
 }
-.text-red-border-class{
-  border: 1px solid #FB3737;
+.text-red-border-class {
+  border: 1px solid #fb3737;
 }
-.icon-warning-class{
+.icon-warning-class {
   margin-left: -25px;
   width: 5%;
 }
-.icon-cross-invalid-class{
+.icon-cross-invalid-class {
   margin-left: 6px;
   width: 9%;
 }
-.icon-cross-class{
+.icon-cross-class {
   margin-left: -13px;
   width: 9%;
 }
-.icon-warning-span-class{
+.icon-warning-span-class {
   margin-left: 3px;
   width: 7%;
-  margin-top:5px;
-  margin-bottom:8px
+  margin-top: 5px;
+  margin-bottom: 8px;
 }
-.span-red-border-class{
-  color:#FB3737
+.span-red-border-class {
+  color: #fb3737;
 }
