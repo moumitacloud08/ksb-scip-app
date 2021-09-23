@@ -137,7 +137,7 @@
                 <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
                   class="table-text-border-class" style="width:107%" [(ngModel)]="el.materialCategory" (click)="clickevent(parentIndex)" />
                   <a (click)="clearMatCat(parentIndex)" style="cursor: pointer" *ngIf="el.materialCategory != ''">
-                    <img class="icon-cross-class"  [src]="iconCross" [alt]="iconCross" />
+                    <img class="icon-cross-mat-class"  [src]="iconCross" [alt]="iconCross" />
                   </a>
               </div>
             </div>
