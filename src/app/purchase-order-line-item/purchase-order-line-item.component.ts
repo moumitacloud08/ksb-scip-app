@@ -168,7 +168,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   validateScip(event: any, scipNumber: string, parentIndex: number) {
     this.results[parentIndex].scipNumber =
-      this.results[parentIndex].scipNumber.replace(/\D/g, '')
+      this.results[parentIndex].scipNumber.replace(/[^0-9a-z]/gi, '')
     if (this.results[parentIndex].scipNumber.length < 10) {
       this.results[parentIndex].isInvalid = true;
     } else {
