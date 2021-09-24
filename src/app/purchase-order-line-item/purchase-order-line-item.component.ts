@@ -311,7 +311,6 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // this.results[parentIndex].isDeleteShow = true;
     console.log(parentIndex + " --- " + rowId);
     let resultTemp = this.results
-    var count = 0;
     let objTemp: purchasedetails = {
       lineItemNumber: "",
       statisticalGoodsNumber: "",
@@ -326,6 +325,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       isInvalid: false,
       isClearData: true,
       rowId: this.results.length,
+      isSubRow: false
     }
 
     resultTemp.push(objTemp);
@@ -350,9 +350,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         isInvalid: false,
         isClearData: true,
         rowId: nextIndex + 1,
+        isSubRow: false
       }
-
+      
       resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])
+      resultTemp[nextIndex].isSubRow = true
+      resultTemp[nextIndex].isClearData = false
 
       for (var i = lastIndex; i != nextIndex && i > nextIndex; i--) {
         if (nextIndex != resultTemp.length - 1) {
@@ -364,14 +367,25 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     } else if (nextIndex == lastIndex) {
       resultTemp[lastIndex] = Object.assign({}, resultTemp[parentIndex])
+      resultTemp[lastIndex].isSubRow = true
+      resultTemp[lastIndex].isClearData = false
+
     }
 
     for (var i = 0; i < resultTemp.length; i++) {
       resultTemp[i].rowId = i;
     }
-    this.results = resultTemp
+    this.results = resultTemp 
   }
+  deleteRow(parentIndex){
+    let resultTemp =    Object.assign([], this.results)
+    resultTemp.splice(parentIndex, 1);
 
+    for (var i = 0; i < resultTemp.length; i++) {
+      resultTemp[i].rowId = i;
+    }
+    this.results = Object.assign([], resultTemp)
+  }
   ClearAllTableData() {
     this.results.forEach(function (value) {
       console.log(value);

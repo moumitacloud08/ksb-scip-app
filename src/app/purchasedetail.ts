@@ -24,5 +24,6 @@ export class purchasedetails {
         public isInvalid: boolean = false,
         public isClearData: boolean = true,
         public rowId: Number = 0,
+        public isSubRow: boolean = false
       ) {}
   }
