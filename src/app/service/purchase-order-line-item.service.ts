@@ -34,6 +34,9 @@ export class PurchaseOrderLineItemService {
       });
     return this.http.get(this.purchaseOrderURL,httpOptions).toPromise();
   }
+  fetchPurchaseDetailsTestData() {
+   return this.http.get('./assets/purchasedetail.json').toPromise();
+ }
   savePurchaseorderLine(paramObj) {
     httpOptions.headers = new HttpHeaders({
        api_token: this.setAPIToken(),

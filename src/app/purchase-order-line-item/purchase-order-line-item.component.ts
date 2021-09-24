@@ -38,7 +38,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   iconClearData = 'assets/images/clear-icon.png';
   iconClearDatadAlt = 'clear data';
   crossiconWarning = 'assets/images/warning-cross-icon.png';
-  crossiconWarningdAlt = 'warning';  
+  crossiconWarningdAlt = 'warning';
   iconWarning = 'assets/images/warning-icon.png';
   iconWarningdAlt = 'warning';
   iconCross = 'assets/images/cross.png';
@@ -49,7 +49,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private purchaseOrderLineItemService: PurchaseOrderLineItemService,
     private router: Router,
-    private utilService : UtilService
+    private utilService: UtilService
   ) {
     this.results = [];
   }
@@ -75,23 +75,24 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'Clear data'
     ];
 
-    this.fetchPurchaseDetails();
+    //this.fetchPurchaseDetails();
+    this.fetchPurchaseDetailsTestData()
   }
-  getSCIPRel(parentIndex,scipRel){
+  getSCIPRel(parentIndex, scipRel) {
     // console.log()
-    this.results[parentIndex].scipRelavent=scipRel
+    this.results[parentIndex].scipRelavent = scipRel
   }
-  clearSCIPData(parentIndex){
-    this.results[parentIndex].scipNumber=''
+  clearSCIPData(parentIndex) {
+    this.results[parentIndex].scipNumber = ''
   }
-  clearStatisticalData(parentIndex){
-    this.results[parentIndex].statisticalGoodsNumber=''
+  clearStatisticalData(parentIndex) {
+    this.results[parentIndex].statisticalGoodsNumber = ''
   }
-  clearCasNum(parentIndex){
-    this.results[parentIndex].casnumber=''
+  clearCasNum(parentIndex) {
+    this.results[parentIndex].casnumber = ''
   }
-  clearMatCat(parentIndex){
-    this.results[parentIndex].materialCategory=''
+  clearMatCat(parentIndex) {
+    this.results[parentIndex].materialCategory = ''
   }
   mouseEnter(parentIndex) {
     if (this.activeParentIndex !== parentIndex) {
@@ -166,6 +167,42 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
+  fetchPurchaseDetailsTestData() {
+    this.purchaseOrderLineItemService
+      .fetchPurchaseDetailsTestData()
+      .then((data) => {
+        console.log(JSON.stringify(data));
+        this.response = JSON.parse(JSON.stringify(data));
+        this.results = this.response.scipDetails.map((item) => {
+          return new purchasedetails(
+            item.lineItemNumber,
+            item.statisticalGoodsNumber,
+            item.purchaseOrderNumber,
+            item.scipNumber,
+            item.scipRelavent,
+            item.materialCategory,
+            item.submitStatus,
+            item.casnumber,
+            item.isAddShow,
+            item.isDeleteShow,
+            item.isInvalid,
+            item.isClearData
+          );
+        });
+        let count = 0;
+        this.results.forEach(function (value) {
+          value.rowId = count;
+          count++;
+        })
+        this.resultsTemp = this.results
+        //console.log(' <===this.results====>');
+        //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
+        this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
+      })
+      .catch((error) => {
+        console.log('Promise rejected with ' + JSON.stringify(error));
+      });
+  }
   validateScip(event: any, scipNumber: string, parentIndex: number) {
     this.results[parentIndex].scipNumber =
       this.results[parentIndex].scipNumber.replace(/[^0-9a-z]/gi, '')
@@ -201,7 +238,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     return newArray;
   }
   errorMessage: string = '';
-  updatedRecordCount:Number;
+  updatedRecordCount: Number;
   savePurchaseorderLine() {
     console.log(this.resultsTemp);
     console.log(this.results);
@@ -210,7 +247,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.results.forEach(function (valueNew) {
       resultTemp.forEach(function (valueOld) {
         if (valueNew.rowId == valueOld.rowId) {
-          if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber || 
+          if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber ||
             valueNew.casnumber != valueOld.casnumber || valueNew.materialCategory != valueOld.materialCategory || valueNew.scipRelavent != valueOld.scipRelavent) {
             dataList.push(valueNew);
           }
@@ -262,16 +299,77 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         }
       }).catch((error) => {
         this.isPurchaseOrderSaved = false;
-          this.errorMessage = 'Something went wrong . Please try after something';
+        this.errorMessage = 'Something went wrong . Please try after something';
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
 
 
   }
 
-  editPurchaseorderLine(parentIndex) {
+  editPurchaseorderLine(parentIndex: number, rowId: number) {
     // this.results[parentIndex].isAddShow = false;
     // this.results[parentIndex].isDeleteShow = true;
+    console.log(parentIndex + " --- " + rowId);
+    let resultTemp = this.results
+    var count = 0;
+    let objTemp: purchasedetails = {
+      lineItemNumber: "",
+      statisticalGoodsNumber: "",
+      purchaseOrderNumber: "",
+      scipNumber: "",
+      scipRelavent: "",
+      materialCategory: "",
+      submitStatus: "",
+      casnumber: "",
+      isAddShow: true,
+      isDeleteShow: false,
+      isInvalid: false,
+      isClearData: true,
+      rowId: this.results.length,
+    }
+
+    resultTemp.push(objTemp);
+
+    let nextIndex: number = parentIndex + 1
+    let nexttonextIndex: number = parentIndex + 2
+    let lastIndex = resultTemp.length - 1
+    if (nextIndex != lastIndex) {
+
+
+      let nextIndexObj: purchasedetails = {
+        lineItemNumber: resultTemp[nextIndex].lineItemNumber,
+        statisticalGoodsNumber: resultTemp[nextIndex].statisticalGoodsNumber,
+        purchaseOrderNumber: resultTemp[nextIndex].purchaseOrderNumber,
+        scipNumber: resultTemp[nextIndex].scipNumber,
+        scipRelavent: resultTemp[nextIndex].scipRelavent,
+        materialCategory: resultTemp[nextIndex].materialCategory,
+        submitStatus: resultTemp[nextIndex].submitStatus,
+        casnumber: resultTemp[nextIndex].casnumber,
+        isAddShow: true,
+        isDeleteShow: false,
+        isInvalid: false,
+        isClearData: true,
+        rowId: nextIndex + 1,
+      }
+
+      resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])
+
+      for (var i = lastIndex; i != nextIndex && i > nextIndex; i--) {
+        if (nextIndex != resultTemp.length - 1) {
+          resultTemp[i] = resultTemp[i - 1]
+          resultTemp[i].rowId = i
+        }
+      }
+      resultTemp[nexttonextIndex] = nextIndexObj
+
+    } else if (nextIndex == lastIndex) {
+      resultTemp[lastIndex] = Object.assign({}, resultTemp[parentIndex])
+    }
+
+    for (var i = 0; i < resultTemp.length; i++) {
+      resultTemp[i].rowId = i;
+    }
+    this.results = resultTemp
   }
 
   ClearAllTableData() {

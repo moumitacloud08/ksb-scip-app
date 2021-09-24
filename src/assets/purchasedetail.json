@@ -1,0 +1,87 @@
+{
+    "code": 200,
+    "type": "STRING",
+    "message": "SUCCESS",
+    "scipDetails": [
+        {
+            "lineItemNumber": 0,
+            "statisticalGoodsNumber": "",
+            "purchaseOrderNumber": 876554,
+            "scipNumber": "67896",
+            "scipRelavent": null,
+            "materialCategory": "Coal",
+            "submitStatus": "Yes",
+            "casnumber": "234235"
+        },
+        {
+            "lineItemNumber": 0,
+            "statisticalGoodsNumber": "345345",
+            "purchaseOrderNumber": 987654,
+            "scipNumber": "89789080",
+            "scipRelavent": null,
+            "materialCategory": "Cement",
+            "submitStatus": "Yes",
+            "casnumber": "234235"
+        },
+        {
+            "lineItemNumber": 0,
+            "statisticalGoodsNumber": "",
+            "purchaseOrderNumber": 1234,
+            "scipNumber": "43546",
+            "scipRelavent": null,
+            "materialCategory": "MaterialCategory",
+            "submitStatus": "Yes",
+            "casnumber": "676876"
+        },
+        {
+            "lineItemNumber": 0,
+            "statisticalGoodsNumber": "",
+            "purchaseOrderNumber": 77765,
+            "scipNumber": "987867545",
+            "scipRelavent": null,
+            "materialCategory": "MaterialCategory",
+            "submitStatus": "Yes",
+            "casnumber": "234239"
+        },
+        {
+            "lineItemNumber": 0,
+            "statisticalGoodsNumber": "",
+            "purchaseOrderNumber": 11134,
+            "scipNumber": "23480238",
+            "scipRelavent": null,
+            "materialCategory": "MaterialCategory",
+            "submitStatus": "Yes",
+            "casnumber": "234239"
+        },
+        {
+            "lineItemNumber": 0,
+            "statisticalGoodsNumber": "",
+            "purchaseOrderNumber": 56576,
+            "scipNumber": "567567555",
+            "scipRelavent": null,
+            "materialCategory": "MaterialCategory",
+            "submitStatus": "Yes",
+            "casnumber": "9879678"
+        },
+        {
+            "lineItemNumber": 0,
+            "statisticalGoodsNumber": "",
+            "purchaseOrderNumber": 3465467,
+            "scipNumber": "54766576",
+            "scipRelavent": null,
+            "materialCategory": "MaterialCategory",
+            "submitStatus": "Yes",
+            "casnumber": "234239"
+        },
+        {
+            "lineItemNumber": 0,
+            "statisticalGoodsNumber": "",
+            "purchaseOrderNumber": 87653,
+            "scipNumber": "65786",
+            "scipRelavent": null,
+            "materialCategory": "MaterialCategory",
+            "submitStatus": "Yes",
+            "casnumber": "234239"
+        }
+    ]
+}

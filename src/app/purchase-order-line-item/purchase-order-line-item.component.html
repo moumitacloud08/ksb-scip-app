@@ -41,7 +41,7 @@
         <tr [ngClass]="{'hover':el.isDeleteShow}"
           *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row"
           id="item_{{parentIndex}}">
-          <td style="width: 15%;">{{ el.purchaseOrderNumber }}</td>
+          <td style="width: 15%;">{{ el.rowId }} {{ el.purchaseOrderNumber }}</td>
           <td style="width: 8%;">{{ el.lineItemNumber }}</td>
           <td style="width: 15%;">
             <!-- {{ el.scipRelavent }} -->
@@ -157,7 +157,7 @@
             </div-->
           </td>
           <td style="width: 20%;">
-            <a (click)="editPurchaseorderLine(parentIndex)"><img [src]="iconPlusCircle" [alt]="iconPlusAlt"
+            <a (click)="editPurchaseorderLine(parentIndex,el.rowId)"><img [src]="iconPlusCircle" [alt]="iconPlusAlt"
                 class="plus-class" /></a>
             <!-- <a *ngIf="el.isDeleteShow == true"><img [src]="iconDelete" [alt]="iconDeleteAlt" class="plus-class" /></a> -->
           </td>
