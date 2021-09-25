@@ -313,74 +313,78 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // this.results[parentIndex].isDeleteShow = true;
     console.log(parentIndex + " --- " + rowId);
     let resultTemp = this.results
-    let objTemp: purchasedetails = {
-      lineItemNumber: "",
-      statisticalGoodsNumber: "",
-      purchaseOrderNumber: "",
-      scipNumber: "",
-      scipRelavent: "",
-      materialCategory: "",
-      submitStatus: "",
-      casnumber: "",
-      isAddShow: true,
-      isDeleteShow: false,
-      isInvalid: false,
-      isClearData: true,
-      rowId: this.results.length,
-      isSubRow: false
-    }
-
-    resultTemp.push(objTemp);
-
-    let nextIndex: number = parentIndex + 1
-    let nexttonextIndex: number = parentIndex + 2
-    let lastIndex = resultTemp.length - 1
-    if (nextIndex != lastIndex) {
-
-
-      let nextIndexObj: purchasedetails = {
-        lineItemNumber: resultTemp[nextIndex].lineItemNumber,
-        statisticalGoodsNumber: resultTemp[nextIndex].statisticalGoodsNumber,
-        purchaseOrderNumber: resultTemp[nextIndex].purchaseOrderNumber,
-        scipNumber: resultTemp[nextIndex].scipNumber,
-        scipRelavent: resultTemp[nextIndex].scipRelavent,
-        materialCategory: resultTemp[nextIndex].materialCategory,
-        submitStatus: resultTemp[nextIndex].submitStatus,
-        casnumber: resultTemp[nextIndex].casnumber,
+    if (resultTemp[parentIndex + 1] === undefined || !resultTemp[parentIndex + 1].isSubRow) {
+      let objTemp: purchasedetails = {
+        lineItemNumber: "",
+        statisticalGoodsNumber: "",
+        purchaseOrderNumber: "",
+        scipNumber: "",
+        scipRelavent: "",
+        materialCategory: "",
+        submitStatus: "",
+        casnumber: "",
         isAddShow: true,
         isDeleteShow: false,
         isInvalid: false,
         isClearData: true,
-        rowId: nextIndex + 1,
+        rowId: this.results.length,
         isSubRow: false
       }
-      
-      resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])
-      resultTemp[nextIndex].isSubRow = true
-      resultTemp[nextIndex].isClearData = false
 
-      for (var i = lastIndex; i != nextIndex && i > nextIndex; i--) {
-        if (nextIndex != resultTemp.length - 1) {
-          resultTemp[i] = resultTemp[i - 1]
-          resultTemp[i].rowId = i
+      resultTemp.push(objTemp);
+
+      let nextIndex: number = parentIndex + 1
+      let nexttonextIndex: number = parentIndex + 2
+      let lastIndex = resultTemp.length - 1
+      if (nextIndex != lastIndex) {
+
+
+        let nextIndexObj: purchasedetails = {
+          lineItemNumber: resultTemp[nextIndex].lineItemNumber,
+          statisticalGoodsNumber: resultTemp[nextIndex].statisticalGoodsNumber,
+          purchaseOrderNumber: resultTemp[nextIndex].purchaseOrderNumber,
+          scipNumber: resultTemp[nextIndex].scipNumber,
+          scipRelavent: resultTemp[nextIndex].scipRelavent,
+          materialCategory: resultTemp[nextIndex].materialCategory,
+          submitStatus: resultTemp[nextIndex].submitStatus,
+          casnumber: resultTemp[nextIndex].casnumber,
+          isAddShow: true,
+          isDeleteShow: false,
+          isInvalid: false,
+          isClearData: true,
+          rowId: nextIndex + 1,
+          isSubRow: false
         }
+
+        resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])
+        resultTemp[nextIndex].isSubRow = true
+        resultTemp[nextIndex].isClearData = false
+
+        for (var i = lastIndex; i != nextIndex && i > nextIndex; i--) {
+          if (nextIndex != resultTemp.length - 1) {
+            resultTemp[i] = resultTemp[i - 1]
+            resultTemp[i].rowId = i
+          }
+        }
+        resultTemp[nexttonextIndex] = nextIndexObj
+
+      } else if (nextIndex == lastIndex) {
+        resultTemp[lastIndex] = Object.assign({}, resultTemp[parentIndex])
+        resultTemp[lastIndex].isSubRow = true
+        resultTemp[lastIndex].isClearData = false
+
       }
-      resultTemp[nexttonextIndex] = nextIndexObj
 
-    } else if (nextIndex == lastIndex) {
-      resultTemp[lastIndex] = Object.assign({}, resultTemp[parentIndex])
-      resultTemp[lastIndex].isSubRow = true
-      resultTemp[lastIndex].isClearData = false
-
+      for (var i = 0; i < resultTemp.length; i++) {
+        resultTemp[i].rowId = i;
+      }
+      this.results = resultTemp
     }
 
-    for (var i = 0; i < resultTemp.length; i++) {
-      resultTemp[i].rowId = i;
-    }
-    this.results = resultTemp 
+
   }
-  deleteRow(parentIndex){
-    let resultTemp =    Object.assign([], this.results)
+  deleteRow(parentIndex) {
+    let resultTemp = Object.assign([], this.results)
     resultTemp.splice(parentIndex, 1);
 
     for (var i = 0; i < resultTemp.length; i++) {
