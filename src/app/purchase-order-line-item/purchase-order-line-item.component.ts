@@ -43,6 +43,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   iconWarningdAlt = 'warning';
   iconCross = 'assets/images/cross.png';
   iiconCrossAlt = 'cross';
+  iconCopy = 'assets/images/copy-icon.png';
+  iconCopyAlt = 'copy';
   results: purchasedetails[];
   activeParentIndex: number;
   constructor(

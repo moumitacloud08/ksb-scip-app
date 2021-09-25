@@ -42,7 +42,10 @@
           *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row"
           id="item_{{parentIndex}}">
           <!-- {{ el.rowId }} -->
-          <td style="width: 15%;"> {{ el.purchaseOrderNumber }}</td>
+          <td style="width: 15%;">
+            <img [src]="iconCopy" [alt]="iconCopyAlt" class="clear-icon-class" *ngIf="el.isSubRow && !el.isClearData" />
+            {{ el.purchaseOrderNumber }}
+          </td>
           <td style="width: 8%;">{{ el.lineItemNumber }}</td>
           <td style="width: 15%;">
             <!-- {{ el.scipRelavent }} -->
@@ -68,9 +71,9 @@
               style="margin-left: -21px;">
               <div *ngIf="el.isAddShow == true">
                 <span style="color:#FFFFFF33">text</span>
-                <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }} 
+                <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }}
                   <img *ngIf="el.isInvalid == true && el.scipNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
-                    class="icon-warning-span-class"/>
+                    class="icon-warning-span-class" />
                 </span>
               </div>
               <div class="form-group" *ngIf="el.isDeleteShow == true">
@@ -105,9 +108,10 @@
                 <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
                   id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
                   [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)" />
-                  <a (click)="clearStatisticalData(parentIndex)" style="cursor: pointer" *ngIf="el.statisticalGoodsNumber != ''">
-                    <img class="icon-cross-class"  [src]="iconCross" [alt]="iconCross" />
-                  </a>
+                <a (click)="clearStatisticalData(parentIndex)" style="cursor: pointer"
+                  *ngIf="el.statisticalGoodsNumber != ''">
+                  <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
+                </a>
               </div>
             </div>
           </td>
@@ -121,9 +125,9 @@
               <div class="form-group" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
                   class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)" />
-                  <a (click)="clearCasNum(parentIndex)" style="cursor: pointer" *ngIf="el.casnumber != ''">
-                    <img class="icon-cross-class"  [src]="iconCross" [alt]="iconCross" />
-                  </a>
+                <a (click)="clearCasNum(parentIndex)" style="cursor: pointer" *ngIf="el.casnumber != ''">
+                  <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
+                </a>
               </div>
             </div>
           </td>
@@ -136,10 +140,11 @@
               </div>
               <div class="form-group" *ngIf="el.isDeleteShow == true">
                 <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
-                  class="table-text-border-class" style="width:107%" [(ngModel)]="el.materialCategory" (click)="clickevent(parentIndex)" />
-                  <a (click)="clearMatCat(parentIndex)" style="cursor: pointer" *ngIf="el.materialCategory != ''">
-                    <img class="icon-cross-mat-class"  [src]="iconCross" [alt]="iconCross" />
-                  </a>
+                  class="table-text-border-class" style="width:107%" [(ngModel)]="el.materialCategory"
+                  (click)="clickevent(parentIndex)" />
+                <a (click)="clearMatCat(parentIndex)" style="cursor: pointer" *ngIf="el.materialCategory != ''">
+                  <img class="icon-cross-mat-class" [src]="iconCross" [alt]="iconCross" />
+                </a>
               </div>
             </div>
 
@@ -158,15 +163,19 @@
             </div-->
           </td>
           <td style="width: 20%;">
-            <a (click)="editPurchaseorderLine(parentIndex,el.rowId)"><img [src]="iconPlusCircle" [alt]="iconPlusAlt"
-                class="plus-class" /></a>
-            <!-- <a *ngIf="el.isDeleteShow == true"><img [src]="iconDelete" [alt]="iconDeleteAlt" class="plus-class" /></a> -->
+            <a (click)="editPurchaseorderLine(parentIndex,el.rowId)" class="enabled-class"
+              *ngIf="el.isClearData && !el.isSubRow">
+              <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
+            </a>
+            <a class="disabled-class" *ngIf="el.isSubRow && !el.isClearData">
+              <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
+            </a>
           </td>
           <td style="width: 20%;">
             <a *ngIf="el.isClearData && !el.isSubRow" (click)="clearRowData(parentIndex)"><img [src]="iconClearData"
                 [alt]="iconClearDatadAlt" class="clear-icon-class" /></a>
             <a *ngIf="el.isSubRow && !el.isClearData" (click)="deleteRow(parentIndex)"><img [src]="iconDelete"
-              [alt]="iconDeleteAlt" class="clear-icon-class" /></a>
+                [alt]="iconDeleteAlt" class="clear-icon-class" /></a>
           </td>
         </tr>
       </tbody>
