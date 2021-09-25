@@ -67,16 +67,16 @@
             </div>
           </td>
           <td style="width: 15%;">
-            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)"
+            <div (mouseenter)="mouseEnter(parentIndex,'scip') " (mouseleave)="mouseLeave(parentIndex,'scip')"
               style="margin-left: -21px;">
-              <div *ngIf="el.isAddShow == true">
+              <div *ngIf="el.isSCIPSpanShow == true">
                 <span style="color:#FFFFFF33">text</span>
                 <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }}
                   <img *ngIf="el.isInvalid == true && el.scipNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
                     class="icon-warning-span-class" />
                 </span>
               </div>
-              <div class="form-group" *ngIf="el.isDeleteShow == true">
+              <div class="form-group" *ngIf="el.isSCIPEditShow == true">
                 <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
                   [ngClass]="{'text-red-border-class':el.isInvalid}" class="table-text-border-class"
                   [(ngModel)]="el.scipNumber" (keyup)="validateScip($event,el.scipNumber,parentIndex)"
@@ -98,13 +98,13 @@
             </div>
           </td>
           <td style="width: 15%;">
-            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)"
+            <div (mouseenter)="mouseEnter(parentIndex,'stat') " (mouseleave)="mouseLeave(parentIndex,'stat')"
               style="margin-left: -21px;">
-              <div *ngIf="el.isAddShow == true">
+              <div *ngIf="el.isStatSpanShow == true">
                 <span style="color:#FFFFFF33">text</span>
                 <span>{{ el.statisticalGoodsNumber }}</span>
               </div>
-              <div class="form-group" *ngIf="el.isDeleteShow == true">
+              <div class="form-group" *ngIf="el.isStatEditShow == true">
                 <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
                   id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
                   [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)" />
@@ -116,13 +116,13 @@
             </div>
           </td>
           <td style="width: 15%;">
-            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)"
+            <div (mouseenter)="mouseEnter(parentIndex,'cas') " (mouseleave)="mouseLeave(parentIndex,'cas')"
               style="margin-left: -21px;">
-              <div *ngIf="el.isAddShow == true">
+              <div *ngIf="el.isCasSpanShow == true">
                 <span style="color:#FFFFFF33">text</span>
                 <span>{{ el.casnumber }}</span>
               </div>
-              <div class="form-group" *ngIf="el.isDeleteShow == true">
+              <div class="form-group" *ngIf="el.isCasEditShow == true">
                 <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
                   class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)" />
                 <a (click)="clearCasNum(parentIndex)" style="cursor: pointer" *ngIf="el.casnumber != ''">
@@ -132,13 +132,13 @@
             </div>
           </td>
           <td style="width: 10%;">
-            <div (mouseenter)="mouseEnter(parentIndex) " (mouseleave)="mouseLeave(parentIndex)"
+            <div (mouseenter)="mouseEnter(parentIndex,'mat') " (mouseleave)="mouseLeave(parentIndex,'mat')"
               style="margin-left: -21px;">
-              <div *ngIf="el.isAddShow == true">
+              <div *ngIf="el.isMatSpanShow == true">
                 <span style="color:#FFFFFF33">text</span>
                 <span>{{ el.materialCategory }}</span>
               </div>
-              <div class="form-group" *ngIf="el.isDeleteShow == true">
+              <div class="form-group" *ngIf="el.isMatEditShow == true">
                 <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
                   class="table-text-border-class" style="width:107%" [(ngModel)]="el.materialCategory"
                   (click)="clickevent(parentIndex)" />

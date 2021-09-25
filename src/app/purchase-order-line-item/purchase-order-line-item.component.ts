@@ -96,12 +96,78 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   clearMatCat(parentIndex) {
     this.results[parentIndex].materialCategory = ''
   }
-  mouseEnter(parentIndex) {
+  mouseEnter(parentIndex,field) {
     if (this.activeParentIndex !== parentIndex) {
       this.activeParentIndex = parentIndex;
       this.resetAllRow();
       this.results[parentIndex].isAddShow = false;
       this.results[parentIndex].isDeleteShow = true;
+      if(field == 'scip'){
+        this.results[parentIndex].isSCIPSpanShow = false;
+        this.results[parentIndex].isSCIPEditShow = true;
+
+
+        this.results[parentIndex].isStatSpanShow = true;
+        this.results[parentIndex].isStatEditShow = false;
+
+        this.results[parentIndex].isCasSpanShow = true;
+        this.results[parentIndex].isCasEditShow = false;
+
+        this.results[parentIndex].isMatSpanShow = true;
+        this.results[parentIndex].isMatEditShow = false;
+      }else if(field == 'stat'){
+        this.results[parentIndex].isStatSpanShow = false;
+        this.results[parentIndex].isStatEditShow = true;
+
+
+        this.results[parentIndex].isSCIPSpanShow = true;
+        this.results[parentIndex].isSCIPEditShow = false;
+
+        this.results[parentIndex].isCasSpanShow = true;
+        this.results[parentIndex].isCasEditShow = false;
+
+        this.results[parentIndex].isMatSpanShow = true;
+        this.results[parentIndex].isMatEditShow = false;
+      }else if(field == 'cas'){
+        this.results[parentIndex].isCasSpanShow = false;
+        this.results[parentIndex].isCasEditShow = true;
+
+
+        this.results[parentIndex].isSCIPSpanShow = true;
+        this.results[parentIndex].isSCIPEditShow = false;
+
+        this.results[parentIndex].isStatSpanShow = true;
+        this.results[parentIndex].isStatEditShow = false;
+
+        this.results[parentIndex].isMatSpanShow = true;
+        this.results[parentIndex].isMatEditShow = false;
+      }else if(field == 'mat'){
+        this.results[parentIndex].isMatSpanShow = false;
+        this.results[parentIndex].isMatEditShow = true;
+
+
+        this.results[parentIndex].isSCIPSpanShow = true;
+        this.results[parentIndex].isSCIPEditShow = false;
+
+        this.results[parentIndex].isStatSpanShow = true;
+        this.results[parentIndex].isStatEditShow = false;
+
+        this.results[parentIndex].isCasSpanShow = true;
+        this.results[parentIndex].isCasEditShow = false;
+      }else{
+        this.results[parentIndex].isSCIPSpanShow = true;
+        this.results[parentIndex].isSCIPEditShow = false;
+
+        this.results[parentIndex].isStatSpanShow = true;
+        this.results[parentIndex].isStatEditShow = false;
+
+        this.results[parentIndex].isCasSpanShow = true;
+        this.results[parentIndex].isCasEditShow = false;
+
+        this.results[parentIndex].isMatSpanShow = true;
+        this.results[parentIndex].isMatEditShow = false;
+      }
+     
     }
   }
   mouseLeave(parentIndex) {
@@ -116,11 +182,13 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       this.resetAllRow();
       this.results[parentIndex].isAddShow = false;
       this.results[parentIndex].isDeleteShow = true;
+      this.results[parentIndex].isSCIPSpanShow = false;
+      this.results[parentIndex].isSCIPEditShow = true;
     }
   }
   resetAllRow(): void {
     this.results = this.results.map(res => {
-      return { ...res, isAddShow: true, isDeleteShow: false }
+      return { ...res, isAddShow: true, isDeleteShow: false, isSCIPSpanShow:true, isSCIPEditShow:false, isStatSpanShow:true, isStatEditShow:false, isCasSpanShow:true, isCasEditShow:false, isMatSpanShow:true, isMatEditShow:false }
     });
   }
   myVar: boolean = false
@@ -328,7 +396,15 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         isInvalid: false,
         isClearData: true,
         rowId: this.results.length,
-        isSubRow: false
+        isSubRow: false,
+        isSCIPSpanShow:true,
+        isSCIPEditShow:false,
+        isStatSpanShow:true,
+        isStatEditShow:false,
+        isCasSpanShow:true,
+        isCasEditShow:false,
+        isMatSpanShow:true,
+         isMatEditShow:false
       }
 
       resultTemp.push(objTemp);
@@ -353,7 +429,15 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           isInvalid: false,
           isClearData: true,
           rowId: nextIndex + 1,
-          isSubRow: false
+          isSubRow: false,
+          isSCIPSpanShow  : true,
+          isSCIPEditShow :false,
+          isStatSpanShow:true,
+          isStatEditShow:false,
+          isCasSpanShow:true,
+          isCasEditShow:false,
+          isMatSpanShow:true,
+          isMatEditShow:false
         }
 
         resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])

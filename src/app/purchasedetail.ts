@@ -24,6 +24,14 @@ export class purchasedetails {
         public isInvalid: boolean = false,
         public isClearData: boolean = true,
         public rowId: Number = 0,
-        public isSubRow: boolean = false
+        public isSubRow: boolean = false,
+        public isSCIPSpanShow: boolean = true,
+        public isSCIPEditShow: boolean = false,
+        public isStatSpanShow: boolean = true,
+        public isStatEditShow: boolean = false,
+        public isCasSpanShow: boolean = true,
+        public isCasEditShow: boolean = false,
+        public isMatSpanShow: boolean = true,
+        public isMatEditShow: boolean = false,
       ) {}
   }
