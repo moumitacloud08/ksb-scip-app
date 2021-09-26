@@ -228,7 +228,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           value.rowId = count;
           count++;
         })
-        this.resultsTemp = this.results
+       // this.resultsTemp = this.results
+        this.resultsTemp = Object.assign([], this.results) ; 
         //console.log(' <===this.results====>');
         //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
@@ -264,7 +265,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           value.rowId = count;
           count++;
         })
-        this.resultsTemp = this.results
+        this.resultsTemp = Object.assign([], this.results) ; 
         //console.log(' <===this.results====>');
         //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
@@ -313,10 +314,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     console.log(this.resultsTemp);
     console.log(this.results);
     let dataList = []
-    let resultTemp = this.resultsTemp;
+    let resultTemp = Object.assign([], this.resultsTemp) ;
     this.results.forEach(function (valueNew) {
       resultTemp.forEach(function (valueOld) {
-        if (valueNew.rowId == valueOld.rowId) {
+        if (!valueOld.isSubRow && valueNew.rowId == valueOld.rowId) {
           if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber ||
             valueNew.casnumber != valueOld.casnumber || valueNew.materialCategory != valueOld.materialCategory || valueNew.scipRelavent != valueOld.scipRelavent) {
             dataList.push(valueNew);
@@ -326,10 +327,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       });
     });
 
-    console.log(dataList);
+    //console.log(dataList);
 
     let uniqueDataList = this.removeDuplicates(dataList, "rowId");
-    console.log(uniqueDataList)
+    //console.log(uniqueDataList)
     let dataListFinal = []
     uniqueDataList.forEach(function (value) {
       dataListFinal.push({
@@ -358,11 +359,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.responseCode = this.response.code;
         //this.responseCode = '200';
         if (this.responseCode == '200') {
-          this.localStorageService.clear('user');
-          this.localStorageService.clear('api_token');
+          // this.localStorageService.clear('user');
+          // this.localStorageService.clear('api_token');
           this.isPurchaseOrderSaved = true;
           this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
-          this.router.navigateByUrl('/record-success');
+          //this.router.navigateByUrl('/record-success');
         } else {
           this.isPurchaseOrderSaved = false;
           this.errorMessage = 'Something went wrong . Please try after something';
@@ -380,7 +381,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // this.results[parentIndex].isAddShow = false;
     // this.results[parentIndex].isDeleteShow = true;
     console.log(parentIndex + " --- " + rowId);
-    let resultTemp = this.results
+    let resultTemp = Object.assign([], this.results) ; 
     if (resultTemp[parentIndex + 1] === undefined || !resultTemp[parentIndex + 1].isSubRow) {
       let objTemp: purchasedetails = {
         lineItemNumber: "",
@@ -462,7 +463,14 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       for (var i = 0; i < resultTemp.length; i++) {
         resultTemp[i].rowId = i;
       }
-      this.results = resultTemp
+      this.results = Object.assign([], resultTemp) ;  
+      this.resultsTemp = Object.assign([], this.results) ; 
+    }else if(resultTemp[parentIndex + 1] != undefined && resultTemp[parentIndex + 1].isSubRow){
+      resultTemp[parentIndex] =  Object.assign({}, resultTemp[parentIndex + 1])
+      resultTemp[parentIndex].isSubRow = false;
+      resultTemp[parentIndex].isClearData = true;
+      resultTemp[parentIndex].rowId = parentIndex
+      this.results = Object.assign([], resultTemp) ;  
     }
 
 
