@@ -174,8 +174,8 @@
           <td style="width: 20%;">
             <a *ngIf="el.isClearData && !el.isSubRow" (click)="clearRowData(parentIndex)"><img [src]="iconClearData"
                 [alt]="iconClearDatadAlt" class="clear-icon-class" /></a>
-            <a *ngIf="el.isSubRow && !el.isClearData" (click)="deleteRow(parentIndex)"><img [src]="iconDelete"
-                [alt]="iconDeleteAlt" class="clear-icon-class" /></a>
+            <a *ngIf="el.isSubRow && !el.isClearData" (click)="getDeleteRowIndex(parentIndex)" data-toggle="modal" data-target="#myModalDeleteRow"><img [src]="iconDelete"
+                [alt]="iconDeleteAlt"  class="clear-icon-class" /></a>
           </td>
         </tr>
       </tbody>
@@ -279,6 +279,27 @@
         
       </div> -->
 
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="myModalDeleteRow">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body modal-body-cutom">
+        <div class="row">
+          <div class="col-md-12 col-part1">
+            <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;"><Strong>Confirm to delete row?</Strong></p>
+            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">You can not undo this action again.</p>
+          </div>
+          <div class="col-md-12 col-part2">
+            <button type="button" class="button blue-button-modal" data-dismiss="modal"
+              (click)="deleteRow()">Delete</button>
+            <button type="button" class="button white-button-modal" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

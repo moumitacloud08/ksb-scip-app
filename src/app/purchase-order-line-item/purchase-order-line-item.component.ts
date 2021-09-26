@@ -479,17 +479,25 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
 
   }
-  deleteRow(parentIndex) {
-    let resultTemp = Object.assign([], this.results)
-    resultTemp.splice(parentIndex, 1);
-    this.resultsTemp.splice(parentIndex, 1);
+  deleteRowIndex: number = -1;
+  getDeleteRowIndex(parentIndex) {
+    this.deleteRowIndex = parentIndex
+    console.log(" delete row index " + this.deleteRowIndex);
+  }
+  deleteRow() {
+    if (this.deleteRowIndex != -1) {
+      let resultTemp = Object.assign([], this.results)
+      resultTemp.splice(this.deleteRowIndex, 1);
+      this.resultsTemp.splice(this.deleteRowIndex, 1);
 
-    for (var i = 0; i < resultTemp.length; i++) {
-      resultTemp[i].rowId = i;
-      this.resultsTemp[i].rowId = i;
+      for (var i = 0; i < resultTemp.length; i++) {
+        resultTemp[i].rowId = i;
+        this.resultsTemp[i].rowId = i;
+      }
+      this.results = Object.assign([], resultTemp)
+      this.resultsTemp = Object.assign([], this.results);
     }
-    this.results = Object.assign([], resultTemp)
-    //this.resultsTemp = Object.assign([], this.results);
+    this.deleteRowIndex = -1
   }
   ClearAllTableData() {
     this.results.forEach(function (value) {
