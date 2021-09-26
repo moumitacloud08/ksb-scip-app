@@ -468,7 +468,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
       setTimeout(() => {                           // <<<---using ()=> syntax
         this.isRowDuplicated = false;
-      }, 2000);
+      }, 1500);
     } else if (resultTemp[parentIndex + 1] != undefined && resultTemp[parentIndex + 1].isSubRow) {
       resultTemp[parentIndex] = Object.assign({}, resultTemp[parentIndex + 1])
       resultTemp[parentIndex].isSubRow = false;
