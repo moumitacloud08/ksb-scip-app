@@ -359,11 +359,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.responseCode = this.response.code;
         //this.responseCode = '200';
         if (this.responseCode == '200') {
-          // this.localStorageService.clear('user');
-          // this.localStorageService.clear('api_token');
+          this.localStorageService.clear('user');
+          this.localStorageService.clear('api_token');
           this.isPurchaseOrderSaved = true;
           this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
-          //this.router.navigateByUrl('/record-success');
+          this.router.navigateByUrl('/record-success');
         } else {
           this.isPurchaseOrderSaved = false;
           this.errorMessage = 'Something went wrong . Please try after something';
