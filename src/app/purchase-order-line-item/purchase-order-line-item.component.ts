@@ -79,6 +79,38 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     //this.fetchPurchaseDetails();
     this.fetchPurchaseDetailsTestData()
+    
+  }
+  paginationlist = []
+  configurepagination() {
+    
+    
+    let x = 2;
+    let paginationlistTemp = [];
+    
+    for(var i=1;i<=this.results.length ;i++){
+      var quotient;
+    var remainder;
+      if(i  < this.results.length ){
+        remainder = i % x;
+        quotient = Math.floor(i / x);
+        if(remainder == 0){
+          paginationlistTemp.push(quotient);
+        }
+        console.log("Index : "+i+"  Inside if 1  : "+quotient+"  "+remainder);
+      }else if(i  == this.results.length){
+        remainder = i % x;
+        quotient = Math.floor(i / x);
+        if(remainder == 0){
+          paginationlistTemp.push(quotient);
+        }else{
+          paginationlistTemp.push(paginationlistTemp.length + 1);
+        }
+        console.log("Index : "+i+"  Inside if 2  : "+quotient+"  "+remainder);
+      }
+    }
+    this.paginationlist =  Object.assign([], paginationlistTemp);
+    console.log(this.paginationlist);
   }
   getSCIPRel(parentIndex, scipRel) {
     // console.log()
@@ -233,6 +265,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         //console.log(' <===this.results====>');
         //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
+        this.configurepagination();
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
@@ -269,6 +302,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         //console.log(' <===this.results====>');
         //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
+        this.configurepagination();
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
