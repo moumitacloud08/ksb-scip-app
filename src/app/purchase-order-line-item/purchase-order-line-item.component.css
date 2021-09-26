@@ -388,3 +388,13 @@ a.page-style:hover {
 .enabled-class{
   cursor: pointer
 }
+.duplicate-row-alert-class{
+  position: relative;
+  top: -201px;
+  /* bottom: 68px; */
+  width: 31%;
+  left: 420px;
+  background-color: #00569D;
+  color: #FFFFFF;
+  padding-left: 64px;
+}

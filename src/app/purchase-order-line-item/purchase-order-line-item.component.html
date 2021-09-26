@@ -44,7 +44,7 @@
           <!-- {{ el.rowId }} -->
           <td style="width: 15%;">
             <img [src]="iconCopy" [alt]="iconCopyAlt" class="clear-icon-class" *ngIf="el.isSubRow && !el.isClearData" />
-            {{ el.purchaseOrderNumber }}
+            {{ el.rowId }} {{ el.purchaseOrderNumber }}
           </td>
           <td style="width: 8%;">{{ el.lineItemNumber }}</td>
           <td style="width: 15%;">
@@ -220,6 +220,9 @@
       </nav>
     </div>
   </div>
+  <div class="alert alert-primary duplicate-row-alert-class" role="alert" *ngIf="isRowDuplicated">
+    PO line item has been duplicated
+  </div>
 </div>
 
 
@@ -279,3 +282,4 @@
     </div>
   </div>
 </div>
+
