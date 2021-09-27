@@ -39,7 +39,7 @@
       </thead>
       <tbody>
         <tr [ngClass]="{'hover':el.isDeleteShow}"
-          *ngFor="let el of results | filter:searchedKeyword;index as parentIndex" class="table-row"
+          *ngFor="let el of results |  filter:searchedKeyword | paginate : {itemsPerPage: tableSize,currentPage: page,totalItems: count};index as parentIndex; " class="table-row"
           id="item_{{parentIndex}}">
           <!-- {{ el.rowId }} -->
           <td style="width: 15%;">
@@ -194,7 +194,15 @@
         </div>
       </div>
     </div>
-    <div class="pagination-container">
+    <div class="d-flex justify-content-right pagination-class">
+      <pagination-controls 
+        responsive="true" 
+        previousLabel="<" 
+        nextLabel=">" 
+        (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </div>
+    <!-- <div class="pagination-container">
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item">
@@ -218,7 +226,7 @@
           </li>
         </ul>
       </nav>
-    </div>
+    </div> -->
   </div>
   <div class="alert alert-primary duplicate-row-alert-class" role="alert" *ngIf="isRowDuplicated">
     PO line item has been duplicated

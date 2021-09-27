@@ -82,6 +82,46 @@
             "materialCategory": "MaterialCategory",
             "submitStatus": "Yes",
             "casnumber": "234239"
+        },
+        {
+            "lineItemNumber": 4456,
+            "statisticalGoodsNumber": "",
+            "purchaseOrderNumber": 32444,
+            "scipNumber": "899007",
+            "scipRelavent": null,
+            "materialCategory": "Cement",
+            "submitStatus": "Yes",
+            "casnumber": "12234"
+        },
+        {
+            "lineItemNumber": 2234,
+            "statisticalGoodsNumber": "",
+            "purchaseOrderNumber": 666678,
+            "scipNumber": "2232222",
+            "scipRelavent": null,
+            "materialCategory": "MaterialCategory",
+            "submitStatus": "Yes",
+            "casnumber": "90089"
+        },
+        {
+            "lineItemNumber": 112343,
+            "statisticalGoodsNumber": "22234656",
+            "purchaseOrderNumber": 889087,
+            "scipNumber": "777654",
+            "scipRelavent": null,
+            "materialCategory": "MaterialCategory",
+            "submitStatus": "Yes",
+            "casnumber": "121212"
+        },
+        {
+            "lineItemNumber": 8890986,
+            "statisticalGoodsNumber": "456547678",
+            "purchaseOrderNumber": 2235466,
+            "scipNumber": "89907554",
+            "scipRelavent": null,
+            "materialCategory": "Iron",
+            "submitStatus": "Yes",
+            "casnumber": "2212345"
         }
     ]
 }

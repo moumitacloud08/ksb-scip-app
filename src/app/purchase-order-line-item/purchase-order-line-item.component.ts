@@ -60,6 +60,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   responseCode: String = '';
   headElements: any = [];
   searchedKeyword: string;
+  startIndex:number=0
+  endIndex:number=4
   ngOnInit(): void {
     this.authToken = this.localStorageService.retrieve('user').authToken;
     console.log(' this.authToken In login ');
@@ -81,9 +83,28 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.fetchPurchaseDetailsTestData()
     
   }
+
+
+  page = 1;
+  count = 0;
+  tableSize = 5;
+
+  onTableDataChange(event){
+    this.page = event;
+    this.count = this.results.length;
+    //this.fetchPurchaseDetails();
+   // this.fetchPurchaseDetailsTestData()
+  }  
+
+  onTableSizeChange(event): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    //this.fetchPurchaseDetails();
+    this.fetchPurchaseDetailsTestData()
+  }
+
   paginationlist = []
-  configurepagination() {
-    
+  configurepagination() {   
     
     let x = 2;
     let paginationlistTemp = [];
@@ -113,22 +134,27 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     console.log(this.paginationlist);
   }
   getSCIPRel(parentIndex, scipRel) {
-    // console.log()
+    parentIndex = ( this.page - 1 ) * 5 + parentIndex
     this.results[parentIndex].scipRelavent = scipRel
   }
   clearSCIPData(parentIndex) {
+    parentIndex = ( this.page - 1 ) * 5 + parentIndex
     this.results[parentIndex].scipNumber = ''
   }
   clearStatisticalData(parentIndex) {
+    parentIndex = ( this.page - 1 ) * 5 + parentIndex
     this.results[parentIndex].statisticalGoodsNumber = ''
   }
   clearCasNum(parentIndex) {
+    parentIndex = ( this.page - 1 ) * 5 + parentIndex
     this.results[parentIndex].casnumber = ''
   }
   clearMatCat(parentIndex) {
+    parentIndex = ( this.page - 1 ) * 5 + parentIndex
     this.results[parentIndex].materialCategory = ''
   }
   mouseEnter(parentIndex, field) {
+    parentIndex = ( this.page - 1 ) * 5 + parentIndex
     if (this.activeParentIndex !== parentIndex) {
       this.activeParentIndex = parentIndex;
       this.resetAllRow();
@@ -209,6 +235,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // this.results[parentIndex].isDeleteShow = false;
   }
   clickevent(parentIndex) {
+    parentIndex = ( this.page - 1 ) * 5 + parentIndex
     if (this.activeParentIndex !== parentIndex) {
       this.activeParentIndex = parentIndex;
       this.resetAllRow();
@@ -225,6 +252,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   myVar: boolean = false
   clearRowData(parentIndex) {
+    parentIndex = ( this.page - 1 ) * 5 + parentIndex
     this.results[parentIndex].scipNumber = '';
     this.results[parentIndex].statisticalGoodsNumber = '';
     this.results[parentIndex].casnumber = '';
@@ -265,7 +293,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         //console.log(' <===this.results====>');
         //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
-        this.configurepagination();
+        //this.configurepagination();
+        this.count=this.results.length
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
@@ -302,7 +331,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         //console.log(' <===this.results====>');
         //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
-        this.configurepagination();
+       // this.configurepagination();
+       this.count=this.results.length
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
@@ -345,8 +375,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   errorMessage: string = '';
   updatedRecordCount: Number;
   savePurchaseorderLine() {
-    console.log(this.resultsTemp);
-    console.log(this.results);
+   // console.log(this.resultsTemp);
+   // console.log(this.results);
     let dataList = []
     let resultTemp = Object.assign([], this.resultsTemp);
     this.results.forEach(function (valueNew) {
@@ -393,11 +423,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.responseCode = this.response.code;
         //this.responseCode = '200';
         if (this.responseCode == '200') {
-          this.localStorageService.clear('user');
-          this.localStorageService.clear('api_token');
+          // this.localStorageService.clear('user');
+          // this.localStorageService.clear('api_token');
           this.isPurchaseOrderSaved = true;
           this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
-          this.router.navigateByUrl('/record-success');
+          // this.router.navigateByUrl('/record-success');
         } else {
           this.isPurchaseOrderSaved = false;
           this.errorMessage = 'Something went wrong . Please try after something';
@@ -414,7 +444,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   editPurchaseorderLine(parentIndex: number, rowId: number) {
     // this.results[parentIndex].isAddShow = false;
     // this.results[parentIndex].isDeleteShow = true;
-    console.log(parentIndex + " --- " + rowId);
+    parentIndex = ( this.page - 1 ) * 5 + parentIndex
+    console.log(this.page+" ----- "+parentIndex + " --- " + rowId);
     let resultTemp = Object.assign([], this.results);
     if (resultTemp[parentIndex + 1] === undefined || !resultTemp[parentIndex + 1].isSubRow) {
       let objTemp: purchasedetails = {
@@ -499,7 +530,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       this.isRowDuplicated = true
       this.results = Object.assign([], resultTemp);
       this.resultsTemp = Object.assign([], this.results);
-
+      this.count =  this.results.length
       setTimeout(() => {                           // <<<---using ()=> syntax
         this.isRowDuplicated = false;
       }, 1500);
@@ -515,6 +546,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   deleteRowIndex: number = -1;
   getDeleteRowIndex(parentIndex) {
+    parentIndex = ( this.page - 1 ) * 5 + parentIndex
     this.deleteRowIndex = parentIndex
     console.log(" delete row index " + this.deleteRowIndex);
   }
@@ -529,8 +561,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.resultsTemp[i].rowId = i;
       }
       this.results = Object.assign([], resultTemp)
-      this.resultsTemp = Object.assign([], this.results);
+      //this.resultsTemp = Object.assign([], this.results);
     }
+    this.count = this.results.length
     this.deleteRowIndex = -1
   }
   ClearAllTableData() {

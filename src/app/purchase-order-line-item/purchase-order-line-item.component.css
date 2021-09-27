@@ -398,3 +398,18 @@ a.page-style:hover {
   color: #FFFFFF;
   padding-left: 64px;
 }
+.pagination-class{
+  position: relative;
+  left: 551px;
+  /* right: 0px; */
+  padding-left: 0px;
+  margin-top: 22px;
+  margin-left: 381px;
+  /* margin-right: 23px;*/
+}
+.ngx-pagination .current {
+  background-color:#00569D
+}
+.current {
+  background-color:#00569D
+}

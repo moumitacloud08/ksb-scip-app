@@ -18,6 +18,8 @@ import { HeaderComponent } from './header/header.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { RecordSuccessComponent } from './record-success/record-success.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { RecordSuccessComponent } from './record-success/record-success.componen
     HttpClientModule,
     FontAwesomeModule,
     Ng2SearchPipeModule,
+    NgxPaginationModule,
     NgxWebstorageModule.forRoot()
   ],
   providers: [UtilService,AuthGuardService],
