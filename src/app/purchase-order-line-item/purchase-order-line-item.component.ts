@@ -566,14 +566,24 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.count = this.results.length
     this.deleteRowIndex = -1
   }
+  isAllDataCleared:boolean = false
   ClearAllTableData() {
+    var count =0
     this.results.forEach(function (value) {
       console.log(value);
       value.scipNumber = ''
       value.casnumber = ''
       value.statisticalGoodsNumber = ''
       value.materialCategory = ''
+      count++
     });
+    this.isAllDataCleared = true;
+    if(count > 0){
+      setTimeout(() => {                           // <<<---using ()=> syntax
+        this.isAllDataCleared = false;
+      }, 1500);
+    }      
+
   }
   resetPurchaseorderLine() {
     this.fetchPurchaseDetails();
