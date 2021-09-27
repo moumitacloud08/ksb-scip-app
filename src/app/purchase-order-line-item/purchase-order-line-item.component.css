@@ -398,7 +398,7 @@ a.page-style:hover {
   color: #FFFFFF;
   padding-left: 64px;
 }
-.pagination-class{
+.my-pagination{
   position: relative;
   left: 551px;
   /* right: 0px; */
@@ -407,9 +407,48 @@ a.page-style:hover {
   margin-left: 381px;
   /* margin-right: 23px;*/
 }
-.ngx-pagination .current {
-  background-color:#00569D
+
+
+
+.my-pagination::ng-deep .ngx-pagination .current {
+  background: #00569D  !important;
+ 
 }
-.current {
-  background-color:#00569D
+.my-pagination::ng-deep .ngx-pagination .pagination-previous.disabled::before {
+  content: '<';
+  display: inline-block;
+  margin-right: 0.5rem;
 }
+.my-pagination::ng-deep .ngx-pagination .pagination-next a::after, .ngx-pagination .pagination-next.disabled::after {
+  content: '>';
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.my-pagination::ng-deep .ngx-pagination .pagination-previous a::before, .ngx-pagination .pagination-previous.disabled::before {
+    content: '<';
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+
+.my-pagination::ng-deep .ngx-pagination .pagination-next a::after, .my-pagination::ng-deep .ngx-pagination .pagination-next.disabled::after {
+  content: '>';
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+/* sets font color for pagination to white */
+/* .my-pagination::ng-deep .ngx-pagination a {
+  color: white;
+  } */
+  
+  /* sets font color for number color when hovering */
+  /* .my-pagination::ng-deep .ngx-pagination a:hover {
+  color: red;
+  } */
+  
+  /* sets font color for disabled previous or next words */
+  /* .my-pagination::ng-deep .ngx-pagination .disabled {
+  color: white !important;
+  } */
