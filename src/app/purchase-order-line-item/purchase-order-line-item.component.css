@@ -398,6 +398,16 @@ a.page-style:hover {
   color: #FFFFFF;
   padding-left: 64px;
 }
+.danger-row-alert-class{
+  position: relative;
+  top: -90px;
+  /* bottom: 68px; */
+  width: 31%;
+  left: 420px;
+  /* background-color: #FFF0F0; */
+  /* color: #FFFFFF; */
+  padding-left: 64px;
+}
 .my-pagination{
   position: relative;
   left: 551px;

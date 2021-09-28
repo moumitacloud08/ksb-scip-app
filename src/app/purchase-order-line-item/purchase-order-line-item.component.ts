@@ -60,8 +60,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   responseCode: String = '';
   headElements: any = [];
   searchedKeyword: string;
-  startIndex:number=0
-  endIndex:number=4
+  startIndex: number = 0
+  endIndex: number = 4
   ngOnInit(): void {
     this.authToken = this.localStorageService.retrieve('user').authToken;
     console.log(' this.authToken In login ');
@@ -81,7 +81,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     //this.fetchPurchaseDetails();
     this.fetchPurchaseDetailsTestData()
-    
+
   }
 
 
@@ -89,12 +89,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   count = 0;
   tableSize = 5;
 
-  onTableDataChange(event){
+  onTableDataChange(event) {
     this.page = event;
     this.count = this.results.length;
     //this.fetchPurchaseDetails();
-   // this.fetchPurchaseDetailsTestData()
-  }  
+    // this.fetchPurchaseDetailsTestData()
+  }
 
   onTableSizeChange(event): void {
     this.tableSize = event.target.value;
@@ -104,57 +104,57 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
 
   paginationlist = []
-  configurepagination() {   
-    
+  configurepagination() {
+
     let x = 2;
     let paginationlistTemp = [];
-    
-    for(var i=1;i<=this.results.length ;i++){
+
+    for (var i = 1; i <= this.results.length; i++) {
       var quotient;
-    var remainder;
-      if(i  < this.results.length ){
+      var remainder;
+      if (i < this.results.length) {
         remainder = i % x;
         quotient = Math.floor(i / x);
-        if(remainder == 0){
+        if (remainder == 0) {
           paginationlistTemp.push(quotient);
         }
-        console.log("Index : "+i+"  Inside if 1  : "+quotient+"  "+remainder);
-      }else if(i  == this.results.length){
+        console.log("Index : " + i + "  Inside if 1  : " + quotient + "  " + remainder);
+      } else if (i == this.results.length) {
         remainder = i % x;
         quotient = Math.floor(i / x);
-        if(remainder == 0){
+        if (remainder == 0) {
           paginationlistTemp.push(quotient);
-        }else{
+        } else {
           paginationlistTemp.push(paginationlistTemp.length + 1);
         }
-        console.log("Index : "+i+"  Inside if 2  : "+quotient+"  "+remainder);
+        console.log("Index : " + i + "  Inside if 2  : " + quotient + "  " + remainder);
       }
     }
-    this.paginationlist =  Object.assign([], paginationlistTemp);
+    this.paginationlist = Object.assign([], paginationlistTemp);
     console.log(this.paginationlist);
   }
   getSCIPRel(parentIndex, scipRel) {
-    parentIndex = ( this.page - 1 ) * 5 + parentIndex
+    parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipRelavent = scipRel
   }
   clearSCIPData(parentIndex) {
-    parentIndex = ( this.page - 1 ) * 5 + parentIndex
+    parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipNumber = ''
   }
   clearStatisticalData(parentIndex) {
-    parentIndex = ( this.page - 1 ) * 5 + parentIndex
+    parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].statisticalGoodsNumber = ''
   }
   clearCasNum(parentIndex) {
-    parentIndex = ( this.page - 1 ) * 5 + parentIndex
+    parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].casnumber = ''
   }
   clearMatCat(parentIndex) {
-    parentIndex = ( this.page - 1 ) * 5 + parentIndex
+    parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].materialCategory = ''
   }
   mouseEnter(parentIndex, field) {
-    parentIndex = ( this.page - 1 ) * 5 + parentIndex
+    parentIndex = (this.page - 1) * 5 + parentIndex
     if (this.activeParentIndex !== parentIndex) {
       this.activeParentIndex = parentIndex;
       this.resetAllRow();
@@ -235,7 +235,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // this.results[parentIndex].isDeleteShow = false;
   }
   clickevent(parentIndex) {
-    parentIndex = ( this.page - 1 ) * 5 + parentIndex
+    parentIndex = (this.page - 1) * 5 + parentIndex
     if (this.activeParentIndex !== parentIndex) {
       this.activeParentIndex = parentIndex;
       this.resetAllRow();
@@ -252,7 +252,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   myVar: boolean = false
   clearRowData(parentIndex) {
-    parentIndex = ( this.page - 1 ) * 5 + parentIndex
+    parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipNumber = '';
     this.results[parentIndex].statisticalGoodsNumber = '';
     this.results[parentIndex].casnumber = '';
@@ -294,7 +294,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
         //this.configurepagination();
-        this.count=this.results.length
+        this.count = this.results.length
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
@@ -331,8 +331,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         //console.log(' <===this.results====>');
         //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
-       // this.configurepagination();
-       this.count=this.results.length
+        // this.configurepagination();
+        this.count = this.results.length
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
@@ -374,13 +374,21 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   errorMessage: string = '';
   updatedRecordCount: Number;
+  isLengthZero: boolean = false;
   savePurchaseorderLine() {
-   // console.log(this.resultsTemp);
-   // console.log(this.results);
+    // console.log(this.resultsTemp);
+    // console.log(this.results);
+    let dataChangeCount = 0;
     let dataList = []
     let resultTemp = Object.assign([], this.resultsTemp);
     this.results.forEach(function (valueNew) {
-      resultTemp.forEach(function (valueOld) {
+     // console.log(valueNew.scipNumber+" --- "+valueNew.statisticalGoodsNumber +" --- "+valueNew.casnumber + " "+valueNew.materialCategory);
+      if(valueNew.scipNumber == '' &&  valueNew.statisticalGoodsNumber == '' &&
+        valueNew.casnumber == '' && valueNew.materialCategory == ''){
+          dataChangeCount++;
+        }
+      resultTemp.forEach(function (valueOld) {       
+
         if (!valueOld.isSubRow && valueNew.rowId == valueOld.rowId) {
           if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber ||
             valueNew.casnumber != valueOld.casnumber || valueNew.materialCategory != valueOld.materialCategory || valueNew.scipRelavent != valueOld.scipRelavent) {
@@ -410,33 +418,45 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       });
     });
     let params = { "scipDetails": dataListFinal }
+    console.log("data change : "+dataChangeCount+" "+this.results.length);
+    if(dataChangeCount != this.results.length){
+      this.isAllDataCleared = false
+    }
 
     console.log("<=========params==============>")
-    console.log(JSON.stringify(params));
+    //console.log(JSON.stringify(params));
     console.log(params)
-
-    this.purchaseOrderLineItemService
-      .savePurchaseorderLine(params)
-      .then((data) => {
-        console.log(JSON.stringify(data));
-        this.response = JSON.parse(JSON.stringify(data));
-        this.responseCode = this.response.code;
-        //this.responseCode = '200';
-        if (this.responseCode == '200') {
-          this.localStorageService.clear('user');
-          this.localStorageService.clear('api_token');
-          this.isPurchaseOrderSaved = true;
-          this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
-          this.router.navigateByUrl('/record-success');
-        } else {
+    if (dataListFinal.length > 0 && !this.isAllDataCleared) {
+      this.purchaseOrderLineItemService
+        .savePurchaseorderLine(params)
+        .then((data) => {
+          console.log(JSON.stringify(data));
+          this.response = JSON.parse(JSON.stringify(data));
+          this.responseCode = this.response.code;
+          //this.responseCode = '200';
+          if (this.responseCode == '200') {
+            this.localStorageService.clear('user');
+            this.localStorageService.clear('api_token');
+            this.isPurchaseOrderSaved = true;
+            this.isAllDataCleared = false;
+            this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
+            this.router.navigateByUrl('/record-success');
+          } else {
+            this.isPurchaseOrderSaved = false;
+            this.errorMessage = 'Something went wrong . Please try after something';
+          }
+        }).catch((error) => {
           this.isPurchaseOrderSaved = false;
           this.errorMessage = 'Something went wrong . Please try after something';
-        }
-      }).catch((error) => {
-        this.isPurchaseOrderSaved = false;
-        this.errorMessage = 'Something went wrong . Please try after something';
-        console.log('Promise rejected with ' + JSON.stringify(error));
-      });
+          console.log('Promise rejected with ' + JSON.stringify(error));
+        });
+    } else {
+      this.isLengthZero = true;
+      setTimeout(() => {                           // <<<---using ()=> syntax
+        this.isLengthZero = false;
+      }, 1500);
+    }
+
 
 
   }
@@ -444,8 +464,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   editPurchaseorderLine(parentIndex: number, rowId: number) {
     // this.results[parentIndex].isAddShow = false;
     // this.results[parentIndex].isDeleteShow = true;
-    parentIndex = ( this.page - 1 ) * 5 + parentIndex
-    console.log(this.page+" ----- "+parentIndex + " --- " + rowId);
+    parentIndex = (this.page - 1) * 5 + parentIndex
+    console.log(this.page + " ----- " + parentIndex + " --- " + rowId);
     let resultTemp = Object.assign([], this.results);
     if (resultTemp[parentIndex + 1] === undefined || !resultTemp[parentIndex + 1].isSubRow) {
       let objTemp: purchasedetails = {
@@ -530,7 +550,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       this.isRowDuplicated = true
       this.results = Object.assign([], resultTemp);
       this.resultsTemp = Object.assign([], this.results);
-      this.count =  this.results.length
+      this.count = this.results.length
       setTimeout(() => {                           // <<<---using ()=> syntax
         this.isRowDuplicated = false;
       }, 1500);
@@ -546,7 +566,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   deleteRowIndex: number = -1;
   getDeleteRowIndex(parentIndex) {
-    parentIndex = ( this.page - 1 ) * 5 + parentIndex
+    parentIndex = (this.page - 1) * 5 + parentIndex
     this.deleteRowIndex = parentIndex
     console.log(" delete row index " + this.deleteRowIndex);
   }
@@ -566,9 +586,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.count = this.results.length
     this.deleteRowIndex = -1
   }
-  isAllDataCleared:boolean = false
+  isAllDataClearedShowAlert: boolean = false
+  isAllDataCleared: boolean = false
   ClearAllTableData() {
-    var count =0
+    var count = 0
     this.results.forEach(function (value) {
       console.log(value);
       value.scipNumber = ''
@@ -577,12 +598,13 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       value.materialCategory = ''
       count++
     });
+    this.isAllDataClearedShowAlert = true;
     this.isAllDataCleared = true;
-    if(count > 0){
+    if (count > 0) {
       setTimeout(() => {                           // <<<---using ()=> syntax
-        this.isAllDataCleared = false;
+        this.isAllDataClearedShowAlert = false;
       }, 1500);
-    }      
+    }
 
   }
   resetPurchaseorderLine() {

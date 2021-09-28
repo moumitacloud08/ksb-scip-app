@@ -231,8 +231,11 @@
   <div class="alert alert-primary duplicate-row-alert-class" role="alert" *ngIf="isRowDuplicated">
     PO line item has been duplicated
   </div>
-  <div class="alert alert-primary duplicate-row-alert-class" role="alert" *ngIf="isAllDataCleared">
+  <div class="alert alert-primary duplicate-row-alert-class" role="alert" *ngIf="isAllDataClearedShowAlert">
     All data have been cleared
+  </div>
+  <div class="alert alert-danger danger-row-alert-class" role="alert" *ngIf="isLengthZero">
+    Fill data then submit
   </div>
 </div>
 
