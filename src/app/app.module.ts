@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {NgxWebstorageModule} from 'ngx-webstorage'
@@ -19,6 +19,8 @@ import { AuthGuardService } from './service/auth-guard.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { RecordSuccessComponent } from './record-success/record-success.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
 @NgModule({
@@ -40,9 +42,21 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FontAwesomeModule,
     Ng2SearchPipeModule,
     NgxPaginationModule,
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [UtilService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// AOT compilation support
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

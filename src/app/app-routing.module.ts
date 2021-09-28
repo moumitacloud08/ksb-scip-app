@@ -22,6 +22,10 @@ const routes: Routes = [
             {
                 path: '',
                 component: LoginComponent
+            },
+             {
+                path: 'vendorplatform',
+                component: LoginComponent
             }
         ]
     },

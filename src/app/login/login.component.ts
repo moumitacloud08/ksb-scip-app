@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute  } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 
 import { UtilService } from '../util.service';
 import { LoginService } from '../service/login.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -22,16 +23,47 @@ export class LoginComponent implements OnInit {
     private LoginService: LoginService,
     private utilService: UtilService,
     private router: Router,
-    private localStorageService: LocalStorageService
-  ) {}
+    private localStorageService: LocalStorageService,
+    public translate: TranslateService,
+    private route: ActivatedRoute
+  ) {
+    translate.addLangs(['en', 'nl']);
+    translate.setDefaultLang('en');
+  }
   // authToken;
-
+  switchLang(lang: string) {
+    this.translate.use(lang);
+  }
+  lang:string = ''
+  appl:string = ''
+  key:string = ''
   ngOnInit(): void {
     // this.authToken = this.localStorageService.retrieve('user').authToken;
     // console.log(' this.authToken In login ');
     // console.log(this.authToken);
     this.localStorageService.clear('user')
+    this.route.queryParams
+      .subscribe(params => {
+        console.log(params); 
+        this.appl = params.appl;
+        this.key = params.key;
+        this.lang = params.spras;
+        console.log("lang : "+this.lang); 
+        this.translate.use(this.lang);
+      }
+    );
+
+    this.routeWithQueryParams()
   }
+
+  routeWithQueryParams() { 
+    console.log(this.router.url);
+    if(this.lang == '' && this.appl == ''&& this.key == ''){
+      this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl,key:this.key,spras:this.lang },queryParamsHandling: 'merge' });
+    }
+    //   this.router.navigate(['/vendorplatform'], { queryParams: { appl: 'scip' }});
+  }
+
   userName: String ='ksb';
   password: String ='ksb';
 

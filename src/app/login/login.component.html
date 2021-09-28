@@ -1,6 +1,20 @@
 <div class="login-container">
+
+  <!-- <span class="form-inline">
+    <select 
+        class="form-control" 
+        #selectedLang 
+        (change)="switchLang(selectedLang.value)">
+      <option *ngFor="let language of translate.getLangs()" 
+        [value]="language"
+        [selected]="language === translate.currentLang">
+        {{ language }}
+      </option>
+    </select>
+  </span> -->
+
   <form #f="ngForm" (ngSubmit)="authenticate(f)">
-    <p class="p1"><b>Enter token</b></p>
+    <p class="p1"><b>{{'TokenText' | translate}}</b></p>
     <p class="p2">
       The token number has been sent to your email address supplier@test.com
     </p>
