@@ -13,5 +13,8 @@
     "CAS_No_col":"CAS No",
     "Material_Category_col":"Material Category",
     "Add_row_col":"Add row",
-    "Clear_data_col":"Clear data"
+    "Clear_data_col":"Clear data",
+    "save_button":"save",
+    "Clear All" : "Clear All" 
+
 }
