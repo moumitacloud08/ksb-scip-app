@@ -3,5 +3,8 @@
     "LoginText": "Login",
     "TokenText":"Enter token",
     "scipInfoText":"SCIP Information",
-    "Submit": "Submit"
+    "scipInfoSubText":"Please input the SCIP or the statistical and CAS numbers against purchased order line item",
+    "Submit": "Submit",
+    "Purchase_Order_col":"Purchase Order",
+    "Line_Item_col":"Line Item"
 }

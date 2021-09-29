@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   ) {
     console.log("Inside cons");
     translate.addLangs(cons.langArray);
-    translate.setDefaultLang('en');
+    translate.setDefaultLang(cons.DEFAULT_LANG);
   }
   // authToken;
   switchLang(lang: string) {
@@ -58,8 +58,8 @@ export class LoginComponent implements OnInit {
         console.log("lang : "+this.lang); 
        
         if(this.lang == '' || this.lang == undefined){
-          this.translate.use('en');
-          this.lang = 'en'
+          this.translate.use(cons.DEFAULT_LANG);
+          this.lang = cons.DEFAULT_LANG
         } else{
           this.translate.use(this.lang);
         }

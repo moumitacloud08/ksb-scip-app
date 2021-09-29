@@ -3,5 +3,8 @@
     "LoginText": "Log in",
     "TokenText":"Token invoeren",
     "scipInfoText":"SCIP Informatie",
-    "Submit": "voorleggen"
+    "scipInfoSubText":"Voer de SCIP of de statistische en CAS-nummers in voor het gekochte orderregelitem",
+    "Submit": "voorleggen",
+    "purchase_order_heading":"Bestelling",
+    "Line_Item_col":"Regelitem"
 }

@@ -58,7 +58,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   ) {
     this.results = [];
     translate.addLangs(cons.langArray);
-    translate.setDefaultLang('en');
+    translate.setDefaultLang(cons.DEFAULT_LANG);
   }
   authToken;
   isPurchaseOrderSaved: boolean = false;
