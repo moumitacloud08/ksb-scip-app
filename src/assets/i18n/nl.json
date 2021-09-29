@@ -6,5 +6,13 @@
     "scipInfoSubText":"Voer de SCIP of de statistische en CAS-nummers in voor het gekochte orderregelitem",
     "Submit": "voorleggen",
     "purchase_order_heading":"Bestelling",
-    "Line_Item_col":"Regelitem"
+    "Line_Item_col":"Regelitem",
+    "SCIP_Relevant_col":"SCIP-relevant",
+    "SCIP_No_col":"SCIP-nummer",
+    "Statistical_Goods_No_col":"Statistische goederen Nee",
+    "CAS_No_col":"CAS-nr",
+    "Material_Category_col":"Materiaal categorie",
+    "Add_row_col":"Add row",
+    "Clear_data_col":"Clear data"
+    
 }

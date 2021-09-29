@@ -6,5 +6,12 @@
     "scipInfoSubText":"Please input the SCIP or the statistical and CAS numbers against purchased order line item",
     "Submit": "Submit",
     "Purchase_Order_col":"Purchase Order",
-    "Line_Item_col":"Line Item"
+    "Line_Item_col":"Line Item",
+    "SCIP_Relevant_col":"SCIP Relevant",
+    "SCIP_No_col":"SCIP No",
+    "Statistical_Goods_No_col":"Statistical Goods No",
+    "CAS_No_col":"CAS No",
+    "Material_Category_col":"Material Category",
+    "Add_row_col":"Add row",
+    "Clear_data_col":"Clear data"
 }
