@@ -12,6 +12,8 @@ import { jsPDF } from "jspdf";
 import 'jspdf-autotable';
 import { Router } from '@angular/router';
 import { UtilService } from '../util.service'
+import { TranslateService } from '@ngx-translate/core';
+import * as cons from '../constants';
 
 @Component({
   selector: 'app-purchase-order-line-item',
@@ -51,9 +53,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private purchaseOrderLineItemService: PurchaseOrderLineItemService,
     private router: Router,
-    private utilService: UtilService
+    private utilService: UtilService,
+    public translate: TranslateService,
   ) {
     this.results = [];
+    translate.addLangs(cons.langArray);
+    translate.setDefaultLang('en');
   }
   authToken;
   isPurchaseOrderSaved: boolean = false;
@@ -62,7 +67,16 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   searchedKeyword: string;
   startIndex: number = 0
   endIndex: number = 4
+
+  lang:string = ''
+  appl:string = ''
+  key:string = ''
   ngOnInit(): void {
+    this.appl = this.localStorageService.retrieve("app")
+    this.key = this.localStorageService.retrieve("key")
+    this.lang = this.localStorageService.retrieve("lang")
+    this.translate.use(this.lang);
+
     this.authToken = this.localStorageService.retrieve('user').authToken;
     console.log(' this.authToken In login ');
     console.log(this.authToken);

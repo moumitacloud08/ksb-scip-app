@@ -6,6 +6,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { UtilService } from '../util.service';
 import { LoginService } from '../service/login.service';
 import { TranslateService } from '@ngx-translate/core';
+import * as cons from '../constants';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
     public translate: TranslateService,
     private route: ActivatedRoute
   ) {
-    translate.addLangs(['en', 'nl']);
+    console.log("Inside cons");
+    translate.addLangs(cons.langArray);
     translate.setDefaultLang('en');
   }
   // authToken;
@@ -41,6 +43,11 @@ export class LoginComponent implements OnInit {
     // this.authToken = this.localStorageService.retrieve('user').authToken;
     // console.log(' this.authToken In login ');
     // console.log(this.authToken);
+
+    // this.localStorageService.clear("app")
+    // this.localStorageService.clear("key")
+    // this.localStorageService.clear("lang")
+
     this.localStorageService.clear('user')
     this.route.queryParams
       .subscribe(params => {
@@ -49,7 +56,23 @@ export class LoginComponent implements OnInit {
         this.key = params.key;
         this.lang = params.spras;
         console.log("lang : "+this.lang); 
-        this.translate.use(this.lang);
+       
+        if(this.lang == '' || this.lang == undefined){
+          this.translate.use('en');
+          this.lang = 'en'
+        } else{
+          this.translate.use(this.lang);
+        }
+        if(this.appl == '' || this.appl == undefined){
+          this.appl = ''
+        } 
+        if(this.key == '' || this.key == undefined){
+          this.key = ''
+        }      
+       
+        this.localStorageService.store("app",this.appl)
+        this.localStorageService.store("key",this.key)
+        this.localStorageService.store("lang",this.lang)
       }
     );
 
@@ -58,7 +81,9 @@ export class LoginComponent implements OnInit {
 
   routeWithQueryParams() { 
     console.log(this.router.url);
-    if(this.lang == '' && this.appl == ''&& this.key == ''){
+    console.log(this.lang + " --- "+this.appl+" -- "+this.key);
+    if(this.lang != '' && this.lang != undefined && this.appl != '' && this.appl != undefined && this.key != ''  && this.key != undefined){
+      console.log("navigating to vendoer");
       this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl,key:this.key,spras:this.lang },queryParamsHandling: 'merge' });
     }
     //   this.router.navigate(['/vendorplatform'], { queryParams: { appl: 'scip' }});
