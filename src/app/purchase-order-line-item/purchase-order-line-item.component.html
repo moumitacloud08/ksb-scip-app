@@ -11,8 +11,7 @@
     <div class="button-container">
       <button type="button" class="button pdf-btn" (click)="SavePDF()">
         <img [src]="iconPDF" [alt]="iconPDFAlt" class="pdf-class" />&nbsp;&nbsp;<span
-          class="scip-download-class">Download
-          SCIP Data</span>
+          class="scip-download-class">{{'Download_SCIP_Data_text' | translate}}</span>
       </button>
     </div>
   </div>
@@ -78,7 +77,7 @@
               <div class="form-group" *ngIf="el.isSCIPEditShow == true">
                 <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
                   [ngClass]="{'text-red-border-class':el.isInvalid}" class="table-text-border-class"
-                  [(ngModel)]="el.scipNumber" (keyup)="validateScip($event,el.scipNumber,parentIndex)"
+                  [(ngModel)]="el.scipNumber" (keyup)="validateScip(parentIndex)"
                   (click)="clickevent(parentIndex)" />
                 <img *ngIf="el.isInvalid == true && el.scipNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
                   class="icon-warning-class" />
@@ -89,7 +88,7 @@
 
               </div>
             </div>
-            <div class="scip-warn" *ngIf="el.isInvalid == true && el.isDeleteShow == true">
+            <div class="scip-warn" *ngIf="el.isInvalid == true && el.isDeleteShow == true && el.scipNumber != ''">
               <img [src]="crossiconWarning" [alt]="crossiconWarningdAlt" class="cross-warning-class" />
               <span>
                 SCIP no should be 10 digit
@@ -106,7 +105,7 @@
               <div class="form-group" *ngIf="el.isStatEditShow == true">
                 <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
                   id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
-                  [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)" />
+                  [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)" (keyup)="validateStatGood(parentIndex)"/>
                 <a (click)="clearStatisticalData(parentIndex)" style="cursor: pointer"
                   *ngIf="el.statisticalGoodsNumber != ''">
                   <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />

@@ -33,8 +33,12 @@ export class LoginService {
     // window.alert(errorMessage);
     return throwError(errorMessage);
   }
+  getPONum(){
+    let key = this.localStorageService.retrieve("key")
+    return key;
+  }
   private tokenUrl =
-    cons.BASE_URL + '/login/authenticateVendor?purchaseOrder=12345'; // URL to web api
+    cons.BASE_URL + '/login/authenticateVendor?purchaseOrder='+this.getPONum(); // URL to web api
 
   
 

@@ -113,8 +113,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   onTableSizeChange(event): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    //this.fetchPurchaseDetails();
-    this.fetchPurchaseDetailsTestData()
+    this.fetchPurchaseDetails();
+    //this.fetchPurchaseDetailsTestData()
   }
 
   paginationlist = []
@@ -352,16 +352,21 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
-  validateScip(event: any, scipNumber: string, parentIndex: number) {
+  validateScip( parentIndex: number) {
+    parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipNumber =
-      this.results[parentIndex].scipNumber.replace(/[^0-9a-z]/gi, '')
+      this.results[parentIndex].scipNumber.replace(/[&\/\\#,+()$~%.'":*?<>@{}]/g, '')
     if (this.results[parentIndex].scipNumber.length < 10) {
       this.results[parentIndex].isInvalid = true;
     } else {
       this.results[parentIndex].isInvalid = false;
     }
   }
-
+  validateStatGood(parentIndex: number){
+    parentIndex = (this.page - 1) * 5 + parentIndex
+    this.results[parentIndex].statisticalGoodsNumber =
+    this.results[parentIndex].statisticalGoodsNumber.replace(/[^0-9]/g, '')
+  }
   selectMaterial(item: any, parentIndex: any, elements: any) {
     this.isCatergoryList = true;
     this.selectedCat = item;

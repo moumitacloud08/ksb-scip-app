@@ -22,10 +22,15 @@ export class PurchaseOrderLineItemService {
     let apiToken: string = this.localStorageService.retrieve('api_token');
     return apiToken;
   }
-
+ 
+  getPONum(){
+    let key = this.localStorageService.retrieve("key")
+    return key;
+  }
   
-  private purchaseOrderURL = cons.BASE_URL + '/purchaseorders/77';
-  private purchaseOrderUpdateURL = cons.BASE_URL + '/purchaseorders/9/updatelineitems';
+  
+  private purchaseOrderURL = cons.BASE_URL + '/purchaseorders/'+this.getPONum();
+  private purchaseOrderUpdateURL = cons.BASE_URL + '/purchaseorders/'+this.getPONum()+'/updatelineitems';
   fetchPurchaseDetails() {
      httpOptions.headers = new HttpHeaders({
         api_token: this.setAPIToken(),

@@ -15,6 +15,9 @@
     "Add_row_col":"Rij toevoegen",
     "Clear_data_col":"Verwijder gegevens",
     "save_button":"opslaan",
-    "Clear_All_button":"Wis alles"
-    
+    "Clear_All_button":"Wis alles",
+    "logo_text":"SCIP Vendor Platform-applicatie",
+    "welcome_text":"Welkom",
+    "Logout":"Uitloggen",
+    "Download_SCIP_Data_text":"SCIP-gegevens downloaden"
 }
