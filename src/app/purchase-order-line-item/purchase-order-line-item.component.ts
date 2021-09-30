@@ -366,6 +366,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].statisticalGoodsNumber =
     this.results[parentIndex].statisticalGoodsNumber.replace(/[^0-9]/g, '')
+    if (this.results[parentIndex].statisticalGoodsNumber.length < 8) {
+      this.results[parentIndex].isStatGoodInvalid = true;
+    } else {
+      this.results[parentIndex].isStatGoodInvalid = false;
+    }
   }
   selectMaterial(item: any, parentIndex: any, elements: any) {
     this.isCatergoryList = true;
@@ -509,7 +514,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         isCasSpanShow: true,
         isCasEditShow: false,
         isMatSpanShow: true,
-        isMatEditShow: false
+        isMatEditShow: false,
+        isStatGoodInvalid: false
       }
 
       resultTemp.push(objTemp);
@@ -541,7 +547,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           isCasSpanShow: true,
           isCasEditShow: false,
           isMatSpanShow: true,
-          isMatEditShow: false
+          isMatEditShow: false,
+          isStatGoodInvalid: false
         }
 
         resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])

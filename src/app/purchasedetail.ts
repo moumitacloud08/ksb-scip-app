@@ -33,5 +33,6 @@ export class purchasedetails {
         public isCasEditShow: boolean = false,
         public isMatSpanShow: boolean = true,
         public isMatEditShow: boolean = false,
+        public isStatGoodInvalid: boolean = false
       ) {}
   }

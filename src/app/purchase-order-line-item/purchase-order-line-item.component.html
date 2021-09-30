@@ -100,7 +100,10 @@
               style="margin-left: -21px;">
               <div *ngIf="el.isStatSpanShow == true">
                 <span style="color:#FFFFFF33">text</span>
-                <span>{{ el.statisticalGoodsNumber }}</span>
+                <span [ngClass]="{'span-red-border-class':el.isStatGoodInvalid}">{{ el.statisticalGoodsNumber }}
+                  <img *ngIf="el.isStatGoodInvalid == true && el.statisticalGoodsNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
+                  class="icon-warning-span-class" />
+                </span>
               </div>
               <div class="form-group" *ngIf="el.isStatEditShow == true">
                 <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
@@ -111,6 +114,12 @@
                   <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
                 </a>
               </div>
+            </div>
+            <div class="scip-warn" *ngIf="el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''">
+              <img [src]="crossiconWarning" [alt]="crossiconWarningdAlt" class="cross-warning-class" />
+              <span>
+                statisticalGoodsNumber no should be 8 digit
+              </span>
             </div>
           </td>
           <td style="width: 15%;">
