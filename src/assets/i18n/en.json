@@ -15,6 +15,16 @@
     "Add_row_col":"Add row",
     "Clear_data_col":"Clear data",
     "save_button":"save",
-    "Clear All" : "Clear All" 
-
+    "Clear All" : "Clear All" ,
+    "logo_text":"SCIP Vendor Platform Application",
+    "welcome_text":"Welcome",
+    "Logout":"Logout",
+    "Download_SCIP_Data_text":"Download SCIP Data",
+    "PO_line_duplicate_text":"PO line item has been duplicated",
+    "all_data_cleared_text":"All data have been cleared",
+    "fill_data_submit_text":"Fill data then submit",
+    "pre_submit_conf_text":"Are you sure you want to submit ?",
+    "pre_submit_warn_text":"Once Submit You are not able to change it again",
+    "pre_all_data_clear_ins_text":"This will clear all table data",
+    "all_data_clear_warn_text":"You can not undo this action again."
 }
