@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router,ActivatedRoute  } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 
 import { UtilService } from '../util.service';
@@ -36,9 +36,15 @@ export class LoginComponent implements OnInit {
   switchLang(lang: string) {
     this.translate.use(lang);
   }
-  lang:string = ''
-  appl:string = ''
-  key:string = ''
+  validateLoginField(event) {
+    console.log(event.target.value);
+    if (event.target.value == '') {
+      this.isWrongInput = false
+    }
+  }
+  lang: string = ''
+  appl: string = ''
+  key: string = ''
   ngOnInit(): void {
     // this.authToken = this.localStorageService.retrieve('user').authToken;
     // console.log(' this.authToken In login ');
@@ -51,53 +57,53 @@ export class LoginComponent implements OnInit {
     this.localStorageService.clear('user')
     this.route.queryParams
       .subscribe(params => {
-        console.log(params); 
+        console.log(params);
         this.appl = params.appl;
         this.key = params.key;
         this.lang = params.spras;
-        console.log("lang : "+this.lang); 
-       
-        if(this.lang == '' || this.lang == undefined){
+        console.log("lang : " + this.lang);
+
+        if (this.lang == '' || this.lang == undefined) {
           this.translate.use(cons.DEFAULT_LANG);
           this.lang = cons.DEFAULT_LANG
-        } else{
+        } else {
           this.translate.use(this.lang);
         }
-        if(this.appl == '' || this.appl == undefined){
+        if (this.appl == '' || this.appl == undefined) {
           this.appl = ''
-        } 
-        if(this.key == '' || this.key == undefined){
+        }
+        if (this.key == '' || this.key == undefined) {
           this.key = ''
-        }      
-       
-        this.localStorageService.store("app",this.appl)
-        this.localStorageService.store("key",this.key)
-        this.localStorageService.store("lang",this.lang)
+        }
+
+        this.localStorageService.store("app", this.appl)
+        this.localStorageService.store("key", this.key)
+        this.localStorageService.store("lang", this.lang)
       }
-    );
+      );
 
     this.routeWithQueryParams()
   }
 
-  routeWithQueryParams() { 
+  routeWithQueryParams() {
     console.log(this.router.url);
-    console.log(this.lang + " --- "+this.appl+" -- "+this.key);
-    if(this.lang != '' && this.lang != undefined && this.appl != '' && this.appl != undefined && this.key != ''  && this.key != undefined){
+    console.log(this.lang + " --- " + this.appl + " -- " + this.key);
+    if (this.lang != '' && this.lang != undefined && this.appl != '' && this.appl != undefined && this.key != '' && this.key != undefined) {
       console.log("navigating to vendoer");
-      this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl,key:this.key,spras:this.lang },queryParamsHandling: 'merge' });
+      this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl, key: this.key, spras: this.lang }, queryParamsHandling: 'merge' });
     }
     //   this.router.navigate(['/vendorplatform'], { queryParams: { appl: 'scip' }});
   }
 
-  userName: String ='ksb';
-  password: String ='ksb';
+  userName: String = 'ksb';
+  password: String = 'ksb';
 
-  str1 = new String(this.userName); 
-  str2 = new String( ":"+this.password ); 
-  authToken:string = btoa(this.str1.concat(this.str2.toString()))
+  str1 = new String(this.userName);
+  str2 = new String(":" + this.password);
+  authToken: string = btoa(this.str1.concat(this.str2.toString()))
   authObject = {
-    authToken:this.authToken,
-    'valid':false
+    authToken: this.authToken,
+    'valid': false
   }
   response: any;
   message: string = '';
@@ -120,7 +126,7 @@ export class LoginComponent implements OnInit {
 
     console.log('Input Token: ' + this.apitoken);
 
-    this.LoginService.login(this.apitoken,this.authToken).subscribe(
+    this.LoginService.login(this.apitoken, this.authToken).subscribe(
       (response) => {
 
         this.response = JSON.parse(JSON.stringify(response));
@@ -128,19 +134,19 @@ export class LoginComponent implements OnInit {
         this.responseCode = this.response.code;
 
         //FOR UNIT TESTING
-        this.messages=this.response
+        this.messages = this.response
 
         if (this.response.code == 200) {
-          
-         
+
+
           this.isWrongInput = false;
           this.message = this.response.message;
 
-          this.localStorageService.store('user',this.authObject)
+          this.localStorageService.store('user', this.authObject)
           this.authObject.valid = true;
 
 
-          this.localStorageService.store('api_token',this.apitoken)
+          this.localStorageService.store('api_token', this.apitoken)
           this.router.navigateByUrl('/dashboard/purchase-order-line-item');
         } else {
           //this.message = this.response.message;
@@ -153,12 +159,15 @@ export class LoginComponent implements OnInit {
           this.isBlankInput = false;
         }
       },
-      (err) => {}
+      (err) => { }
     );
   }
   requestNewToken() {
     this.isWrongInput = false;
     this.isBlankInput = false;
     this.isSent = true;
+    setTimeout(() => {                           // <<<---using ()=> syntax
+      this.isSent = false;
+    }, 1500);
   }
 }
