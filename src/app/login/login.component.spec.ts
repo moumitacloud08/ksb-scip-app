@@ -23,7 +23,7 @@ describe('LoginComponent', () => {
   let service: LoginService;
   beforeEach(() => {
     service = new LoginService(null,null);
-    component = new LoginComponent(service, new UtilService(), null, null);
+    component = new LoginComponent(service, new UtilService(), null, null,null,null);
   });
 
   it('Test authenticate EqualTo', fakeAsync(() => {
