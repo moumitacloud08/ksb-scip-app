@@ -19,5 +19,16 @@
     "logo_text":"SCIP Vendor Platform-applicatie",
     "welcome_text":"Welkom",
     "Logout":"Uitloggen",
-    "Download_SCIP_Data_text":"SCIP-gegevens downloaden"
+    "Download_SCIP_Data_text":"SCIP-gegevens downloaden",
+    "PO_line_duplicate_text":"PO-regelitem is gedupliceerd",
+    "all_data_cleared_text":"Alle gegevens zijn gewist",
+    "fill_data_submit_text":"Gegevens invullen en vervolgens verzenden",
+    "pre_submit_conf_text":"Weet u zeker dat u wilt indienen ?",
+    "pre_submit_warn_text":"Eenmaal verzonden U kunt het niet meer wijzigen",
+    "pre_all_data_clear_ins_text":"Hiermee worden alle tabelgegevens gewist",
+    "all_data_clear_warn_text":"U kunt deze actie niet opnieuw ongedaan maken.",
+    "Request_new_token_text":"Nieuw token aanvragen",
+    "Token_Sub_text":"Nieuw token aanvragen",
+    "searchbox_placeholder_text":"Zoeken op SCIP-nr, Statistische goederen nee, CAS-nr",
+    "wrong_login_input_text":"Verkeerde token! Nog 2 pogingen over en het blokkeert daarna"
 }

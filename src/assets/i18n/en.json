@@ -26,5 +26,9 @@
     "pre_submit_conf_text":"Are you sure you want to submit ?",
     "pre_submit_warn_text":"Once Submit You are not able to change it again",
     "pre_all_data_clear_ins_text":"This will clear all table data",
-    "all_data_clear_warn_text":"You can not undo this action again."
+    "all_data_clear_warn_text":"You can not undo this action again.",
+    "Request_new_token_text":"Request new token",
+    "Token_Sub_text":"Request new token",
+    "searchbox_placeholder_text":"Search by SCIP no, Statistical goods no, CAS no",
+    "wrong_login_input_text":"Wrong token! 2 attempt remaining and it will block after"
 }
