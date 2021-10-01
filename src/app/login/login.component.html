@@ -2,7 +2,7 @@
   <form #f="ngForm" (ngSubmit)="authenticate(f)">
     <p class="p1"><b>{{'TokenText' | translate}}</b></p>
     <p class="p2">
-      The token number has been sent to your email address supplier@test.com
+      {{'enter_token_sub_text'| translate}}
     </p>
     <div class="form-group">
       <input type="text" placeholder="Enter token" name="tokenInput" id="tokenInput" class="text-border-class" [ngClass]="{'text-border-failed-class': isWrongInput}" ngModel
@@ -11,7 +11,7 @@
     <div class="button-container">
       <button class="button blue-button">Login</button>&nbsp;&nbsp;
       <button type="button" class="button blank-button" (click)="requestNewToken()">
-        Request new token
+        {{ 'Request_new_token_text' | translate}}
       </button>
     </div>
     <!--p class="p3" *ngIf="!isLoggenIn && isBlankInput">
@@ -21,7 +21,7 @@
 
         <span class="p3" *ngIf="isWrongInput">
           <img [src]="iconFailed" [alt]="iconFailed" class="save-icon-class" style="height: 12px;width: 12px;"/>
-          Wrong token! 2 attempt remaining and it will block after
+          {{ 'wrong_login_input_text' | translate}}
         </span>
       </div>
     
@@ -29,7 +29,7 @@
      
       <span class="p4" *ngIf="!isWrongInput && isSent">
         <img [src]="iconSaved" [alt]="iconSavedAlt" class="save-icon-class" style="height: 23px;width: 23px;"/>
-        The token has been sent to your email address successfully
+        {{ 'request_new_token_msg_text' | translate}}
       </span>
     </div>
     

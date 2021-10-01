@@ -30,5 +30,7 @@
     "Request_new_token_text":"Nieuw token aanvragen",
     "Token_Sub_text":"Nieuw token aanvragen",
     "searchbox_placeholder_text":"Zoeken op SCIP-nr, Statistische goederen nee, CAS-nr",
-    "wrong_login_input_text":"Verkeerde token! Nog 2 pogingen over en het blokkeert daarna"
+    "wrong_login_input_text":"Verkeerde token! Nog 2 pogingen over en het blokkeert daarna",
+    "enter_token_sub_text":"Het tokennummer is verzonden naar uw e-mailadres leverancier@test.com",
+    "request_new_token_msg_text":"De token is succesvol naar uw e-mailadres verzonden"
 }

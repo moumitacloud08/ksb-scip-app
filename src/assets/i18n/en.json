@@ -30,5 +30,7 @@
     "Request_new_token_text":"Request new token",
     "Token_Sub_text":"Request new token",
     "searchbox_placeholder_text":"Search by SCIP no, Statistical goods no, CAS no",
-    "wrong_login_input_text":"Wrong token! 2 attempt remaining and it will block after"
+    "wrong_login_input_text":"Wrong token! 2 attempt remaining and it will block after",
+    "enter_token_sub_text":"The token number has been sent to your email address supplier@test.com",
+    "request_new_token_msg_text":"The token has been sent to your email address successfully"
 }
