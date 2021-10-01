@@ -50,37 +50,11 @@ export class LoginComponent implements OnInit {
     // console.log(' this.authToken In login ');
     // console.log(this.authToken);
 
-    // this.localStorageService.clear("app")
-    // this.localStorageService.clear("key")
-    // this.localStorageService.clear("lang")
 
     this.localStorageService.clear('user')
-    this.route.queryParams
-      .subscribe(params => {
-        console.log(params);
-        this.appl = params.appl;
-        this.key = params.key;
-        this.lang = params.spras;
-        console.log("lang : " + this.lang);
-
-        if (this.lang == '' || this.lang == undefined) {
-          this.translate.use(cons.DEFAULT_LANG);
-          this.lang = cons.DEFAULT_LANG
-        } else {
-          this.translate.use(this.lang);
-        }
-        if (this.appl == '' || this.appl == undefined) {
-          this.appl = ''
-        }
-        if (this.key == '' || this.key == undefined) {
-          this.key = ''
-        }
-
-        this.localStorageService.store("app", this.appl)
-        this.localStorageService.store("key", this.key)
-        this.localStorageService.store("lang", this.lang)
-      }
-      );
+    this.key = this.localStorageService.retrieve("key")
+    this.appl = this.localStorageService.retrieve("app")
+    this.lang = this.localStorageService.retrieve("lang")
 
     this.routeWithQueryParams()
   }
@@ -92,7 +66,6 @@ export class LoginComponent implements OnInit {
       console.log("navigating to vendoer");
       this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl, key: this.key, spras: this.lang }, queryParamsHandling: 'merge' });
     }
-    //   this.router.navigate(['/vendorplatform'], { queryParams: { appl: 'scip' }});
   }
 
   userName: String = 'ksb';

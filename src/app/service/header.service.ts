@@ -24,7 +24,11 @@ export class HeaderService {
     let apiToken: string = this.localStorageService.retrieve('api_token');
     return apiToken;
   }
-  private userEmailURL = cons.BASE_URL + '/users?purchaseOrder=66';
+  getPONum(){
+    let key = this.localStorageService.retrieve("key")
+    return key;
+  }
+  private userEmailURL = cons.BASE_URL + '/users?purchaseOrder='+this.getPONum();
   fetchmailId() {
     httpOptions.headers = new HttpHeaders({
        api_token: this.setAPIToken(),
