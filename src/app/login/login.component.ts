@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 
-import { UtilService } from '../util.service';
+
 import { LoginService } from '../service/login.service';
 import { TranslateService } from '@ngx-translate/core';
 import * as cons from '../constants';
@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private LoginService: LoginService,
-    private utilService: UtilService,
     private router: Router,
     private localStorageService: LocalStorageService,
     public translate: TranslateService,
@@ -61,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   routeWithQueryParams() {
     console.log(this.router.url);
-    console.log(this.lang + " --- " + this.appl + " -- " + this.key);
+    console.log(" KEYS ===> "+this.lang + " --- " + this.appl + " -- " + this.key);
     if (this.lang != '' && this.lang != undefined && this.appl != '' && this.appl != undefined && this.key != '' && this.key != undefined) {
       console.log("navigating to vendoer");
       this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl, key: this.key, spras: this.lang }, queryParamsHandling: 'merge' });
