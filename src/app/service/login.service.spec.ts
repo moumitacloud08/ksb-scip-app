@@ -35,9 +35,18 @@ describe('LoginService', () => {
     //httpTestingController = TestBed.get(HttpTestingController);
   });
 
+  it('getPONum should return value', () => {
+   // spyOn(localStorageService, 'store').and.returnValue("6765");
+
+    spyOn(localStorageService, 'retrieve').and.returnValue("6765");    
+    spyOn(service, 'getPONum').and.returnValue("6765");
+   
+  });
  
   it('login should return Observable', () => {
     spyOn(localStorageService, 'retrieve').and.returnValue(authObject);
+    spyOn(service, 'getPONum').and.returnValue("6765");
+
 
     let str1 = new String('ksb'); 
     let str2 = new String( ":"+'ksb'); 

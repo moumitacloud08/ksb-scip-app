@@ -282,15 +282,13 @@
       <div class="modal-body modal-body-cutom">
         <div class="row">
           <div class="col-md-12 col-part1">
-            <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;"><Strong>This will clear all
-                table data</Strong></p>
-            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">You can not undo this action
-              again.</p>
+            <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;"><Strong>{{'pre_all_data_clear_ins_text' | translate}}</Strong></p>
+            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">{{'all_data_clear_warn_text' | translate}}</p>
           </div>
           <div class="col-md-12 col-part2">
             <button type="button" class="button blue-button-modal" data-dismiss="modal"
-              (click)="ClearAllTableData()">Delete</button>
-            <button type="button" class="button white-button-modal" data-dismiss="modal">Cancel</button>
+              (click)="ClearAllTableData()">{{'Delete_button_text' | translate}}</button>
+            <button type="button" class="button white-button-modal" data-dismiss="modal">{{'Cancel_button_text' | translate}}</button>
           </div>
         </div>
       </div>

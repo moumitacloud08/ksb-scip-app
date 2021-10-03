@@ -1,6 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {
+  NgxWebstorageModule,
+  LocalStorageService,
+} from 'ngx-webstorage';
 import { HomeComponent } from './home.component';
+import { RouterTestingModule } from "@angular/router/testing";
+import { TranslateTestingModule } from 'ngx-translate-testing';
+import { TranslateService, TranslateFakeLoader, TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,9 +16,19 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      imports: [RouterTestingModule,
+        TranslateTestingModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateFakeLoader
+          }
+        })
+      ],
+      declarations: [HomeComponent],
+      providers: [LocalStorageService, TranslateService,]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

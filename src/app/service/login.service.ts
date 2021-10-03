@@ -37,12 +37,13 @@ export class LoginService {
     let key = this.localStorageService.retrieve("key")
     return key;
   }
-  private tokenUrl =
-    cons.BASE_URL + '/login/authenticateVendor?purchaseOrder='+this.getPONum(); // URL to web api
+   // URL to web api
 
   
 
   login(apitoken: string,authToken:string): Observable<any[]> {
+    let tokenUrl =
+    cons.BASE_URL + '/login/authenticateVendor?purchaseOrder='+this.getPONum();
     console.log('Input Token in Service: ' + apitoken);
 
     if (apitoken != '' && authToken != ' ') {
@@ -53,8 +54,8 @@ export class LoginService {
         Authorization: 'Basic ' + authToken,
       });
     }
-    console.log('tokenUrl ' + this.tokenUrl);
-    return this.http.get<any[]>(this.tokenUrl, httpOptions).pipe(
+    console.log('tokenUrl ' + tokenUrl);
+    return this.http.get<any[]>(tokenUrl, httpOptions).pipe(
       tap((data) => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
