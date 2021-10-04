@@ -30,21 +30,22 @@ describe('LoginService', () => {
       imports: [HttpClientTestingModule, NgxWebstorageModule.forRoot()],
       providers: [LocalStorageService],
     });
+    
     localStorageService = TestBed.inject(LocalStorageService);
+    let store = {"app":"scip","key":"6765","lang":"en","user":{authToken:'a3NiOmtzYg=='},"api_token":"123456789"}
+    spyOn(localStorageService, 'retrieve').and.callFake((key) =>{return store[key]});
     service = TestBed.inject(LoginService);
+  
     //httpTestingController = TestBed.get(HttpTestingController);
   });
 
-  it('getPONum should return value', () => {
-   // spyOn(localStorageService, 'store').and.returnValue("6765");
-
-    spyOn(localStorageService, 'retrieve').and.returnValue("6765");    
-    spyOn(service, 'getPONum').and.returnValue("6765");
+  it('getPONum should return value', () => {  
+    let ponum= service.getPONum();
+    expect("6765").toBe(ponum);
    
   });
  
   it('login should return Observable', () => {
-    spyOn(localStorageService, 'retrieve').and.returnValue(authObject);
     spyOn(service, 'getPONum').and.returnValue("6765");
 
 

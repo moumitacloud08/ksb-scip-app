@@ -7,7 +7,7 @@ import {NgxWebstorageModule} from 'ngx-webstorage'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { GenerateTokenComponent } from './generate-token/generate-token.component';
+// import { GenerateTokenComponent } from './generate-token/generate-token.component';
 import { LoginComponent } from './login/login.component';
 
 import { UtilService } from './util.service';
@@ -27,7 +27,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
   declarations: [
     AppComponent,
     HomeComponent,
-    GenerateTokenComponent,
     LoginComponent,
     PurchaseOrderLineItemComponent,
     DashboardComponent,
