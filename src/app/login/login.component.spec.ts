@@ -25,12 +25,14 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import { TranslateService, TranslateFakeLoader, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
+import { Location } from '@angular/common';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let service: LoginService;
   let localStorageService: LocalStorageService;
+ // const location: Location = TestBed.inject(Location);
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -59,10 +61,20 @@ describe('LoginComponent', () => {
     localStorageService = TestBed.inject(LocalStorageService);
     spyOn(localStorageService, 'clear').and.returnValue();
     //spyOn(localStorageService, 'store').and.returnValue("6765");
-    let store = {"app":"scip","key":"6765","lang":"en"}
+    let store = {"app":"scip","key":"6765","lang":"en","user":{authToken:'a3NiOmtzYg=='},"api_token":"123456789"}
     spyOn(localStorageService, 'retrieve').and.callFake((key) =>{return store[key]});
+    
     fixture.detectChanges();
   });
+
+
+  it('Test ngOnInit', fakeAsync(() => {
+    spyOn(component, 'ngOnInit').and.returnValue();
+    expect(component.key).toBe("6765");
+    expect(component.appl).toBe("scip");
+    expect(component.lang).toBe("en");
+  }));
+  
 
   it('Test authenticate EqualTo', fakeAsync(() => {
     const testForm = <NgForm>{
