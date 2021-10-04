@@ -19,7 +19,7 @@ import {
 
 import { LoginService } from '../service/login.service';
 import { Observable } from 'rxjs';
-import { of } from 'rxjs';
+import { of,throwError } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { RouterTestingModule } from "@angular/router/testing";
 import { TranslateTestingModule } from 'ngx-translate-testing';
@@ -87,6 +87,18 @@ describe('LoginComponent', () => {
     spyOn(service, 'login').and.returnValue(of([message]));
     component.authenticate(testForm);
     expect(component.messages.length).toBe(1);
+  }));
+  it('Test authenticate error test', fakeAsync(() => {
+    const testForm = <NgForm>{
+      value: {
+        tokenInput: '123456789',
+      },
+    };
+
+    let message = "Error Occurred";
+    spyOn(service, 'login').and.returnValue(throwError(message));
+    component.authenticate(testForm);
+    expect(component.message).toBe(message);
   }));
   
 

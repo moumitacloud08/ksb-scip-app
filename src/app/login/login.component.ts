@@ -131,7 +131,10 @@ export class LoginComponent implements OnInit {
           this.isBlankInput = false;
         }
       },
-      (err) => { }
+      (err) => {
+        console.log("Error caught at Subscriber " + err)
+        this.message = err;
+       }
     );
   }
   requestNewToken() {
