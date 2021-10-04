@@ -20,7 +20,7 @@ export class LoginService {
     private http: HttpClient,
     private localStorageService: LocalStorageService
   ) {}
-
+  errorMessage:string;
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -30,6 +30,7 @@ export class LoginService {
       // server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+    this.errorMessage = error.message;
     // window.alert(errorMessage);
     return throwError(errorMessage);
   }

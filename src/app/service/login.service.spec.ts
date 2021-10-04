@@ -45,23 +45,14 @@ describe('LoginService', () => {
     expect("6765").toBe(ponum);
    
   });
-  // it('handle error test', () => {  
-  //   let error = new  ErrorEvent("Error Occurred")
-  //   let errorObj= service.handleError(error);
-  //   console.log("|||||||||||||||||||||||");
-  //   console.log(errorObj.error);
-  //  // expect("6765").toBe(ponum);
+  it('handle error test', () => {  
+   let error = { status: '403', message: 'Error Occurred' };
+   service.handleError(error);
+   expect(service.errorMessage).toBe(error.message);
    
-  // });
+  });
 
-  // it('login should return Observable error', () => {
-  //   spyOn(service, 'getPONum').and.returnValue("6765");
-
-  //   let str1 = new String('ksb'); 
-  //   let str2 = new String( ":"+'ksb'); 
-  //   let authToken:string = ''   
-  //   service.login('123456789',authToken)
-  // });
+  
  
   it('login should return Observable', () => {
     spyOn(service, 'getPONum').and.returnValue("6765");
