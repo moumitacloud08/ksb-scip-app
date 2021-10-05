@@ -18,14 +18,12 @@ import {
 } from '@angular/common/http/testing';
 
 import { LoginService } from '../service/login.service';
-import { Observable } from 'rxjs';
 import { of,throwError } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { RouterTestingModule } from "@angular/router/testing";
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import { TranslateService, TranslateFakeLoader, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
-import { Location } from '@angular/common';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -82,7 +80,6 @@ describe('LoginComponent', () => {
         tokenInput: '123456789',
       },
     };
-
     let message = [{ code: '200', type: 'String', message: 'Login Success' }];
     spyOn(service, 'login').and.returnValue(of([message]));
     component.authenticate(testForm);
