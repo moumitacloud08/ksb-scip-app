@@ -7,8 +7,6 @@ import {
   NgxWebstorageModule,
   LocalStorageService,
 } from 'ngx-webstorage';
-import { Observable } from 'rxjs';
-import { of,throwError } from 'rxjs';
 import { LoginService } from './login.service';
 
 describe('LoginService', () => {
