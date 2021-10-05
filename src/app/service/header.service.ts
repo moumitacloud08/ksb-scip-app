@@ -28,13 +28,14 @@ export class HeaderService {
     let key = this.localStorageService.retrieve("key")
     return key;
   }
-  private userEmailURL = cons.BASE_URL + '/users?purchaseOrder='+this.getPONum();
+  //private userEmailURL = cons.BASE_URL + '/users?purchaseOrder='+this.getPONum();
   fetchmailId() {
+    let userEmailURL = cons.BASE_URL + '/users?purchaseOrder='+this.getPONum();
     httpOptions.headers = new HttpHeaders({
        api_token: this.setAPIToken(),
        'Content-Type': 'application/json',
        Authorization: 'Basic ' + this.setAuthToken(),
      });
-   return this.http.get(this.userEmailURL,httpOptions).toPromise();
+   return this.http.get(userEmailURL,httpOptions).toPromise();
  }
 }

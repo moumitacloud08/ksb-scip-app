@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
         console.log("this.emailId : " + this.emailId)
       })
       .catch((error) => {
-        console.log('Promise rejected with ' + JSON.stringify(error));
+        console.log('in fetchmailId Promise rejected with ' + JSON.stringify(error));
       });
   }
   logout() {
