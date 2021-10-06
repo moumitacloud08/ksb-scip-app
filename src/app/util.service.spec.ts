@@ -9,7 +9,14 @@ describe('UtilService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(UtilService);
   });
-
+  it('isLoggenIn should be a boolean', () => {
+    service.isLoggenIn = true
+    expect(service.isLoggenIn).toBe(true);
+  });
+  it('updatedRecordCountFunc should be a string', () => {
+    service.updatedRecordCountFunc = "1"
+    expect(service.updatedRecordCountFunc).toBe("1");
+  });
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
