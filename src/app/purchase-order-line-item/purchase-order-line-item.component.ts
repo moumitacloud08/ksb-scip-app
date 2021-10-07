@@ -117,36 +117,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     //this.fetchPurchaseDetailsTestData()
   }
 
-  paginationlist = []
-  configurepagination() {
-
-    let x = 2;
-    let paginationlistTemp = [];
-
-    for (var i = 1; i <= this.results.length; i++) {
-      var quotient;
-      var remainder;
-      if (i < this.results.length) {
-        remainder = i % x;
-        quotient = Math.floor(i / x);
-        if (remainder == 0) {
-          paginationlistTemp.push(quotient);
-        }
-        console.log("Index : " + i + "  Inside if 1  : " + quotient + "  " + remainder);
-      } else if (i == this.results.length) {
-        remainder = i % x;
-        quotient = Math.floor(i / x);
-        if (remainder == 0) {
-          paginationlistTemp.push(quotient);
-        } else {
-          paginationlistTemp.push(paginationlistTemp.length + 1);
-        }
-        console.log("Index : " + i + "  Inside if 2  : " + quotient + "  " + remainder);
-      }
-    }
-    this.paginationlist = Object.assign([], paginationlistTemp);
-    console.log(this.paginationlist);
-  }
+  
   getSCIPRel(parentIndex, scipRel) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipRelavent = scipRel
