@@ -52,7 +52,7 @@ describe('LoginComponent', () => {
         })
             .compileComponents();
     });
-    function setResultData(){
+    function setResultData() {
         component.results = [{
             "lineItemNumber": "8890986",
             "statisticalGoodsNumber": "3454476",
@@ -128,6 +128,7 @@ describe('LoginComponent', () => {
             isMatEditShow: false,
             isStatGoodInvalid: false
         }]
+        component.resultsTemp = Object.assign([], component.results);
     }
     beforeEach(() => {
         fixture = TestBed.createComponent(PurchaseOrderLineItemComponent);
@@ -139,7 +140,8 @@ describe('LoginComponent', () => {
         let store = { "app": "scip", "key": "6765", "lang": "en", "user": { authToken: 'a3NiOmtzYg==' }, "api_token": "123456789" }
         spyOn(localStorageService, 'retrieve').and.callFake((key) => { return store[key] });
         setResultData();
-       
+
+
         component.page = 1
         component.activeParentIndex = 2
         fixture.detectChanges();
@@ -174,13 +176,13 @@ describe('LoginComponent', () => {
         component.onTableSizeChange(event);
         expect(component.page).toBe(1);
     }));
-    it('scipRelavent to be yes', fakeAsync(() => {        
-        
+    it('scipRelavent to be yes', fakeAsync(() => {
+
         component.getSCIPRel(0, "yes");
         expect(component.results[parentIndex].scipRelavent).toBe("yes");
     }));
-    it('SCIP to be blank', fakeAsync(() => {        
-        
+    it('SCIP to be blank', fakeAsync(() => {
+
         component.clearSCIPData(parentIndex);
         expect(component.results[parentIndex].scipNumber).toBe("");
         setResultData();
@@ -201,88 +203,144 @@ describe('LoginComponent', () => {
         setResultData();
     }));
     it('isSCIPEditShow to be false', fakeAsync(() => {
-        component.mouseEnter(parentIndex,"scip");
+        component.mouseEnter(parentIndex, "scip");
         expect(component.results[parentIndex].isSCIPEditShow).toBe(true);
         expect(component.results[parentIndex].isSCIPSpanShow).toBe(false);
 
         setResultData();
     }));
 
-    it('isStatSpanShow to be false', fakeAsync(() => {      
+    it('isStatSpanShow to be false', fakeAsync(() => {
 
-        component.mouseEnter(parentIndex,"stat");
+        component.mouseEnter(parentIndex, "stat");
         expect(component.results[parentIndex].isStatEditShow).toBe(true);
         expect(component.results[parentIndex].isStatSpanShow).toBe(false);
 
         setResultData();
     }));
-    it('isCasSpanShow to be false', fakeAsync(() => {      
+    it('isCasSpanShow to be false', fakeAsync(() => {
 
-        component.mouseEnter(parentIndex,"cas");
+        component.mouseEnter(parentIndex, "cas");
         expect(component.results[parentIndex].isCasEditShow).toBe(true);
         expect(component.results[parentIndex].isCasSpanShow).toBe(false);
 
         setResultData();
     }));
-    it('isMatSpanShow to be false', fakeAsync(() => {      
+    it('isMatSpanShow to be false', fakeAsync(() => {
 
-        component.mouseEnter(parentIndex,"mat");
+        component.mouseEnter(parentIndex, "mat");
         expect(component.results[parentIndex].isMatEditShow).toBe(true);
         expect(component.results[parentIndex].isMatSpanShow).toBe(false);
         setResultData();
     }));
-    it('isSCIPEditShow to be false', fakeAsync(() => {      
+    it('isSCIPEditShow to be false', fakeAsync(() => {
 
-        component.mouseEnter(parentIndex,"test");
+        component.mouseEnter(parentIndex, "test");
         expect(component.results[parentIndex].isSCIPEditShow).toBe(false);
         expect(component.results[parentIndex].isSCIPSpanShow).toBe(true);
         setResultData();
     }));
-    it('test mouseLeave', fakeAsync(() => {     
+    it('test mouseLeave', fakeAsync(() => {
 
         component.mouseLeave(parentIndex);
         expect(component.results[parentIndex].isSCIPSpanShow).toBe(true);
         setResultData();
     }));
-    it('test clickevent', fakeAsync(() => {     
+    it('test clickevent', fakeAsync(() => {
 
         component.clickevent(parentIndex);
         expect(component.results[parentIndex].isSCIPSpanShow).toBe(false);
         setResultData();
     }));
-    
 
-    it('test clearRowData', fakeAsync(() => {     
+
+    it('test clearRowData', fakeAsync(() => {
 
         component.clearRowData(parentIndex);
         expect(component.results[parentIndex].scipNumber).toBe("");
         setResultData();
     }));
 
-    it('validateScip: isInvalid to be true', fakeAsync(() => {     
+    it('validateScip: isInvalid to be true', fakeAsync(() => {
 
         component.validateScip(parentIndex);
         expect(component.results[parentIndex].isInvalid).toBe(true);
         setResultData();
     }));
-    it('validateScip: isInvalid to be false', fakeAsync(() => {     
+    it('validateScip: isInvalid to be false', fakeAsync(() => {
 
         component.validateScip(2);
         expect(component.results[2].isInvalid).toBe(false);
         setResultData();
     }));
-    it('validateStatGood: isStatGoodInvalid  to be true', fakeAsync(() => {    
+    it('validateStatGood: isStatGoodInvalid  to be true', fakeAsync(() => {
         component.validateStatGood(parentIndex);
         expect(component.results[parentIndex].isStatGoodInvalid).toBe(true);
         setResultData();
     }));
-    it('validateStatGood: isStatGoodInvalid  to be false', fakeAsync(() => {  
+    it('validateStatGood: isStatGoodInvalid  to be false', fakeAsync(() => {
         component.validateStatGood(1);
         expect(component.results[parentIndex].isStatGoodInvalid).toBe(false);
         setResultData();
     }));
-    
+    it('test removeDuplicates', fakeAsync(() => {
+        component.removeDuplicates(component.results, 'rowId');
+        expect(component.results.length).toBe(3);
+        setResultData();
+    }));
 
+    it('Test savePurchaseorderLine details', fakeAsync(() => {
+
+        let data = [{
+            "lineItemNumber": 8890986,
+            "statisticalGoodsNumber": "456547678",
+            "purchaseOrderNumber": 2235466,
+            "scipNumber": "89907554",
+            "scipRelavent": null,
+            "materialCategory": "Iron",
+            "submitStatus": "Yes",
+            "casnumber": "2212345"
+        }]
+        let spy = spyOn(service, 'savePurchaseorderLine').and.returnValue(Promise.resolve(data));
+        component.results[parentIndex].statisticalGoodsNumber = "98665467"
+        component.savePurchaseorderLine();
+        expect(spy).toHaveBeenCalled();
+    }));
+    it('test editPurchaseorderLine', () => {
+
+        component.editPurchaseorderLine(parentIndex, 0);
+        expect(component.results.length).toBe(4);
+        setResultData();
+    });
+    it('test editPurchaseorderLine for laST index', () => {
+
+        component.editPurchaseorderLine(2, 1);
+        expect(component.results.length).toBe(4);
+        setResultData();
+    });
+    it('deleteRowIndex should be parentIndex', () => {
+        
+        component.getDeleteRowIndex(1);
+        expect(component.deleteRowIndex).toBe(1);
+        setResultData();
+    });
+    it('results length should be 2', () => {
+        component.deleteRowIndex = 1
+        component.deleteRow();
+        expect(component.results.length).toBe(2);
+        setResultData();
+    });
+    it('Test ClearAllTableData', () => {
+        component.ClearAllTableData();
+        expect(component.results[parentIndex].scipNumber).toBe("");
+        setResultData();
+    });
+    it('Test SavePDF', () => {
+       // component.generateHeaderForPDF();
+        component.SavePDF();
+        expect(component.generateDataForPDF().length).toBe(3);
+        setResultData();
+    });
     it('should create', () => {
         expect(component).toBeTruthy();
     });
