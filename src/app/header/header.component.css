@@ -30,9 +30,12 @@
 .navbar-text {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  padding-left: 40.5rem;
+  /* padding-left: 40.5rem;
   margin-left: 58px;
-  margin-right: -138px;
+  margin-right: -138px; */
+}
+.navbar-text a {
+  padding-left: 20px;
 }
 .usericon {
   width: 30px;
