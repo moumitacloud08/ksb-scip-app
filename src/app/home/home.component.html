@@ -2,11 +2,27 @@
     <div class="left-panel">
         <div class="ksb-bg"></div>
     </div>
+    
     <div class="right-panel">
+        <div class="lang-box">
+            <span class="form-inline">
+                <select 
+                    class="form-control" 
+                    #selectedLang 
+                    (change)="switchLang(selectedLang.value)">
+                  <option *ngFor="let language of translate.getLangs()" 
+                    [value]="language"
+                    [selected]="language === translate.currentLang">
+                    {{ language }}
+                  </option>
+                </select>
+              </span>
+        </div>
         <div class="ksblogo-bg">
             <div class="ksb-logoimg"><img src="../../assets/images/Image 14.png" alt="KSB"></div>
-            <div class="ksb-logotxt"><p>{{'logo_text' | translate }}</p></div>
+            <div class="ksb-logotxt"><p>{{'logo_text' | translate }}</p></div>            
         </div>
+        
         <router-outlet></router-outlet>
     </div>
 </div>

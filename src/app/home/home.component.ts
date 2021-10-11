@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
 import * as cons from '../constants';
-import {  ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ import {  ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private localStorageService: LocalStorageService, private route: ActivatedRoute, public translate: TranslateService) {
+  constructor(private localStorageService: LocalStorageService, private route: ActivatedRoute, public translate: TranslateService,private router: Router) {
     translate.addLangs(cons.langArray);
     translate.setDefaultLang(cons.DEFAULT_LANG);
   }
@@ -22,6 +22,10 @@ export class HomeComponent implements OnInit {
     // this.localStorageService.clear("app")
     // this.localStorageService.clear("key")
     // this.localStorageService.clear("lang")
+    this.getURLParams()
+  }
+
+  getURLParams() {
     this.route.queryParams
       .subscribe(params => {
         console.log(params);
@@ -47,7 +51,22 @@ export class HomeComponent implements OnInit {
         this.localStorageService.store("key", this.key)
         this.localStorageService.store("lang", this.lang)
       });
-
-
   }
+
+  switchLang(lang: string) {
+    this.lang = lang
+    this.translate.use(this.lang);
+    this.localStorageService.store("lang", this.lang)
+    this.routeWithQueryParams()
+  }
+
+  routeWithQueryParams() {
+    console.log(this.router.url);
+    console.log(" KEYS ===> "+this.lang + " --- " + this.appl + " -- " + this.key);
+    if (this.lang != '' && this.lang != undefined && this.appl != '' && this.appl != undefined && this.key != '' && this.key != undefined) {
+      console.log("navigating to vendoer");
+      this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl, key: this.key, spras: this.lang }, queryParamsHandling: 'merge' });
+    }
+  }
+
 }

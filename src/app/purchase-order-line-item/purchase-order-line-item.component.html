@@ -45,7 +45,7 @@
             {{ el.purchaseOrderNumber }}
           </td>
           <td style="width: 8%;">{{ el.lineItemNumber }}</td>
-          <td style="width: 15%;">
+          <td style="width: 12%;">
             <!-- {{ el.scipRelavent }} -->
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
@@ -64,7 +64,7 @@
               </div>
             </div>
           </td>
-          <td style="width: 15%;">
+          <td style="width: 12%;">
             <div (mouseenter)="mouseEnter(parentIndex,'scip') " (mouseleave)="mouseLeave(parentIndex,'scip')"
               style="margin-left: -21px;">
               <div *ngIf="el.isSCIPSpanShow == true">
@@ -147,7 +147,7 @@
               </div>
               <div class="form-group" *ngIf="el.isMatEditShow == true">
                 <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
-                  class="table-text-border-class" style="width:107%" [(ngModel)]="el.materialCategory"
+                  class="table-text-border-class" style="width:99%" [(ngModel)]="el.materialCategory"
                   (click)="clickevent(parentIndex)" />
                 <a (click)="clearMatCat(parentIndex)" style="cursor: pointer" *ngIf="el.materialCategory != ''">
                   <img class="icon-cross-mat-class" [src]="iconCross" [alt]="iconCross" />
@@ -169,7 +169,7 @@
               </div>
             </div-->
           </td>
-          <td style="width: 20%;">
+          <td style="width: 13%;">
             <a (click)="editPurchaseorderLine(parentIndex,el.rowId)" class="enabled-class"
               *ngIf="el.isClearData && !el.isSubRow">
               <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
@@ -178,7 +178,7 @@
               <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
             </a>
           </td>
-          <td style="width: 20%;">
+          <td style="width: 10%;">
             <a *ngIf="el.isClearData && !el.isSubRow" (click)="clearRowData(parentIndex)"><img [src]="iconClearData"
                 [alt]="iconClearDatadAlt" class="clear-icon-class" /></a>
             <a *ngIf="el.isSubRow && !el.isClearData" (click)="getDeleteRowIndex(parentIndex)" data-toggle="modal" data-target="#myModalDeleteRow"><img [src]="iconDelete"
@@ -189,19 +189,19 @@
     </table>
   </div>
   <div class="table-footer">
-    <div class="button-container-footer">
+    <div class="button-container-footer flex">
       <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal">Save</button>
       <button type="button" class="button white-button" data-toggle="modal" data-target="#myModalClearAll">Clear
         All</button>
     </div>
-    <div class="row">
+    <div class="row flex">
       <div class="col-md-12 alert-class">
         <div class="alert alert-danger" role="alert" *ngIf="(responseCode !== '' && responseCode !== '200')">
           {{errorMessage}}
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-right my-pagination">
+    <div class="d-flex justify-content-right my-pagination flex">
       <pagination-controls 
         responsive="true" 
         previousLabel="" 
