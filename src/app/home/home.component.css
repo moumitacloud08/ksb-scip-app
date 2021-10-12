@@ -55,3 +55,8 @@
     opacity: 1;
     margin: 0.8em 0;
 }
+.btn-secondary {
+    color: black;
+    background-color: white;
+    border-color: white;
+  }

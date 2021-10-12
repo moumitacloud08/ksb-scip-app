@@ -4,7 +4,7 @@
     </div>
     
     <div class="right-panel">
-        <div class="lang-box">
+        <!-- <div class="lang-box">
             <span class="form-inline">
                 <select 
                     class="form-control" 
@@ -16,8 +16,18 @@
                     {{ language }}
                   </option>
                 </select>
-              </span>
-        </div>
+              </span> -->
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false"  >
+                  <span>{{lang}}</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <button class="dropdown-item" type="button" *ngFor="let language of translate.getLangs()"  (click)="getlang(language)">
+                    <span style="font-size:  0.875rem;">{{language}}</span>
+                  </button>
+                </div>
+              </div>
         <div class="ksblogo-bg">
             <div class="ksb-logoimg"><img src="../../assets/images/Image 14.png" alt="KSB"></div>
             <div class="ksb-logotxt"><p>{{'logo_text' | translate }}</p></div>            

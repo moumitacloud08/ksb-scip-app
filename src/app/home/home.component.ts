@@ -52,12 +52,18 @@ export class HomeComponent implements OnInit {
         this.localStorageService.store("lang", this.lang)
       });
   }
-
+islangSelected:boolean = false
   switchLang(lang: string) {
-    this.lang = lang
-    this.translate.use(this.lang);
-    this.localStorageService.store("lang", this.lang)
-    this.routeWithQueryParams()
+      this.lang = lang
+      this.translate.use(this.lang);
+      this.localStorageService.store("lang", this.lang)
+      this.islangSelected = true;
+      this.routeWithQueryParams()
+    
+  }
+  getlang(lang:string){
+console.log("lang "+lang);
+this.switchLang(lang)
   }
 
   routeWithQueryParams() {
