@@ -58,5 +58,24 @@
 .btn-secondary {
     color: black;
     background-color: white;
-    border-color: white;
-  }
+    border-color: #c5ced8;
+    /* padding-left: 33px;
+    padding-right: 33px; */
+    margin-bottom: 5px;
+}
+  
+.img-lang{
+    width: 18px;
+}
+.lang-desc{
+    padding-left: 15px;
+    padding-right: 6px;
+}
+.span-lang{
+    padding-left: 3px;
+}
+.lang-box{
+    position: relative;
+    bottom: 50px;
+    left: 276px;
+}

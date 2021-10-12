@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
 import * as cons from '../constants';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private localStorageService: LocalStorageService, private route: ActivatedRoute, public translate: TranslateService,private router: Router) {
+  constructor(private localStorageService: LocalStorageService, private route: ActivatedRoute, public translate: TranslateService, private router: Router) {
     translate.addLangs(cons.langArray);
     translate.setDefaultLang(cons.DEFAULT_LANG);
   }
@@ -23,8 +23,10 @@ export class HomeComponent implements OnInit {
     // this.localStorageService.clear("key")
     // this.localStorageService.clear("lang")
     this.getURLParams()
+    this.langlist = cons.langList
+    this.getlangDesc();
   }
-
+  langlist = []
   getURLParams() {
     this.route.queryParams
       .subscribe(params => {
@@ -52,23 +54,32 @@ export class HomeComponent implements OnInit {
         this.localStorageService.store("lang", this.lang)
       });
   }
-islangSelected:boolean = false
-  switchLang(lang: string) {
-      this.lang = lang
-      this.translate.use(this.lang);
-      this.localStorageService.store("lang", this.lang)
-      this.islangSelected = true;
-      this.routeWithQueryParams()
-    
-  }
-  getlang(lang:string){
-console.log("lang "+lang);
-this.switchLang(lang)
-  }
 
+  switchLang(lang: string) {
+    this.lang = lang
+    this.translate.use(this.lang);
+    this.localStorageService.store("lang", this.lang)
+    this. getlangDesc();
+    this.routeWithQueryParams()
+  }
+  languageDesc: string;
+  getlang(lang: any) {
+    console.log(lang);
+    this.switchLang(lang.code)
+  }
+  getlangDesc(){
+    let lang = this.lang
+    let languageDesc = this.languageDesc
+    this.langlist.forEach(function (value) { 
+      if(value.code == lang){
+        languageDesc = value.desc
+      }
+    })
+    this.languageDesc = languageDesc
+  }
   routeWithQueryParams() {
     console.log(this.router.url);
-    console.log(" KEYS ===> "+this.lang + " --- " + this.appl + " -- " + this.key);
+    console.log(" KEYS ===> " + this.lang + " --- " + this.appl + " -- " + this.key);
     if (this.lang != '' && this.lang != undefined && this.appl != '' && this.appl != undefined && this.key != '' && this.key != undefined) {
       console.log("navigating to vendoer");
       this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl, key: this.key, spras: this.lang }, queryParamsHandling: 'merge' });

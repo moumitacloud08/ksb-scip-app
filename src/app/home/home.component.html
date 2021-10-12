@@ -2,7 +2,7 @@
     <div class="left-panel">
         <div class="ksb-bg"></div>
     </div>
-    
+
     <div class="right-panel">
         <!-- <div class="lang-box">
             <span class="form-inline">
@@ -17,22 +17,29 @@
                   </option>
                 </select>
               </span> -->
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false"  >
-                  <span>{{lang}}</span>
+        <div class="dropdown lang-box">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span *ngIf="lang == 'en'" class="span-lang"><img class="img-lang" alt="United States" src="http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" /></span>
+                <span *ngIf="lang == 'nl'" class="span-lang"><img class="img-lang" alt="United States" src="http://purecatamphetamine.github.io/country-flag-icons/3x2/NL.svg" /></span> 
+                <span class="lang-desc">{{languageDesc}}</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button" *ngFor="let language of langlist"
+                    (click)="getlang(language)">
+                    <span *ngIf="language.code == 'en'" class="span-lang"><img class="img-lang" alt="United States" src="http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" /></span>
+                    <span *ngIf="language.code == 'nl'" class="span-lang"><img class="img-lang" alt="United States" src="http://purecatamphetamine.github.io/country-flag-icons/3x2/NL.svg" /></span>                    
+                    <span style="font-size:  0.875rem;" class="lang-desc">{{language.desc}}</span>
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <button class="dropdown-item" type="button" *ngFor="let language of translate.getLangs()"  (click)="getlang(language)">
-                    <span style="font-size:  0.875rem;">{{language}}</span>
-                  </button>
-                </div>
-              </div>
+            </div>
+        </div>
         <div class="ksblogo-bg">
             <div class="ksb-logoimg"><img src="../../assets/images/Image 14.png" alt="KSB"></div>
-            <div class="ksb-logotxt"><p>{{'logo_text' | translate }}</p></div>            
+            <div class="ksb-logotxt">
+                <p>{{'logo_text' | translate }}</p>
+            </div>
         </div>
-        
+
         <router-outlet></router-outlet>
     </div>
 </div>
