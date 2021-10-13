@@ -31,15 +31,18 @@
   .card-body span {
     margin-left: 297px;
     padding-left: 214px;
+    font-size:22px
   }
   
   .box-msg-class {
     margin-top: 53px;
-    margin-left: 517px;
+    margin-left: 549px;
   }
+  /* .box-msg-class span { size:5px } */
   .save-icon-class {
     height: 24px;
     width: 24px;
     color: #08b564;
   }
   .pointer {cursor: pointer;}
+  .pointer span { font-size:16px}

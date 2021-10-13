@@ -1,8 +1,8 @@
 {
     "Sitetitle": "Angular Multi Language Site",
-    "LoginText": "Login",
-    "TokenText":"Enter token",
-    "scipInfoText":"SCIP Information",
+    "LoginText": "Conecte-se",
+    "TokenText":"Digite o token",
+    "scipInfoText":"Informação SCIP",
     "scipInfoSubText":"Please input the SCIP or the statistical and CAS numbers against purchased order line item",
     "Submit": "Submit",
     "Purchase_Order_col":"Purchase Order",
