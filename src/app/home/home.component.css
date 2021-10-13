@@ -74,8 +74,11 @@
 .span-lang{
     padding-left: 3px;
 }
-.lang-box{
-    position: relative;
-    bottom: 50px;
-    left: 276px;
+.lang-box {
+    /* position: relative; */
+    /* bottom: 50px; */
+    /* left: 65px; */
+    margin-left: 67%;
+    /* margin-right: 15rem; */
+    margin-top: -3rem;
 }
