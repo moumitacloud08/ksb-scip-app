@@ -190,9 +190,8 @@
   </div>
   <div class="table-footer">
     <div class="button-container-footer flex">
-      <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal">Save</button>
-      <button type="button" class="button white-button" data-toggle="modal" data-target="#myModalClearAll">Clear
-        All</button>
+      <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal">{{ 'save_button' | translate}}</button>
+      <button type="button" class="button white-button" data-toggle="modal" data-target="#myModalClearAll">{{'Clear_All_text' | translate}}</button>
     </div>
     <div class="row flex">
       <div class="col-md-12 alert-class">
@@ -236,13 +235,13 @@
     </div> -->
   </div>
   <div class="alert alert-primary duplicate-row-alert-class" role="alert" *ngIf="isRowDuplicated">
-    PO line item has been duplicated
+    {{ 'PO_line_duplicate_text' | translate}}
   </div>
   <div class="alert alert-primary duplicate-row-alert-class" role="alert" *ngIf="isAllDataClearedShowAlert">
-    All data have been cleared
+    {{ 'all_data_cleared_text' | translate}}
   </div>
   <div class="alert alert-danger danger-row-alert-class" role="alert" *ngIf="isLengthZero">
-    Fill data then submit
+    {{'fill_data_submit_text' | translate}}
   </div>
 </div>
 
