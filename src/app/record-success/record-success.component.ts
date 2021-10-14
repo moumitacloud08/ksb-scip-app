@@ -35,8 +35,6 @@ export class RecordSuccessComponent implements OnInit {
     this.routeWithQueryParams()
   }
   routeWithQueryParams() {
-    console.log(this.router.url);
-    console.log(" KEYS ===> "+this.lang + " --- " + this.appl + " -- " + this.key);
     if (this.lang != '' && this.lang != undefined && this.appl != '' && this.appl != undefined && this.key != '' && this.key != undefined) {
       console.log("navigating to vendoer");
       this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl, key: this.key, spras: this.lang }, queryParamsHandling: 'merge' });
