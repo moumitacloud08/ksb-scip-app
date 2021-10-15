@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   routeWithQueryParams() {
     console.log(this.router.url);
-    console.log(" KEYS ===> "+this.lang + " --- " + this.appl + " -- " + this.key);
+    console.log(" KEYS ===> " + this.lang + " --- " + this.appl + " -- " + this.key);
     if (this.lang != '' && this.lang != undefined && this.appl != '' && this.appl != undefined && this.key != '' && this.key != undefined) {
       console.log("navigating to vendoer");
       this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl, key: this.key, spras: this.lang }, queryParamsHandling: 'merge' });
@@ -134,15 +134,32 @@ export class LoginComponent implements OnInit {
       (err) => {
         console.log("Error caught at Subscriber " + err)
         this.message = err;
-       }
+      }
     );
   }
+  email:string=""
+  isSentEmail:boolean = false;
   requestNewToken() {
-    this.isWrongInput = false;
-    this.isBlankInput = false;
-    this.isSent = true;
-    setTimeout(() => {                           // <<<---using ()=> syntax
-      this.isSent = false;
-    }, 1500);
+    this.LoginService.generateToken(this.authToken).subscribe(
+      (response) => {
+        this.response = JSON.parse(JSON.stringify(response));
+        console.log(this.response);
+        this.responseCode = this.response.code;
+        
+        if (this.response.code == 200) {
+          this.isSentEmail = true
+          this.isWrongInput = false;
+          this.isSent = true;  
+          this.email = "supplier@gmail.com"
+          setTimeout(() => {                           
+            this.isSent = false;
+          }, 1500);
+        } else {
+          this.isSentEmail = false
+        }
+      },
+      (err) => { }
+    );
+
   }
 }

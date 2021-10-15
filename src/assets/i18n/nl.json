@@ -31,7 +31,7 @@
     "Token_Sub_text":"Nieuw token aanvragen",
     "searchbox_placeholder_text":"Zoeken op SCIP-nr, Statistische goederen nee, CAS-nr",
     "wrong_login_input_text":"Verkeerde token! Nog 2 pogingen over en het blokkeert daarna",
-    "enter_token_sub_text":"",
+    "enter_token_sub_text":"Het tokennummer is naar uw e-mailadres verzonden",
     "request_new_token_msg_text":"De token is succesvol naar uw e-mailadres verzonden",
     "Review_Again_Text":"Opnieuw beoordelen",
     "Delete_button_text":"Verwijderen",

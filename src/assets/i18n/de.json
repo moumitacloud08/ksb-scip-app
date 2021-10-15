@@ -31,7 +31,7 @@
     "Token_Sub_text":"Neuen Token anfordern",
     "searchbox_placeholder_text":"Suche nach SCIP, statistischer Warennummer oder CAS-Nummer oder Materialkategorie",
     "wrong_login_input_text":"Falsches Zeichen! 2 Versuche verbleiben und es wird danach blockiert",
-    "enter_token_sub_text":"",
+    "enter_token_sub_text":"Die Tokennummer wurde an Ihre E-Mail-Adresse gesendet",
     "request_new_token_msg_text":"Das Token wurde erfolgreich an Ihre E-Mail-Adresse gesendet",
     "Review_Again_Text":"Nochmals überprüfen",
     "Delete_button_text":"Löschen",

@@ -19,8 +19,8 @@ export class LoginService {
   constructor(
     private http: HttpClient,
     private localStorageService: LocalStorageService
-  ) {}
-  errorMessage:string;
+  ) { }
+  errorMessage: string;
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -34,17 +34,17 @@ export class LoginService {
     // window.alert(errorMessage);
     return throwError(errorMessage);
   }
-  getPONum(){
+  getPONum() {
     let key = this.localStorageService.retrieve("key")
     return key;
   }
-   // URL to web api
+  // URL to web api
 
-  
 
-  login(apitoken: string,authToken:string): Observable<any[]> {
+
+  login(apitoken: string, authToken: string): Observable<any[]> {
     let tokenUrl =
-    cons.BASE_URL + '/login/authenticateVendor?purchaseOrder='+this.getPONum();
+      cons.BASE_URL + '/login/authenticateVendor?purchaseOrder=' + this.getPONum();
     console.log('Input Token in Service: ' + apitoken);
 
     if (apitoken != '' && authToken != ' ') {
@@ -60,5 +60,21 @@ export class LoginService {
       tap((data) => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
+  }
+
+  // URL to web api
+
+  generateToken(authToken: String): Observable<Message[]> {
+    console.log(authToken);
+    let tokenUrl =
+      cons.BASE_URL + '/login/requestNewToken?purchaseOrder=' + this.getPONum();
+    httpOptions.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Basic ' + authToken,
+    });
+    console.log(httpOptions);
+    return this.http
+      .get<Message[]>(tokenUrl, httpOptions)
+      .pipe(catchError(this.handleError));
   }
 }

@@ -31,7 +31,7 @@
     "Token_Sub_text":"Richiedi nuovo token",
     "searchbox_placeholder_text":"Ricerca di SCIP, numero prodotto statistico o numero CAS o categoria materiale.",
     "wrong_login_input_text":"Segno sbagliato! 2 tentativi rimanenti e si bloccherà dopo",
-    "enter_token_sub_text":"",
+    "enter_token_sub_text":"Il numero del token è stato inviato al tuo indirizzo email",
     "request_new_token_msg_text":"Il token è stato inviato con successo al tuo indirizzo email",
     "Review_Again_Text":"Ricontrolla",
     "Delete_button_text":"Cancella",
