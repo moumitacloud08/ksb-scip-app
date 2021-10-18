@@ -139,6 +139,7 @@ export class LoginComponent implements OnInit {
   }
   email:string=""
   isSentEmail:boolean = false;
+  errorMessage:string=""
   requestNewToken() {
     this.LoginService.generateToken(this.authToken).subscribe(
       (response) => {
@@ -150,11 +151,15 @@ export class LoginComponent implements OnInit {
           this.isSentEmail = true
           this.isWrongInput = false;
           this.isSent = true;  
-          this.email = "supplier@gmail.com"
+          //this.email = "supplier@gmail.com"
+          this.email = this.response.emailAddress
           setTimeout(() => {                           
             this.isSent = false;
           }, 1500);
-        } else {
+        } else if(this.response.code == 400) {
+          this.isSentEmail = false
+          this.errorMessage = this.response.message
+        }else {
           this.isSentEmail = false
         }
       },

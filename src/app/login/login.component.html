@@ -5,7 +5,7 @@
       {{'enter_token_sub_text'| translate}} {{email}}
     </p>
     <p class="p2" *ngIf="!isWrongInput && !isSentEmail">
-      {{'enter_token_sub_text'| translate}} {{email}}
+      {{errorMessage}} 
     </p>
     <div class="form-group">
       <input type="text" placeholder="{{'TokenText' | translate}}" name="tokenInput" id="tokenInput" class="text-border-class" [ngClass]="{'text-border-failed-class': isWrongInput}" ngModel
