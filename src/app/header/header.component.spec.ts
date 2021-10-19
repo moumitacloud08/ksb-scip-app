@@ -15,7 +15,7 @@ import { TranslateTestingModule } from 'ngx-translate-testing';
 import { TranslateService, TranslateFakeLoader, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { HeaderComponent } from './header.component';
-
+import { LoginComponent } from '../login/login.component';
 describe('HeaderComponent', () => {
     let component: HeaderComponent;
     let fixture: ComponentFixture<HeaderComponent>;
@@ -27,7 +27,9 @@ describe('HeaderComponent', () => {
             imports: [
                 HttpClientTestingModule,
                 NgxWebstorageModule.forRoot(),
-                RouterTestingModule,
+                RouterTestingModule.withRoutes([
+                    { path: 'vendorplatform', component: LoginComponent },
+                  ]),
                 TranslateTestingModule,
                 TranslateModule.forRoot({
                     loader: {
@@ -62,6 +64,13 @@ describe('HeaderComponent', () => {
         component.fetchmailId();
         expect(spy).toHaveBeenCalled();
         //expect(component.emailId).toBe(email);
+    }));
+
+    it('Logout test', fakeAsync(() => {
+        spyOn(localStorageService, 'clear').and.returnValue();
+        component.logout();
+       
+        expect(component.lang).toBe("en");
     }));
 
     it('should create', () => {
