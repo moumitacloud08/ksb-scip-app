@@ -161,6 +161,7 @@ export class LoginComponent implements OnInit {
           this.errorMessage = this.response.message
         }else {
           this.isSentEmail = false
+          this.errorMessage = this.response.message
         }
       },
       (err) => { }

@@ -30,7 +30,7 @@
 
                 <span class="lang-desc">{{languageDesc}}</span>
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="overflow-y: scroll;height: 134px;">
                 <button class="dropdown-item" type="button" *ngFor="let language of langlist"
                     (click)="getlang(language)">
                     <span *ngIf="language.code == 'en'" class="span-lang"><img class="img-lang" alt="United States" src="http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" /></span>
