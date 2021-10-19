@@ -98,7 +98,12 @@ describe('LoginComponent', () => {
     expect(component.message).toBe(message);
   }));
   
-
+  it('Test request new token test', fakeAsync(() => {
+    let message = [{ code: '200', type: 'String', message: 'Token has been generated' }];
+    spyOn(service, 'generateToken').and.returnValue(of([message]));
+    component.requestNewToken();
+    expect(component.messages.length).toBe(1);
+  }));
   it('should create', () => {
     expect(component).toBeTruthy();
   });

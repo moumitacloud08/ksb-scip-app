@@ -64,7 +64,7 @@ export class LoginService {
 
   // URL to web api
 
-  generateToken(authToken: String): Observable<Message[]> {
+  generateToken(authToken: String): Observable<any[]> {
     console.log(authToken);
     let tokenUrl =
       cons.BASE_URL + '/login/requestNewToken?purchaseOrder=' + this.getPONum();
@@ -74,7 +74,7 @@ export class LoginService {
     });
     console.log(httpOptions);
     return this.http
-      .get<Message[]>(tokenUrl, httpOptions)
+      .get<any[]>(tokenUrl, httpOptions)
       .pipe(catchError(this.handleError));
   }
 }
