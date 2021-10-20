@@ -8,7 +8,7 @@
             "statisticalGoodsNumber": "",
             "purchaseOrderNumber": 876554,
             "scipNumber": "67896",
-            "scipRelavent": null,
+            "scipRelavent": "Yes",
             "materialCategory": "Coal",
             "submitStatus": "Yes",
             "casnumber": "234235"
@@ -18,7 +18,7 @@
             "statisticalGoodsNumber": "345345",
             "purchaseOrderNumber": 987654,
             "scipNumber": "89789080",
-            "scipRelavent": null,
+            "scipRelavent": "No",
             "materialCategory": "Cement",
             "submitStatus": "Yes",
             "casnumber": "234235"

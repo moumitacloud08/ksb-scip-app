@@ -35,5 +35,8 @@
     "request_new_token_msg_text":"O token foi enviado para o seu endereço de e-mail com sucesso",
     "Review_Again_Text":"Verificar novamente",
     "Delete_button_text":"Eliminar",
-    "Cancel_button_text":"Cancelar"
+    "Cancel_button_text":"Cancelar",
+    "yes_option":"sim",
+    "no_option":"NÃO",
+    "Select_option":"Selecione"
 }

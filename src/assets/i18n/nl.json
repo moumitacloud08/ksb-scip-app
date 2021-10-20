@@ -35,5 +35,8 @@
     "request_new_token_msg_text":"De token is succesvol naar uw e-mailadres verzonden",
     "Review_Again_Text":"Opnieuw beoordelen",
     "Delete_button_text":"Verwijderen",
-    "Cancel_button_text":"Annuleren"
+    "Cancel_button_text":"Annuleren",
+    "yes_option":"Ja",
+    "no_option":"Nee",
+    "Select_option":"Selecteer"
 }

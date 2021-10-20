@@ -51,15 +51,15 @@
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false" (click)="selectMaterial('','','')">
                 <span style="font-size:  0.875rem;"
-                  *ngIf="el.scipRelavent != 'Yes' && el.scipRelavent != 'No'">Select</span>
+                  *ngIf="el.scipRelavent != 'Yes' && el.scipRelavent != 'No'">{{'Select_option' | translate}}</span>
                 <span>{{el.scipRelavent}}</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'Yes')">
-                  <span style="font-size:  0.875rem;">Yes</span>
+                  <span style="font-size:  0.875rem;">{{'yes_option' | translate}}</span>
                 </button>
                 <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'No')">
-                  <span style="font-size:  0.875rem;">No</span>
+                  <span style="font-size:  0.875rem;">{{'no_option' | translate}}</span>
                 </button>
               </div>
             </div>
