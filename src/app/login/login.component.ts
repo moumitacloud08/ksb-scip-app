@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     // console.log(' this.authToken In login ');
     // console.log(this.authToken);
 
-
+    this.localStorageService.clear('savedData')
     this.localStorageService.clear('user')
     this.key = this.localStorageService.retrieve("key")
     this.appl = this.localStorageService.retrieve("app")

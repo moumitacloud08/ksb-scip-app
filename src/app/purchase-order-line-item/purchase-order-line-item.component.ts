@@ -430,6 +430,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           this.responseCode = this.response.code;
           //this.responseCode = '200';
           if (this.responseCode == '200') {
+            this.localStorageService.store('savedData',dataListFinal)
+
             this.localStorageService.clear('user');
             this.localStorageService.clear('api_token');
             this.isPurchaseOrderSaved = true;
