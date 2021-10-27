@@ -306,13 +306,13 @@
       <div class="modal-body modal-body-cutom">
         <div class="row">
           <div class="col-md-12 col-part1">
-            <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;"><Strong>Confirm to delete row?</Strong></p>
+            <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;"><Strong>{{'confirm_row_delete' | translate}}</Strong></p>
             <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">You can not undo this action again.</p>
           </div>
           <div class="col-md-12 col-part2">
             <button type="button" class="button blue-button-modal" data-dismiss="modal"
-              (click)="deleteRow()">Delete</button>
-            <button type="button" class="button white-button-modal" data-dismiss="modal">Cancel</button>
+              (click)="deleteRow()">{{'Delete_button_text' | translate}}</button>
+            <button type="button" class="button white-button-modal" data-dismiss="modal">{{'Cancel_button_text' | translate}}</button>
           </div>
         </div>
       </div>

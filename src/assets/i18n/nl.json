@@ -38,5 +38,6 @@
     "Cancel_button_text":"Annuleren",
     "yes_option":"Ja",
     "no_option":"Nee",
-    "Select_option":"Selecteer"
+    "Select_option":"Selecteer",
+    "confirm_row_delete":"Bevestig om rij te verwijderen?"
 }

@@ -38,5 +38,6 @@
     "Cancel_button_text":"Annulla",
     "yes_option":"sì",
     "no_option":"No",
-    "Select_option":"Selezionare"
+    "Select_option":"Selezionare",
+    "confirm_row_delete":"Confermare per eliminare la riga?"
 }

@@ -38,5 +38,6 @@
     "Cancel_button_text":"Cancel",
     "yes_option":"Yes",
     "no_option":"No",
-    "Select_option":"Select"
+    "Select_option":"Select",
+    "confirm_row_delete":"Confirm to delete row?"
 }

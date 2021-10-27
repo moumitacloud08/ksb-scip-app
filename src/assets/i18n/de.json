@@ -38,5 +38,6 @@
     "Cancel_button_text":"Abbrechen",
     "yes_option":"Jawohl",
     "no_option":"Nein",
-    "Select_option":"Auswählen"
+    "Select_option":"Auswählen",
+    "confirm_row_delete":"Bestätigen, um die Zeile zu löschen?"
 }

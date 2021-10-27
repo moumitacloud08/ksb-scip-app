@@ -38,5 +38,6 @@
     "Cancel_button_text":"Cancelar",
     "yes_option":"sí",
     "no_option":"No",
-    "Select_option":"Seleccione"
+    "Select_option":"Seleccione",
+    "confirm_row_delete":"¿Confirmar para eliminar la fila?"
 }

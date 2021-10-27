@@ -38,5 +38,6 @@
     "Cancel_button_text":"Cancelar",
     "yes_option":"sim",
     "no_option":"NÃO",
-    "Select_option":"Selecione"
+    "Select_option":"Selecione",
+    "confirm_row_delete":"Confirma para excluir a linha?"
 }
