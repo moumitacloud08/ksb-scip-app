@@ -666,7 +666,35 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     (doc as any).autoTable({
       head: this.generateHeaderForPDF(),
       body: this.generateDataForPDF(),
-      theme: 'plain',
+      theme: 'striped',
+      margin: {top: 20},
+      //tableLineColor: [189, 195, 199],
+      //tableLineWidth: 0.75,
+      styles: {
+        cellPadding: 3,
+        fontSize: 8,
+        valign: 'middle',
+        
+        overflow: 'linebreak',
+        tableWidth: 'auto',
+        //fileColor: [30, 30, 30],
+        //lineColor: [44, 62, 80],
+      //  lineWidth: 0.55
+    },
+    headerStyles: {
+        //columnWidth: 'wrap',
+        cellPadding: 2,
+        lineWidth: 0,
+        valign:'top',
+        fontStyle: 'bold',
+         halign: 'left',    //'center' or 'right'
+        fillColor: [118, 173, 228],
+        textColor: [78, 53, 73], //Black     
+        //textColor: [255, 255, 255], //White     
+        fontSize: 8,
+        
+        rowHeight:10
+    },
       didDrawCell: data => {
         //console.log(data.column.index)
       }
