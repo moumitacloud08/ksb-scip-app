@@ -39,5 +39,6 @@
     "yes_option":"Jawohl",
     "no_option":"Nein",
     "Select_option":"Auswählen",
-    "confirm_row_delete":"Bestätigen, um die Zeile zu löschen?"
+    "confirm_row_delete":"Bestätigen, um die Zeile zu löschen?",
+    "row_delete_warn_text":"Dieser Vorgang kann nicht rückgängig gemacht werden."
 }

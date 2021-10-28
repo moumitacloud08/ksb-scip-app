@@ -39,5 +39,6 @@
     "yes_option":"Yes",
     "no_option":"No",
     "Select_option":"Select",
-    "confirm_row_delete":"Confirm to delete row?"
+    "confirm_row_delete":"Confirm to delete row?",
+    "row_delete_warn_text":"You can not undo this action again."
 }

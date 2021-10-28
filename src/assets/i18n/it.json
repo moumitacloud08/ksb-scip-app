@@ -39,5 +39,6 @@
     "yes_option":"sì",
     "no_option":"No",
     "Select_option":"Selezionare",
-    "confirm_row_delete":"Confermare per eliminare la riga?"
+    "confirm_row_delete":"Confermare per eliminare la riga?",
+    "row_delete_warn_text":"L'operazione non può essere annullata."
 }

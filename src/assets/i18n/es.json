@@ -39,5 +39,6 @@
     "yes_option":"sí",
     "no_option":"No",
     "Select_option":"Seleccione",
-    "confirm_row_delete":"¿Confirmar para eliminar la fila?"
+    "confirm_row_delete":"¿Confirmar para eliminar la fila?",
+    "row_delete_warn_text":"Esta acción no se puede deshacer."
 }
