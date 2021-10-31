@@ -658,18 +658,22 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     var doc = new jsPDF();
 
     doc.setFontSize(18);
-    doc.text('SCIP Information', 13, 38);
+    doc.text('SCIP Information', 13, 46);
     doc.setFontSize(11);
-    doc.setTextColor(100);
+    doc.setTextColor('#b0b1b3');
+    doc.text('SCIP Vendor Platform Application', 13, 33);
+    doc.setFontSize(8);
+    doc.setDrawColor(233,236,239);
+    doc.line(10, 36, 200, 36);
 
 
     (doc as any).autoTable({
       head: this.generateHeaderForPDF(),
       body: this.generateDataForPDF(),
       theme: 'striped',
-      margin: {top: 45},
-      //tableLineColor: [189, 195, 199],
-      //tableLineWidth: 0.75,
+      margin: {top: 50},
+      tableLineColor: [189, 195, 199],
+      tableLineWidth: 0.25,
       styles: {
         cellPadding: 3,
         fontSize: 8,
@@ -678,22 +682,22 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         overflow: 'linebreak',
         tableWidth: 'auto',
         //fileColor: [30, 30, 30],
-        //lineColor: [44, 62, 80],
-      //  lineWidth: 0.55
+        // lineColor: [44, 62, 80],
+        // lineWidth: 0.55
     },
     headerStyles: {
         //columnWidth: 'wrap',
-        cellPadding: 2,
+        cellPadding: 3,
         lineWidth: 0,
         valign:'top',
         fontStyle: 'bold',
-         halign: 'left',    //'center' or 'right'
-        fillColor: [118, 173, 228],
+        halign: 'left',    //'center' or 'right'
+        fillColor: [0.43, 0.22, 0.00, 0.11],
         textColor: [78, 53, 73], //Black     
         //textColor: [255, 255, 255], //White     
         fontSize: 8,
         
-        rowHeight:10
+        rowHeight:9
     },
       didDrawCell: data => {
         //console.log(data.column.index)
