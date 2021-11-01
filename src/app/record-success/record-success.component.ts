@@ -6,6 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import * as cons from '../constants';
 import { jsPDF } from "jspdf";
 import 'jspdf-autotable';
+import { PurchaseOrderLineItemService } from '../service/purchase-order-line-item.service';
+import { purchasedetails } from '.././purchasedetail';
 @Component({
   selector: 'app-record-success',
   templateUrl: './record-success.component.html',
@@ -13,7 +15,7 @@ import 'jspdf-autotable';
 })
 export class RecordSuccessComponent implements OnInit {
 
-  constructor(private router: Router, private utilService: UtilService, private localStorageService: LocalStorageService, public translate: TranslateService) {
+  constructor(private router: Router, private utilService: UtilService, private localStorageService: LocalStorageService, public translate: TranslateService, private purchaseOrderLineItemService: PurchaseOrderLineItemService) {
     translate.addLangs(cons.langArray);
     translate.setDefaultLang(cons.DEFAULT_LANG);
   }
@@ -29,7 +31,80 @@ export class RecordSuccessComponent implements OnInit {
     this.key = this.localStorageService.retrieve("key")
     this.appl = this.localStorageService.retrieve("app")
     this.lang = this.localStorageService.retrieve("lang")
+
+    //this.fetchPurchaseDetails();
+    this.fetchPurchaseDetailsTestData()
   }
+  response: any;
+  results: purchasedetails[];
+  fetchPurchaseDetails() {
+    this.purchaseOrderLineItemService
+      .fetchPurchaseDetails()
+      .then((data) => {
+        console.log(JSON.stringify(data));
+        this.response = JSON.parse(JSON.stringify(data));
+        this.results = this.response.scipDetails.map((item) => {
+          return new purchasedetails(
+            item.lineItemNumber,
+            item.statisticalGoodsNumber,
+            item.purchaseOrderNumber,
+            item.scipNumber,
+            item.scipRelavent,
+            item.materialCategory,
+            item.submitStatus,
+            item.casnumber,
+            item.isAddShow,
+            item.isDeleteShow,
+            item.isInvalid,
+            item.isClearData
+          );
+        });
+        let count = 0;
+        this.results.forEach(function (value) {
+          value.rowId = count;
+          count++;
+        })        
+      })
+      .catch((error) => {
+        console.log('Promise rejected with ' + JSON.stringify(error));
+      });
+  }
+  fetchPurchaseDetailsTestData() {
+    this.purchaseOrderLineItemService
+      .fetchPurchaseDetailsTestData()
+      .then((data) => {
+        console.log(JSON.stringify(data));
+        this.response = JSON.parse(JSON.stringify(data));
+        this.results = this.response.scipDetails.map((item) => {
+          return new purchasedetails(
+            item.lineItemNumber,
+            item.statisticalGoodsNumber,
+            item.purchaseOrderNumber,
+            item.scipNumber,
+            item.scipRelavent,
+            item.materialCategory,
+            item.submitStatus,
+            item.casnumber,
+            item.isAddShow,
+            item.isDeleteShow,
+            item.isInvalid,
+            item.isClearData
+          );
+        });
+        let count = 0;
+        this.results.forEach(function (value) {
+          value.rowId = count;
+          count++;
+        })
+      })
+      .catch((error) => {
+        console.log('Promise rejected with ' + JSON.stringify(error));
+      });
+  }
+
+
+
+
   iconSaved = 'assets/images/save-icon.png';
   iconSavedAlt = 'success';
   goToLogin() {
@@ -46,7 +121,7 @@ export class RecordSuccessComponent implements OnInit {
   head: any = []
   savedData: any = []
   generateDataForPDF() {
-    this.savedData = this.localStorageService.retrieve("savedData");
+    this.savedData = this.results
     console.log("=================");
     console.log(this.savedData);
     let dataTemp = []
