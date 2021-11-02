@@ -68,9 +68,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   startIndex: number = 0
   endIndex: number = 4
 
-  lang:string = ''
-  appl:string = ''
-  key:string = ''
+  lang: string = ''
+  appl: string = ''
+  key: string = ''
   ngOnInit(): void {
     this.appl = this.localStorageService.retrieve("app")
     this.key = this.localStorageService.retrieve("key")
@@ -117,7 +117,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     //this.fetchPurchaseDetailsTestData()
   }
 
-  
+
   getSCIPRel(parentIndex, scipRel) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipRelavent = scipRel
@@ -323,7 +323,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
-  validateScip( parentIndex: number) {
+  validateScip(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipNumber =
       this.results[parentIndex].scipNumber.replace(/[&\/\\#,+()$~%.'":*?<>@{}]/g, '')
@@ -333,10 +333,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       this.results[parentIndex].isInvalid = false;
     }
   }
-  validateStatGood(parentIndex: number){
+  validateStatGood(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].statisticalGoodsNumber =
-    this.results[parentIndex].statisticalGoodsNumber.replace(/[^0-9]/g, '')
+      this.results[parentIndex].statisticalGoodsNumber.replace(/[^0-9]/g, '')
     if (this.results[parentIndex].statisticalGoodsNumber.length < 8) {
       this.results[parentIndex].isStatGoodInvalid = true;
     } else {
@@ -371,26 +371,28 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   updatedRecordCount: Number;
   isLengthZero: boolean = false;
   savePurchaseorderLine() {
-    // console.log(this.resultsTemp);
-    // console.log(this.results);
     let dataChangeCount = 0;
     let dataList = []
     let resultTemp = Object.assign([], this.resultsTemp);
-    this.results.forEach(function (valueNew) {
-     // console.log(valueNew.scipNumber+" --- "+valueNew.statisticalGoodsNumber +" --- "+valueNew.casnumber + " "+valueNew.materialCategory);
-      if(valueNew.scipNumber == '' &&  valueNew.statisticalGoodsNumber == '' &&
-        valueNew.casnumber == '' && valueNew.materialCategory == ''){
-          dataChangeCount++;
-        }
-      resultTemp.forEach(function (valueOld) {       
+    this.results = this.validateRow(this.results)
+    let rowInvalidCount = 0;
 
-        if (!valueOld.isSubRow && valueNew.rowId == valueOld.rowId) {
+    this.results.forEach(function (valueNew) {
+      // console.log(valueNew.scipNumber+" --- "+valueNew.statisticalGoodsNumber +" --- "+valueNew.casnumber + " "+valueNew.materialCategory);
+      if (valueNew.scipNumber == '' && valueNew.statisticalGoodsNumber == '' &&
+        valueNew.casnumber == '' && valueNew.materialCategory == '') {
+        dataChangeCount++;
+      }
+      if (valueNew.isRowInvalid == true) {
+        rowInvalidCount++
+      }
+      resultTemp.forEach(function (valueOld) {
+        if (valueNew.rowId == valueOld.rowId) {
           if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber ||
             valueNew.casnumber != valueOld.casnumber || valueNew.materialCategory != valueOld.materialCategory || valueNew.scipRelavent != valueOld.scipRelavent) {
             dataList.push(valueNew);
           }
         }
-
       });
     });
 
@@ -413,15 +415,15 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       });
     });
     let params = { "scipDetails": dataListFinal }
-    console.log("data change : "+dataChangeCount+" "+this.results.length);
-    if(dataChangeCount != this.results.length){
+    console.log("data change : " + dataChangeCount + " " + this.results.length);
+    if (dataChangeCount != this.results.length) {
       this.isAllDataCleared = false
     }
 
     console.log("<=========params==============>")
     //console.log(JSON.stringify(params));
     console.log(params)
-    if (dataListFinal.length > 0 && !this.isAllDataCleared) {
+    if (dataListFinal.length > 0 && !this.isAllDataCleared && rowInvalidCount == 0) {
       this.purchaseOrderLineItemService
         .savePurchaseorderLine(params)
         .then((data) => {
@@ -430,7 +432,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           this.responseCode = this.response.code;
           //this.responseCode = '200';
           if (this.responseCode == '200') {
-            this.localStorageService.store('savedData',dataListFinal)
+            this.localStorageService.store('savedData', dataListFinal)
 
             this.localStorageService.clear('user');
             this.localStorageService.clear('api_token');
@@ -448,15 +450,28 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           console.log('Promise rejected with ' + JSON.stringify(error));
         });
     } else {
-      this.isLengthZero = true;
-      setTimeout(() => {                           // <<<---using ()=> syntax
-        this.isLengthZero = false;
-      }, 1500);
+      if (dataListFinal.length == 0) {
+        this.isLengthZero = true;
+        setTimeout(() => {                           // <<<---using ()=> syntax
+          this.isLengthZero = false;
+        }, 1500);
+      }
+
     }
-
-
-
   }
+
+  validateRow(results) {
+    results.forEach(function (value) {
+      if (value.scipNumber != '' && value.casnumber != '' && value.statisticalGoodsNumber == '') {
+        value.isRowInvalid = true
+      }
+      if (value.scipNumber != '' && value.casnumber == '' && value.statisticalGoodsNumber != '') {
+        value.isRowInvalid = true
+      }
+    });
+    return results;
+  }
+
   isRowDuplicated: boolean = false;
   editPurchaseorderLine(parentIndex: number, rowId: number) {
     // this.results[parentIndex].isAddShow = false;
@@ -488,7 +503,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         isCasEditShow: false,
         isMatSpanShow: true,
         isMatEditShow: false,
-        isStatGoodInvalid: false
+        isStatGoodInvalid: false,
+        isRowInvalid: false
       }
 
       resultTemp.push(objTemp);
@@ -521,7 +537,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           isCasEditShow: false,
           isMatSpanShow: true,
           isMatEditShow: false,
-          isStatGoodInvalid: false
+          isStatGoodInvalid: false,
+          isRowInvalid: false
         }
 
         resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])
@@ -663,7 +680,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     doc.setTextColor('#b0b1b3');
     doc.text('SCIP Vendor Platform Application', 13, 33);
     doc.setFontSize(8);
-    doc.setDrawColor(233,236,239);
+    doc.setDrawColor(233, 236, 239);
     doc.line(10, 36, 200, 36);
 
 
@@ -671,34 +688,34 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       head: this.generateHeaderForPDF(),
       body: this.generateDataForPDF(),
       theme: 'striped',
-      margin: {top: 50},
+      margin: { top: 50 },
       tableLineColor: [189, 195, 199],
       tableLineWidth: 0.25,
       styles: {
         cellPadding: 3,
         fontSize: 8,
         valign: 'middle',
-        
+
         overflow: 'linebreak',
         tableWidth: 'auto',
         //fileColor: [30, 30, 30],
         // lineColor: [44, 62, 80],
         // lineWidth: 0.55
-    },
-    headerStyles: {
+      },
+      headerStyles: {
         //columnWidth: 'wrap',
         cellPadding: 3,
         lineWidth: 0,
-        valign:'top',
+        valign: 'top',
         fontStyle: 'bold',
         halign: 'left',    //'center' or 'right'
         fillColor: [0.43, 0.22, 0.00, 0.11],
         textColor: [78, 53, 73], //Black     
         //textColor: [255, 255, 255], //White     
         fontSize: 8,
-        
-        rowHeight:9
-    },
+
+        rowHeight: 9
+      },
       didDrawCell: data => {
         //console.log(data.column.index)
       }
