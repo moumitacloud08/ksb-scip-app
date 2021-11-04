@@ -479,6 +479,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     parentIndex = (this.page - 1) * 5 + parentIndex
     console.log(this.page + " ----- " + parentIndex + " --- " + rowId);
     let resultTemp = Object.assign([], this.results);
+    console.log("Parent index subrow: "+resultTemp[parentIndex].isSubRow);
     //  if (resultTemp[parentIndex + 1] === undefined || !resultTemp[parentIndex + 1].isSubRow) {
     let objTemp: purchasedetails = {
       lineItemNumber: "",
@@ -547,13 +548,14 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       resultTemp[nextIndex].isSubRow = true
       resultTemp[nextIndex].isClearData = false
       resultTemp[nextIndex].parentRowId = parentIndex
-
+     
       for (var i = lastIndex; i != nextIndex && i > nextIndex; i--) {
         if (nextIndex != resultTemp.length - 1) {
           resultTemp[i] = resultTemp[i - 1]
           resultTemp[i].rowId = i
         }
       }
+     
       console.log("nexttonextIndex : "+nexttonextIndex +" -- "+nextIndexObj.isSubRow);
       console.log(nextIndexObj);
       if (nextIndexObj != undefined && nextIndexObj.isSubRow == true
@@ -578,6 +580,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     for (var i = 0; i < resultTemp.length; i++) {
       resultTemp[i].rowId = i;
     }
+   
     this.isRowDuplicated = true
     this.results = Object.assign([], resultTemp);
     this.resultsTemp = Object.assign([], this.results);
@@ -586,9 +589,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       this.isRowDuplicated = false;
     }, 1500);
 
-
-    resultTemp[parentIndex].isSubRow = false;
-    resultTemp[parentIndex].isClearData = true;
+    if(!resultTemp[parentIndex].isSubRow){
+      resultTemp[parentIndex].isSubRow = false;
+      resultTemp[parentIndex].isClearData = true;
+    }
+    
 
 
     // } 

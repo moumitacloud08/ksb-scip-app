@@ -42,6 +42,7 @@
           <!-- {{ el.rowId }} -->
           <td style="width: 15%;">
             <img [src]="iconCopy" [alt]="iconCopyAlt" class="clear-icon-class" *ngIf="el.isSubRow && !el.isClearData" />
+            <!-- {{el.parentRowId}}---{{ el.rowId }} ---  -->
             {{ el.purchaseOrderNumber }}
           </td>
           <td style="width: 8%;">{{ el.lineItemNumber }}</td>
@@ -170,13 +171,12 @@
             </div-->
           </td>
           <td style="width: 13%;">
-            <a (click)="editPurchaseorderLine(parentIndex,el.rowId)" class="enabled-class"
-              *ngIf="el.isClearData && !el.isSubRow">
+            <a (click)="editPurchaseorderLine(parentIndex,el.rowId)" class="enabled-class">
               <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
             </a>
-            <a class="disabled-class" *ngIf="el.isSubRow && !el.isClearData">
+            <!-- <a class="disabled-class" *ngIf="el.isSubRow && !el.isClearData">
               <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
-            </a>
+            </a> -->
           </td>
           <td style="width: 10%;">
             <a *ngIf="el.isClearData && !el.isSubRow" (click)="clearRowData(parentIndex)"><img [src]="iconClearData"
