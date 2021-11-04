@@ -1,4 +1,4 @@
-<div class="body-container">
+<div class="body-container"  >
   <div class="hd-part">
     <div class="ptext">
       <p class="p1"><b>{{'scipInfoText' | translate}}</b></p>
@@ -35,10 +35,10 @@
           </th>
         </tr>
       </thead>
-      <tbody>
-        <tr [ngClass]="{'hover':el.isDeleteShow}"
+      <tbody (mouseleave)="mouseLeaveTab()">
+        <tr [ngClass]="{'hover':el.isDeleteShow,'row-class':el.isRowInvalid}"
           *ngFor="let el of results |  filter:searchedKeyword | paginate : {itemsPerPage: tableSize,currentPage: page,totalItems: count};index as parentIndex; " class="table-row"
-          id="item_{{parentIndex}}">
+          id="item_{{parentIndex}}" (mouseover)="mouseEnterRow(parentIndex)" (mouseleave)="mouseLeaveRow(parentIndex)">
           <!-- {{ el.rowId }} -->
           <td style="width: 15%;">
             <img [src]="iconCopy" [alt]="iconCopyAlt" class="clear-icon-class" *ngIf="el.isSubRow && !el.isClearData" />
@@ -65,11 +65,11 @@
               </div>
             </div>
           </td>
-          <td style="width: 12%;">
+          <td style="width: 12%;" >
             <div (mouseenter)="mouseEnter(parentIndex,'scip') " (mouseleave)="mouseLeave(parentIndex,'scip')"
               style="margin-left: -21px;">
               <div *ngIf="el.isSCIPSpanShow == true">
-                <span style="color:#FFFFFF33">text</span>
+                <span  [ngClass]="{'text-norm-class':!el.isRowInvalid,'text-class':el.isRowInvalid && el.isRowHover ,'text-red-class':el.isRowInvalid && !el.isRowHover}">text</span>
                 <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }}
                   <img *ngIf="el.isInvalid == true && el.scipNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
                     class="icon-warning-span-class" />
@@ -100,7 +100,7 @@
             <div (mouseenter)="mouseEnter(parentIndex,'stat') " (mouseleave)="mouseLeave(parentIndex,'stat')"
               style="margin-left: -21px;">
               <div *ngIf="el.isStatSpanShow == true">
-                <span style="color:#FFFFFF33">text</span>
+                <span  [ngClass]="{'text-norm-class':!el.isRowInvalid,'text-class':el.isRowInvalid && el.isRowHover ,'text-red-class':el.isRowInvalid && !el.isRowHover}">text</span>
                 <span [ngClass]="{'span-red-border-class':el.isStatGoodInvalid}">{{ el.statisticalGoodsNumber }}
                   <img *ngIf="el.isStatGoodInvalid == true && el.statisticalGoodsNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
                   class="icon-warning-span-class" />
@@ -127,7 +127,7 @@
             <div (mouseenter)="mouseEnter(parentIndex,'cas') " (mouseleave)="mouseLeave(parentIndex,'cas')"
               style="margin-left: -21px;">
               <div *ngIf="el.isCasSpanShow == true">
-                <span style="color:#FFFFFF33">text</span>
+                <span  [ngClass]="{'text-norm-class':!el.isRowInvalid,'text-class':el.isRowInvalid && el.isRowHover ,'text-red-class':el.isRowInvalid && !el.isRowHover}">text</span>
                 <span>{{ el.casnumber }}</span>
               </div>
               <div class="form-group" *ngIf="el.isCasEditShow == true">
@@ -143,7 +143,7 @@
             <div (mouseenter)="mouseEnter(parentIndex,'mat') " (mouseleave)="mouseLeave(parentIndex,'mat')"
               style="margin-left: -21px;">
               <div *ngIf="el.isMatSpanShow == true">
-                <span style="color:#FFFFFF33">text</span>
+                <span  [ngClass]="{'text-norm-class':!el.isRowInvalid,'text-class':el.isRowInvalid && el.isRowHover ,'text-red-class':el.isRowInvalid && !el.isRowHover}">text</span>
                 <span>{{ el.materialCategory }}</span>
               </div>
               <div class="form-group" *ngIf="el.isMatEditShow == true">

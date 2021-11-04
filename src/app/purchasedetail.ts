@@ -35,6 +35,7 @@ export class purchasedetails {
         public isMatEditShow: boolean = false,
         public isStatGoodInvalid: boolean = false,
         public isRowInvalid: boolean = false,
-        public parentRowId: Number = -1
+        public parentRowId: Number = -1,
+        public isRowHover: boolean = false,
       ) {}
   }

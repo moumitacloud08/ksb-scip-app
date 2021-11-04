@@ -138,8 +138,27 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].materialCategory = ''
   }
-  mouseEnter(parentIndex, field) {
+  prevRow= -1
+  mouseEnterRow(parentIndex){
     parentIndex = (this.page - 1) * 5 + parentIndex
+    if( this.prevRow != -1 && this.prevRow != parentIndex){
+      this.results[this.prevRow].isRowHover = false  
+    }
+    this.prevRow = parentIndex
+    this.results[parentIndex].isRowHover = true   
+    console.log("MOUSE ENTER ROW :"+ parentIndex); 
+  }
+  mouseLeaveRow(parentIndex){
+    parentIndex = (this.page - 1) * 5 + parentIndex
+    console.log("MOUSE Leave ROW :"+ parentIndex); 
+      this.results[parentIndex].isRowHover = false  
+   
+  }
+  
+  mouseEnter(parentIndex, field) {
+    parentIndex = (this.page - 1) * 5 + parentIndex    
+    //this.results[parentIndex].isRowHover = false
+
     if (this.activeParentIndex !== parentIndex) {
       this.activeParentIndex = parentIndex;
       this.resetAllRow();
@@ -213,7 +232,19 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     }
   }
+  mouseLeaveTab() {
+    console.log("MOUSE mouseLeaveTab :"); 
+    if( this.prevRow != -1){
+      this.results[this.prevRow].isRowHover = false  
+    }
+    // this.results[parentIndex].isRowHover = false
+  }
   mouseLeave(parentIndex) {
+console.log("MOUSE ---- LEAVE");
+    parentIndex = (this.page - 1) * 5 + parentIndex    
+    this.results[parentIndex].isRowHover = false
+   
+
     this.activeParentIndex = null;
     this.resetAllRow();
     // this.results[parentIndex].isAddShow = true;
@@ -506,7 +537,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       isMatEditShow: false,
       isStatGoodInvalid: false,
       isRowInvalid: false,
-      parentRowId: -1
+      parentRowId: -1,
+      isRowHover : false
     }
 
     resultTemp.push(objTemp);
@@ -541,7 +573,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         isMatEditShow: false,
         isStatGoodInvalid: false,
         isRowInvalid: false,
-        parentRowId: resultTemp[nextIndex].parentRowId
+        parentRowId: resultTemp[nextIndex].parentRowId,
+        isRowHover: false
       }
 
       resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])

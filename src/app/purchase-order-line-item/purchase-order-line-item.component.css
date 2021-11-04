@@ -332,6 +332,19 @@ a.page-style:hover {
   padding-left: 3px;
   margin-left: 1px;
 }
+.row-class{
+  /* color:#f5aaaa; */
+  background-color: #f7bcbc
+}
+.text-class{
+  color: #FFFFFF33
+}
+.text-red-class{
+  color: #f7bcbc
+}
+.text-norm-class{
+  color: #FFFFFF33
+}
 .stat-warn {
   border: 2px solid #fb3737;
   font-size: 0.587rem;
