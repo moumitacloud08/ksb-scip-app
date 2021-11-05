@@ -132,7 +132,7 @@
               </div>
               <div class="form-group" *ngIf="el.isCasEditShow == true">
                 <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
-                  class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)" />
+                  class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)" (keyup)="validateCASNo(parentIndex)"/>
                 <a (click)="clearCasNum(parentIndex)" style="cursor: pointer" *ngIf="el.casnumber != ''">
                   <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
                 </a>

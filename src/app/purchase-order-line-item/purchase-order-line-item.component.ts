@@ -377,6 +377,15 @@ console.log("MOUSE ---- LEAVE");
     } else {
       this.results[parentIndex].isStatGoodInvalid = false;
     }
+    if(this.results[parentIndex].statisticalGoodsNumber.length > 17){
+      this.results[parentIndex].statisticalGoodsNumber = this.results[parentIndex].statisticalGoodsNumber.slice(0, -1); 
+    }
+  }
+  validateCASNo(parentIndex: number) {
+    parentIndex = (this.page - 1) * 5 + parentIndex
+    if(this.results[parentIndex].casnumber.length > 20){
+      this.results[parentIndex].casnumber = this.results[parentIndex].casnumber.slice(0, -1); 
+    }
   }
   selectMaterial(item: any, parentIndex: any, elements: any) {
     this.isCatergoryList = true;
