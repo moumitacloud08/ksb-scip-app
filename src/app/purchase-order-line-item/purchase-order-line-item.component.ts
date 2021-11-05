@@ -452,7 +452,7 @@ console.log("MOUSE ---- LEAVE");
     }
 
     console.log("<=========params==============>")
-    //console.log(JSON.stringify(params));
+    console.log(JSON.stringify(params));
     console.log(params)
     if (dataListFinal.length > 0 && !this.isAllDataCleared && rowInvalidCount == 0) {
       this.purchaseOrderLineItemService
@@ -578,6 +578,9 @@ console.log("MOUSE ---- LEAVE");
       }
 
       resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])
+      resultTemp[nextIndex].scipNumber = ''
+      resultTemp[nextIndex].statisticalGoodsNumber = ''
+      resultTemp[nextIndex].casnumber = ''
       resultTemp[nextIndex].isSubRow = true
       resultTemp[nextIndex].isClearData = false
       resultTemp[nextIndex].parentRowId = parentIndex
