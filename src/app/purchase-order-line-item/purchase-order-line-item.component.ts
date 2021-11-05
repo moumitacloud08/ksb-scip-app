@@ -363,6 +363,10 @@ console.log("MOUSE ---- LEAVE");
     } else {
       this.results[parentIndex].isInvalid = false;
     }
+    if(this.results[parentIndex].scipNumber.length > 40){
+      this.results[parentIndex].scipNumber = this.results[parentIndex].scipNumber.slice(0, -1); 
+    }
+   
   }
   validateStatGood(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
