@@ -8,6 +8,10 @@ import {
 } from 'ngx-webstorage';
 import { TranslateService, TranslateFakeLoader, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 describe('RecordSuccessComponent', () => {
   let component: RecordSuccessComponent;
   let fixture: ComponentFixture<RecordSuccessComponent>;
@@ -16,7 +20,7 @@ describe('RecordSuccessComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RecordSuccessComponent],
-      imports: [RouterTestingModule, NgxWebstorageModule.forRoot(), TranslateModule.forRoot({
+      imports: [HttpClientTestingModule,RouterTestingModule, NgxWebstorageModule.forRoot(), TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
           useClass: TranslateFakeLoader
