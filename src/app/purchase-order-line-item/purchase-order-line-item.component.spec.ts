@@ -76,7 +76,10 @@ describe('LoginComponent', () => {
             isCasEditShow: false,
             isMatSpanShow: true,
             isMatEditShow: false,
-            isStatGoodInvalid: false
+            isStatGoodInvalid: false,
+            isRowInvalid: false,
+            parentRowId: -1,
+            isRowHover: false,
         },
         {
             "lineItemNumber": "7687687",
@@ -101,7 +104,10 @@ describe('LoginComponent', () => {
             isCasEditShow: false,
             isMatSpanShow: true,
             isMatEditShow: false,
-            isStatGoodInvalid: false
+            isStatGoodInvalid: false,
+            isRowInvalid: false,
+            parentRowId: -1,
+            isRowHover: false,
         },
         {
             "lineItemNumber": "79898",
@@ -126,7 +132,10 @@ describe('LoginComponent', () => {
             isCasEditShow: false,
             isMatSpanShow: true,
             isMatEditShow: false,
-            isStatGoodInvalid: false
+            isStatGoodInvalid: false,
+            isRowInvalid: false,
+            parentRowId: -1,
+            isRowHover: false,
         }]
         component.resultsTemp = Object.assign([], component.results);
     }
