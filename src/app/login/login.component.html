@@ -22,9 +22,13 @@
       </p -->
       <div class="failed-div">
 
-        <span class="p3" *ngIf="isWrongInput">
+        <span class="p3" *ngIf="isWrongInput && !isTokenblank">
           <img [src]="iconFailed" [alt]="iconFailed" class="save-icon-class" style="height: 12px;width: 12px;"/>
           {{ 'wrong_login_input_text' | translate}}
+        </span>
+        <span class="p3" *ngIf="isTokenblank && !isWrongInput">
+          <img [src]="iconFailed" [alt]="iconFailed" class="save-icon-class" style="height: 12px;width: 12px;"/>
+          {{ 'blank_login_input_text' | translate}}
         </span>
       </div>
     

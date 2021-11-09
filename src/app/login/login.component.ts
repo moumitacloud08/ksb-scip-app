@@ -86,6 +86,7 @@ export class LoginComponent implements OnInit {
   iconSavedAlt = 'success';
   iconFailed = 'assets/images/warning-icon.png';
   iconFaileddAlt = 'success';
+  isTokenblank:boolean = false
   authenticate(f: NgForm) {
     console.log(f)
     this.isWrongInput = false;
@@ -97,74 +98,79 @@ export class LoginComponent implements OnInit {
     }
 
     console.log('Input Token: ' + this.apitoken);
+    if (this.apitoken != '') {
+      this.isTokenblank = false
+      this.LoginService.login(this.apitoken, this.authToken).subscribe(
+        (response) => {
 
-    this.LoginService.login(this.apitoken, this.authToken).subscribe(
-      (response) => {
+          this.response = JSON.parse(JSON.stringify(response));
+          console.log(this.response);
+          this.responseCode = this.response.code;
 
-        this.response = JSON.parse(JSON.stringify(response));
-        console.log(this.response);
-        this.responseCode = this.response.code;
+          //FOR UNIT TESTING
+          this.messages = this.response
 
-        //FOR UNIT TESTING
-        this.messages = this.response
-
-        if (this.response.code == 200) {
-
-
-          this.isWrongInput = false;
-          this.message = this.response.message;
-
-          this.localStorageService.store('user', this.authObject)
-          this.authObject.valid = true;
+          if (this.response.code == 200) {
 
 
-          this.localStorageService.store('api_token', this.apitoken)
-          this.router.navigateByUrl('/dashboard/purchase-order-line-item');
-        } else {
-          //this.message = this.response.message;
-          this.message = "Wrong token! 2 attempt remaining and it will block after";
-          if (this.message == '') {
-            this.message = 'Login Failed';
+            this.isWrongInput = false;
+            this.message = this.response.message;
+
+            this.localStorageService.store('user', this.authObject)
+            this.authObject.valid = true;
+
+
+            this.localStorageService.store('api_token', this.apitoken)
+            this.router.navigateByUrl('/dashboard/purchase-order-line-item');
+          } else {
+            //this.message = this.response.message;
+            this.message = "Wrong token! 2 attempt remaining and it will block after";
+            if (this.message == '') {
+              this.message = 'Login Failed';
+            }
+
+            this.isWrongInput = true;
+            this.isBlankInput = false;
           }
-
-          this.isWrongInput = true;
-          this.isBlankInput = false;
+        },
+        (err) => {
+          console.log("Error caught at Subscriber " + err)
+          this.message = err;
         }
-      },
-      (err) => {
-        console.log("Error caught at Subscriber " + err)
-        this.message = err;
-      }
-    );
+      );
+    }else{
+      this.isTokenblank = true
+    }
+
   }
-  email:string=""
-  isSentEmail:boolean = false;
-  errorMessage:string=""
-  successMessage:string=""
+  email: string = ""
+  isSentEmail: boolean = false;
+  errorMessage: string = ""
+  successMessage: string = ""
   requestNewToken() {
     this.LoginService.generateToken(this.authToken).subscribe(
       (response) => {
         this.response = JSON.parse(JSON.stringify(response));
         console.log(this.response);
         this.responseCode = this.response.code;
-        
+
         //FOR UNIT TESTING
         this.messages = this.response
 
         if (this.response.code == 200) {
           this.isSentEmail = true
           this.isWrongInput = false;
-          this.isSent = true;  
+          this.isSent = true;
           //this.email = "supplier@gmail.com"
           this.email = this.response.emailAddress
           this.successMessage = this.response.message
-          setTimeout(() => {                           
+          setTimeout(() => {
             this.isSent = false;
           }, 1500);
-        } else if(this.response.code == 400) {
+        } else if (this.response.code == 400) {
           this.isSentEmail = false
           this.errorMessage = this.response.message
-        }else {
+        } else {
           this.isSentEmail = false
           this.errorMessage = this.response.message
         }
