@@ -122,6 +122,16 @@
             "materialCategory": "Iron",
             "submitStatus": "Yes",
             "casnumber": "2212345"
+        },
+        {
+            "lineItemNumber": 6576787,
+            "statisticalGoodsNumber": "876775675",
+            "purchaseOrderNumber": 2235466,
+            "scipNumber": "89907554",
+            "scipRelavent": null,
+            "materialCategory": "Iron",
+            "submitStatus": "Yes",
+            "casnumber": "2212345"
         }
     ]
 }
