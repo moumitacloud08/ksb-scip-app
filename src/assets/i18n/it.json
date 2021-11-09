@@ -40,5 +40,6 @@
     "no_option":"No",
     "Select_option":"Selezionare",
     "confirm_row_delete":"Confermare per eliminare la riga?",
-    "row_delete_warn_text":"L'operazione non può essere annullata."
+    "row_delete_warn_text":"L'operazione non può essere annullata.",
+    "blank_login_input_text":"Si prega di inserire un numero di token"
 }

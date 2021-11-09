@@ -40,5 +40,6 @@
     "no_option":"Non",
     "Select_option":"Sélectionner",
     "confirm_row_delete":"Confirmer pour supprimer la ligne ?",
-    "row_delete_warn_text":"You can not undo this action again."
+    "row_delete_warn_text":"You can not undo this action again.",
+    "blank_login_input_text":"Veuillez entrer un numéro de jeton"
 }

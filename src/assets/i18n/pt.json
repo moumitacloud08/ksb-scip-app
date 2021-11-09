@@ -40,5 +40,6 @@
     "no_option":"NÃO",
     "Select_option":"Selecione",
     "confirm_row_delete":"Confirma para excluir a linha?",
-    "row_delete_warn_text":"Esta acção não é reversível."
+    "row_delete_warn_text":"Esta acção não é reversível.",
+    "blank_login_input_text":"Insira um número de token"
 }

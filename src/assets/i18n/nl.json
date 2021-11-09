@@ -40,5 +40,6 @@
     "no_option":"Nee",
     "Select_option":"Selecteer",
     "confirm_row_delete":"Bevestig om rij te verwijderen?",
-    "row_delete_warn_text":"U kunt deze actie niet opnieuw ongedaan maken."
+    "row_delete_warn_text":"U kunt deze actie niet opnieuw ongedaan maken.",
+    "blank_login_input_text":"Voer een tokennummer in"
 }
