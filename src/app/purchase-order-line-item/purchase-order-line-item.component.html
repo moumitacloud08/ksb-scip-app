@@ -78,7 +78,7 @@
               <div class="form-group" *ngIf="el.isSCIPEditShow == true">
                 <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
                   [ngClass]="{'text-red-border-class':el.isInvalid}" class="table-text-border-class"
-                  [(ngModel)]="el.scipNumber" (keyup)="validateScip(parentIndex)"
+                  [(ngModel)]="el.scipNumber" (keyup)="validateScip(parentIndex)" (keydown)="validateScip(parentIndex)"
                   (click)="clickevent(parentIndex)" />
                 <img *ngIf="el.isInvalid == true && el.scipNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
                   class="icon-warning-class" />
@@ -109,7 +109,7 @@
               <div class="form-group" *ngIf="el.isStatEditShow == true">
                 <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
                   id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
-                  [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)" (keyup)="validateStatGood(parentIndex)"/>
+                  [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)" (keyup)="validateStatGood(parentIndex)" (keydown)="validateStatGood(parentIndex)"/>
                 <a (click)="clearStatisticalData(parentIndex)" style="cursor: pointer"
                   *ngIf="el.statisticalGoodsNumber != ''">
                   <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
@@ -132,7 +132,7 @@
               </div>
               <div class="form-group" *ngIf="el.isCasEditShow == true">
                 <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
-                  class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)" (keyup)="validateCASNo(parentIndex)"/>
+                  class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)" (keyup)="validateCASNo(parentIndex)" (keydown)="validateCASNo(parentIndex)"/>
                 <a (click)="clearCasNum(parentIndex)" style="cursor: pointer" *ngIf="el.casnumber != ''">
                   <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
                 </a>
