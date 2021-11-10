@@ -359,6 +359,7 @@ console.log("MOUSE ---- LEAVE");
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipNumber =
       this.results[parentIndex].scipNumber.replace(/[&\/\\#,+()$~%.'":*?<>@{}]/g, '')
+      
     // if (this.results[parentIndex].scipNumber.length < 10) {
     //   this.results[parentIndex].isInvalid = true;
     // } else {
