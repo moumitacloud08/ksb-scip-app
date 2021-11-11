@@ -122,6 +122,11 @@
                 statisticalGoodsNumber no should be 8 digit
               </span>
             </div>
+            <div class="stat-empty-warn" *ngIf="el.isStatEmpty">
+              <span>
+                If CAS no. is entered then statistical goods no. needs to e provided
+              </span>
+            </div>
           </td>
           <td style="width: 15%;">
             <div (mouseenter)="mouseEnter(parentIndex,'cas') " (mouseleave)="mouseLeave(parentIndex,'cas')"
@@ -137,6 +142,11 @@
                   <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
                 </a>
               </div>
+            </div>
+            <div class="cas-empty-warn" *ngIf="el.isCASNumberEmpty">
+              <span>
+                If statistical goods no. is entered then CAS no. needs to e provided
+              </span>
             </div>
           </td>
           <td style="width: 10%;">
