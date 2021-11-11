@@ -37,5 +37,7 @@ export class purchasedetails {
         public isRowInvalid: boolean = false,
         public parentRowId: Number = -1,
         public isRowHover: boolean = false,
+        public isCASNumberEmpty: boolean = false,
+        public isStatEmpty: boolean = false,
       ) {}
   }

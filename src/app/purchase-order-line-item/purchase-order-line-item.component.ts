@@ -370,7 +370,9 @@ console.log("MOUSE ---- LEAVE");
       this.results[parentIndex].statisticalGoodsNumber.replace(/[^0-9]/g, '')
     if (this.results[parentIndex].statisticalGoodsNumber.length < 8) {
       this.results[parentIndex].isStatGoodInvalid = true;
+      this.results[parentIndex].isStatEmpty = false
     } else {
+      this.results[parentIndex].isStatEmpty = false
       this.results[parentIndex].isStatGoodInvalid = false;
     }
     if(this.results[parentIndex].statisticalGoodsNumber.length > 17){
@@ -506,9 +508,11 @@ console.log("MOUSE ---- LEAVE");
     results.forEach(function (value) {
       if (value.scipNumber != '' && value.casnumber != '' && value.statisticalGoodsNumber == '') {
         value.isRowInvalid = true
+        value.isStatEmpty = true;
       }
       if (value.scipNumber != '' && value.casnumber == '' && value.statisticalGoodsNumber != '') {
         value.isRowInvalid = true
+        value.isCASNumberEmpty = true
       }
     });
     return results;
@@ -549,7 +553,9 @@ console.log("MOUSE ---- LEAVE");
       isStatGoodInvalid: false,
       isRowInvalid: false,
       parentRowId: -1,
-      isRowHover : false
+      isRowHover : false,
+      isCASNumberEmpty: false,
+      isStatEmpty: false
     }
 
     resultTemp.push(objTemp);
@@ -585,7 +591,9 @@ console.log("MOUSE ---- LEAVE");
         isStatGoodInvalid: false,
         isRowInvalid: false,
         parentRowId: resultTemp[nextIndex].parentRowId,
-        isRowHover: false
+        isRowHover: false,
+        isCASNumberEmpty: false,
+        isStatEmpty: false
       }
 
       resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])
