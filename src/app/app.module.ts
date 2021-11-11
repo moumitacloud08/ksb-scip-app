@@ -21,6 +21,7 @@ import { RecordSuccessComponent } from './record-success/record-success.componen
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { KsbTooltipComponent } from './ksb-tooltip/ksb-tooltip.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     PurchaseOrderLineItemComponent,
     DashboardComponent,
     HeaderComponent,
-    RecordSuccessComponent
+    RecordSuccessComponent,
+    KsbTooltipComponent
   ],
   imports: [
     BrowserModule,
