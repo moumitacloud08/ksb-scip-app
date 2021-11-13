@@ -147,11 +147,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     }
     this.prevRow = parentIndex
     this.results[parentIndex].isRowHover = true   
-    console.log("MOUSE ENTER ROW :"+ parentIndex); 
+  //  console.log("MOUSE ENTER ROW :"+ parentIndex); 
   }
   mouseLeaveRow(parentIndex){
     parentIndex = (this.page - 1) * 5 + parentIndex
-    console.log("MOUSE Leave ROW :"+ parentIndex); 
+   // console.log("MOUSE Leave ROW :"+ parentIndex); 
       this.results[parentIndex].isRowHover = false  
    
   }
@@ -166,10 +166,47 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       this.results[parentIndex].isAddShow = false;
       this.results[parentIndex].isDeleteShow = true;
       if (field == 'scip') {
-        this.results[parentIndex].isSCIPSpanShow = false;
-        this.results[parentIndex].isSCIPEditShow = true;
+       
+        let results = this.results
 
-
+        var count = 0;
+        let emptySCIPValue = 0
+        console.log("scip number : "+results[parentIndex].scipNumber);
+        results.forEach(function (value) {
+          if(results[parentIndex].parentRowId == -1){
+            console.log("===== 1 ====");
+           
+            if(results[count].parentRowId == parentIndex){
+              console.log("===== 2 ====");
+              if(results[count].scipNumber  != ''){
+                console.log("===== 3 ====");
+                emptySCIPValue ++
+              }              
+            }
+          }else if(results[parentIndex].parentRowId != -1){
+            console.log("===== 4 ====");
+            let index = results[parentIndex].parentRowId
+            if(results[index.toString()].scipNumber != ''){
+              console.log("===== 5 ====");
+              emptySCIPValue ++
+            }
+            if(results[count].parentRowId == index && count != parentIndex){
+              console.log("===== 6 ====");
+              if(results[count].scipNumber != ''){
+                console.log("===== 7 ====");
+                emptySCIPValue ++
+              }
+            }
+          }
+          count ++;
+        })
+        if(emptySCIPValue > 0){
+          this.results[parentIndex].isSCIPSpanShow = true;
+          this.results[parentIndex].isSCIPEditShow = false;
+        }else if(emptySCIPValue == 0){
+          this.results[parentIndex].isSCIPSpanShow = false;
+          this.results[parentIndex].isSCIPEditShow = true;
+        }
         this.results[parentIndex].isStatSpanShow = true;
         this.results[parentIndex].isStatEditShow = false;
 
@@ -647,20 +684,7 @@ console.log("MOUSE ---- LEAVE");
     if(!resultTemp[parentIndex].isSubRow){
       resultTemp[parentIndex].isSubRow = false;
       resultTemp[parentIndex].isClearData = true;
-    }
-    
-
-
-    // } 
-
-    // else if (resultTemp[parentIndex + 1] != undefined && resultTemp[parentIndex + 1].isSubRow) {
-    //   resultTemp[parentIndex] = Object.assign({}, resultTemp[parentIndex + 1])
-    //   resultTemp[parentIndex].isSubRow = false;
-    //   resultTemp[parentIndex].isClearData = true;
-    //   resultTemp[parentIndex].rowId = parentIndex
-    //   this.results = Object.assign([], resultTemp);
-    // }
-
+    }    
 
   }
   deleteRowIndex: number = -1;
