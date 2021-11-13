@@ -95,6 +95,7 @@
                 SCIP no should be 10 digit
               </span>
             </div>
+            <ksb-tooltip [showTooltip]="el.isInvalid == true && el.isDeleteShow == true && el.scipNumber != ''" [tooltipText]="'SCIP no should be 10 digit'"></ksb-tooltip>
           </td>
           <td style="width: 15%;">
             <div (mouseenter)="mouseEnter(parentIndex,'stat') " (mouseleave)="mouseLeave(parentIndex,'stat')"
@@ -109,6 +110,7 @@
               <div class="form-group" *ngIf="el.isStatEditShow == true">
                 <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
                   id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
+                  [ngClass]="{'text-red-border-class':el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''}"
                   [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)" (keyup)="validateStatGood(parentIndex)" (keydown)="validateStatGood(parentIndex)"/>
                 <a (click)="clearStatisticalData(parentIndex)" style="cursor: pointer"
                   *ngIf="el.statisticalGoodsNumber != ''">
@@ -116,17 +118,18 @@
                 </a>
               </div>
             </div>
-            <div class="stat-warn" *ngIf="el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''">
+            <!-- <div class="stat-warn" *ngIf="el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''">
               <img [src]="crossiconWarning" [alt]="crossiconWarningdAlt" class="cross-warning-class" />
               <span>
                 statisticalGoodsNumber no should be 8 digit
               </span>
-            </div>
+            </div> -->
             <div class="stat-empty-warn" *ngIf="el.isStatEmpty">
               <span>
                 If CAS no. is entered then statistical goods no. needs to e provided
               </span>
             </div>
+            <ksb-tooltip [showTooltip]="el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''" [tooltipText]="'statisticalGoodsNumber no should be 8 digit'"></ksb-tooltip>
           </td>
           <td style="width: 15%;">
             <div (mouseenter)="mouseEnter(parentIndex,'cas') " (mouseleave)="mouseLeave(parentIndex,'cas')"

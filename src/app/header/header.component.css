@@ -84,7 +84,12 @@
   opacity: 1;
   margin: 0.6em 0 0;
 }
-
+.logout-prop{
+  color: #00569d;
+}
+.user-detail{
+  font-weight: 500;
+}
 /* .logout-prop {
   top: 51px;
   left: 1731px;

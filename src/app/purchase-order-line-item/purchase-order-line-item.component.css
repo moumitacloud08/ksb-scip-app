@@ -37,6 +37,9 @@ td {
 .table th {
   padding-top: 0.3rem;
 }
+/* .table thead th {
+  vertical-align: top !important;
+} */
 .table-th {
   height: 50px;
   padding: 7px 5px 7px 5px;
@@ -84,8 +87,8 @@ input::placeholder {
   font-family: "Roboto", sans-serif;
 }
 .text-border-class {
-  width: 41%;
-  padding: 6px 13px 11px 15px;
+  width: 80%;
+  padding: 3px 13px 5px 15px;
   margin: 10px 0px 13px;
   box-sizing: border-box;
   border: 1px solid #adb5bd;
@@ -156,16 +159,22 @@ input::placeholder {
 }
 
 .clear-icon-class {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
+  opacity: 0.4;
 }
+.clear-icon-class:hover {
+  opacity: 1;
+}
+
 .pdf-class {
   width: 20px;
 }
 .scip-download-class {
   padding: 6px;
   position: relative;
+  font-weight: 600;
 }
 a.page-style:hover {
   background-color: #007bff;
@@ -412,7 +421,7 @@ a.page-style:hover {
   width: 12px;
 }
 .text-red-border-class {
-  border: 1px solid #fb3737;
+  border: 2px solid #fb3737 !important;
 }
 .icon-warning-class {
   margin-left: -25px;
@@ -446,7 +455,7 @@ a.page-style:hover {
   text-decoration: underline;
 }
 .plus-class {
-  width: 30px;
+  width: 16px;
 }
 .enabled-class {
   cursor: pointer;
@@ -479,6 +488,29 @@ a.page-style:hover {
   margin-top: 22px;
   /* margin-left: 381px; */
   /* margin-right: 23px;*/
+}
+
+.my-pagination::ng-deep .ngx-pagination li {
+  margin-right: 7px;
+}
+.my-pagination::ng-deep .ngx-pagination li:first-child {
+  margin-right: 0px;
+}
+.my-pagination::ng-deep .ngx-pagination li:last-child {
+  margin-right: 0px;
+}
+
+.my-pagination::ng-deep .ngx-pagination a {
+  border: 1px solid #CCC;
+  background-color: #f4f4f4;
+}
+.my-pagination::ng-deep .ngx-pagination .pagination-next a {
+  border: none;
+  background-color:#fff;
+}
+.my-pagination::ng-deep .ngx-pagination .pagination-previous a {
+  border: none;
+  background-color:#fff;
 }
 
 .my-pagination::ng-deep .ngx-pagination .current {
