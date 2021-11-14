@@ -41,7 +41,7 @@
           id="item_{{parentIndex}}" (mouseover)="mouseEnterRow(parentIndex)" (mouseleave)="mouseLeaveRow(parentIndex)">
           <!-- {{ el.rowId }} -->
           <td style="width: 15%;">
-            <img [src]="iconCopy" [alt]="iconCopyAlt" class="clear-icon-class" *ngIf="el.isSubRow && !el.isClearData" />
+            <img [src]="iconCopy" [alt]="iconCopyAlt" class="clear-icon-class size-big" *ngIf="el.isSubRow && !el.isClearData" />
             <!-- {{el.parentRowId}}---{{ el.rowId }} ---  -->
             {{ el.purchaseOrderNumber }}
           </td>
@@ -103,7 +103,7 @@
               <div *ngIf="el.isStatSpanShow == true">
                 <span class="text-class">text</span>
                 <span [ngClass]="{'span-red-border-class':el.isStatGoodInvalid}">{{ el.statisticalGoodsNumber }}
-                  <img *ngIf="el.isStatGoodInvalid == true && el.statisticalGoodsNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
+                  <img *ngIf="(el.isStatGoodInvalid == true && el.statisticalGoodsNumber != '') || el.isStatEmpty" [src]="iconWarning" [alt]="iconWarningdAlt"
                   class="icon-warning-span-class" />
                 </span>
               </div>
@@ -124,11 +124,12 @@
                 statisticalGoodsNumber no should be 8 digit
               </span>
             </div> -->
-            <div class="stat-empty-warn" *ngIf="el.isStatEmpty">
+            <ksb-tooltip [showTooltip]="!el.isStatSpanShow && el.isStatEmpty" [tooltipText]="'Please Enter Statistical Goods no.'"></ksb-tooltip>
+            <!-- <div class="stat-empty-warn" *ngIf="el.isStatEmpty">
               <span>
                 If CAS no. is entered then statistical goods no. needs to e provided
               </span>
-            </div>
+            </div> -->
             <ksb-tooltip [showTooltip]="el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''" [tooltipText]="'statisticalGoodsNumber no should be 8 digit'"></ksb-tooltip>
           </td>
           <td style="width: 15%;">
@@ -136,7 +137,10 @@
               style="margin-left: -21px;">
               <div *ngIf="el.isCasSpanShow == true">
                 <span class="text-class">text</span>                
-                <span>{{ el.casnumber }}</span>
+                <span>{{ el.casnumber }}
+                  <img *ngIf="el.isCASNumberEmpty" [src]="iconWarning" [alt]="iconWarningdAlt"
+                  class="icon-warning-span-class" />
+                </span>
               </div>
               <div class="form-group" *ngIf="el.isCasEditShow == true">
                 <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
@@ -146,11 +150,12 @@
                 </a>
               </div>
             </div>
-            <div class="cas-empty-warn" *ngIf="el.isCASNumberEmpty">
+            <ksb-tooltip [showTooltip]="el.isCasEditShow && el.isCASNumberEmpty" [tooltipText]="'Please enter Cas No.'"></ksb-tooltip>
+            <!-- <div class="cas-empty-warn" *ngIf="el.isCASNumberEmpty">
               <span>
                 If statistical goods no. is entered then CAS no. needs to e provided
               </span>
-            </div>
+            </div> -->
           </td>
           <td style="width: 10%;">
             <div (mouseenter)="mouseEnter(parentIndex,'mat') " (mouseleave)="mouseLeave(parentIndex,'mat')"
