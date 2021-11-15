@@ -172,34 +172,16 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         var count = 0;
         let emptySCIPValue = 0
         console.log("scip number : "+results[parentIndex].scipNumber);
-        results.forEach(function (value) {
-          if(results[parentIndex].parentRowId == -1){
-            console.log("===== 1 ====");
-           
-            if(results[count].parentRowId == parentIndex){
-              console.log("===== 2 ====");
-              if(results[count].scipNumber  != ''){
-                console.log("===== 3 ====");
-                emptySCIPValue ++
-              }              
-            }
-          }else if(results[parentIndex].parentRowId != -1){
-            console.log("===== 4 ====");
-            let index = results[parentIndex].parentRowId
-            if(results[index.toString()].scipNumber != ''){
-              console.log("===== 5 ====");
-              emptySCIPValue ++
-            }
-            if(results[count].parentRowId == index && count != parentIndex){
-              console.log("===== 6 ====");
-              if(results[count].scipNumber != ''){
-                console.log("===== 7 ====");
-                emptySCIPValue ++
-              }
-            }
-          }
-          count ++;
-        })
+       // console.log(results);
+       results.forEach(function (value) {
+        if(count != parentIndex && results[count].lineItemNumber == results[parentIndex].lineItemNumber){
+          if(results[count].scipNumber  != ''){
+            emptySCIPValue ++
+          } 
+        } 
+        count ++
+       })   
+
         if(emptySCIPValue > 0){
           this.results[parentIndex].isSCIPSpanShow = true;
           this.results[parentIndex].isSCIPEditShow = false;

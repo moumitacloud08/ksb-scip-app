@@ -1,5 +1,5 @@
 'use strict';
-export const BASE_URL = 'http://localhost:8080/scip-api';
+export const BASE_URL = 'http://localhost:9002/scip-api';
 export const langArray = ['en', 'de', 'fr', 'pt','it','es','nl'];
 export const langList = [
   { code: 'en', desc: 'English' },
