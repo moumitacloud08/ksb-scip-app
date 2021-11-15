@@ -71,7 +71,7 @@
               <div *ngIf="el.isSCIPSpanShow == true">
                 <span class="text-class">text</span>
                 <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }}
-                  <img *ngIf="el.isInvalid == true && el.scipNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
+                  <img *ngIf="(el.isInvalid == true && el.scipNumber != '') || (el.isCASNumberEmpty && el.isStatEmpty && el.scipNumber == '')" [src]="iconWarning" [alt]="iconWarningdAlt"
                     class="icon-warning-span-class" />
                 </span>
               </div>
@@ -89,12 +89,8 @@
 
               </div>
             </div>
-            <div class="scip-warn" *ngIf="el.isInvalid == true && el.isDeleteShow == true && el.scipNumber != ''">
-              <img [src]="crossiconWarning" [alt]="crossiconWarningdAlt" class="cross-warning-class" />
-              <span>
-                SCIP no should be 10 digit
-              </span>
-            </div>
+            <ksb-tooltip [showTooltip]="el.isSCIPEditShow && el.isCASNumberEmpty && el.isStatEmpty && el.scipNumber == ''" [tooltipText]="'You have to fill all data.'"></ksb-tooltip>
+
             <ksb-tooltip [showTooltip]="el.isInvalid == true && el.isDeleteShow == true && el.scipNumber != ''" [tooltipText]="'SCIP no should be 10 digit'"></ksb-tooltip>
           </td>
           <td style="width: 15%;">

@@ -402,6 +402,7 @@ console.log("MOUSE ---- LEAVE");
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].casnumber =
       this.results[parentIndex].casnumber.replace(/[&\/\\#,+()$~%.'":*?<>@{}]/g, '')
+      this.results[parentIndex].isCASNumberEmpty = false
     if(this.results[parentIndex].casnumber.length > 20){
       this.results[parentIndex].casnumber = this.results[parentIndex].casnumber.slice(0, -1); 
     }
@@ -487,31 +488,31 @@ console.log("MOUSE ---- LEAVE");
     console.log(JSON.stringify(params));
     console.log(params)
     if (dataListFinal.length > 0 && !this.isAllDataCleared && rowInvalidCount == 0) {
-      this.purchaseOrderLineItemService
-        .savePurchaseorderLine(params)
-        .then((data) => {
-          console.log(JSON.stringify(data));
-          this.response = JSON.parse(JSON.stringify(data));
-          this.responseCode = this.response.code;
-          //this.responseCode = '200';
-          if (this.responseCode == '200') {
-            this.localStorageService.store('savedData', dataListFinal)
+      // this.purchaseOrderLineItemService
+      //   .savePurchaseorderLine(params)
+      //   .then((data) => {
+      //     console.log(JSON.stringify(data));
+      //     this.response = JSON.parse(JSON.stringify(data));
+      //     this.responseCode = this.response.code;
+      //     //this.responseCode = '200';
+      //     if (this.responseCode == '200') {
+      //       this.localStorageService.store('savedData', dataListFinal)
 
-            this.localStorageService.clear('user');
-            this.localStorageService.clear('api_token');
-            this.isPurchaseOrderSaved = true;
-            this.isAllDataCleared = false;
-            this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
-            this.router.navigateByUrl('/record-success');
-          } else {
-            this.isPurchaseOrderSaved = false;
-            this.errorMessage = 'Something went wrong . Please try after something';
-          }
-        }).catch((error) => {
-          this.isPurchaseOrderSaved = false;
-          this.errorMessage = 'Something went wrong . Please try after something';
-          console.log('Promise rejected with ' + JSON.stringify(error));
-        });
+      //       this.localStorageService.clear('user');
+      //       this.localStorageService.clear('api_token');
+      //       this.isPurchaseOrderSaved = true;
+      //       this.isAllDataCleared = false;
+      //       this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
+      //       this.router.navigateByUrl('/record-success');
+      //     } else {
+      //       this.isPurchaseOrderSaved = false;
+      //       this.errorMessage = 'Something went wrong . Please try after something';
+      //     }
+      //   }).catch((error) => {
+      //     this.isPurchaseOrderSaved = false;
+      //     this.errorMessage = 'Something went wrong . Please try after something';
+      //     console.log('Promise rejected with ' + JSON.stringify(error));
+      //   });
     } else {
       if (dataListFinal.length == 0) {
         this.isLengthZero = true;
@@ -525,15 +526,32 @@ console.log("MOUSE ---- LEAVE");
 
   validateRow(results) {
     results.forEach(function (value) {
-      if (value.scipNumber != '' && value.casnumber != '' && value.statisticalGoodsNumber == '') {
-        value.isRowInvalid = true
+      value.isCASNumberEmpty = false
+      value.isStatEmpty = false;
+      value.isRowInvalid = false
+     
+      let emptySCIPValue = 0
+      results.forEach(function (value2) {
+        if(value.rowId != value2.rowId &&  value.lineItemNumber == value2.lineItemNumber){
+          if(value2.scipNumber  != ''){
+            emptySCIPValue ++
+          }
+        }
+      })
+      if (emptySCIPValue > 0 && value.casnumber != '' && value.statisticalGoodsNumber == '') {
         value.isStatEmpty = true;
-      }
-      if (value.scipNumber != '' && value.casnumber == '' && value.statisticalGoodsNumber != '') {
         value.isRowInvalid = true
-        value.isCASNumberEmpty = true
       }
-    });
+      if (emptySCIPValue > 0  && value.casnumber == '' && value.statisticalGoodsNumber != '') {
+        value.isCASNumberEmpty = true
+        value.isRowInvalid = true
+      }
+      if (emptySCIPValue == 0 && value.casnumber == '' && value.statisticalGoodsNumber == '') {
+        value.isCASNumberEmpty = true
+        value.isStatEmpty = true;
+        value.isRowInvalid = true
+      }
+    });    
     return results;
   }
 
