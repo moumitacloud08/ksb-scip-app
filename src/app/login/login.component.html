@@ -21,7 +21,6 @@
         Please enter the token number
       </p -->
       <div class="failed-div">
-
         <span class="p3" *ngIf="isWrongInput && !isTokenblank">
           <img [src]="iconFailed" [alt]="iconFailed" class="save-icon-class" style="height: 12px;width: 12px;"/>
           {{ 'wrong_login_input_text' | translate}}
@@ -32,8 +31,7 @@
         </span>
       </div>
     
-    <div class="success-div">
-     
+    <div class="success-div">     
       <span class="p4" *ngIf="!isWrongInput && isSent">
         <img [src]="iconSaved" [alt]="iconSavedAlt" class="save-icon-class" style="height: 23px;width: 23px;"/>
         {{ 'request_new_token_msg_text' | translate}}
