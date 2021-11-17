@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
   authenticate(f: NgForm) {
     console.log(f)
     this.isWrongInput = false;
-
+    this.isSent = false
     if (f.value.tokenInput != '') {
       this.apitoken = f.value.tokenInput;
     } else {
@@ -161,6 +161,7 @@ export class LoginComponent implements OnInit {
           this.isSentEmail = true
           this.isWrongInput = false;
           this.isSent = true;
+          this.isTokenblank = false
           //this.email = "supplier@gmail.com"
           this.email = this.response.emailAddress
           this.successMessage = this.response.message
