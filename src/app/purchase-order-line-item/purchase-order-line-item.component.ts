@@ -466,6 +466,9 @@ console.log("MOUSE ---- LEAVE");
     //console.log(uniqueDataList)
     let dataListFinal = []
     uniqueDataList.forEach(function (value) {
+      if(value.scipRelavent == null){
+        value.scipRelavent = "1"
+      }
       dataListFinal.push({
         "casnumber": value.casnumber,
         "lineItemNumber": value.lineItemNumber,

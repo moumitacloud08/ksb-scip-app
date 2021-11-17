@@ -8,7 +8,7 @@
             "statisticalGoodsNumber": "6787989",
             "purchaseOrderNumber": 876554,
             "scipNumber": "67896",
-            "scipRelavent": "Yes",
+            "scipRelavent": "2",
             "materialCategory": "Coal",
             "submitStatus": "Yes",
             "casnumber": "234235"
@@ -18,7 +18,7 @@
             "statisticalGoodsNumber": "345345",
             "purchaseOrderNumber": 987654,
             "scipNumber": "89789080",
-            "scipRelavent": "No",
+            "scipRelavent": "1",
             "materialCategory": "Cement",
             "submitStatus": "Yes",
             "casnumber": "234235"
@@ -38,7 +38,7 @@
             "statisticalGoodsNumber": "4567688",
             "purchaseOrderNumber": 77765,
             "scipNumber": "987867545",
-            "scipRelavent": null,
+            "scipRelavent": "3",
             "materialCategory": "MaterialCategory",
             "submitStatus": "Yes",
             "casnumber": "234239"
@@ -58,7 +58,7 @@
             "statisticalGoodsNumber": "89876867",
             "purchaseOrderNumber": 56576,
             "scipNumber": "567567555",
-            "scipRelavent": null,
+            "scipRelavent": "1",
             "materialCategory": "MaterialCategory",
             "submitStatus": "Yes",
             "casnumber": "9879678"
@@ -78,7 +78,7 @@
             "statisticalGoodsNumber": "46546757",
             "purchaseOrderNumber": 87653,
             "scipNumber": "65786",
-            "scipRelavent": null,
+            "scipRelavent": "3",
             "materialCategory": "MaterialCategory",
             "submitStatus": "Yes",
             "casnumber": "234239"
@@ -98,7 +98,7 @@
             "statisticalGoodsNumber": "7878989",
             "purchaseOrderNumber": 666678,
             "scipNumber": "2232222",
-            "scipRelavent": null,
+            "scipRelavent": "2",
             "materialCategory": "MaterialCategory",
             "submitStatus": "Yes",
             "casnumber": "90089"
@@ -108,7 +108,7 @@
             "statisticalGoodsNumber": "22234656",
             "purchaseOrderNumber": 889087,
             "scipNumber": "777654",
-            "scipRelavent": null,
+            "scipRelavent": "1",
             "materialCategory": "MaterialCategory",
             "submitStatus": "Yes",
             "casnumber": "121212"
@@ -118,7 +118,7 @@
             "statisticalGoodsNumber": "456547678",
             "purchaseOrderNumber": 2235466,
             "scipNumber": "89907554",
-            "scipRelavent": null,
+            "scipRelavent": "3",
             "materialCategory": "Iron",
             "submitStatus": "Yes",
             "casnumber": "2212345"
