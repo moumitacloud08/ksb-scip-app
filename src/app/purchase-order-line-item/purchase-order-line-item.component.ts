@@ -126,18 +126,22 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   clearSCIPData(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipNumber = ''
+    this.validatSingleRow(parentIndex)
   }
   clearStatisticalData(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].statisticalGoodsNumber = ''
+    this.validatSingleRow(parentIndex)
   }
   clearCasNum(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].casnumber = ''
+    this.validatSingleRow(parentIndex)
   }
   clearMatCat(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].materialCategory = ''
+    this.validatSingleRow(parentIndex)
   }
   prevRow= -1
   mouseEnterRow(parentIndex){
@@ -381,7 +385,7 @@ console.log("MOUSE ---- LEAVE");
     if(this.results[parentIndex].scipNumber.length > 40){
       this.results[parentIndex].scipNumber = this.results[parentIndex].scipNumber.slice(0, -1); 
     }
-   
+    this.validatSingleRow(parentIndex)
   }
   validateStatGood(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
@@ -397,6 +401,7 @@ console.log("MOUSE ---- LEAVE");
     if(this.results[parentIndex].statisticalGoodsNumber.length > 17){
       this.results[parentIndex].statisticalGoodsNumber = this.results[parentIndex].statisticalGoodsNumber.slice(0, -1); 
     }
+    this.validatSingleRow(parentIndex)
   }
   validateCASNo(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
@@ -406,6 +411,7 @@ console.log("MOUSE ---- LEAVE");
     if(this.results[parentIndex].casnumber.length > 20){
       this.results[parentIndex].casnumber = this.results[parentIndex].casnumber.slice(0, -1); 
     }
+    this.validatSingleRow(parentIndex)
   }
   selectMaterial(item: any, parentIndex: any, elements: any) {
     this.isCatergoryList = true;
