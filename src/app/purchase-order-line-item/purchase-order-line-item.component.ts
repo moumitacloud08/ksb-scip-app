@@ -496,7 +496,7 @@ console.log("MOUSE ---- LEAVE");
     console.log("<=========params==============>")
     console.log(JSON.stringify(params));
     console.log(params)
-    if (dataListFinal.length > 0 && !this.isAllDataCleared && rowInvalidCount == 0) {
+    if (!this.isAllDataCleared && rowInvalidCount == 0) {
       this.purchaseOrderLineItemService
         .savePurchaseorderLine(params)
         .then((data) => {
