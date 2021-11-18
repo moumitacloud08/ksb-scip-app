@@ -444,7 +444,7 @@ console.log("MOUSE ---- LEAVE");
     let dataChangeCount = 0;
     let dataList = []
     let resultTemp = Object.assign([], this.resultsTemp);
-    this.results = this.validateRow(this.results)
+   // this.results = this.validateRow(this.results)
     let rowInvalidCount = 0;
 
     this.results.forEach(function (valueNew) {
@@ -496,7 +496,7 @@ console.log("MOUSE ---- LEAVE");
     console.log("<=========params==============>")
     console.log(JSON.stringify(params));
     console.log(params)
-    if (!this.isAllDataCleared && rowInvalidCount == 0) {
+    if (!this.isAllDataCleared) {
       this.purchaseOrderLineItemService
         .savePurchaseorderLine(params)
         .then((data) => {
