@@ -688,7 +688,39 @@ console.log("MOUSE ---- LEAVE");
       resultTemp[parentIndex].isSubRow = false;
       resultTemp[parentIndex].isClearData = true;
     }    
+    this.validatSingleRow(parentIndex)
+  }
 
+  validatSingleRow(parentIndex) {
+    let results = this.results
+    
+      results[parentIndex].isCASNumberEmpty = false
+      results[parentIndex].isStatEmpty = false;
+      results[parentIndex].isRowInvalid = false
+     
+      let emptySCIPValue = 0
+      results.forEach(function (value2) {
+        if(results[parentIndex].lineItemNumber == value2.lineItemNumber){
+          if(value2.scipNumber  != ''){
+            emptySCIPValue ++
+          }
+        }
+      })
+      if (emptySCIPValue > 0 && results[parentIndex].casnumber != '' && results[parentIndex].statisticalGoodsNumber == '') {
+        results[parentIndex].isStatEmpty = true;
+        results[parentIndex].isRowInvalid = true
+      }
+      if (emptySCIPValue > 0  && results[parentIndex].casnumber == '' && results[parentIndex].statisticalGoodsNumber != '') {
+        results[parentIndex].isCASNumberEmpty = true
+        results[parentIndex].isRowInvalid = true
+      }
+      if (emptySCIPValue == 0 && results[parentIndex].casnumber == '' && results[parentIndex].statisticalGoodsNumber == '') {
+        results[parentIndex].isCASNumberEmpty = true
+        results[parentIndex].isStatEmpty = true;
+        results[parentIndex].isRowInvalid = true
+      }
+      this.results = results
+   // return results;
   }
   deleteRowIndex: number = -1;
   getDeleteRowIndex(parentIndex) {
