@@ -444,7 +444,7 @@ console.log("MOUSE ---- LEAVE");
     let dataChangeCount = 0;
     let dataList = []
     let resultTemp = Object.assign([], this.resultsTemp);
-   // this.results = this.validateRow(this.results)
+    this.results = this.validateRow(this.results)
     let rowInvalidCount = 0;
 
     this.results.forEach(function (valueNew) {
@@ -453,13 +453,16 @@ console.log("MOUSE ---- LEAVE");
         valueNew.casnumber == '' && valueNew.materialCategory == '') {
         dataChangeCount++;
       }
-      if (valueNew.isRowInvalid == true) {
-        rowInvalidCount++
-      }
+      // if (valueNew.isRowInvalid == true) {
+      //   rowInvalidCount++
+      // }
       resultTemp.forEach(function (valueOld) {
         if (valueNew.rowId == valueOld.rowId) {
           if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber ||
             valueNew.casnumber != valueOld.casnumber || valueNew.materialCategory != valueOld.materialCategory || valueNew.scipRelavent != valueOld.scipRelavent) {
+              if (valueNew.isRowInvalid == true) {
+                rowInvalidCount++
+              }
             dataList.push(valueNew);
           }
         }
@@ -496,7 +499,7 @@ console.log("MOUSE ---- LEAVE");
     console.log("<=========params==============>")
     console.log(JSON.stringify(params));
     console.log(params)
-    if (!this.isAllDataCleared) {
+    if (!this.isAllDataCleared && rowInvalidCount == 0) {
       this.purchaseOrderLineItemService
         .savePurchaseorderLine(params)
         .then((data) => {
@@ -535,7 +538,7 @@ console.log("MOUSE ---- LEAVE");
 
   validateRow(results) {
     results.forEach(function (value) {
-      value.isCASNumberEmpty = false
+     // value.isCASNumberEmpty = false
       value.isStatEmpty = false;
       value.isRowInvalid = false
      
@@ -548,16 +551,16 @@ console.log("MOUSE ---- LEAVE");
         }
       })
       if (emptySCIPValue > 0 && value.casnumber != '' && value.statisticalGoodsNumber == '') {
-        value.isStatEmpty = true;
+       // value.isStatEmpty = true;
         value.isRowInvalid = true
       }
       if (emptySCIPValue > 0  && value.casnumber == '' && value.statisticalGoodsNumber != '') {
-        value.isCASNumberEmpty = true
+        //value.isCASNumberEmpty = true
         value.isRowInvalid = true
       }
       if (emptySCIPValue == 0 && value.casnumber == '' && value.statisticalGoodsNumber == '') {
-        value.isCASNumberEmpty = true
-        value.isStatEmpty = true;
+       // value.isCASNumberEmpty = true
+        //value.isStatEmpty = true;
         value.isRowInvalid = true
       }
     });    
