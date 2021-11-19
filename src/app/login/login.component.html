@@ -23,7 +23,7 @@
       <div class="failed-div">
         <span class="p3" *ngIf="isWrongInput && !isTokenblank">
           <img [src]="iconFailed" [alt]="iconFailed" class="save-icon-class" style="height: 12px;width: 12px;"/>
-          {{ 'wrong_login_input_text' | translate}}
+          {{message}}
         </span>
         <span class="p3" *ngIf="isTokenblank && !isWrongInput">
           <img [src]="iconFailed" [alt]="iconFailed" class="save-icon-class" style="height: 12px;width: 12px;"/>

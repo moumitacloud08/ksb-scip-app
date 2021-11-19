@@ -122,13 +122,23 @@ export class LoginComponent implements OnInit {
 
             this.localStorageService.store('api_token', this.apitoken)
             this.router.navigateByUrl('/dashboard/purchase-order-line-item');
-          } else {
-            //this.message = this.response.message;
-            this.message = "Wrong token! 2 attempt remaining and it will block after";
-            if (this.message == '') {
-              this.message = 'Login Failed';
-            }
+          }if (this.response.code == 406) {
+           
+            let remAttempt = 3 - this.response.loginAttemted
+            
+            this.message = "Wrong token!"+ remAttempt +" attempt remaining and it will block after" ;
+            this.isWrongInput = true;
+            this.isBlankInput = false; 
 
+          }if (this.response.code == 404) {
+           
+            this.message = this.response.message ;
+            this.isWrongInput = true;
+            this.isBlankInput = false; 
+
+          } else {
+           
+            this.message = 'Login Failed';
             this.isWrongInput = true;
             this.isBlankInput = false;
           }
