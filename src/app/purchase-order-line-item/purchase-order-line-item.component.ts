@@ -459,10 +459,13 @@ console.log("MOUSE ---- LEAVE");
       resultTemp.forEach(function (valueOld) {
         if (valueNew.rowId == valueOld.rowId) {
           if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber ||
-            valueNew.casnumber != valueOld.casnumber || valueNew.materialCategory != valueOld.materialCategory || valueNew.scipRelavent != valueOld.scipRelavent) {
+            valueNew.casnumber != valueOld.casnumber || valueNew.materialCategory != valueOld.materialCategory 
+            || valueNew.scipRelavent != valueOld.scipRelavent) {
               if (valueNew.isRowInvalid == true) {
                 rowInvalidCount++
               }
+            dataList.push(valueNew);
+          }else{
             dataList.push(valueNew);
           }
         }
