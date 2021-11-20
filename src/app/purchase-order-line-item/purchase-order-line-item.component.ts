@@ -301,6 +301,7 @@ console.log("MOUSE ---- LEAVE");
   }
   response: any;
   resultsTemp: purchasedetails[];
+  resultsPDFData: purchasedetails[];
   fetchPurchaseDetails() {
     this.purchaseOrderLineItemService
       .fetchPurchaseDetails()
@@ -330,10 +331,9 @@ console.log("MOUSE ---- LEAVE");
         })
         // this.resultsTemp = this.results
         this.resultsTemp = Object.assign([], this.results);
-        //console.log(' <===this.results====>');
-        //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
         //this.configurepagination();
+        this.resultsPDFData = Object.assign([], this.results);
         this.count = this.results.length
       })
       .catch((error) => {
@@ -368,9 +368,8 @@ console.log("MOUSE ---- LEAVE");
           count++;
         })
         this.resultsTemp = Object.assign([], this.results);
-        //console.log(' <===this.results====>');
-        //console.log(JSON.parse(JSON.stringify(this.resultsTemp)));
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
+        this.resultsPDFData = Object.assign([], this.results);
         // this.configurepagination();
         this.count = this.results.length
       })
@@ -797,8 +796,17 @@ console.log("MOUSE ---- LEAVE");
   generateDataForPDF() {
     let dataTemp = []
     let dataList = []
-    this.results.forEach(function (value) {
+    this.resultsPDFData.forEach(function (value) {
       //console.log(value);
+      if(value.scipRelavent == '' || value.scipRelavent == null || value.scipRelavent == '1'){
+        value.scipRelavent = 'Select'
+      }
+      else if(value.scipRelavent == '2'){
+        value.scipRelavent = 'Yes'
+      }
+      else if(value.scipRelavent == '3'){
+        value.scipRelavent = 'No'
+      }
       dataTemp = [value.purchaseOrderNumber, value.lineItemNumber, value.scipRelavent, value.scipNumber, value.statisticalGoodsNumber,
       value.casnumber, value.materialCategory]
       // dataTemp.push(value.purchaseOrderNumber,value.lineItemNumber,value.scipRelavent, value.scipNumber,value.statisticalGoodsNumber,
