@@ -606,7 +606,8 @@ console.log("MOUSE ---- LEAVE");
       parentRowId: -1,
       isRowHover : false,
       isCASNumberEmpty: false,
-      isStatEmpty: false
+      isStatEmpty: false,
+      isSCIPEmpty: false
     }
 
     resultTemp.push(objTemp);
@@ -644,7 +645,8 @@ console.log("MOUSE ---- LEAVE");
         parentRowId: resultTemp[nextIndex].parentRowId,
         isRowHover: false,
         isCASNumberEmpty: false,
-        isStatEmpty: false
+        isStatEmpty: false,
+        isSCIPEmpty: false
       }
 
       resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])
@@ -717,18 +719,29 @@ console.log("MOUSE ---- LEAVE");
           }
         }
       })
-      if (emptySCIPValue > 0 && results[parentIndex].casnumber != '' && results[parentIndex].statisticalGoodsNumber == '') {
+      if (emptySCIPValue == 0){
+        results[parentIndex].isSCIPEmpty = true
+        results[parentIndex].isRowInvalid = true
+      }
+      if (results[parentIndex].statisticalGoodsNumber == '') {
         results[parentIndex].isStatEmpty = true;
         results[parentIndex].isRowInvalid = true
       }
-      if (emptySCIPValue > 0  && results[parentIndex].casnumber == '' && results[parentIndex].statisticalGoodsNumber != '') {
+      if (results[parentIndex].casnumber == '') {
         results[parentIndex].isCASNumberEmpty = true
         results[parentIndex].isRowInvalid = true
       }
       if (emptySCIPValue == 0 && results[parentIndex].casnumber == '' && results[parentIndex].statisticalGoodsNumber == '') {
         results[parentIndex].isCASNumberEmpty = true
         results[parentIndex].isStatEmpty = true;
+        results[parentIndex].isSCIPEmpty = true
         results[parentIndex].isRowInvalid = true
+      }
+      if (emptySCIPValue > 0 && results[parentIndex].casnumber != '' && results[parentIndex].statisticalGoodsNumber != '') {
+        results[parentIndex].isCASNumberEmpty = false
+        results[parentIndex].isStatEmpty = false;
+        results[parentIndex].isSCIPEmpty = false
+        results[parentIndex].isRowInvalid = false
       }
       this.results = results
    // return results;

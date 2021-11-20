@@ -39,5 +39,6 @@ export class purchasedetails {
         public isRowHover: boolean = false,
         public isCASNumberEmpty: boolean = false,
         public isStatEmpty: boolean = false,
+        public isSCIPEmpty: boolean = false
       ) {}
   }
