@@ -462,8 +462,10 @@ console.log("MOUSE ---- LEAVE");
             || valueNew.scipRelavent != valueOld.scipRelavent) {
               if (valueNew.isRowInvalid == true) {
                 rowInvalidCount++
+              }else if (valueNew.isRowInvalid == false) {
+                dataList.push(valueNew);
               }
-            dataList.push(valueNew);
+            
           }else{
             dataList.push(valueNew);
           }
@@ -501,7 +503,7 @@ console.log("MOUSE ---- LEAVE");
     console.log("<=========params==============>")
     console.log(JSON.stringify(params));
     console.log(params)
-    if (!this.isAllDataCleared && rowInvalidCount == 0) {
+    if (!this.isAllDataCleared) {
       this.purchaseOrderLineItemService
         .savePurchaseorderLine(params)
         .then((data) => {
@@ -552,19 +554,30 @@ console.log("MOUSE ---- LEAVE");
           }
         }
       })
-      if (emptySCIPValue > 0 && value.casnumber != '' && value.statisticalGoodsNumber == '') {
-       // value.isStatEmpty = true;
+      if (emptySCIPValue == 0){
+        value.isSCIPEmpty = true
         value.isRowInvalid = true
       }
-      if (emptySCIPValue > 0  && value.casnumber == '' && value.statisticalGoodsNumber != '') {
-        //value.isCASNumberEmpty = true
+      if (value.statisticalGoodsNumber == '') {
+        value.isStatEmpty = true;
+        value.isRowInvalid = true
+      }
+      if (value.casnumber == '') {
+        value.isCASNumberEmpty = true
         value.isRowInvalid = true
       }
       if (emptySCIPValue == 0 && value.casnumber == '' && value.statisticalGoodsNumber == '') {
-       // value.isCASNumberEmpty = true
-        //value.isStatEmpty = true;
+        value.isCASNumberEmpty = true
+        value.isStatEmpty = true;
+        value.isSCIPEmpty = true
         value.isRowInvalid = true
       }
+      if (emptySCIPValue > 0 && value.casnumber != '' && value.statisticalGoodsNumber != '') {
+        value.isCASNumberEmpty = false
+        value.isStatEmpty = false;
+        value.isSCIPEmpty = false
+        value.isRowInvalid = false
+      }      
     });    
     return results;
   }
