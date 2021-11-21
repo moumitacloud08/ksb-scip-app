@@ -467,6 +467,9 @@ console.log("MOUSE ---- LEAVE");
               }
             
           }else{
+            valueNew.isSCIPEmpty = false
+            valueNew.isStatEmpty = false
+            valueNew.isCASNumberEmpty = false
             dataList.push(valueNew);
           }
         }

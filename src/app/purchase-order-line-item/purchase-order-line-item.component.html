@@ -94,7 +94,7 @@
 
               </div>
             </div>
-            <ksb-tooltip [showTooltip]="el.isSCIPSpanShow && el.isSCIPEmpty" [tooltipText]="'Please Enter SCIP no.'"></ksb-tooltip>
+            <ksb-tooltip [showTooltip]="!el.isSCIPSpanShow && el.isSCIPEmpty" [tooltipText]="'Please Enter SCIP no.'"></ksb-tooltip>
 
             <ksb-tooltip [showTooltip]="el.isInvalid == true && el.isDeleteShow == true && el.scipNumber != ''" [tooltipText]="'SCIP no should be 10 digit'"></ksb-tooltip>
           </td>
