@@ -209,7 +209,7 @@
   </div>
   <div class="table-footer">
     <div class="button-container-footer flex">
-      <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal">{{ 'save_button' | translate}}</button>
+      <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal" (click)="checkRowvalidity()">{{ 'save_button' | translate}}</button>
       <button type="button" class="button white-button" data-toggle="modal" data-target="#myModalClearAll">{{'Clear_All_text' | translate}}</button>
     </div>
     <div class="row flex">
@@ -276,6 +276,7 @@
           <div class="col-md-12 col-part1">
             <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;"><strong>{{'pre_submit_conf_text' | translate}}</strong></p>
             <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">{{'pre_submit_warn_text' | translate}}</p>
+            <p *ngIf="invalidRowCount > 0" style="color:#f10e1a;font-size: 18px;font-family: 'Roboto', sans-serif;">Some rows have errors. These rows will not be saved. To correct please click on review again.</p>
           </div>
           <div class="col-md-12 col-part2">
             <button type="button" class="button blue-button-modal" data-dismiss="modal"

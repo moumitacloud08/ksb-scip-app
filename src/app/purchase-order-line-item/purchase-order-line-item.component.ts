@@ -393,6 +393,7 @@ console.log("MOUSE ---- LEAVE");
     if (this.results[parentIndex].statisticalGoodsNumber.length < 8) {
       this.results[parentIndex].isStatGoodInvalid = true;
       this.results[parentIndex].isStatEmpty = false
+      this.results[parentIndex].isRowInvalid = true
     } else {
       this.results[parentIndex].isStatEmpty = false
       this.results[parentIndex].isStatGoodInvalid = false;
@@ -719,7 +720,18 @@ console.log("MOUSE ---- LEAVE");
     }    
     this.validatSingleRow(parentIndex)
   }
-
+  invalidRowCount = 0
+  checkRowvalidity() {
+    console.log("===========");
+    this.invalidRowCount = 0
+    let invalidRowCount = this.invalidRowCount;
+    this.results.forEach(function (value) {
+      if(value.isRowInvalid == true){
+        invalidRowCount ++
+      }
+    })
+    this.invalidRowCount = invalidRowCount
+  }
   validatSingleRow(parentIndex) {
     let results = this.results
     
@@ -759,8 +771,10 @@ console.log("MOUSE ---- LEAVE");
         results[parentIndex].isSCIPEmpty = false
         results[parentIndex].isRowInvalid = false
       }
+      if(results[parentIndex].statisticalGoodsNumber.length < 8){
+        results[parentIndex].isRowInvalid = true
+      }
       this.results = results
-   // return results;
   }
   deleteRowIndex: number = -1;
   getDeleteRowIndex(parentIndex) {
