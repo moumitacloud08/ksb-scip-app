@@ -122,6 +122,18 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   getSCIPRel(parentIndex, scipRel) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipRelavent = scipRel
+
+    this.results[parentIndex].isSCIPSpanShow = true;
+    this.results[parentIndex].isSCIPEditShow = false;
+
+    this.results[parentIndex].isStatSpanShow = true;
+    this.results[parentIndex].isStatEditShow = false;
+
+    this.results[parentIndex].isCasSpanShow = true;
+    this.results[parentIndex].isCasEditShow = false;
+
+    this.results[parentIndex].isMatSpanShow = true;
+    this.results[parentIndex].isMatEditShow = false;
   }
   clearSCIPData(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
@@ -241,6 +253,20 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.results[parentIndex].isCasSpanShow = true;
         this.results[parentIndex].isCasEditShow = false;
       } else {
+        this.results[parentIndex].isSCIPSpanShow = true;
+        this.results[parentIndex].isSCIPEditShow = false;
+
+        this.results[parentIndex].isStatSpanShow = true;
+        this.results[parentIndex].isStatEditShow = false;
+
+        this.results[parentIndex].isCasSpanShow = true;
+        this.results[parentIndex].isCasEditShow = false;
+
+        this.results[parentIndex].isMatSpanShow = true;
+        this.results[parentIndex].isMatEditShow = false;
+      }
+
+      if(this.results[parentIndex].scipRelavent == '3'){
         this.results[parentIndex].isSCIPSpanShow = true;
         this.results[parentIndex].isSCIPEditShow = false;
 
