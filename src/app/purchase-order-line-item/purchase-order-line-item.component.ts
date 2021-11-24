@@ -122,23 +122,27 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   getSCIPRel(parentIndex, scipRel) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipRelavent = scipRel
-    if(scipRel == '3'){
+    if (scipRel == '3') {
       this.results[parentIndex].scipNumber = ''
       this.results[parentIndex].statisticalGoodsNumber = ''
       this.results[parentIndex].casnumber = ''
       this.results[parentIndex].materialCategory = ''
-    }else if((scipRel == '1' || scipRel == '2') && !this.results[parentIndex].isSubRow){
-      let resultdata = this.results
-      this.resultsPDFData.forEach(function(value){
-        if(value.lineItemNumber == resultdata[parentIndex].lineItemNumber){
-          console.log(value.lineItemNumber+" "+resultdata[parentIndex].lineItemNumber+" "+value.scipNumber);
-          resultdata[parentIndex].scipNumber = value.scipNumber
-          resultdata[parentIndex].statisticalGoodsNumber = value.statisticalGoodsNumber
-          resultdata[parentIndex].casnumber = value.casnumber
-          resultdata[parentIndex].materialCategory = value.materialCategory
-        }
-      })
-      this.results = resultdata
+      this.results[parentIndex].isbuttonDisabled = true
+    } else if (scipRel == '1' || scipRel == '2') {
+      if (!this.results[parentIndex].isSubRow) {
+        let resultdata = this.results
+        this.resultsPDFData.forEach(function (value) {
+          if (value.lineItemNumber == resultdata[parentIndex].lineItemNumber) {
+            console.log(value.lineItemNumber + " " + resultdata[parentIndex].lineItemNumber + " " + value.scipNumber);
+            resultdata[parentIndex].scipNumber = value.scipNumber
+            resultdata[parentIndex].statisticalGoodsNumber = value.statisticalGoodsNumber
+            resultdata[parentIndex].casnumber = value.casnumber
+            resultdata[parentIndex].materialCategory = value.materialCategory
+          }
+        })
+        this.results = resultdata
+      }
+      this.results[parentIndex].isbuttonDisabled = false
     }
 
     // this.results[parentIndex].isSCIPSpanShow = true;
@@ -322,11 +326,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.prevIndex = parentIndex
-   // console.log("MOUSE ---- LEAVE "+parentIndex+" --- "+this.activeParentIndex);
+    // console.log("MOUSE ---- LEAVE "+parentIndex+" --- "+this.activeParentIndex);
     this.results[parentIndex].isRowHover = false
     this.activeParentIndex = null;
     this.resetAllRow();
-    if(this.results[parentIndex+1] == undefined || (parentIndex + 1)%5 === 0){
+    if (this.results[parentIndex + 1] == undefined || (parentIndex + 1) % 5 === 0) {
       console.log("INSIDE LAST INDEX");
       this.validatSingleRow(parentIndex)
     }
@@ -689,7 +693,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       isRowHover: false,
       isCASNumberEmpty: false,
       isStatEmpty: false,
-      isSCIPEmpty: false
+      isSCIPEmpty: false,
+      isbuttonDisabled: false
     }
 
     resultTemp.push(objTemp);
@@ -728,7 +733,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         isRowHover: false,
         isCASNumberEmpty: false,
         isStatEmpty: false,
-        isSCIPEmpty: false
+        isSCIPEmpty: false,
+        isbuttonDisabled: false
       }
 
       resultTemp[nextIndex] = Object.assign({}, resultTemp[parentIndex])

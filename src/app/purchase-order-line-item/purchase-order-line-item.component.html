@@ -1,4 +1,4 @@
-<div class="body-container"  >
+<div class="body-container">
   <div class="hd-part">
     <div class="ptext">
       <p class="p1"><b>{{'scipInfoText' | translate}}</b></p>
@@ -37,11 +37,13 @@
       </thead>
       <tbody (mouseleave)="mouseLeaveTab()">
         <tr [ngClass]="{'hover':el.isDeleteShow}"
-          *ngFor="let el of results |  filter:searchedKeyword | paginate : {itemsPerPage: tableSize,currentPage: page,totalItems: count};index as parentIndex; " class="table-row"
-          id="item_{{parentIndex}}" (mouseover)="mouseEnterRow(parentIndex)" (mouseleave)="mouseLeaveRow(parentIndex)">
+          *ngFor="let el of results |  filter:searchedKeyword | paginate : {itemsPerPage: tableSize,currentPage: page,totalItems: count};index as parentIndex; "
+          class="table-row" id="item_{{parentIndex}}" (mouseover)="mouseEnterRow(parentIndex)"
+          (mouseleave)="mouseLeaveRow(parentIndex)">
           <!-- {{ el.rowId }} -->
           <td style="width: 15%;">
-            <img [src]="iconCopy" [alt]="iconCopyAlt" class="clear-icon-class size-big" *ngIf="el.isSubRow && !el.isClearData" />
+            <img [src]="iconCopy" [alt]="iconCopyAlt" class="clear-icon-class size-big"
+              *ngIf="el.isSubRow && !el.isClearData" />
             <!-- {{el.parentRowId}}---{{ el.rowId }} ---  -->
             {{ el.purchaseOrderNumber }}
           </td>
@@ -55,10 +57,12 @@
                   *ngIf="el.scipRelavent == '1' || el.scipRelavent == null">{{'Select_option' | translate}}</span>
                 <span *ngIf="el.scipRelavent == '2'">{{'yes_option' | translate}}</span>
                 <span *ngIf="el.scipRelavent == '3'">{{'no_option' | translate}}</span>
-                <span *ngIf="el.scipRelavent != '1' && el.scipRelavent != '2' && el.scipRelavent != '3'">{{el.scipRelavent}}</span>
+                <span
+                  *ngIf="el.scipRelavent != '1' && el.scipRelavent != '2' && el.scipRelavent != '3'">{{el.scipRelavent}}</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button  *ngIf="el.scipRelavent != '1' && el.scipRelavent != null" class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'1')">
+                <button *ngIf="el.scipRelavent != '1' && el.scipRelavent != null" class="dropdown-item" type="button"
+                  (click)="getSCIPRel(parentIndex,'1')">
                   <span style="font-size:  0.875rem;">{{'Select_option' | translate}}</span>
                 </button>
                 <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'2')">
@@ -70,14 +74,15 @@
               </div>
             </div>
           </td>
-          <td style="width: 12%;" >
+          <td style="width: 12%;">
             <div (mouseenter)="mouseEnter(parentIndex,'scip') " (mouseleave)="mouseLeave(parentIndex,'scip')"
               style="margin-left: -21px;">
               <div *ngIf="el.isSCIPSpanShow == true">
                 <span class="text-class">text</span>
                 <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }}
-                  <img *ngIf="(el.isInvalid == true && el.scipNumber != '') || ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))" [src]="iconWarning" [alt]="iconWarningdAlt"
-                    class="icon-warning-span-class" />
+                  <img
+                    *ngIf="(el.isInvalid == true && el.scipNumber != '') || ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))"
+                    [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" />
                 </span>
               </div>
               <div class="form-group" *ngIf="el.isSCIPEditShow == true">
@@ -94,9 +99,12 @@
 
               </div>
             </div>
-            <ksb-tooltip [showTooltip]="!el.isSCIPSpanShow && ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))" [tooltipText]="'Please Enter SCIP no.'"></ksb-tooltip>
+            <ksb-tooltip
+              [showTooltip]="!el.isSCIPSpanShow && ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))"
+              [tooltipText]="'Please Enter SCIP no.'"></ksb-tooltip>
 
-            <ksb-tooltip [showTooltip]="el.isInvalid == true && el.isDeleteShow == true && el.scipNumber != ''" [tooltipText]="'SCIP no should be 10 digit'"></ksb-tooltip>
+            <ksb-tooltip [showTooltip]="el.isInvalid == true && el.isDeleteShow == true && el.scipNumber != ''"
+              [tooltipText]="'SCIP no should be 10 digit'"></ksb-tooltip>
           </td>
           <td style="width: 15%;">
             <div (mouseenter)="mouseEnter(parentIndex,'stat') " (mouseleave)="mouseLeave(parentIndex,'stat')"
@@ -104,15 +112,17 @@
               <div *ngIf="el.isStatSpanShow == true">
                 <span class="text-class">text</span>
                 <span [ngClass]="{'span-red-border-class':el.isStatGoodInvalid}">{{ el.statisticalGoodsNumber }}
-                  <img *ngIf="(el.isStatGoodInvalid == true && el.statisticalGoodsNumber != '') || ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isCASNumberEmpty && el.isStatEmpty)" [src]="iconWarning" [alt]="iconWarningdAlt"
-                  class="icon-warning-span-class" />
+                  <img
+                    *ngIf="(el.isStatGoodInvalid == true && el.statisticalGoodsNumber != '') || ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isCASNumberEmpty && el.isStatEmpty)"
+                    [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" />
                 </span>
               </div>
               <div class="form-group" *ngIf="el.isStatEditShow == true">
                 <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
                   id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
                   [ngClass]="{'text-red-border-class':el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''}"
-                  [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)" (keyup)="validateStatGood(parentIndex)" (keydown)="validateStatGood(parentIndex)"/>
+                  [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)"
+                  (keyup)="validateStatGood(parentIndex)" (keydown)="validateStatGood(parentIndex)" />
                 <a (click)="clearStatisticalData(parentIndex)" style="cursor: pointer"
                   *ngIf="el.statisticalGoodsNumber != ''">
                   <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
@@ -125,33 +135,40 @@
                 statisticalGoodsNumber no should be 8 digit
               </span>
             </div> -->
-            <ksb-tooltip [showTooltip]="!el.isStatSpanShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isCASNumberEmpty && el.isStatEmpty)" [tooltipText]="'Please Enter Statistical Goods no.'"></ksb-tooltip>
+            <ksb-tooltip
+              [showTooltip]="!el.isStatSpanShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isCASNumberEmpty && el.isStatEmpty)"
+              [tooltipText]="'Please Enter Statistical Goods no.'"></ksb-tooltip>
             <!-- <div class="stat-empty-warn" *ngIf="el.isStatEmpty">
               <span>
                 If CAS no. is entered then statistical goods no. needs to e provided
               </span>
             </div> -->
-            <ksb-tooltip [showTooltip]="el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''" [tooltipText]="'statisticalGoodsNumber no should be 8 digit'"></ksb-tooltip>
+            <ksb-tooltip
+              [showTooltip]="el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''"
+              [tooltipText]="'statisticalGoodsNumber no should be 8 digit'"></ksb-tooltip>
           </td>
           <td style="width: 15%;">
             <div (mouseenter)="mouseEnter(parentIndex,'cas') " (mouseleave)="mouseLeave(parentIndex,'cas')"
               style="margin-left: -21px;">
               <div *ngIf="el.isCasSpanShow == true">
-                <span class="text-class">text</span>                
+                <span class="text-class">text</span>
                 <span>{{ el.casnumber }}
-                  <img *ngIf="((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)" [src]="iconWarning" [alt]="iconWarningdAlt"
-                  class="icon-warning-span-class" />
+                  <img *ngIf="((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)"
+                    [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" />
                 </span>
               </div>
               <div class="form-group" *ngIf="el.isCasEditShow == true">
                 <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
-                  class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)" (keyup)="validateCASNo(parentIndex)" (keydown)="validateCASNo(parentIndex)"/>
+                  class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)"
+                  (keyup)="validateCASNo(parentIndex)" (keydown)="validateCASNo(parentIndex)" />
                 <a (click)="clearCasNum(parentIndex)" style="cursor: pointer" *ngIf="el.casnumber != ''">
                   <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
                 </a>
               </div>
             </div>
-            <ksb-tooltip [showTooltip]="el.isCasEditShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)" [tooltipText]="'Please enter Cas No.'"></ksb-tooltip>
+            <ksb-tooltip
+              [showTooltip]="el.isCasEditShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)"
+              [tooltipText]="'Please enter Cas No.'"></ksb-tooltip>
             <!-- <div class="cas-empty-warn" *ngIf="el.isCASNumberEmpty">
               <span>
                 If statistical goods no. is entered then CAS no. needs to e provided
@@ -190,18 +207,24 @@
             </div-->
           </td>
           <td style="width: 13%;">
-            <a (click)="editPurchaseorderLine(parentIndex,el.rowId)" class="enabled-class">
+            <a (click)="editPurchaseorderLine(parentIndex,el.rowId)" class="enabled-class" *ngIf="!el.isbuttonDisabled">
               <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
             </a>
-            <!-- <a class="disabled-class" *ngIf="el.isSubRow && !el.isClearData">
+            <a class="disabled-class" *ngIf="el.isbuttonDisabled">
               <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
-            </a> -->
+            </a>
           </td>
           <td style="width: 10%;">
-            <a *ngIf="el.isClearData && !el.isSubRow" (click)="clearRowData(parentIndex)"><img [src]="iconClearData"
+            <a class="enabled-class" *ngIf="el.isClearData && !el.isSubRow && !el.isbuttonDisabled" (click)="clearRowData(parentIndex)"><img
+                [src]="iconClearData" [alt]="iconClearDatadAlt" class="clear-icon-class" /></a>
+            <a class="enabled-class" *ngIf="el.isSubRow && !el.isClearData && !el.isbuttonDisabled" (click)="getDeleteRowIndex(parentIndex)"
+              data-toggle="modal" data-target="#myModalDeleteRow"><img [src]="iconDelete" [alt]="iconDeleteAlt"
+                class="clear-icon-class" /></a>
+
+            <a  class="disabled-class" *ngIf="el.isClearData && !el.isSubRow && el.isbuttonDisabled"><img [src]="iconClearData"
                 [alt]="iconClearDatadAlt" class="clear-icon-class" /></a>
-            <a *ngIf="el.isSubRow && !el.isClearData" (click)="getDeleteRowIndex(parentIndex)" data-toggle="modal" data-target="#myModalDeleteRow"><img [src]="iconDelete"
-                [alt]="iconDeleteAlt"  class="clear-icon-class" /></a>
+            <a class="disabled-class" *ngIf="el.isSubRow && !el.isClearData && el.isbuttonDisabled" ><img [src]="iconDelete"
+                [alt]="iconDeleteAlt" class="clear-icon-class" /></a>
           </td>
         </tr>
       </tbody>
@@ -209,8 +232,10 @@
   </div>
   <div class="table-footer">
     <div class="button-container-footer flex">
-      <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal" (click)="checkRowvalidity()">{{ 'save_button' | translate}}</button>
-      <button type="button" class="button white-button" data-toggle="modal" data-target="#myModalClearAll">{{'Clear_All_text' | translate}}</button>
+      <button type="button" class="button blue-button" data-toggle="modal" data-target="#myModal"
+        (click)="checkRowvalidity()">{{ 'save_button' | translate}}</button>
+      <button type="button" class="button white-button" data-toggle="modal"
+        data-target="#myModalClearAll">{{'Clear_All_text' | translate}}</button>
     </div>
     <div class="row flex">
       <div class="col-md-12 alert-class">
@@ -220,11 +245,7 @@
       </div>
     </div>
     <div class="d-flex justify-content-right my-pagination flex">
-      <pagination-controls 
-        responsive="true" 
-        previousLabel="" 
-        nextLabel="" 
-        (pageChange)="onTableDataChange($event)">
+      <pagination-controls responsive="true" previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
       </pagination-controls>
     </div>
     <!-- <div class="pagination-container">
@@ -274,14 +295,18 @@
       <div class="modal-body modal-body-cutom">
         <div class="row">
           <div class="col-md-12 col-part1">
-            <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;"><strong>{{'pre_submit_conf_text' | translate}}</strong></p>
-            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">{{'pre_submit_warn_text' | translate}}</p>
-            <p *ngIf="invalidRowCount > 0" style="color:#f10e1a;font-size: 18px;font-family: 'Roboto', sans-serif;">Some rows have errors. These rows will not be saved. To correct please click on review again.</p>
+            <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;"><strong>{{'pre_submit_conf_text'
+                | translate}}</strong></p>
+            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">{{'pre_submit_warn_text' |
+              translate}}</p>
+            <p *ngIf="invalidRowCount > 0" style="color:#f10e1a;font-size: 18px;font-family: 'Roboto', sans-serif;">Some
+              rows have errors. These rows will not be saved. To correct please click on review again.</p>
           </div>
           <div class="col-md-12 col-part2">
             <button type="button" class="button blue-button-modal" data-dismiss="modal"
               (click)="savePurchaseorderLine()">{{'Submit' | translate}}</button>
-            <button type="button" class="button white-button-modal" data-dismiss="modal">{{'Review_Again_Text' | translate}}</button>
+            <button type="button" class="button white-button-modal" data-dismiss="modal">{{'Review_Again_Text' |
+              translate}}</button>
           </div>
         </div>
       </div>
@@ -301,13 +326,17 @@
       <div class="modal-body modal-body-cutom">
         <div class="row">
           <div class="col-md-12 col-part1">
-            <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;"><Strong>{{'pre_all_data_clear_ins_text' | translate}}</Strong></p>
-            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">{{'all_data_clear_warn_text' | translate}}</p>
+            <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;">
+              <Strong>{{'pre_all_data_clear_ins_text' | translate}}</Strong>
+            </p>
+            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">{{'all_data_clear_warn_text' |
+              translate}}</p>
           </div>
           <div class="col-md-12 col-part2">
             <button type="button" class="button blue-button-modal" data-dismiss="modal"
               (click)="ClearAllTableData()">{{'Delete_button_text' | translate}}</button>
-            <button type="button" class="button white-button-modal" data-dismiss="modal">{{'Cancel_button_text' | translate}}</button>
+            <button type="button" class="button white-button-modal" data-dismiss="modal">{{'Cancel_button_text' |
+              translate}}</button>
           </div>
         </div>
       </div>
@@ -326,17 +355,19 @@
       <div class="modal-body modal-body-cutom">
         <div class="row">
           <div class="col-md-12 col-part1">
-            <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;"><Strong>{{'confirm_row_delete' | translate}}</Strong></p>
-            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">{{'row_delete_warn_text' | translate }}</p>
+            <p style="color:#1E1E1E;font-size: 25px;font-family: 'Roboto', sans-serif;"><Strong>{{'confirm_row_delete' |
+                translate}}</Strong></p>
+            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">{{'row_delete_warn_text' |
+              translate }}</p>
           </div>
           <div class="col-md-12 col-part2">
             <button type="button" class="button blue-button-modal" data-dismiss="modal"
               (click)="deleteRow()">{{'Delete_button_text' | translate}}</button>
-            <button type="button" class="button white-button-modal" data-dismiss="modal">{{'Cancel_button_text' | translate}}</button>
+            <button type="button" class="button white-button-modal" data-dismiss="modal">{{'Cancel_button_text' |
+              translate}}</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
