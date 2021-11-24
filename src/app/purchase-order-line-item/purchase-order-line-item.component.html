@@ -35,7 +35,7 @@
           </th>
         </tr>
       </thead>
-      <tbody (mouseleave)="mouseLeaveTab()">
+      <tbody>
         <tr [ngClass]="{'hover':el.isDeleteShow}"
           *ngFor="let el of results |  filter:searchedKeyword | paginate : {itemsPerPage: tableSize,currentPage: page,totalItems: count};index as parentIndex; " class="table-row"
           id="item_{{parentIndex}}" (mouseover)="mouseEnterRow(parentIndex)" (mouseleave)="mouseLeaveRow(parentIndex)">
@@ -76,7 +76,7 @@
               <div *ngIf="el.isSCIPSpanShow == true">
                 <span class="text-class">text</span>
                 <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }}
-                  <img *ngIf="(el.isInvalid == true && el.scipNumber != '') || (el.isCASNumberEmpty && el.isStatEmpty && el.scipNumber == '')" [src]="iconWarning" [alt]="iconWarningdAlt"
+                  <img *ngIf="(el.isInvalid == true && el.scipNumber != '') || ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))" [src]="iconWarning" [alt]="iconWarningdAlt"
                     class="icon-warning-span-class" />
                 </span>
               </div>
@@ -94,7 +94,7 @@
 
               </div>
             </div>
-            <ksb-tooltip [showTooltip]="!el.isSCIPSpanShow && el.isSCIPEmpty" [tooltipText]="'Please Enter SCIP no.'"></ksb-tooltip>
+            <ksb-tooltip [showTooltip]="!el.isSCIPSpanShow && ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))" [tooltipText]="'Please Enter SCIP no.'"></ksb-tooltip>
 
             <ksb-tooltip [showTooltip]="el.isInvalid == true && el.isDeleteShow == true && el.scipNumber != ''" [tooltipText]="'SCIP no should be 10 digit'"></ksb-tooltip>
           </td>
@@ -104,7 +104,7 @@
               <div *ngIf="el.isStatSpanShow == true">
                 <span class="text-class">text</span>
                 <span [ngClass]="{'span-red-border-class':el.isStatGoodInvalid}">{{ el.statisticalGoodsNumber }}
-                  <img *ngIf="(el.isStatGoodInvalid == true && el.statisticalGoodsNumber != '') || el.isStatEmpty" [src]="iconWarning" [alt]="iconWarningdAlt"
+                  <img *ngIf="(el.isStatGoodInvalid == true && el.statisticalGoodsNumber != '') || ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isCASNumberEmpty && el.isStatEmpty)" [src]="iconWarning" [alt]="iconWarningdAlt"
                   class="icon-warning-span-class" />
                 </span>
               </div>
@@ -125,7 +125,7 @@
                 statisticalGoodsNumber no should be 8 digit
               </span>
             </div> -->
-            <ksb-tooltip [showTooltip]="!el.isStatSpanShow && el.isStatEmpty" [tooltipText]="'Please Enter Statistical Goods no.'"></ksb-tooltip>
+            <ksb-tooltip [showTooltip]="!el.isStatSpanShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isCASNumberEmpty && el.isStatEmpty)" [tooltipText]="'Please Enter Statistical Goods no.'"></ksb-tooltip>
             <!-- <div class="stat-empty-warn" *ngIf="el.isStatEmpty">
               <span>
                 If CAS no. is entered then statistical goods no. needs to e provided
@@ -139,7 +139,7 @@
               <div *ngIf="el.isCasSpanShow == true">
                 <span class="text-class">text</span>                
                 <span>{{ el.casnumber }}
-                  <img *ngIf="el.isCASNumberEmpty" [src]="iconWarning" [alt]="iconWarningdAlt"
+                  <img *ngIf="((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)" [src]="iconWarning" [alt]="iconWarningdAlt"
                   class="icon-warning-span-class" />
                 </span>
               </div>
@@ -151,7 +151,7 @@
                 </a>
               </div>
             </div>
-            <ksb-tooltip [showTooltip]="el.isCasEditShow && el.isCASNumberEmpty" [tooltipText]="'Please enter Cas No.'"></ksb-tooltip>
+            <ksb-tooltip [showTooltip]="el.isCasEditShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)" [tooltipText]="'Please enter Cas No.'"></ksb-tooltip>
             <!-- <div class="cas-empty-warn" *ngIf="el.isCASNumberEmpty">
               <span>
                 If statistical goods no. is entered then CAS no. needs to e provided
