@@ -35,7 +35,7 @@
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody (mouseleave)="mouseLeaveTab()">
         <tr [ngClass]="{'hover':el.isDeleteShow}"
           *ngFor="let el of results |  filter:searchedKeyword | paginate : {itemsPerPage: tableSize,currentPage: page,totalItems: count};index as parentIndex; " class="table-row"
           id="item_{{parentIndex}}" (mouseover)="mouseEnterRow(parentIndex)" (mouseleave)="mouseLeaveRow(parentIndex)">

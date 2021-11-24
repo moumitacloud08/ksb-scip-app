@@ -303,12 +303,14 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.prevIndex = parentIndex
-    //console.log("MOUSE ---- LEAVE "+parentIndex+" --- "+this.activeParentIndex);
+   // console.log("MOUSE ---- LEAVE "+parentIndex+" --- "+this.activeParentIndex);
     this.results[parentIndex].isRowHover = false
     this.activeParentIndex = null;
     this.resetAllRow();
-    // this.results[parentIndex].isAddShow = true;
-    // this.results[parentIndex].isDeleteShow = false;
+    if(this.results[parentIndex+1] == undefined || (parentIndex + 1)%5 === 0){
+      console.log("INSIDE LAST INDEX");
+      this.validatSingleRow(parentIndex)
+    }
   }
   clickevent(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
