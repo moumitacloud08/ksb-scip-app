@@ -122,18 +122,37 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   getSCIPRel(parentIndex, scipRel) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipRelavent = scipRel
+    if(scipRel == '3'){
+      this.results[parentIndex].scipNumber = ''
+      this.results[parentIndex].statisticalGoodsNumber = ''
+      this.results[parentIndex].casnumber = ''
+      this.results[parentIndex].materialCategory = ''
+    }else if((scipRel == '1' || scipRel == '2') && !this.results[parentIndex].isSubRow){
+      let resultdata = this.results
+      this.resultsPDFData.forEach(function(value){
+        if(value.lineItemNumber == resultdata[parentIndex].lineItemNumber){
+          console.log(value.lineItemNumber+" "+resultdata[parentIndex].lineItemNumber+" "+value.scipNumber);
+          resultdata[parentIndex].scipNumber = value.scipNumber
+          resultdata[parentIndex].statisticalGoodsNumber = value.statisticalGoodsNumber
+          resultdata[parentIndex].casnumber = value.casnumber
+          resultdata[parentIndex].materialCategory = value.materialCategory
+        }
+      })
+      this.results = resultdata
+    }
 
-    this.results[parentIndex].isSCIPSpanShow = true;
-    this.results[parentIndex].isSCIPEditShow = false;
+    // this.results[parentIndex].isSCIPSpanShow = true;
+    // this.results[parentIndex].isSCIPEditShow = false;
 
-    this.results[parentIndex].isStatSpanShow = true;
-    this.results[parentIndex].isStatEditShow = false;
+    // this.results[parentIndex].isStatSpanShow = true;
+    // this.results[parentIndex].isStatEditShow = false;
 
-    this.results[parentIndex].isCasSpanShow = true;
-    this.results[parentIndex].isCasEditShow = false;
+    // this.results[parentIndex].isCasSpanShow = true;
+    // this.results[parentIndex].isCasEditShow = false;
 
-    this.results[parentIndex].isMatSpanShow = true;
-    this.results[parentIndex].isMatEditShow = false;
+    // this.results[parentIndex].isMatSpanShow = true;
+    // this.results[parentIndex].isMatEditShow = false;
+
   }
   clearSCIPData(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
@@ -372,6 +391,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
         //this.configurepagination();
         this.resultsPDFData = Object.assign([], this.results);
+        this.resultsPDFData = JSON.parse(JSON.stringify(this.resultsPDFData));
+
         this.count = this.results.length
       })
       .catch((error) => {
@@ -407,7 +428,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         })
         this.resultsTemp = Object.assign([], this.results);
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
+
         this.resultsPDFData = Object.assign([], this.results);
+        this.resultsPDFData = JSON.parse(JSON.stringify(this.resultsPDFData));
+
         // this.configurepagination();
         this.count = this.results.length
       })
