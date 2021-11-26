@@ -626,12 +626,18 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       })
       if (emptySCIPValue == 0) {
         value.isSCIPEmpty = true
+      }else if (emptySCIPValue > 0) {
+        value.isSCIPEmpty = false
       }
       if (value.statisticalGoodsNumber == '') {
         value.isStatEmpty = true;
+      }else {
+        value.isStatEmpty = false;
       }
       if (value.casnumber == '') {
         value.isCASNumberEmpty = true
+      }else{
+        value.isCASNumberEmpty = false
       }
       if (!value.isSCIPEmpty && value.isStatEmpty && value.isCASNumberEmpty) {
         value.isRowInvalid = false
