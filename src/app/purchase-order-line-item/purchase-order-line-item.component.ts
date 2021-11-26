@@ -94,8 +94,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'Clear data'
     ];
 
-    //this.fetchPurchaseDetails();
-    this.fetchPurchaseDetailsTestData()
+    this.fetchPurchaseDetails();
+    //this.fetchPurchaseDetailsTestData()
 
   }
 
@@ -195,7 +195,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   prevIndex: number
   mouseEnter(parentIndex, field) {
     parentIndex = (this.page - 1) * 5 + parentIndex
-    console.log(" MOUSE ENTER " + this.prevIndex + " ---- " + parentIndex);
+   // console.log(" MOUSE ENTER " + this.prevIndex + " ---- " + parentIndex);
 
     if (this.prevIndex != parentIndex) {
       let resultTemp = this.resultsTemp
@@ -803,8 +803,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     })
     this.invalidRowCount = invalidRowCount
   }
-  validatSingleRow(parentIndex) {
+  validatSingleRow(parentIndex) {   
     let results = this.results
+
+    // let results = Object.assign([], this.results);
+    // results = JSON.parse(JSON.stringify(results));
+
 
     results[parentIndex].isCASNumberEmpty = false
     results[parentIndex].isStatEmpty = false;
@@ -820,12 +824,18 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     })
     if (emptySCIPValue == 0) {
       results[parentIndex].isSCIPEmpty = true
+    }else if (emptySCIPValue > 0) {
+      results[parentIndex].isSCIPEmpty = false
     }
     if (results[parentIndex].statisticalGoodsNumber == '') {
       results[parentIndex].isStatEmpty = true;
+    }else {
+      results[parentIndex].isStatEmpty = false;
     }
     if (results[parentIndex].casnumber == '') {
       results[parentIndex].isCASNumberEmpty = true
+    }else{
+      results[parentIndex].isCASNumberEmpty = false
     }
     if (!results[parentIndex].isSCIPEmpty && results[parentIndex].isStatEmpty && results[parentIndex].isCASNumberEmpty) {
       results[parentIndex].isRowInvalid = false
@@ -846,6 +856,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       results[parentIndex].isRowInvalid = true
     }
     this.results = results
+
+    // this.results = Object.assign([], results);
+    // this.results = JSON.parse(JSON.stringify(this.results));
   }
   deleteRowIndex: number = -1;
   getDeleteRowIndex(parentIndex) {

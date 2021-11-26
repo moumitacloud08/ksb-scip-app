@@ -5,13 +5,13 @@
     "scipDetails": [
         {
             "lineItemNumber": 75656564,
-            "statisticalGoodsNumber": "6787989",
+            "statisticalGoodsNumber": "",
             "purchaseOrderNumber": 876554,
-            "scipNumber": "67896",
+            "scipNumber": "",
             "scipRelavent": "2",
             "materialCategory": "Coal",
             "submitStatus": "Yes",
-            "casnumber": "234235"
+            "casnumber": ""
         },
         {
             "lineItemNumber": 986765676,
@@ -35,13 +35,13 @@
         },
         {
             "lineItemNumber": 9876764545,
-            "statisticalGoodsNumber": "4567688",
+            "statisticalGoodsNumber": "",
             "purchaseOrderNumber": 77765,
-            "scipNumber": "987867545",
-            "scipRelavent": "3",
-            "materialCategory": "MaterialCategory",
+            "scipNumber": "",
+            "scipRelavent": "2",
+            "materialCategory": "",
             "submitStatus": "Yes",
-            "casnumber": "234239"
+            "casnumber": ""
         },
         {
             "lineItemNumber": 23333366675,
