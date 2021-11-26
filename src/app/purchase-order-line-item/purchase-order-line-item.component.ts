@@ -330,7 +330,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.results[parentIndex].isRowHover = false
     this.activeParentIndex = null;
     this.resetAllRow();
-    if (this.results[parentIndex + 1] == undefined || (parentIndex + 1) % 5 === 0) {
+    if ((this.results[parentIndex + 1] == undefined || (parentIndex + 1) % 5 === 0) && (this.prevIndex != parentIndex)) {
       console.log("INSIDE LAST INDEX");
       this.validatSingleRow(parentIndex)
     }
