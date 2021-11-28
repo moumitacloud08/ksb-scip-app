@@ -584,8 +584,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           if (this.responseCode == '200') {
             this.localStorageService.store('savedData', dataListFinal)
 
-            this.localStorageService.clear('user');
-            this.localStorageService.clear('api_token');
+           // this.localStorageService.clear('user');
+           // this.localStorageService.clear('api_token');
             this.isPurchaseOrderSaved = true;
             this.isAllDataCleared = false;
             this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();

@@ -34,8 +34,8 @@ export class RecordSuccessComponent implements OnInit {
     this.appl = this.localStorageService.retrieve("app")
     this.lang = this.localStorageService.retrieve("lang")
 
-    //this.fetchPurchaseDetails();
-    this.fetchPurchaseDetailsTestData()
+    this.fetchPurchaseDetails();
+    //this.fetchPurchaseDetailsTestData()
   }
   response: any;
   results: purchasedetails[];
