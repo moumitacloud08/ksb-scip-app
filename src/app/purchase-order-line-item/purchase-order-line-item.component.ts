@@ -158,25 +158,26 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // this.results[parentIndex].isMatEditShow = false;
 
   }
+
   clearSCIPData(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipNumber = ''
-    //this.validatSingleRow(parentIndex)
+    this.prevIndex = parentIndex
   }
   clearStatisticalData(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].statisticalGoodsNumber = ''
-    // this.validatSingleRow(parentIndex)
+    this.prevIndex = parentIndex
   }
   clearCasNum(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].casnumber = ''
-    // this.validatSingleRow(parentIndex)
+    this.prevIndex = parentIndex
   }
   clearMatCat(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].materialCategory = ''
-    //  this.validatSingleRow(parentIndex)
+    this.prevIndex = parentIndex
   }
   prevRow = -1
   mouseEnterRow(parentIndex) {
@@ -195,7 +196,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   prevIndex: number
   mouseEnter(parentIndex, field) {
     parentIndex = (this.page - 1) * 5 + parentIndex
-   // console.log(" MOUSE ENTER " + this.prevIndex + " ---- " + parentIndex);
+    console.log(" MOUSE ENTER " + this.prevIndex + " ---- " + parentIndex);
 
     if (this.prevIndex != parentIndex) {
       let resultTemp = this.resultsTemp
@@ -204,6 +205,14 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           if (this.results[this.prevIndex].scipNumber != resultTemp[i].scipNumber || this.results[this.prevIndex].statisticalGoodsNumber != resultTemp[i].statisticalGoodsNumber || this.results[this.prevIndex].casnumber != resultTemp[i].casnumber || this.results[this.prevIndex].materialCategory != resultTemp[i].materialCategory) {
             this.validatSingleRow(this.prevIndex)
           }
+          if(this.results[this.prevIndex].scipNumber == '' && this.results[this.prevIndex].statisticalGoodsNumber == ''
+          &&  this.results[this.prevIndex].casnumber == ''){
+            console.log(" ROW EMPTY ");
+            this.results[this.prevIndex].isSCIPEmpty = false
+            this.results[this.prevIndex].isCASNumberEmpty = false
+            this.results[this.prevIndex].isStatEmpty = false
+            this.results[parentIndex].isRowInvalid = false
+         }
         }
       }
     }
