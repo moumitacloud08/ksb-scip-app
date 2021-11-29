@@ -81,8 +81,11 @@
                 <span class="text-class">text</span>
                 <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }}
                   <img
-                    *ngIf="(el.isInvalid == true && el.scipNumber != '') || ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))"
+                    *ngIf="(el.isInvalid == true && el.scipNumber != '')"
                     [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" />
+                    <!-- <img
+                    *ngIf="(el.isInvalid == true && el.scipNumber != '') || ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))"
+                    [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" /> -->
                 </span>
               </div>
               <div class="form-group" *ngIf="el.isSCIPEditShow == true">
@@ -99,12 +102,11 @@
 
               </div>
             </div>
-            <ksb-tooltip
+            <!-- <ksb-tooltip
               [showTooltip]="!el.isSCIPSpanShow && ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))"
-              [tooltipText]="'Please Enter SCIP no.'"></ksb-tooltip>
+              [tooltipText]="'Please Enter SCIP no.'"></ksb-tooltip> -->
 
-            <ksb-tooltip [showTooltip]="el.isInvalid == true && el.isDeleteShow == true && el.scipNumber != ''"
-              [tooltipText]="'SCIP no should be 10 digit'"></ksb-tooltip>
+        
           </td>
           <td style="width: 15%;">
             <div (mouseenter)="mouseEnter(parentIndex,'stat') " (mouseleave)="mouseLeave(parentIndex,'stat')"

@@ -459,34 +459,27 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     if (this.results[parentIndex].scipNumber.length > 40) {
       this.results[parentIndex].scipNumber = this.results[parentIndex].scipNumber.slice(0, -1);
     }
-    //this.validatSingleRow(parentIndex)
+    this.prevIndex = parentIndex
   }
   validateStatGood(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].statisticalGoodsNumber =
       this.results[parentIndex].statisticalGoodsNumber.replace(/[^0-9]/g, '')
-    if (this.results[parentIndex].statisticalGoodsNumber.length < 8) {
-      this.results[parentIndex].isStatGoodInvalid = true;
-      this.results[parentIndex].isStatEmpty = false
-      this.results[parentIndex].isRowInvalid = true
-    } else {
-      this.results[parentIndex].isStatEmpty = false
-      this.results[parentIndex].isStatGoodInvalid = false;
-    }
+    
     if (this.results[parentIndex].statisticalGoodsNumber.length > 17) {
       this.results[parentIndex].statisticalGoodsNumber = this.results[parentIndex].statisticalGoodsNumber.slice(0, -1);
     }
-    // this.validatSingleRow(parentIndex)
+    this.prevIndex = parentIndex
   }
   validateCASNo(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].casnumber =
       this.results[parentIndex].casnumber.replace(/[&\/\\#,+()$~%.'":*?<>@{}]/g, '')
-    this.results[parentIndex].isCASNumberEmpty = false
+    //this.results[parentIndex].isCASNumberEmpty = false
     if (this.results[parentIndex].casnumber.length > 20) {
       this.results[parentIndex].casnumber = this.results[parentIndex].casnumber.slice(0, -1);
     }
-    // this.validatSingleRow(parentIndex)
+    this.prevIndex = parentIndex
   }
   selectMaterial(item: any, parentIndex: any, elements: any) {
     this.isCatergoryList = true;
