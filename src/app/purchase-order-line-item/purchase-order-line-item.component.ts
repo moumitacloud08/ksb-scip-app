@@ -749,6 +749,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       resultTemp[nextIndex].scipNumber = ''
       resultTemp[nextIndex].statisticalGoodsNumber = ''
       resultTemp[nextIndex].casnumber = ''
+      resultTemp[nextIndex].materialCategory = ''
       resultTemp[nextIndex].isSubRow = true
       resultTemp[nextIndex].isClearData = false
       resultTemp[nextIndex].parentRowId = parentIndex
