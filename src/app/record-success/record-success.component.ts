@@ -130,7 +130,7 @@ export class RecordSuccessComponent implements OnInit {
     let dataList = []
     this.savedData.forEach(function (value) {
       dataTemp = [value.purchaseOrderNumber, value.lineItemNumber, value.scipRelavent, value.scipNumber, value.statisticalGoodsNumber,
-      value.casnumber, value.materialCategory]
+      value.casnumber, value.materialCategory, value.submitStatus]
       dataList.push(dataTemp);
     });
     console.log(dataList);
@@ -145,7 +145,8 @@ export class RecordSuccessComponent implements OnInit {
       'SCIP No.',
       'Statistical Goods No',
       'CAS No',
-      'Material Category'
+      'Material Category',
+      'Status'
     ];
     head = [headElements]
     return head;

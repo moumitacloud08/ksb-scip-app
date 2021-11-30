@@ -944,7 +944,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         value.scipRelavent = 'No'
       }
       dataTemp = [value.purchaseOrderNumber, value.lineItemNumber, value.scipRelavent, value.scipNumber, value.statisticalGoodsNumber,
-      value.casnumber, value.materialCategory]
+      value.casnumber, value.materialCategory, value.submitStatus]
       // dataTemp.push(value.purchaseOrderNumber,value.lineItemNumber,value.scipRelavent, value.scipNumber,value.statisticalGoodsNumber,
       //   value.casnumber,value.materialCategory);
 
@@ -962,7 +962,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'SCIP No.',
       'Statistical Goods No',
       'CAS No',
-      'Material Category'
+      'Material Category',
+      'Status'
     ];
     head = [headElements]
     return head;
