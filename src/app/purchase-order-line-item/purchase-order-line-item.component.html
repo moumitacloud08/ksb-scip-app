@@ -29,7 +29,10 @@
           <th>
             <div style="margin-left: -1px;">{{'Material_Category_col' | translate}}</div>
           </th>
-          <th>{{'Add_row_col' | translate}}</th>
+          <th>
+            Status
+          </th>
+          <th><div style="margin-right: 22px;width: 73px;">{{'Add_row_col' | translate}}</div></th>
           <th>
             <div style="margin-right: 22px;width: 73px;">{{'Clear_data_col' | translate}}</div>
           </th>
@@ -208,6 +211,7 @@
               </div>
             </div-->
           </td>
+          <td style="width: 8%;">{{ el.submitStatus }}</td>
           <td style="width: 13%;">
             <a (click)="editPurchaseorderLine(parentIndex,el.rowId)" class="enabled-class" *ngIf="!el.isbuttonDisabled">
               <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
