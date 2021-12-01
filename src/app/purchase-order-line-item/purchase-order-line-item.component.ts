@@ -205,14 +205,14 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           if (this.results[this.prevIndex].scipNumber != resultTemp[i].scipNumber || this.results[this.prevIndex].statisticalGoodsNumber != resultTemp[i].statisticalGoodsNumber || this.results[this.prevIndex].casnumber != resultTemp[i].casnumber || this.results[this.prevIndex].materialCategory != resultTemp[i].materialCategory) {
             this.validatSingleRow(this.prevIndex)
           }
-          if(this.results[this.prevIndex].scipNumber == '' && this.results[this.prevIndex].statisticalGoodsNumber == ''
-          &&  this.results[this.prevIndex].casnumber == ''){
+          if (this.results[this.prevIndex].scipNumber == '' && this.results[this.prevIndex].statisticalGoodsNumber == ''
+            && this.results[this.prevIndex].casnumber == '') {
             console.log(" ROW EMPTY ");
             this.results[this.prevIndex].isSCIPEmpty = false
             this.results[this.prevIndex].isCASNumberEmpty = false
             this.results[this.prevIndex].isStatEmpty = false
             this.results[parentIndex].isRowInvalid = false
-         }
+          }
         }
       }
     }
@@ -226,6 +226,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       if (field == 'scip') {
 
         let results = this.results
+        let resultsTemp = this.resultsPDFData
 
         var count = 0;
         let emptySCIPValue = 0
@@ -236,6 +237,13 @@ export class PurchaseOrderLineItemComponent implements OnInit {
             if (results[count].scipNumber != '') {
               emptySCIPValue++
             }
+          } else if (count == parentIndex && !results[parentIndex].isSubRow) {
+            resultsTemp.forEach(function (value2) {
+              if (value2.lineItemNumber == results[parentIndex].lineItemNumber && value2.scipNumber != '') {
+                emptySCIPValue++
+              }
+            })
+
           }
           count++
         })
@@ -465,7 +473,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].statisticalGoodsNumber =
       this.results[parentIndex].statisticalGoodsNumber.replace(/[^0-9]/g, '')
-    
+
     if (this.results[parentIndex].statisticalGoodsNumber.length > 17) {
       this.results[parentIndex].statisticalGoodsNumber = this.results[parentIndex].statisticalGoodsNumber.slice(0, -1);
     }
@@ -586,8 +594,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           if (this.responseCode == '200') {
             this.localStorageService.store('savedData', dataListFinal)
 
-           // this.localStorageService.clear('user');
-           // this.localStorageService.clear('api_token');
+            // this.localStorageService.clear('user');
+            // this.localStorageService.clear('api_token');
             this.isPurchaseOrderSaved = true;
             this.isAllDataCleared = false;
             this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
@@ -628,17 +636,17 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       })
       if (emptySCIPValue == 0) {
         value.isSCIPEmpty = true
-      }else if (emptySCIPValue > 0) {
+      } else if (emptySCIPValue > 0) {
         value.isSCIPEmpty = false
       }
       if (value.statisticalGoodsNumber == '') {
         value.isStatEmpty = true;
-      }else {
+      } else {
         value.isStatEmpty = false;
       }
       if (value.casnumber == '') {
         value.isCASNumberEmpty = true
-      }else{
+      } else {
         value.isCASNumberEmpty = false
       }
       if (!value.isSCIPEmpty && value.isStatEmpty && value.isCASNumberEmpty) {
@@ -812,7 +820,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     })
     this.invalidRowCount = invalidRowCount
   }
-  validatSingleRow(parentIndex) {   
+  validatSingleRow(parentIndex) {
     let results = this.results
 
     // let results = Object.assign([], this.results);
@@ -833,17 +841,17 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     })
     if (emptySCIPValue == 0) {
       results[parentIndex].isSCIPEmpty = true
-    }else if (emptySCIPValue > 0) {
+    } else if (emptySCIPValue > 0) {
       results[parentIndex].isSCIPEmpty = false
     }
     if (results[parentIndex].statisticalGoodsNumber == '') {
       results[parentIndex].isStatEmpty = true;
-    }else {
+    } else {
       results[parentIndex].isStatEmpty = false;
     }
     if (results[parentIndex].casnumber == '') {
       results[parentIndex].isCASNumberEmpty = true
-    }else{
+    } else {
       results[parentIndex].isCASNumberEmpty = false
     }
     if (!results[parentIndex].isSCIPEmpty && results[parentIndex].isStatEmpty && results[parentIndex].isCASNumberEmpty) {
@@ -944,7 +952,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         value.scipRelavent = 'No'
       }
       dataTemp = [value.purchaseOrderNumber, value.lineItemNumber, value.scipRelavent, value.scipNumber, value.statisticalGoodsNumber,
-      value.casnumber, value.materialCategory]
+      value.casnumber, value.materialCategory, value.submitStatus]
       // dataTemp.push(value.purchaseOrderNumber,value.lineItemNumber,value.scipRelavent, value.scipNumber,value.statisticalGoodsNumber,
       //   value.casnumber,value.materialCategory);
 
@@ -962,7 +970,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'SCIP No.',
       'Statistical Goods No',
       'CAS No',
-      'Material Category'
+      'Material Category',
+      'Status'
     ];
     head = [headElements]
     return head;

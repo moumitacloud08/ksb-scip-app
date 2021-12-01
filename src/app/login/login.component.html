@@ -34,7 +34,7 @@
     <div class="success-div">     
       <span class="p4" *ngIf="!isWrongInput && isSent">
         <img [src]="iconSaved" [alt]="iconSavedAlt" class="save-icon-class" style="height: 23px;width: 23px;"/>
-        {{ 'request_new_token_msg_text' | translate}}
+        {{ 'request_new_token_msg_text' | translate}} {{newTokenAttempt}}
       </span>
     </div>
     
