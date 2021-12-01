@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
   iconSavedAlt = 'success';
   iconFailed = 'assets/images/warning-icon.png';
   iconFaileddAlt = 'success';
-  isTokenblank:boolean = false
+  isTokenblank: boolean = false
   authenticate(f: NgForm) {
     console.log(f)
     this.isWrongInput = false;
@@ -122,22 +122,22 @@ export class LoginComponent implements OnInit {
 
             this.localStorageService.store('api_token', this.apitoken)
             this.router.navigateByUrl('/dashboard/purchase-order-line-item');
-          }if (this.response.code == 406) {
-           
-            let remAttempt = 3 - this.response.loginAttemted
-            
-            this.message = "Wrong token!"+ remAttempt +" attempt remaining and it will block after" ;
-            this.isWrongInput = true;
-            this.isBlankInput = false; 
+          } if (this.response.code == 406) {
 
-          }if (this.response.code == 404) {
-           
-            this.message = this.response.message ;
+            let remAttempt = 3 - this.response.loginAttemted
+
+            this.message = "Wrong token!" + remAttempt + " attempt remaining and it will block after";
             this.isWrongInput = true;
-            this.isBlankInput = false; 
+            this.isBlankInput = false;
+
+          } if (this.response.code == 404) {
+
+            this.message = this.response.message;
+            this.isWrongInput = true;
+            this.isBlankInput = false;
 
           } else {
-           
+
             this.message = 'Login Failed';
             this.isWrongInput = true;
             this.isBlankInput = false;
@@ -148,7 +148,7 @@ export class LoginComponent implements OnInit {
           this.message = err;
         }
       );
-    }else{
+    } else {
       this.isTokenblank = true
     }
 
@@ -157,6 +157,7 @@ export class LoginComponent implements OnInit {
   isSentEmail: boolean = false;
   errorMessage: string = ""
   successMessage: string = ""
+  newTokenAttempt: number
   requestNewToken() {
     this.LoginService.generateToken(this.authToken).subscribe(
       (response) => {
@@ -166,7 +167,7 @@ export class LoginComponent implements OnInit {
 
         //FOR UNIT TESTING
         this.messages = this.response
-
+        let remAttempt;
         if (this.response.code == 200) {
           this.isSentEmail = true
           this.isWrongInput = false;
@@ -175,13 +176,16 @@ export class LoginComponent implements OnInit {
           //this.email = "supplier@gmail.com"
           this.email = this.response.emailAddress
           this.successMessage = this.response.message
+          
+          remAttempt = 3 - this.response.loginAttemted
+          this.newTokenAttempt = remAttempt
           setTimeout(() => {
             this.isSent = false;
           }, 1500);
         } else if (this.response.code == 400) {
           this.isSentEmail = false
-          this.errorMessage = this.response.message
-        } else {
+          this.errorMessage = this.response.message          
+        }  else {
           this.isSentEmail = false
           this.errorMessage = this.response.message
         }
