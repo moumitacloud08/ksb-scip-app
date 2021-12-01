@@ -132,6 +132,12 @@ export class LoginComponent implements OnInit {
 
           } if (this.response.code == 404) {
 
+            this.message = this.response.message + this.response.blockedUntilDateTime;
+            this.isWrongInput = true;
+            this.isBlankInput = false;
+
+          }else if (this.response.code == 410) {
+
             this.message = this.response.message;
             this.isWrongInput = true;
             this.isBlankInput = false;
@@ -176,7 +182,7 @@ export class LoginComponent implements OnInit {
           //this.email = "supplier@gmail.com"
           this.email = this.response.emailAddress
           this.successMessage = this.response.message
-          
+
           remAttempt = 3 - this.response.loginAttemted
           this.newTokenAttempt = remAttempt
           setTimeout(() => {
