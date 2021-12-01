@@ -10,7 +10,9 @@
   display: flex;
   align-items: flex-end;
 }
-
+table{
+  table-layout: fixed;
+}
 th {
   text-align: center;
   font-family: "Roboto", sans-serif;
@@ -167,7 +169,11 @@ input::placeholder {
 .clear-icon-class:hover {
   opacity: 1;
 }
-
+.ellipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .size-big {
   width: 28px !important;
   height: 32px !important;
