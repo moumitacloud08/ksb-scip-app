@@ -872,6 +872,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     }
     if (!results[parentIndex].isStatEmpty && results[parentIndex].statisticalGoodsNumber.length < 8) {
       results[parentIndex].isRowInvalid = true
+      results[parentIndex].isStatGoodInvalid = true
+    }else if(!results[parentIndex].isStatEmpty && results[parentIndex].statisticalGoodsNumber.length >= 8){
+      results[parentIndex].isStatGoodInvalid = false
+
     }
     this.results = results
 
