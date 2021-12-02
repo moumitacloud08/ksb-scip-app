@@ -520,7 +520,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     let dataChangeCount = 0;
     let dataList = []
     let resultTemp = Object.assign([], this.resultsTemp);
-    this.results = this.validateRow(this.results)
+   // this.results = this.validateRow(this.results)
     let rowInvalidCount = 0;
 
     this.results.forEach(function (valueNew) {
@@ -811,6 +811,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   invalidRowCount = 0
   checkRowvalidity() {
     console.log("===========");
+    console.log(this.results);
     this.invalidRowCount = 0
     let invalidRowCount = this.invalidRowCount;
     this.results.forEach(function (value) {
@@ -869,7 +870,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     } else if (results[parentIndex].isSCIPEmpty && !results[parentIndex].isStatEmpty && results[parentIndex].isCASNumberEmpty) {
       results[parentIndex].isRowInvalid = true
     }
-    if (results[parentIndex].statisticalGoodsNumber.length < 8) {
+    if (!results[parentIndex].isStatEmpty && results[parentIndex].statisticalGoodsNumber.length < 8) {
       results[parentIndex].isRowInvalid = true
     }
     this.results = results
