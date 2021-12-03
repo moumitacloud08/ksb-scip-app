@@ -20,20 +20,25 @@ export class HeaderComponent implements OnInit {
   ) {
     translate.addLangs(cons.langArray);
     translate.setDefaultLang(cons.DEFAULT_LANG);
-   }
+  }
   faSignOutAlt = faSignOutAlt;
-  isloggedIn:boolean = false;
+  isloggedIn: boolean = false;
 
-  lang:string = ''
-  appl:string = ''
-  key:string = ''
+  lang: string = ''
+  appl: string = ''
+  key: string = ''
+  pageURL: string = ""
   ngOnInit(): void {
     if (this.localStorageService.retrieve("user") != null) {
       this.isloggedIn = true;
       this.fetchmailId();
-    }else{
+    } else {
       this.isloggedIn = false;
     }
+    console.log(this.router.url);
+    this.pageURL = this.router.url
+    if (this.pageURL == '/record-success') { this.isloggedIn = false; }
+
     this.appl = this.localStorageService.retrieve("app")
     this.key = this.localStorageService.retrieve("key")
     this.lang = this.localStorageService.retrieve("lang")
@@ -56,11 +61,11 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.localStorageService.clear('user');
     this.localStorageService.clear('api_token');
-   
-    if(this.lang != '' && this.lang != undefined && this.appl != '' && this.appl != undefined && this.key != ''  && this.key != undefined){
+
+    if (this.lang != '' && this.lang != undefined && this.appl != '' && this.appl != undefined && this.key != '' && this.key != undefined) {
       console.log("navigating to vendoer");
-      this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl,key:this.key,spras:this.lang },queryParamsHandling: 'merge' });
-    }else{
+      this.router.navigate(['/vendorplatform'], { queryParams: { appl: this.appl, key: this.key, spras: this.lang }, queryParamsHandling: 'merge' });
+    } else {
       this.router.navigateByUrl('/');
     }
   }
