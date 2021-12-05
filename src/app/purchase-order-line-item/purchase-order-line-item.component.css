@@ -1,5 +1,5 @@
 .body-container {
-  padding: 10px 100px;
+  padding: 10px 20px;
 }
 .ptext {
   flex: 1;
@@ -9,6 +9,53 @@
   justify-content: flex-end;
   display: flex;
   align-items: flex-end;
+}
+.table-container{
+  display: flex;
+  justify-content: space-between;
+}
+.table-toggle{
+  padding: 10px;
+  border: 1px solid #CCC;
+  flex: 30%;
+  margin-right: 10px;
+  display: none;
+  flex-wrap: wrap;
+}
+.tbl-active{
+  display: block;
+}
+.data-count{
+  border-right: 2px solid #CCC;
+  margin: 10px 5px;
+  padding-right: 20px;
+}
+.data-count:first-child{
+  margin-left: 0;
+}
+.data-count:last-child{
+  border: none;
+}
+.table-detail{
+  flex: 70%;
+  padding: 10px;
+  border: 1px solid #CCC;
+  position: relative;
+}
+.toggle-btn-container{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  cursor: pointer;
+  color: #b6b5b5;
+}
+.toggle-btn-container.close{
+  transform: rotate(0deg);
+  transition: transform 1s linear;
+}
+.toggle-btn-container.open{
+  transform: rotate(180deg);
+  transition: transform 1s linear;
 }
 table{
   table-layout: fixed;

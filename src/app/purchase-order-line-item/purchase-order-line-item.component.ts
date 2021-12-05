@@ -50,6 +50,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   iconCopyAlt = 'copy';
   results: purchasedetails[];
   activeParentIndex: number;
+  showToggleTable = false;
   constructor(
     private localStorageService: LocalStorageService,
     private purchaseOrderLineItemService: PurchaseOrderLineItemService,
@@ -1050,5 +1051,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     // Download PDF document  
     doc.save('table.pdf');
+  }
+  toggleTable(){
+    this.showToggleTable = !this.showToggleTable;
   }
 }
