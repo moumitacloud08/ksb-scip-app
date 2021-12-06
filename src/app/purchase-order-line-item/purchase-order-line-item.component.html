@@ -16,225 +16,284 @@
     </div>
   </div>
   <div class="table-container">
-    <table class="table" id="waypointsTable">
-      <thead class="table-th">
-        <tr>
-          <!-- <th *ngFor="let head of headElements" scope="col">{{ head }}</th> -->
-          <th width="9%">{{'Purchase_Order_col' | translate}}</th>
-          <th width="9%">{{'Line_Item_col' | translate}}</th>
-          <th width="10%">{{'SCIP_Relevant_col' | translate}}</th>
-          <th width="11%">{{'SCIP_No_col' | translate}}</th>
-          <th width="13%">{{'Statistical_Goods_No_col' | translate}}</th>
-          <th width="13%">{{'CAS_No_col' | translate}}</th>
-          <th width="9%">
-            <div style="margin-left: -1px;">{{'Material_Category_col' | translate}}</div>
-          </th>
-          <th width="9%">
-            Status
-          </th>
-          <th width="9%">{{'Add_row_col' | translate}}</th>
-          <th width="8%">
-            <div style="margin-right: 22px;width: 73px;">{{'Clear_data_col' | translate}}</div>
-          </th>
-        </tr>
-      </thead>
-      <tbody (mouseleave)="mouseLeaveTab()">
-        <tr [ngClass]="{'hover':el.isDeleteShow}"
-          *ngFor="let el of results |  filter:searchedKeyword | paginate : {itemsPerPage: tableSize,currentPage: page,totalItems: count};index as parentIndex; "
-          class="table-row" id="item_{{parentIndex}}" (mouseover)="mouseEnterRow(parentIndex)"
-          (mouseleave)="mouseLeaveRow(parentIndex)">
-          <!-- {{ el.rowId }} -->
-          <td width="9%">
-            <img [src]="iconCopy" [alt]="iconCopyAlt" class="clear-icon-class size-big"
-              *ngIf="el.isSubRow && !el.isClearData" />
-            <!-- {{el.parentRowId}}---{{ el.rowId }} ---  -->
-            {{ el.purchaseOrderNumber }}
-          </td>
-          <td width="9%">{{ el.lineItemNumber }}</td>
-          <td width="10%">
-            <!-- {{ el.scipRelavent }} -->
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <span style="font-size:  0.875rem;"
-                  *ngIf="el.scipRelavent == '1' || el.scipRelavent == null">{{'Select_option' | translate}}</span>
-                <span *ngIf="el.scipRelavent == '2'">{{'yes_option' | translate}}</span>
-                <span *ngIf="el.scipRelavent == '3'">{{'no_option' | translate}}</span>
-                <span
-                  *ngIf="el.scipRelavent != '1' && el.scipRelavent != '2' && el.scipRelavent != '3'">{{el.scipRelavent}}</span>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button *ngIf="el.scipRelavent != '1' && el.scipRelavent != null" class="dropdown-item" type="button"
-                  (click)="getSCIPRel(parentIndex,'1')">
-                  <span style="font-size:  0.875rem;">{{'Select_option' | translate}}</span>
+    <div class="table-toggle" [ngClass]="{'tbl-active':showToggleTable}">
+      <div class="d-flex">
+        <div class="data-count">Total PO: 4</div>
+        <div class="data-count">Total PO: 4</div>
+        <div class="data-count">Total PO: 4</div>
+      </div>
+      <table class="table flex">
+        <thead class="table-th">
+          <tr>
+            <td>Purchase Order</td>
+            <td>PO Date</td>
+            <td>SCIp Status</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-row">
+            <td>4510000009178</td>
+            <td>1 Oct 2021</td>
+            <td>SCIP Updated</td>
+          </tr>
+          <tr class="table-row">
+            <td>4510000009178</td>
+            <td>1 Oct 2021</td>
+            <td>SCIP Updated</td>
+          </tr>
+          <tr class="table-row">
+            <td>4510000009178</td>
+            <td>1 Oct 2021</td>
+            <td>SCIP Updated</td>
+          </tr>
+          <tr class="table-row">
+            <td>4510000009178</td>
+            <td>1 Oct 2021</td>
+            <td>SCIP Updated</td>
+          </tr>
+          <tr class="table-row">
+            <td>4510000009178</td>
+            <td>1 Oct 2021</td>
+            <td>SCIP Updated</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-detail">
+      <div class="toggle-btn-container"  [ngClass]="showToggleTable ? 'open' : 'close'" (click)="toggleTable()">
+        <span>>></span>
+      </div>
+      <div class="d-flex">
+        <div class="data-count">Total PO: 4</div>
+        <div class="data-count">Total PO: 4</div>
+        <div class="data-count">Total PO: 4</div>
+      </div>
+      <table class="table" id="waypointsTable">
+        <thead class="table-th">
+          <tr>
+            <!-- <th *ngFor="let head of headElements" scope="col">{{ head }}</th> -->
+            <th width="9%">{{'Purchase_Order_col' | translate}}</th>
+            <th width="9%">{{'Line_Item_col' | translate}}</th>
+            <th width="10%">{{'SCIP_Relevant_col' | translate}}</th>
+            <th width="11%">{{'SCIP_No_col' | translate}}</th>
+            <th width="13%">{{'Statistical_Goods_No_col' | translate}}</th>
+            <th width="13%">{{'CAS_No_col' | translate}}</th>
+            <th width="9%">
+              <div style="margin-left: -1px;">{{'Material_Category_col' | translate}}</div>
+            </th>
+            <th width="9%">
+              Status
+            </th>
+            <th width="9%">{{'Add_row_col' | translate}}</th>
+            <th width="8%">
+              <div style="margin-right: 22px;width: 73px;">{{'Clear_data_col' | translate}}</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody (mouseleave)="mouseLeaveTab()">
+          <tr [ngClass]="{'hover':el.isDeleteShow}"
+            *ngFor="let el of results |  filter:searchedKeyword | paginate : {itemsPerPage: tableSize,currentPage: page,totalItems: count};index as parentIndex; "
+            class="table-row" id="item_{{parentIndex}}" (mouseover)="mouseEnterRow(parentIndex)"
+            (mouseleave)="mouseLeaveRow(parentIndex)">
+            <!-- {{ el.rowId }} -->
+            <td width="9%">
+              <img [src]="iconCopy" [alt]="iconCopyAlt" class="clear-icon-class size-big"
+                *ngIf="el.isSubRow && !el.isClearData" />
+              <!-- {{el.parentRowId}}---{{ el.rowId }} ---  -->
+              {{ el.purchaseOrderNumber }}
+            </td>
+            <td width="9%">{{ el.lineItemNumber }}</td>
+            <td width="10%">
+              <!-- {{ el.scipRelavent }} -->
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <span style="font-size:  0.875rem;"
+                    *ngIf="el.scipRelavent == '1' || el.scipRelavent == null">{{'Select_option' | translate}}</span>
+                  <span *ngIf="el.scipRelavent == '2'">{{'yes_option' | translate}}</span>
+                  <span *ngIf="el.scipRelavent == '3'">{{'no_option' | translate}}</span>
+                  <span
+                    *ngIf="el.scipRelavent != '1' && el.scipRelavent != '2' && el.scipRelavent != '3'">{{el.scipRelavent}}</span>
                 </button>
-                <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'2')">
-                  <span style="font-size:  0.875rem;">{{'yes_option' | translate}}</span>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <button *ngIf="el.scipRelavent != '1' && el.scipRelavent != null" class="dropdown-item" type="button"
+                    (click)="getSCIPRel(parentIndex,'1')">
+                    <span style="font-size:  0.875rem;">{{'Select_option' | translate}}</span>
+                  </button>
+                  <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'2')">
+                    <span style="font-size:  0.875rem;">{{'yes_option' | translate}}</span>
+                  </button>
+                  <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'3')">
+                    <span style="font-size:  0.875rem;">{{'no_option' | translate}}</span>
+                  </button>
+                </div>
+              </div>
+            </td>
+            <td width="11%">
+              <div (mouseenter)="mouseEnter(parentIndex,'scip') " (mouseleave)="mouseLeave(parentIndex,'scip')"
+                style="margin-left: -21px;">
+                <div *ngIf="el.isSCIPSpanShow == true">
+                  <span *ngIf="!el.scipNumber || el.scipNumber ==''" class="text-class">text</span>
+                  <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }}
+                    <img
+                      *ngIf="(el.isInvalid == true && el.scipNumber != '')"
+                      [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" />
+                      <!-- <img
+                      *ngIf="(el.isInvalid == true && el.scipNumber != '') || ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))"
+                      [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" /> -->
+                  </span>
+                </div>
+                <div class="form-group" *ngIf="el.isSCIPEditShow == true">
+                  <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
+                    [ngClass]="{'text-red-border-class':el.isInvalid}" class="table-text-border-class"
+                    [(ngModel)]="el.scipNumber" (keyup)="validateScip(parentIndex)" (keydown)="validateScip(parentIndex)"
+                    (click)="clickevent(parentIndex)" />
+                  <img *ngIf="el.isInvalid == true && el.scipNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
+                    class="icon-warning-class" />
+                  <a (click)="clearSCIPData(parentIndex)" style="cursor: pointer" *ngIf="el.scipNumber != ''">
+                    <img [ngClass]="{'icon-cross-invalid-class':el.isInvalid, 'icon-cross-class':!el.isInvalid}"
+                      [src]="iconCross" [alt]="iconCross" />
+                  </a>
+
+                </div>
+              </div>
+              <!-- <ksb-tooltip
+                [showTooltip]="!el.isSCIPSpanShow && ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))"
+                [tooltipText]="'Please Enter SCIP no.'"></ksb-tooltip> -->
+
+          
+            </td>
+            <td width="13%">
+              <div (mouseenter)="mouseEnter(parentIndex,'stat') " (mouseleave)="mouseLeave(parentIndex,'stat')"
+                style="margin-left: -21px;">
+                <div *ngIf="el.isStatSpanShow == true">
+                  <span *ngIf="!el.statisticalGoodsNumber || el.statisticalGoodsNumber == ''" class="text-class">text</span>
+                  <span [ngClass]="{'span-red-border-class':el.isStatGoodInvalid}">{{ el.statisticalGoodsNumber }}
+                    <img
+                      *ngIf="(el.isStatGoodInvalid == true && el.statisticalGoodsNumber != '') || ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isCASNumberEmpty && el.isStatEmpty)"
+                      [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" />
+                  </span>
+                </div>
+                <div class="form-group" *ngIf="el.isStatEditShow == true">
+                  <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
+                    id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
+                    [ngClass]="{'text-red-border-class':el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''}"
+                    [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)"
+                    (keyup)="validateStatGood(parentIndex)" (keydown)="validateStatGood(parentIndex)" />
+                  <a (click)="clearStatisticalData(parentIndex)" style="cursor: pointer"
+                    *ngIf="el.statisticalGoodsNumber != ''">
+                    <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
+                  </a>
+                </div>
+              </div>
+              <!-- <div class="stat-warn" *ngIf="el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''">
+                <img [src]="crossiconWarning" [alt]="crossiconWarningdAlt" class="cross-warning-class" />
+                <span>
+                  statisticalGoodsNumber no should be 8 digit
+                </span>
+              </div> -->
+              <ksb-tooltip
+                [showTooltip]="!el.isStatSpanShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isCASNumberEmpty && el.isStatEmpty)"
+                [tooltipText]="'Please Enter Statistical Goods no.'"></ksb-tooltip>
+              <!-- <div class="stat-empty-warn" *ngIf="el.isStatEmpty">
+                <span>
+                  If CAS no. is entered then statistical goods no. needs to e provided
+                </span>
+              </div> -->
+              <ksb-tooltip
+                [showTooltip]="el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''"
+                [tooltipText]="'statisticalGoodsNumber no should be 8 digit'"></ksb-tooltip>
+            </td>
+            <td width="13%">
+              <div (mouseenter)="mouseEnter(parentIndex,'cas') " (mouseleave)="mouseLeave(parentIndex,'cas')"
+                >
+                <div *ngIf="el.isCasSpanShow == true" class="ellipsis" style="margin: 0 auto;max-width: 66%;">
+                  <span *ngIf="!el.casnumber || el.casnumber==''" class="text-class">text</span>
+                  <span>{{ el.casnumber }}
+                    <img *ngIf="((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)"
+                      [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" />
+                  </span>
+                </div>
+                <div class="form-group" *ngIf="el.isCasEditShow == true">
+                  <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
+                    class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)"
+                    (keyup)="validateCASNo(parentIndex)" (keydown)="validateCASNo(parentIndex)" />
+                  <a (click)="clearCasNum(parentIndex)" style="cursor: pointer" *ngIf="el.casnumber != ''">
+                    <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
+                  </a>
+                </div>
+              </div>
+              <ksb-tooltip
+                [showTooltip]="el.isCasEditShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)"
+                [tooltipText]="'Please enter Cas No.'"></ksb-tooltip>
+              <!-- <div class="cas-empty-warn" *ngIf="el.isCASNumberEmpty">
+                <span>
+                  If statistical goods no. is entered then CAS no. needs to e provided
+                </span>
+              </div> -->
+            </td>
+            <td width="9%">
+              <div (mouseenter)="mouseEnter(parentIndex,'mat') " (mouseleave)="mouseLeave(parentIndex,'mat')"
+                style="margin-left: -21px;">
+                <div *ngIf="el.isMatSpanShow == true">
+                  <span class="text-class">text</span>
+                  <span>{{ el.materialCategory }}</span>
+                </div>
+                <div class="form-group" *ngIf="el.isMatEditShow == true">
+                  <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
+                    class="table-text-border-class" style="width:99%" [(ngModel)]="el.materialCategory"
+                    (click)="clickevent(parentIndex)" />
+                  <a (click)="clearMatCat(parentIndex)" style="cursor: pointer" *ngIf="el.materialCategory != ''">
+                    <img class="icon-cross-mat-class" [src]="iconCross" [alt]="iconCross" />
+                  </a>
+                </div>
+              </div>
+
+              <!--div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false" (click)="selectMaterial('','','')">
+                  <span *ngIf="el.isSelected == false" style="font-size:  0.875rem;">Material Category</span> <span
+                    *ngIf="el.isSelected == true">{{el.selectedCat}}</span>
                 </button>
-                <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'3')">
-                  <span style="font-size:  0.875rem;">{{'no_option' | translate}}</span>
-                </button>
-              </div>
-            </div>
-          </td>
-          <td width="11%">
-            <div (mouseenter)="mouseEnter(parentIndex,'scip') " (mouseleave)="mouseLeave(parentIndex,'scip')"
-              style="margin-left: -21px;">
-              <div *ngIf="el.isSCIPSpanShow == true">
-                <span *ngIf="!el.scipNumber || el.scipNumber ==''" class="text-class">text</span>
-                <span [ngClass]="{'span-red-border-class':el.isInvalid}">{{ el.scipNumber }}
-                  <img
-                    *ngIf="(el.isInvalid == true && el.scipNumber != '')"
-                    [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" />
-                    <!-- <img
-                    *ngIf="(el.isInvalid == true && el.scipNumber != '') || ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))"
-                    [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" /> -->
-                </span>
-              </div>
-              <div class="form-group" *ngIf="el.isSCIPEditShow == true">
-                <input type="text" name="scipNumber{{parentIndex}}" id="scipNumber{{parentIndex}}"
-                  [ngClass]="{'text-red-border-class':el.isInvalid}" class="table-text-border-class"
-                  [(ngModel)]="el.scipNumber" (keyup)="validateScip(parentIndex)" (keydown)="validateScip(parentIndex)"
-                  (click)="clickevent(parentIndex)" />
-                <img *ngIf="el.isInvalid == true && el.scipNumber != ''" [src]="iconWarning" [alt]="iconWarningdAlt"
-                  class="icon-warning-class" />
-                <a (click)="clearSCIPData(parentIndex)" style="cursor: pointer" *ngIf="el.scipNumber != ''">
-                  <img [ngClass]="{'icon-cross-invalid-class':el.isInvalid, 'icon-cross-class':!el.isInvalid}"
-                    [src]="iconCross" [alt]="iconCross" />
-                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <button class="dropdown-item" type="button" *ngFor="let item of el.materialCategory;index as childIndex"
+                    (click)="selectMaterial(item,parentIndex,elements)"><span
+                      style="font-size:  0.875rem;">{{item}}</span></button>
 
-              </div>
-            </div>
-            <!-- <ksb-tooltip
-              [showTooltip]="!el.isSCIPSpanShow && ((el.isSCIPEmpty && el.isStatEmpty && !el.isCASNumberEmpty) || (el.isSCIPEmpty && !el.isStatEmpty && el.isCASNumberEmpty))"
-              [tooltipText]="'Please Enter SCIP no.'"></ksb-tooltip> -->
+                </div>
+              </div-->
+            </td>
+            <td style="width: 9%;">{{ el.submitStatus }}</td>
+            <td width="9%">
+              <a (click)="editPurchaseorderLine(parentIndex,el.rowId)" class="enabled-class" *ngIf="!el.isbuttonDisabled">
+                <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
+              </a>
+              <a class="disabled-class" *ngIf="el.isbuttonDisabled">
+                <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
+              </a>
+            </td>
+            <td width="8%">
+              <a class="enabled-class" *ngIf="el.isClearData && !el.isSubRow && !el.isbuttonDisabled" (click)="clearRowData(parentIndex)"><img
+                  [src]="iconClearData" [alt]="iconClearDatadAlt" class="clear-icon-class" /></a>
+              <a class="enabled-class" *ngIf="el.isSubRow && !el.isClearData && !el.isbuttonDisabled" (click)="getDeleteRowIndex(parentIndex)"
+                data-toggle="modal" data-target="#myModalDeleteRow"><img [src]="iconDelete" [alt]="iconDeleteAlt"
+                  class="clear-icon-class" /></a>
 
-        
-          </td>
-          <td width="13%">
-            <div (mouseenter)="mouseEnter(parentIndex,'stat') " (mouseleave)="mouseLeave(parentIndex,'stat')"
-              style="margin-left: -21px;">
-              <div *ngIf="el.isStatSpanShow == true">
-                <span *ngIf="!el.statisticalGoodsNumber || el.statisticalGoodsNumber == ''" class="text-class">text</span>
-                <span [ngClass]="{'span-red-border-class':el.isStatGoodInvalid}">{{ el.statisticalGoodsNumber }}
-                  <img
-                    *ngIf="(el.isStatGoodInvalid == true && el.statisticalGoodsNumber != '') || ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isCASNumberEmpty && el.isStatEmpty)"
-                    [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" />
-                </span>
-              </div>
-              <div class="form-group" *ngIf="el.isStatEditShow == true">
-                <input type="text" name="statisticalGoodsNumber{{parentIndex}}"
-                  id="statisticalGoodsNumber{{parentIndex}}" class="table-text-border-class"
-                  [ngClass]="{'text-red-border-class':el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''}"
-                  [(ngModel)]="el.statisticalGoodsNumber" (click)="clickevent(parentIndex)"
-                  (keyup)="validateStatGood(parentIndex)" (keydown)="validateStatGood(parentIndex)" />
-                <a (click)="clearStatisticalData(parentIndex)" style="cursor: pointer"
-                  *ngIf="el.statisticalGoodsNumber != ''">
-                  <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
-                </a>
-              </div>
-            </div>
-            <!-- <div class="stat-warn" *ngIf="el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''">
-              <img [src]="crossiconWarning" [alt]="crossiconWarningdAlt" class="cross-warning-class" />
-              <span>
-                statisticalGoodsNumber no should be 8 digit
-              </span>
-            </div> -->
-            <ksb-tooltip
-              [showTooltip]="!el.isStatSpanShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isCASNumberEmpty && el.isStatEmpty)"
-              [tooltipText]="'Please Enter Statistical Goods no.'"></ksb-tooltip>
-            <!-- <div class="stat-empty-warn" *ngIf="el.isStatEmpty">
-              <span>
-                If CAS no. is entered then statistical goods no. needs to e provided
-              </span>
-            </div> -->
-            <ksb-tooltip
-              [showTooltip]="el.isStatGoodInvalid == true && el.isDeleteShow == true && el.statisticalGoodsNumber != ''"
-              [tooltipText]="'statisticalGoodsNumber no should be 8 digit'"></ksb-tooltip>
-          </td>
-          <td width="13%">
-            <div (mouseenter)="mouseEnter(parentIndex,'cas') " (mouseleave)="mouseLeave(parentIndex,'cas')"
-              >
-              <div *ngIf="el.isCasSpanShow == true" class="ellipsis" style="margin: 0 auto;max-width: 66%;">
-                <span *ngIf="!el.casnumber || el.casnumber==''" class="text-class">text</span>
-                <span>{{ el.casnumber }}
-                  <img *ngIf="((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)"
-                    [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" />
-                </span>
-              </div>
-              <div class="form-group" *ngIf="el.isCasEditShow == true">
-                <input type="text" name="casnumber{{parentIndex}}" id="casnumber{{parentIndex}}"
-                  class="table-text-border-class" [(ngModel)]="el.casnumber" (click)="clickevent(parentIndex)"
-                  (keyup)="validateCASNo(parentIndex)" (keydown)="validateCASNo(parentIndex)" />
-                <a (click)="clearCasNum(parentIndex)" style="cursor: pointer" *ngIf="el.casnumber != ''">
-                  <img class="icon-cross-class" [src]="iconCross" [alt]="iconCross" />
-                </a>
-              </div>
-            </div>
-            <ksb-tooltip
-              [showTooltip]="el.isCasEditShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)"
-              [tooltipText]="'Please enter Cas No.'"></ksb-tooltip>
-            <!-- <div class="cas-empty-warn" *ngIf="el.isCASNumberEmpty">
-              <span>
-                If statistical goods no. is entered then CAS no. needs to e provided
-              </span>
-            </div> -->
-          </td>
-          <td width="9%">
-            <div (mouseenter)="mouseEnter(parentIndex,'mat') " (mouseleave)="mouseLeave(parentIndex,'mat')"
-              style="margin-left: -21px;">
-              <div *ngIf="el.isMatSpanShow == true">
-                <span class="text-class">text</span>
-                <span>{{ el.materialCategory }}</span>
-              </div>
-              <div class="form-group" *ngIf="el.isMatEditShow == true">
-                <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
-                  class="table-text-border-class" style="width:99%" [(ngModel)]="el.materialCategory"
-                  (click)="clickevent(parentIndex)" />
-                <a (click)="clearMatCat(parentIndex)" style="cursor: pointer" *ngIf="el.materialCategory != ''">
-                  <img class="icon-cross-mat-class" [src]="iconCross" [alt]="iconCross" />
-                </a>
-              </div>
-            </div>
-
-            <!--div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" (click)="selectMaterial('','','')">
-                <span *ngIf="el.isSelected == false" style="font-size:  0.875rem;">Material Category</span> <span
-                  *ngIf="el.isSelected == true">{{el.selectedCat}}</span>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button" *ngFor="let item of el.materialCategory;index as childIndex"
-                  (click)="selectMaterial(item,parentIndex,elements)"><span
-                    style="font-size:  0.875rem;">{{item}}</span></button>
-
-              </div>
-            </div-->
-          </td>
-          <td style="width: 9%;">{{ el.submitStatus }}</td>
-          <td width="9%">
-            <a (click)="editPurchaseorderLine(parentIndex,el.rowId)" class="enabled-class" *ngIf="!el.isbuttonDisabled">
-              <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
-            </a>
-            <a class="disabled-class" *ngIf="el.isbuttonDisabled">
-              <img [src]="iconPlusCircle" [alt]="iconPlusAlt" class="plus-class" />
-            </a>
-          </td>
-          <td width="8%">
-            <a class="enabled-class" *ngIf="el.isClearData && !el.isSubRow && !el.isbuttonDisabled" (click)="clearRowData(parentIndex)"><img
-                [src]="iconClearData" [alt]="iconClearDatadAlt" class="clear-icon-class" /></a>
-            <a class="enabled-class" *ngIf="el.isSubRow && !el.isClearData && !el.isbuttonDisabled" (click)="getDeleteRowIndex(parentIndex)"
-              data-toggle="modal" data-target="#myModalDeleteRow"><img [src]="iconDelete" [alt]="iconDeleteAlt"
-                class="clear-icon-class" /></a>
-
-            <a  class="disabled-class" *ngIf="el.isClearData && !el.isSubRow && el.isbuttonDisabled"><img [src]="iconClearData"
-                [alt]="iconClearDatadAlt" class="clear-icon-class" /></a>
-            <a class="disabled-class" *ngIf="el.isSubRow && !el.isClearData && el.isbuttonDisabled" ><img [src]="iconDelete"
-                [alt]="iconDeleteAlt" class="clear-icon-class" /></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <a  class="disabled-class" *ngIf="el.isClearData && !el.isSubRow && el.isbuttonDisabled"><img [src]="iconClearData"
+                  [alt]="iconClearDatadAlt" class="clear-icon-class" /></a>
+              <a class="disabled-class" *ngIf="el.isSubRow && !el.isClearData && el.isbuttonDisabled" ><img [src]="iconDelete"
+                  [alt]="iconDeleteAlt" class="clear-icon-class" /></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="table-footer">
+        <div class="d-flex justify-content-right my-pagination flex">
+          <pagination-controls responsive="true" previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="table-footer">
     <div class="button-container-footer flex">
@@ -250,35 +309,6 @@
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-right my-pagination flex">
-      <pagination-controls responsive="true" previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
-      </pagination-controls>
-    </div>
-    <!-- <div class="pagination-container">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
-            <a>
-              <fa-icon [icon]="faLessThan" size="xs" class="icon-class" style="color: #adb5bd; "></fa-icon>
-            </a>
-          </li>
-          &nbsp;&nbsp;
-          <li class="page-item"><a class="page-link page-style">1</a></li>
-          &nbsp;
-          <li class="page-item"><a class="page-link page-style">2</a></li>
-          &nbsp;
-          <li class="page-item"><a class="page-link page-style">3</a></li>
-          &nbsp;
-          <li class="page-item"><a class="page-link page-style">4</a></li>
-          &nbsp;&nbsp;
-          <li class="page-item">
-            <a>
-              <fa-icon [icon]="faGreaterThan" size="xs" class="icon-class"></fa-icon>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div> -->
   </div>
   <div class="alert alert-primary duplicate-row-alert-class" role="alert" *ngIf="isRowDuplicated">
     {{ 'PO_line_duplicate_text' | translate}}
