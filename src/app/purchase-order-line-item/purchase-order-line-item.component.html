@@ -17,29 +17,30 @@
   </div>
   <div class="table-container">
     <div class="table-toggle" [ngClass]="{'tbl-active':showToggleTable}">
-      <div class="d-flex">
-        <div class="data-count">Total PO: 4</div>
-        <div class="data-count">Total PO: 4</div>
-        <div class="data-count">Total PO: 4</div>
+      <div class="d-flex header-input-container">
+        <div class="pl-1"><input type="text" placeholder="Start Date" class="header-input"/></div>
+        <div class="pl-1"><input type="text" placeholder="Start Date" class="header-input"/></div>
+        <div class="pl-1"><input type="text" placeholder="Start Date" class="header-input"/></div>
+        <div class="hamberger-menu"></div>
       </div>
       <table class="table flex">
         <thead class="table-th">
           <tr>
-            <td>Purchase Order</td>
-            <td>PO Date</td>
-            <td>SCIp Status</td>
+            <th>Purchase Order</th>
+            <th>PO Date</th>
+            <th>SCIP Status</th>
           </tr>
         </thead>
         <tbody>
           <tr class="table-row">
             <td>4510000009178</td>
             <td>1 Oct 2021</td>
-            <td>SCIP Updated</td>
+            <td><div class="success-icon"></div></td>
           </tr>
           <tr class="table-row">
             <td>4510000009178</td>
             <td>1 Oct 2021</td>
-            <td>SCIP Updated</td>
+            <td><div class="warning-icon"></div></td>
           </tr>
           <tr class="table-row">
             <td>4510000009178</td>
@@ -58,15 +59,20 @@
           </tr>
         </tbody>
       </table>
+      <div class="d-flex">
+        <div class="success-icon text-icon">SCIP Updated</div>
+        <div class="warning-icon text-icon">SCIP Required</div>
+      </div>
     </div>
     <div class="table-detail">
       <div class="toggle-btn-container"  [ngClass]="showToggleTable ? 'open' : 'close'" (click)="toggleTable()">
         <span>>></span>
       </div>
       <div class="d-flex">
-        <div class="data-count">Total PO: 4</div>
-        <div class="data-count">Total PO: 4</div>
-        <div class="data-count">Total PO: 4</div>
+        <div class="data-count text-disable font-weight-bold">Total PO: 4</div>
+        <div class="data-count text-error font-weight-bold">Total PO: 4</div>
+        <div class="data-count text-success font-weight-bold no-border">Total PO: 4</div>
+        <div class="hamberger-menu"></div>
       </div>
       <table class="table" id="waypointsTable">
         <thead class="table-th">
@@ -86,7 +92,7 @@
             </th>
             <th width="9%">{{'Add_row_col' | translate}}</th>
             <th width="8%">
-              <div style="margin-right: 22px;width: 73px;">{{'Clear_data_col' | translate}}</div>
+              <div style="margin-right: 22px;">{{'Clear_data_col' | translate}}</div>
             </th>
           </tr>
         </thead>

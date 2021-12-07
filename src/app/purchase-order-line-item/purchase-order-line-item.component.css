@@ -599,7 +599,56 @@ a.page-style:hover {
   display: inline-block;
   margin-left: 0.5rem;
 }
-
+.text-disable{
+  color: #CCC;
+}
+.text-warning{
+  color: #f7bcbc;
+}
+.text-success{
+  color: #08b564;
+}
+.text-error{
+  color: #fb3737;
+}
+.success-icon{
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  background-image: url('../../assets/images/successTick.jpeg');
+}
+.warning-icon{
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  background-image: url('../../assets/images/warning.jpeg');
+}
+.hamberger-menu{
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+  background: #FFFFFF url('../../assets/images/Hamburger_icon.svg.jpg') no-repeat 0 0;
+  background-size: 32px 32px;
+}
+.pl-1{
+  padding-right: 0.5rem !important;
+}
+.header-input-container{
+  margin-bottom: 0.5rem;
+}
+.header-input{
+  width: 5rem;
+}
+.text-icon {
+  margin-left: 1rem;
+  width: auto;
+  padding-left: 32px;
+}
+.no-border{
+  border: none;
+}
 /* sets font color for pagination to white */
 /* .my-pagination::ng-deep .ngx-pagination a {
   color: white;
