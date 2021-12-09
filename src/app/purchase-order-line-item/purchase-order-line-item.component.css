@@ -2,11 +2,10 @@
   padding: 10px 20px;
 }
 .ptext {
-  flex: 1;
+  flex: 40%;
 }
 .button-container {
-  flex: 1;
-  justify-content: flex-end;
+  flex: 60%;
   display: flex;
   align-items: flex-end;
 }
@@ -29,6 +28,8 @@
   border-right: 2px solid #CCC;
   margin: 10px 5px;
   padding-right: 20px;
+  line-height: 30px;
+  font-style: italic;
 }
 .data-count:first-child{
   margin-left: 0;
@@ -136,7 +137,7 @@ input::placeholder {
   font-family: "Roboto", sans-serif;
 }
 .text-border-class {
-  width: 80%;
+  width: 90%;
   padding: 3px 13px 5px 15px;
   margin: 10px 0px 13px;
   box-sizing: border-box;
@@ -611,29 +612,76 @@ a.page-style:hover {
 .text-error{
   color: #fb3737;
 }
-.success-icon{
+.open-icon{
   width: 24px;
   height: 24px;
   background-repeat: no-repeat;
   margin: 0 auto;
-  background-image: url('../../assets/images/successTick.jpeg');
+  background-image: url('../../assets/images/plus-circle.svg');
 }
-.warning-icon{
+.complete-icon{
   width: 24px;
   height: 24px;
   background-repeat: no-repeat;
   margin: 0 auto;
-  background-image: url('../../assets/images/warning.jpeg');
+  background-image: url('../../assets/images/check-circle.svg');
 }
-.hamberger-menu{
-  width: 32px;
-  height: 32px;
+.partial-icon{
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  background-image: url('../../assets/images/dash-circle-dotted.svg');
+}
+.new-icon{
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  background-image: url('../../assets/images/file-plus.svg');
+}
+.open-text{
+  padding-right: 24px;
+  background-repeat: no-repeat;
+  background-position: right;
+  margin: 10px;
+  background-image: url('../../assets/images/plus-circle.svg');
+}
+.complete-text{
+  padding-right: 24px;
+  background-repeat: no-repeat;
+  background-position: right;
+  margin: 10px;
+  background-image: url('../../assets/images/check-circle.svg');
+}
+.partial-text{
+  padding-right: 24px;
+  background-repeat: no-repeat;
+  background-position: right;
+  margin: 10px;
+  background-image: url('../../assets/images/dash-circle-dotted.svg');
+}
+.new-text{
+  padding-right: 24px;
+  background-repeat: no-repeat;
+  background-image: url('../../assets/images/file-plus.svg');
+  background-position: right;
+  margin: 10px;
+}
+.download-menu{
   margin-left: auto;
-  background: #FFFFFF url('../../assets/images/Hamburger_icon.svg.jpg') no-repeat 0 0;
-  background-size: 32px 32px;
+}
+.table-toggle table td{
+  line-height: 35px;
+}
+.pt-4{
+  padding-top: 64px!important;
 }
 .pl-1{
   padding-right: 0.5rem !important;
+}
+.pb-1{
+  padding-bottom: 8px!important;
 }
 .header-input-container{
   margin-bottom: 0.5rem;

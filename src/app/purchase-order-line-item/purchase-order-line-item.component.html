@@ -8,21 +8,28 @@
       <input type="text" class="text-border-class" name="scip" id="scip"
         placeholder="Search by SCIP no, Statistical goods no, CAS no" [(ngModel)]="searchedKeyword" />
     </div>
-    <div class="button-container">
-      <button type="button" class="button pdf-btn" (click)="SavePDF()">
-        <img [src]="iconPDF" [alt]="iconPDFAlt" class="pdf-class" />&nbsp;&nbsp;<span
-          class="scip-download-class">{{'Download_SCIP_Data_text' | translate}}</span>
-      </button>
+    <div class="button-container pb-1">
+      <div class="open-text">Open</div>
+      <div class="complete-text">Fully submitted</div>
+      <div class="partial-text">Partial submitted</div>
+      <div class="new-text">New</div>
     </div>
   </div>
   <div class="table-container">
-    <div class="table-toggle" [ngClass]="{'tbl-active':showToggleTable}">
-      <div class="d-flex header-input-container">
+    <div class="table-toggle pt-4" [ngClass]="{'tbl-active':showToggleTable}">
+      <!-- <div class="d-flex header-input-container">
         <div class="pl-1"><input type="text" placeholder="Start Date" class="header-input"/></div>
         <div class="pl-1"><input type="text" placeholder="Start Date" class="header-input"/></div>
         <div class="pl-1"><input type="text" placeholder="Start Date" class="header-input"/></div>
-        <div class="hamberger-menu"></div>
-      </div>
+        <div class="download-menu">
+          <div class="button-container">
+            <button type="button" class="button pdf-btn" (click)="SavePDF()">
+              <img [src]="iconPDF" [alt]="iconPDFAlt" class="pdf-class" />&nbsp;&nbsp;<span
+                class="scip-download-class">{{'Download_SCIP_Data_text' | translate}}</span>
+            </button>
+          </div>
+        </div>
+      </div> -->
       <table class="table flex">
         <thead class="table-th">
           <tr>
@@ -35,44 +42,47 @@
           <tr class="table-row">
             <td>4510000009178</td>
             <td>1 Oct 2021</td>
-            <td><div class="success-icon"></div></td>
+            <td><div class="open-icon"></div></td>
           </tr>
           <tr class="table-row">
             <td>4510000009178</td>
             <td>1 Oct 2021</td>
-            <td><div class="warning-icon"></div></td>
+            <td><div class="complete-icon"></div></td>
           </tr>
           <tr class="table-row">
             <td>4510000009178</td>
             <td>1 Oct 2021</td>
-            <td>SCIP Updated</td>
+            <td><div class="partial-icon"></div></td>
           </tr>
           <tr class="table-row">
             <td>4510000009178</td>
             <td>1 Oct 2021</td>
-            <td>SCIP Updated</td>
+            <td><div class="new-icon"></div></td>
           </tr>
           <tr class="table-row">
             <td>4510000009178</td>
             <td>1 Oct 2021</td>
-            <td>SCIP Updated</td>
+            <td><div class="complete-icon"></div></td>
           </tr>
         </tbody>
       </table>
-      <div class="d-flex">
-        <div class="success-icon text-icon">SCIP Updated</div>
-        <div class="warning-icon text-icon">SCIP Required</div>
-      </div>
     </div>
     <div class="table-detail">
       <div class="toggle-btn-container"  [ngClass]="showToggleTable ? 'open' : 'close'" (click)="toggleTable()">
         <span>>></span>
       </div>
       <div class="d-flex">
-        <div class="data-count text-disable font-weight-bold">Total PO: 4</div>
-        <div class="data-count text-error font-weight-bold">Total PO: 4</div>
-        <div class="data-count text-success font-weight-bold no-border">Total PO: 4</div>
-        <div class="hamberger-menu"></div>
+        <div class="data-count text-disable font-weight-bold">Total Line item: 20</div>
+        <div class="data-count text-error font-weight-bold">SCIP Details Updated: 4</div>
+        <div class="data-count text-success font-weight-bold no-border">SCIP Details Awaited: 6</div>
+        <div class="download-menu">
+          <div class="button-container justify-content-right">
+            <button type="button" class="button pdf-btn" (click)="SavePDF()">
+              <img [src]="iconPDF" [alt]="iconPDFAlt" class="pdf-class" />&nbsp;&nbsp;<span
+                class="scip-download-class">{{'Download_SCIP_Data_text' | translate}}</span>
+            </button>
+          </div>
+        </div>
       </div>
       <table class="table" id="waypointsTable">
         <thead class="table-th">
