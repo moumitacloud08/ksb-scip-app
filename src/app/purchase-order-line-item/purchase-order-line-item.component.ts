@@ -197,7 +197,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   prevIndex: number
   mouseEnter(parentIndex, field) {
     parentIndex = (this.page - 1) * 5 + parentIndex
-    console.log(" MOUSE ENTER " + this.prevIndex + " ---- " + parentIndex);
+    // console.log(" MOUSE ENTER " + this.prevIndex + " ---- " + parentIndex);
 
     if (this.prevIndex != parentIndex) {
       let resultTemp = this.resultsTemp
@@ -208,7 +208,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           }
           if (this.results[this.prevIndex].scipNumber == '' && this.results[this.prevIndex].statisticalGoodsNumber == ''
             && this.results[this.prevIndex].casnumber == '') {
-            console.log(" ROW EMPTY ");
+            // console.log(" ROW EMPTY ");
             this.results[this.prevIndex].isSCIPEmpty = false
             this.results[this.prevIndex].isCASNumberEmpty = false
             this.results[this.prevIndex].isStatEmpty = false
@@ -231,7 +231,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
         var count = 0;
         let emptySCIPValue = 0
-        console.log("scip number : " + results[parentIndex].scipNumber);
+        //console.log("scip number : " + results[parentIndex].scipNumber);
         // console.log(results);
         results.forEach(function (value) {
           if (count != parentIndex && results[count].lineItemNumber == results[parentIndex].lineItemNumber) {
@@ -334,7 +334,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     }
   }
   mouseLeaveTab() {
-    console.log("MOUSE mouseLeaveTab :");
+    //console.log("MOUSE mouseLeaveTab :");
     if (this.prevRow != -1) {
       this.results[this.prevRow].isRowHover = false
     }
@@ -349,7 +349,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.activeParentIndex = null;
     this.resetAllRow();
     if ((this.results[parentIndex + 1] == undefined || (parentIndex + 1) % 5 === 0) && (this.prevIndex != parentIndex)) {
-      console.log("INSIDE LAST INDEX");
+      //console.log("INSIDE LAST INDEX");
       this.validatSingleRow(parentIndex)
     }
   }
@@ -385,7 +385,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.purchaseOrderLineItemService
       .fetchPurchaseDetails()
       .then((data) => {
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
         this.response = JSON.parse(JSON.stringify(data));
         this.results = this.response.scipDetails.map((item) => {
           return new purchasedetails(
@@ -521,18 +521,14 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     let dataChangeCount = 0;
     let dataList = []
     let resultTemp = Object.assign([], this.resultsTemp);
-   // this.results = this.validateRow(this.results)
     let rowInvalidCount = 0;
 
     this.results.forEach(function (valueNew) {
-      // console.log(valueNew.scipNumber+" --- "+valueNew.statisticalGoodsNumber +" --- "+valueNew.casnumber + " "+valueNew.materialCategory);
       if (valueNew.scipNumber == '' && valueNew.statisticalGoodsNumber == '' &&
         valueNew.casnumber == '' && valueNew.materialCategory == '') {
         dataChangeCount++;
       }
-      // if (valueNew.isRowInvalid == true) {
-      //   rowInvalidCount++
-      // }
+
       resultTemp.forEach(function (valueOld) {
         if (valueNew.rowId == valueOld.rowId) {
           if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber ||
@@ -557,33 +553,53 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     //console.log(dataList);
 
     let uniqueDataList = this.removeDuplicates(dataList, "rowId");
-    //console.log(uniqueDataList)
-    let dataListFinal = []
-    uniqueDataList.forEach(function (value) {
-      if (value.scipRelavent == null) {
-        value.scipRelavent = "1"
-      }
-      dataListFinal.push({
-        "casnumber": value.casnumber,
-        "lineItemNumber": value.lineItemNumber,
-        "materialCategory": value.materialCategory,
-        "purchaseOrderNumber": value.purchaseOrderNumber,
-        "scipNumber": value.scipNumber,
-        "scipRelavent": value.scipRelavent,
-        "statisticalGoodsNumber": value.statisticalGoodsNumber,
-        "submitStatus": value.submitStatus
+    console.log(" <======uniqueDataList========>")
+    console.log(uniqueDataList)
 
+    let lineItemList = []
+    uniqueDataList.forEach(function (value) {
+      lineItemList.push(value.lineItemNumber);
+    })
+
+    let dataListFinal = []
+    lineItemList.forEach(function (lineItem) {
+      let dataTempList = []
+      uniqueDataList.forEach(function (value) {
+
+        if(lineItem == value.lineItemNumber){
+          if (value.scipRelavent == null) {
+            value.scipRelavent = "1"
+          }
+          dataTempList.push({
+            "casnumber": value.casnumber,
+            "lineItemNumber": value.lineItemNumber,
+            "materialCategory": value.materialCategory,
+            "purchaseOrderNumber": value.purchaseOrderNumber,
+            "scipNumber": value.scipNumber,
+            "scipRelavent": value.scipRelavent,
+            "statisticalGoodsNumber": value.statisticalGoodsNumber,
+            "submitStatus": value.submitStatus
+  
+          });         
+        }        
       });
-    });
+
+      var obj = {
+        "lineItemNumber":lineItem,
+        "lineItemDetails":dataTempList
+      }
+      dataListFinal.push(obj)
+    })
+
     let params = { "scipDetails": dataListFinal }
-    console.log("data change : " + dataChangeCount + " " + this.results.length);
+   
     if (dataChangeCount != this.results.length) {
       this.isAllDataCleared = false
     }
 
     console.log("<=========params==============>")
     console.log(JSON.stringify(params));
-    console.log(params)
+    //console.log(params)
     if (!this.isAllDataCleared) {
       this.purchaseOrderLineItemService
         .savePurchaseorderLine(params)
@@ -874,7 +890,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     if (!results[parentIndex].isStatEmpty && results[parentIndex].statisticalGoodsNumber.length < 8) {
       results[parentIndex].isRowInvalid = true
       results[parentIndex].isStatGoodInvalid = true
-    }else if(!results[parentIndex].isStatEmpty && results[parentIndex].statisticalGoodsNumber.length >= 8){
+    } else if (!results[parentIndex].isStatEmpty && results[parentIndex].statisticalGoodsNumber.length >= 8) {
       results[parentIndex].isStatGoodInvalid = false
 
     }
@@ -1057,7 +1073,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // Download PDF document  
     doc.save('table.pdf');
   }
-  toggleTable(){
+  toggleTable() {
     this.showToggleTable = !this.showToggleTable;
   }
 }
