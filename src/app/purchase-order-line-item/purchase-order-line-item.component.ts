@@ -559,6 +559,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     let lineItemList = []
     uniqueDataList.forEach(function (value) {
       lineItemList.push(value.lineItemNumber);
+      lineItemList = [...new Set(lineItemList)];
     })
 
     let dataListFinal = []
@@ -804,6 +805,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       resultTemp[lastIndex] = Object.assign({}, resultTemp[parentIndex])
       resultTemp[nextIndex].isSubRow = true
       resultTemp[lastIndex].isClearData = false
+      resultTemp[lastIndex].scipNumber = ''
+      resultTemp[lastIndex].statisticalGoodsNumber = ''
+      resultTemp[lastIndex].casnumber = ''
+      resultTemp[lastIndex].materialCategory = ''
 
     }
 
