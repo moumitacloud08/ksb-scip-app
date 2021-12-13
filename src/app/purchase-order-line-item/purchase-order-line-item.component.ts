@@ -129,6 +129,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       this.results[parentIndex].casnumber = ''
       this.results[parentIndex].materialCategory = ''
       this.results[parentIndex].isbuttonDisabled = true
+      this.results[parentIndex].isCASNumberEmpty = false
+      this.results[parentIndex].isSCIPEmpty = false
+      this.results[parentIndex].isStatEmpty = false
     } else if (scipRel == '1' || scipRel == '2') {
       if (!this.results[parentIndex].isSubRow) {
         let resultdata = this.results
@@ -144,6 +147,15 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.results = resultdata
       }
       this.results[parentIndex].isbuttonDisabled = false
+      if(this.results[parentIndex].casnumber == ''){
+        this.results[parentIndex].isCASNumberEmpty = true
+      }
+      if(this.results[parentIndex].scipNumber == ''){
+        this.results[parentIndex].isSCIPEmpty = true
+      }
+      if(this.results[parentIndex].statisticalGoodsNumber == ''){
+        this.results[parentIndex].isStatEmpty = true
+      }
     }
 
     // this.results[parentIndex].isSCIPSpanShow = true;
@@ -565,6 +577,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     let dataListFinal = []
     lineItemList.forEach(function (lineItem) {
       let dataTempList = []
+      var sciptNumber = ''
+      var purchaseOrderNumber = ''
+      var submitStatus = ''
       uniqueDataList.forEach(function (value) {
 
         if(lineItem == value.lineItemNumber){
@@ -573,21 +588,24 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           }
           dataTempList.push({
             "casnumber": value.casnumber,
-            "lineItemNumber": value.lineItemNumber,
+            "lineItemNo": value.lineItemNumber,
             "materialCategory": value.materialCategory,
-            "purchaseOrderNumber": value.purchaseOrderNumber,
-            "scipNumber": value.scipNumber,
-            "scipRelavent": value.scipRelavent,
-            "statisticalGoodsNumber": value.statisticalGoodsNumber,
-            "submitStatus": value.submitStatus
+            // "scipRelavent": value.scipRelavent,
+            "statisticalGoodsNumber": value.statisticalGoodsNumber
   
-          });         
+          });   
+          sciptNumber = value.scipNumber
+          purchaseOrderNumber = value.purchaseOrderNumber
+          submitStatus = value.submitStatus
         }        
       });
-
       var obj = {
         "lineItemNumber":lineItem,
-        "lineItemDetails":dataTempList
+        "lineItemDetails":dataTempList,
+        "scipNumber": sciptNumber,
+        "purchaseOrderNumber":purchaseOrderNumber,
+        "submitStatus":"Fully Submitted",
+        "scipRelavent": 2,
       }
       dataListFinal.push(obj)
     })
