@@ -95,8 +95,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'Clear data'
     ];
 
-    this.fetchPurchaseDetails();
-    //this.fetchPurchaseDetailsTestData()
+    //this.fetchPurchaseDetails();
+    this.fetchPurchaseDetailsTestData()
 
   }
 
@@ -147,13 +147,13 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.results = resultdata
       }
       this.results[parentIndex].isbuttonDisabled = false
-      if(this.results[parentIndex].casnumber == ''){
+      if (this.results[parentIndex].casnumber == '') {
         this.results[parentIndex].isCASNumberEmpty = true
       }
-      if(this.results[parentIndex].scipNumber == ''){
+      if (this.results[parentIndex].scipNumber == '') {
         this.results[parentIndex].isSCIPEmpty = true
       }
-      if(this.results[parentIndex].statisticalGoodsNumber == ''){
+      if (this.results[parentIndex].statisticalGoodsNumber == '') {
         this.results[parentIndex].isStatEmpty = true
       }
     }
@@ -439,7 +439,27 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       .then((data) => {
         console.log(JSON.stringify(data));
         this.response = JSON.parse(JSON.stringify(data));
-        this.results = this.response.scipDetails.map((item) => {
+        let tempList = []
+        this.response.scipDetails.forEach(function (value) {
+          if (value.lineItemDetails.length > 0) {
+            value.lineItemDetails.forEach(function (value2) {
+              tempList.push({
+                "lineItemNumber": value.lineItemNumber,
+                "purchaseOrderNumber": value.purchaseOrderNumber,
+                "scipNumber": value.scipNumber,
+                "scipRelavent": value.scipRelavent,
+                "submitStatus": value.submitStatus,
+                "casNumber":value2.casNumber,
+                "materialCategory":value2.materialCategory,
+                "statisticalGoodsNumber":value2.statisticalGoodsNumber
+              })
+            });
+          }         
+        });
+
+
+
+        this.results = tempList.map((item) => {
           return new purchasedetails(
             item.lineItemNumber,
             item.statisticalGoodsNumber,
@@ -448,7 +468,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
             item.scipRelavent,
             item.materialCategory,
             item.submitStatus,
-            item.casnumber,
+            item.casNumber,
             item.isAddShow,
             item.isDeleteShow,
             item.isInvalid,
@@ -582,7 +602,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       var submitStatus = ''
       uniqueDataList.forEach(function (value) {
 
-        if(lineItem == value.lineItemNumber){
+        if (lineItem == value.lineItemNumber) {
           if (value.scipRelavent == null) {
             value.scipRelavent = "1"
           }
@@ -592,26 +612,26 @@ export class PurchaseOrderLineItemComponent implements OnInit {
             "materialCategory": value.materialCategory,
             // "scipRelavent": value.scipRelavent,
             "statisticalGoodsNumber": value.statisticalGoodsNumber
-  
-          });   
+
+          });
           sciptNumber = value.scipNumber
           purchaseOrderNumber = value.purchaseOrderNumber
           submitStatus = value.submitStatus
-        }        
+        }
       });
       var obj = {
-        "lineItemNumber":lineItem,
-        "lineItemDetails":dataTempList,
+        "lineItemNumber": lineItem,
+        "lineItemDetails": dataTempList,
         "scipNumber": sciptNumber,
-        "purchaseOrderNumber":purchaseOrderNumber,
-        "submitStatus":"Fully Submitted",
+        "purchaseOrderNumber": purchaseOrderNumber,
+        "submitStatus": "Fully Submitted",
         "scipRelavent": 2,
       }
       dataListFinal.push(obj)
     })
 
     let params = { "scipDetails": dataListFinal }
-   
+
     if (dataChangeCount != this.results.length) {
       this.isAllDataCleared = false
     }

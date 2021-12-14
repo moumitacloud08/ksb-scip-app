@@ -4,134 +4,178 @@
     "message": "SUCCESS",
     "scipDetails": [
         {
-            "lineItemNumber": 75656564,
-            "statisticalGoodsNumber": "",
-            "purchaseOrderNumber": 876554,
+            "lineItemNumber": "00010",
+            "lineItemDetails": [
+                {
+                    "casNumber": "1221123123",
+                    "materialCategory": "12312321",
+                    "statisticalGoodsNumber": "12312123",
+                    "lineItemNo": "00010"
+                }             
+            ],
+            "purchaseOrderNumber": "4500009219",
+            "scipNumber": "ASAS1",
+            "scipRelavent": "2",
+            "submitStatus": "New"
+        },
+        {
+            "lineItemNumber": "00030",
+            "lineItemDetails": [
+                {
+                    "casNumber": "34535345",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "34534534",
+                    "lineItemNo": "00030"
+                },
+                {
+                    "casNumber": "111111",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "11113333333",
+                    "lineItemNo": "00030"
+                },
+                {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": "00030"
+                },
+                {
+                    "casNumber": "111111",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "11113333333",
+                    "lineItemNo": "00030"
+                },
+                {
+                    "casNumber": "34535345",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "34534534",
+                    "lineItemNo": "00030"
+                },
+                {
+                    "casNumber": "111111",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "11113333333",
+                    "lineItemNo": "00030"
+                },
+                {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": "00030"
+                },
+                {
+                    "casNumber": "34535345",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "34534534",
+                    "lineItemNo": "00030"
+                },
+                {
+                    "casNumber": "111111",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "11113333333",
+                    "lineItemNo": "00030"
+                },
+                {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": "00030"
+                }
+            ],
+            "purchaseOrderNumber": "4500009219",
+            "scipNumber": "DFDF2",
+            "scipRelavent": "1",
+            "submitStatus": "New"
+        },
+        {
+            "lineItemNumber": "00090",
+            "lineItemDetails": [
+                {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": null
+                }
+            ],
+            "purchaseOrderNumber": "4500009219",
             "scipNumber": "",
-            "scipRelavent": "2",
-            "materialCategory": "Coal",
-            "submitStatus": "Yes",
-            "casnumber": ""
-        },
-        {
-            "lineItemNumber": 986765676,
-            "statisticalGoodsNumber": "",
-            "purchaseOrderNumber": 987654,
-            "scipNumber": "89789080",
             "scipRelavent": "1",
-            "materialCategory": "Cement",
-            "submitStatus": "Yes",
-            "casnumber": "234235"
+            "submitStatus": "New"
         },
         {
-            "lineItemNumber": 345467689,
-            "statisticalGoodsNumber": "98785766",
-            "purchaseOrderNumber": 1234,
-            "scipNumber": "43546",
-            "scipRelavent": null,
-            "materialCategory": "MaterialCategory",
-            "submitStatus": "Yes",
-            "casnumber": "676876"
-        },
-        {
-            "lineItemNumber": 9876764545,
-            "statisticalGoodsNumber": "",
-            "purchaseOrderNumber": 77765,
+            "lineItemNumber": "00110",
+            "lineItemDetails": [
+                {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": "00110"
+                },
+                {
+                    "casNumber": "11111111",
+                    "materialCategory": "Q1",
+                    "statisticalGoodsNumber": "11111111",
+                    "lineItemNo": "00110"
+                },
+                {
+                    "casNumber": "2345",
+                    "materialCategory": "23453",
+                    "statisticalGoodsNumber": "23452345345",
+                    "lineItemNo": "00110"
+                },
+                {
+                    "casNumber": "11111111",
+                    "materialCategory": "Q1",
+                    "statisticalGoodsNumber": "11111111",
+                    "lineItemNo": "00110"
+                },
+                {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": "00110"
+                },
+                {
+                    "casNumber": "2345",
+                    "materialCategory": "23453",
+                    "statisticalGoodsNumber": "23452345345",
+                    "lineItemNo": "00110"
+                },
+                {
+                    "casNumber": "11111111",
+                    "materialCategory": "Q1",
+                    "statisticalGoodsNumber": "11111111",
+                    "lineItemNo": "00110"
+                },
+                {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": "00110"
+                },
+                {
+                    "casNumber": "2345",
+                    "materialCategory": "23453",
+                    "statisticalGoodsNumber": "23452345345",
+                    "lineItemNo": "00110"
+                },
+                {
+                    "casNumber": "11111111",
+                    "materialCategory": "Q1",
+                    "statisticalGoodsNumber": "11111111",
+                    "lineItemNo": "00110"
+                },
+                {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": "00110"
+                }
+            ],
+            "purchaseOrderNumber": "4500009219",
             "scipNumber": "",
-            "scipRelavent": "2",
-            "materialCategory": "",
-            "submitStatus": "Yes",
-            "casnumber": ""
-        },
-        {
-            "lineItemNumber": 23333366675,
-            "statisticalGoodsNumber": "5656767",
-            "purchaseOrderNumber": 11134,
-            "scipNumber": "23480238",
-            "scipRelavent": null,
-            "materialCategory": "MaterialCategory",
-            "submitStatus": "Yes",
-            "casnumber": "234239"
-        },
-        {
-            "lineItemNumber": 0,
-            "statisticalGoodsNumber": "89876867",
-            "purchaseOrderNumber": 56576,
-            "scipNumber": "567567555",
             "scipRelavent": "1",
-            "materialCategory": "MaterialCategory",
-            "submitStatus": "Yes",
-            "casnumber": "9879678"
-        },
-        {
-            "lineItemNumber": 23452,
-            "statisticalGoodsNumber": "3566767",
-            "purchaseOrderNumber": 3465467,
-            "scipNumber": "54766576",
-            "scipRelavent": null,
-            "materialCategory": "MaterialCategory",
-            "submitStatus": "Yes",
-            "casnumber": "234239"
-        },
-        {
-            "lineItemNumber": 88976655,
-            "statisticalGoodsNumber": "46546757",
-            "purchaseOrderNumber": 87653,
-            "scipNumber": "65786",
-            "scipRelavent": "3",
-            "materialCategory": "MaterialCategory",
-            "submitStatus": "Yes",
-            "casnumber": "234239"
-        },
-        {
-            "lineItemNumber": 4456,
-            "statisticalGoodsNumber": "67876879",
-            "purchaseOrderNumber": 32444,
-            "scipNumber": "899007",
-            "scipRelavent": null,
-            "materialCategory": "Cement",
-            "submitStatus": "Yes",
-            "casnumber": "12234"
-        },
-        {
-            "lineItemNumber": 2234,
-            "statisticalGoodsNumber": "7878989",
-            "purchaseOrderNumber": 666678,
-            "scipNumber": "2232222",
-            "scipRelavent": "2",
-            "materialCategory": "MaterialCategory",
-            "submitStatus": "Yes",
-            "casnumber": "90089"
-        },
-        {
-            "lineItemNumber": 112343,
-            "statisticalGoodsNumber": "22234656",
-            "purchaseOrderNumber": 889087,
-            "scipNumber": "777654",
-            "scipRelavent": "1",
-            "materialCategory": "MaterialCategory",
-            "submitStatus": "Yes",
-            "casnumber": "121212"
-        },
-        {
-            "lineItemNumber": 8890986,
-            "statisticalGoodsNumber": "456547678",
-            "purchaseOrderNumber": 2235466,
-            "scipNumber": "89907554",
-            "scipRelavent": "3",
-            "materialCategory": "Iron",
-            "submitStatus": "Yes",
-            "casnumber": "2212345"
-        },
-        {
-            "lineItemNumber": 6576787,
-            "statisticalGoodsNumber": "876775675",
-            "purchaseOrderNumber": 2235466,
-            "scipNumber": "89907554",
-            "scipRelavent": null,
-            "materialCategory": "Iron",
-            "submitStatus": "Yes",
-            "casnumber": "2212345"
+            "submitStatus": "New"
         }
     ]
 }
