@@ -133,13 +133,13 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                   <button *ngIf="el.scipRelavent != '1' && el.scipRelavent != null" class="dropdown-item" type="button"
-                    (click)="getSCIPRel(parentIndex,'1')">
+                    (click)="getSCIPRel(parentIndex,'1')" [disabled]="el.submitStatus == 'Fully Submitted'">
                     <span style="font-size:  0.875rem;">{{'Select_option' | translate}}</span>
                   </button>
-                  <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'2')">
+                  <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'2')" [disabled]="el.submitStatus == 'Fully Submitted'">
                     <span style="font-size:  0.875rem;">{{'yes_option' | translate}}</span>
                   </button>
-                  <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'3')">
+                  <button class="dropdown-item" type="button" (click)="getSCIPRel(parentIndex,'3')" [disabled]="el.submitStatus == 'Fully Submitted'">
                     <span style="font-size:  0.875rem;">{{'no_option' | translate}}</span>
                   </button>
                 </div>

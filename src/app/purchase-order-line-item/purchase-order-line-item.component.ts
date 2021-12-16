@@ -343,6 +343,20 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.results[parentIndex].isMatEditShow = false;
       }
 
+      if( this.results[parentIndex].submitStatus == 'Fully Submitted'){
+        this.results[parentIndex].isSCIPSpanShow = true;
+        this.results[parentIndex].isSCIPEditShow = false;
+
+        this.results[parentIndex].isStatSpanShow = true;
+        this.results[parentIndex].isStatEditShow = false;
+
+        this.results[parentIndex].isCasSpanShow = true;
+        this.results[parentIndex].isCasEditShow = false;
+
+        this.results[parentIndex].isMatSpanShow = true;
+        this.results[parentIndex].isMatEditShow = false;
+      }
+
     }
   }
   mouseLeaveTab() {
