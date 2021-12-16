@@ -638,7 +638,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         "lineItemDetails": dataTempList,
         "scipNumber": sciptNumber,
         "purchaseOrderNumber": purchaseOrderNumber,
-        "submitStatus": "Fully Submitted",
+        "submitStatus": submitStatus,
         "scipRelavent": 2,
       }
       dataListFinal.push(obj)
