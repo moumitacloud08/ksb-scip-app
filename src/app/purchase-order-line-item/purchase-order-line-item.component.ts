@@ -355,6 +355,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
         this.results[parentIndex].isMatSpanShow = true;
         this.results[parentIndex].isMatEditShow = false;
+        this.results[parentIndex].isbuttonDisabled = true;
       }
 
     }
