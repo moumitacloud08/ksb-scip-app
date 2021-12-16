@@ -356,7 +356,9 @@
           </div>
           <div class="col-md-12 col-part2">
             <button type="button" class="button blue-button-modal" data-dismiss="modal"
-              (click)="savePurchaseorderLine()">{{'Submit' | translate}}</button>
+              (click)="savePurchaseorderLine()" *ngIf="invalidRowCount == 0">{{'Submit' | translate}}</button>
+            <button type="button" class="buttondisabled blue-button-modal" data-dismiss="modal"
+               *ngIf="invalidRowCount > 0" [disabled]="invalidRowCount > 0">{{'Submit' | translate}}</button>
             <button type="button" class="button white-button-modal" data-dismiss="modal">{{'Review_Again_Text' |
               translate}}</button>
           </div>

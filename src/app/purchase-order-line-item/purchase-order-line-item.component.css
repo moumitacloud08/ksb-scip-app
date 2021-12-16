@@ -180,6 +180,16 @@ input::placeholder {
   margin: 4px 3px 13px;
   cursor: pointer;
 }
+.buttondisabled {
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 3px 13px;
+}
 .button-container-footer .button {
   min-width: 75px;
 }
