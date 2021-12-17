@@ -42,7 +42,10 @@
           <tr class="table-row" *ngFor="let pos of posList">
             <td>{{pos.purchaseOrder}}</td>
             <td>{{pos.poDate}}</td>
-            <td><div class="open-icon"></div></td>
+            <td *ngIf="pos.scipStatus == 2"><div class="open-icon"></div></td>
+            <td *ngIf="pos.scipStatus == 1"><div class="new-icon"></div></td>
+            <td *ngIf="pos.scipStatus == 3"><div class="partial-icon"></div></td>
+            <td *ngIf="pos.scipStatus == 4"><div class="complete-icon"></div></td>
           </tr>
           <!-- <tr class="table-row">
             <td>4510000009178</td>
