@@ -189,6 +189,7 @@ input::placeholder {
   display: inline-block;
   font-size: 12px;
   margin: 4px 3px 13px;
+  cursor: not-allowed;
 }
 .button-container-footer .button {
   min-width: 75px;
