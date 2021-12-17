@@ -43,6 +43,20 @@ export class PurchaseOrderLineItemService {
   fetchPurchaseDetailsTestData() {
    return this.http.get('./assets/purchasedetail.json').toPromise();
  }
+
+ fetcPOSList() {
+  let posURL = cons.BASE_URL + '/purchaseorders/pos/'+this.getPONum();
+   httpOptions.headers = new HttpHeaders({
+      api_token: this.setAPIToken(),
+      'Content-Type': 'application/json',
+      Authorization: 'Basic ' + this.setAuthToken(),
+    });
+  return this.http.get(posURL,httpOptions).toPromise();
+}
+ fetchPOSListTestData() {
+  return this.http.get('./assets/pos.json').toPromise();
+}
+
   savePurchaseorderLine(paramObj) {
     let purchaseOrderUpdateURL = cons.BASE_URL + '/purchaseorders/'+this.getPONum()+'/updatelineitems';
     httpOptions.headers = new HttpHeaders({

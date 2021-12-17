@@ -8,6 +8,7 @@ import {
 import { LocalStorageService } from 'ngx-webstorage';
 import { PurchaseOrderLineItemService } from '../service/purchase-order-line-item.service';
 import { purchasedetails } from '.././purchasedetail';
+import { posdetails } from '.././posdetails';
 import { jsPDF } from "jspdf";
 import 'jspdf-autotable';
 import { Router } from '@angular/router';
@@ -51,6 +52,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   results: purchasedetails[];
   activeParentIndex: number;
   showToggleTable = false;
+  posList: posdetails[];
   constructor(
     private localStorageService: LocalStorageService,
     private purchaseOrderLineItemService: PurchaseOrderLineItemService,
@@ -59,6 +61,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     public translate: TranslateService,
   ) {
     this.results = [];
+    this.posList = [];
     translate.addLangs(cons.langArray);
     translate.setDefaultLang(cons.DEFAULT_LANG);
   }
@@ -97,6 +100,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     //this.fetchPurchaseDetails();
     this.fetchPurchaseDetailsTestData()
+
+    //this.fetchPOSListData()
+    this.fetchPOSListTestData()
 
   }
 
@@ -343,7 +349,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.results[parentIndex].isMatEditShow = false;
       }
 
-      if( this.results[parentIndex].submitStatus == 'Fully Submitted'){
+      if (this.results[parentIndex].submitStatus == 'Fully Submitted') {
         this.results[parentIndex].isSCIPSpanShow = true;
         this.results[parentIndex].isSCIPEditShow = false;
 
@@ -414,7 +420,29 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       .then((data) => {
         //console.log(JSON.stringify(data));
         this.response = JSON.parse(JSON.stringify(data));
-        this.results = this.response.scipDetails.map((item) => {
+
+
+        let tempList = []
+        this.response.scipDetails.forEach(function (value) {
+          if (value.lineItemDetails.length > 0) {
+            value.lineItemDetails.forEach(function (value2) {
+              tempList.push({
+                "lineItemNumber": value.lineItemNumber,
+                "purchaseOrderNumber": value.purchaseOrderNumber,
+                "scipNumber": value.scipNumber,
+                "scipRelavent": value.scipRelavent,
+                "submitStatus": value.submitStatus,
+                "casNumber": value2.casNumber,
+                "materialCategory": value2.materialCategory,
+                "statisticalGoodsNumber": value2.statisticalGoodsNumber
+              })
+            });
+          }
+        });
+
+
+
+        this.results = tempList.map((item) => {
           return new purchasedetails(
             item.lineItemNumber,
             item.statisticalGoodsNumber,
@@ -464,12 +492,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
                 "scipNumber": value.scipNumber,
                 "scipRelavent": value.scipRelavent,
                 "submitStatus": value.submitStatus,
-                "casNumber":value2.casNumber,
-                "materialCategory":value2.materialCategory,
-                "statisticalGoodsNumber":value2.statisticalGoodsNumber
+                "casNumber": value2.casNumber,
+                "materialCategory": value2.materialCategory,
+                "statisticalGoodsNumber": value2.statisticalGoodsNumber
               })
             });
-          }         
+          }
         });
 
 
@@ -508,6 +536,68 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
+
+
+
+
+  fetchPOSListData() {
+    this.purchaseOrderLineItemService
+      .fetcPOSList()
+      .then((data) => {
+        console.log(JSON.stringify(data));
+        this.response = JSON.parse(JSON.stringify(data));  
+
+        this.posList = this.response.posData.map((item) => {
+          return new posdetails(
+            -1,
+            item.purchaseOrder,
+            item.uniqueKey,
+            item.poDate,
+            item.scipStatus,
+          );
+        });
+        let count = 0;
+        this.posList.forEach(function (value) {
+          value.rowId = count;
+          count++;
+        })       
+      })
+      .catch((error) => {
+        console.log('Promise rejected with ' + JSON.stringify(error));
+      });
+  }
+
+  fetchPOSListTestData() {
+    this.purchaseOrderLineItemService
+      .fetchPOSListTestData()
+      .then((data) => {
+        console.log(JSON.stringify(data));
+        this.response = JSON.parse(JSON.stringify(data));
+
+        this.posList = this.response.posData.map((item) => {
+          return new posdetails(
+            -1,
+            item.purchaseOrder,
+            item.uniqueKey,
+            item.poDate,
+            item.scipStatus,
+          );
+        });
+        let count = 0;
+        this.posList.forEach(function (value) {
+          value.rowId = count;
+          count++;
+        })
+      })
+      .catch((error) => {
+        console.log('Promise rejected with ' + JSON.stringify(error));
+      });
+  }
+
+
+
+
+
   validateScip(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipNumber =

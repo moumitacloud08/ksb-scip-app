@@ -39,12 +39,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="table-row">
-            <td>4510000009178</td>
-            <td>1 Oct 2021</td>
+          <tr class="table-row" *ngFor="let pos of posList">
+            <td>{{pos.purchaseOrder}}</td>
+            <td>{{pos.poDate}}</td>
             <td><div class="open-icon"></div></td>
           </tr>
-          <tr class="table-row">
+          <!-- <tr class="table-row">
             <td>4510000009178</td>
             <td>1 Oct 2021</td>
             <td><div class="complete-icon"></div></td>
@@ -63,7 +63,7 @@
             <td>4510000009178</td>
             <td>1 Oct 2021</td>
             <td><div class="complete-icon"></div></td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
