@@ -47,8 +47,8 @@
   position: absolute;
   left: 0;
   top: 50%;
-  cursor: pointer;
-  color: #b6b5b5;
+  cursor: pointer;  
+  color: #000;
 }
 .toggle-btn-container.close{
   transform: rotate(0deg);
@@ -143,6 +143,9 @@ input::placeholder {
   box-sizing: border-box;
   border: 1px solid #adb5bd;
   outline: none;
+}
+.posi-relative{
+  position: relative;
 }
 .pagination-box {
   position: absolute;
@@ -623,6 +626,21 @@ a.page-style:hover {
 .text-error{
   color: #fb3737;
 }
+.justify-content-end{
+  justify-content: flex-end;
+}
+.text-bold{
+  font-weight: bold;
+}
+.sticky-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-right: 10px;
+}
+.pb-5{
+  padding-bottom: 50px!important;
+}
 .open-icon{
   width: 24px;
   height: 24px;
@@ -656,6 +674,7 @@ a.page-style:hover {
   background-repeat: no-repeat;
   background-position: right;
   margin: 10px;
+  color: #ff8c1a;
   background-image: url('../../assets/images/plus-circle.svg');
 }
 .complete-text{
@@ -663,6 +682,7 @@ a.page-style:hover {
   background-repeat: no-repeat;
   background-position: right;
   margin: 10px;
+  color: #2eb82e;
   background-image: url('../../assets/images/check-circle.svg');
 }
 .partial-text{
@@ -670,6 +690,7 @@ a.page-style:hover {
   background-repeat: no-repeat;
   background-position: right;
   margin: 10px;
+  color: #b35900;
   background-image: url('../../assets/images/dash-circle-dotted.svg');
 }
 .new-text{
@@ -677,6 +698,7 @@ a.page-style:hover {
   background-repeat: no-repeat;
   background-image: url('../../assets/images/file-plus.svg');
   background-position: right;
+  color: #0000b3;
   margin: 10px;
 }
 .download-menu{
