@@ -41,7 +41,7 @@ export class RecordSuccessComponent implements OnInit {
   results: purchasedetails[];
   fetchPurchaseDetails() {
     this.purchaseOrderLineItemService
-      .fetchPurchaseDetails()
+      .fetchPurchaseDetails('')
       .then((data) => {
         console.log(JSON.stringify(data));
         this.response = JSON.parse(JSON.stringify(data));

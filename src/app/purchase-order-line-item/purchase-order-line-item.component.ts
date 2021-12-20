@@ -98,8 +98,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       'Clear data'
     ];
 
-    //this.fetchPurchaseDetails();
-    this.fetchPurchaseDetailsTestData()
+    //this.fetchPurchaseDetails('');
+    this.fetchPurchaseDetailsTestData('')
 
     //this.fetchPOSListData()
     this.fetchPOSListTestData()
@@ -121,8 +121,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   onTableSizeChange(event): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    this.fetchPurchaseDetails();
-    //this.fetchPurchaseDetailsTestData()
+    //this.fetchPurchaseDetails('');
+    this.fetchPurchaseDetailsTestData('')
   }
 
 
@@ -414,9 +414,13 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   response: any;
   resultsTemp: purchasedetails[];
   resultsPDFData: purchasedetails[];
-  fetchPurchaseDetails() {
+  fetchPurchaseDetails(poNum: string) {
+    let ponumber;
+    if(poNum != ''){
+      ponumber = Number(poNum)
+    }
     this.purchaseOrderLineItemService
-      .fetchPurchaseDetails()
+      .fetchPurchaseDetails(ponumber)
       .then((data) => {
         //console.log(JSON.stringify(data));
         this.response = JSON.parse(JSON.stringify(data));
@@ -463,6 +467,15 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           value.rowId = count;
           count++;
         })
+        let poresult = [];
+        if(this.showToggleTable && poNum != ''){
+          this.results.forEach(function (value) {
+            if(value.purchaseOrderNumber == poNum){
+              poresult.push(value);
+            }
+          })
+          this.results = Object.assign([], poresult);
+        }
         // this.resultsTemp = this.results
         this.resultsTemp = Object.assign([], this.results);
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
@@ -476,7 +489,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
-  fetchPurchaseDetailsTestData() {
+  fetchPurchaseDetailsTestData(poNum) {
     this.purchaseOrderLineItemService
       .fetchPurchaseDetailsTestData()
       .then((data) => {
@@ -523,6 +536,15 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           value.rowId = count;
           count++;
         })
+        let poresult = [];
+        if(this.showToggleTable && poNum != ''){
+          this.results.forEach(function (value) {
+            if(value.purchaseOrderNumber == poNum){
+              poresult.push(value);
+            }
+          })
+          this.results = Object.assign([], poresult);
+        }
         this.resultsTemp = Object.assign([], this.results);
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
 
@@ -537,7 +559,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       });
   }
 
-
+  getPoDetails(pos: any) {
+    //this.fetchPurchaseDetails(pos.purchaseOrder);
+    this.fetchPurchaseDetailsTestData(pos.purchaseOrder);
+  }
 
 
   fetchPOSListData() {
@@ -831,7 +856,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     });
     return results;
   }
-
+ 
   isRowDuplicated: boolean = false;
   editPurchaseorderLine(parentIndex: number, rowId: number) {
     // this.results[parentIndex].isAddShow = false;
@@ -1091,7 +1116,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
   }
   resetPurchaseorderLine() {
-    this.fetchPurchaseDetails();
+    this.fetchPurchaseDetails('');
     this.headElements = [
       'Purchase Order',
       'Line Item',
@@ -1223,5 +1248,6 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   toggleTable() {
     this.showToggleTable = !this.showToggleTable;
+    console.log("showToggleTable : "+this.showToggleTable);
   }
 }

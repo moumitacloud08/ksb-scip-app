@@ -40,7 +40,7 @@
         </thead>
         <tbody>
           <tr class="table-row" *ngFor="let pos of posList">
-            <td>{{pos.purchaseOrder}}</td>
+            <td><a (click)="getPoDetails(pos)" style="cursor:pointer">{{pos.purchaseOrder}}</a></td>
             <td>{{pos.poDate}}</td>
             <td *ngIf="pos.scipStatus == 2"><div class="open-icon"></div></td>
             <td *ngIf="pos.scipStatus == 1"><div class="new-icon"></div></td>
