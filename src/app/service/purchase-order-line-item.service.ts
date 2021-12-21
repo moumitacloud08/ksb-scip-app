@@ -30,9 +30,9 @@ export class PurchaseOrderLineItemService {
   
   
  
-  fetchPurchaseDetails(poNum:string) {
+  fetchPurchaseDetails(poNum:string,uniqueKey:string) {
     let purchaseOrderURL="";
-    purchaseOrderURL = cons.BASE_URL + '/purchaseorders/'+poNum;
+    purchaseOrderURL = cons.BASE_URL + '/purchaseorders/'+uniqueKey;
     if(poNum == null || poNum == '' || poNum == undefined){
       purchaseOrderURL = cons.BASE_URL + '/purchaseorders/'+this.getPONum();
     }

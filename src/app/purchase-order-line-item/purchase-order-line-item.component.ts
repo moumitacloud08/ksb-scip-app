@@ -417,13 +417,13 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   response: any;
   resultsTemp: purchasedetails[];
   resultsPDFData: purchasedetails[];
-  fetchPurchaseDetails(poNum: string) {
+  fetchPurchaseDetails(poNum: string,uniqueKey: string) {
     let ponumber;
     if (poNum != '') {
       ponumber = Number(poNum)
     }
     this.purchaseOrderLineItemService
-      .fetchPurchaseDetails(ponumber)
+      .fetchPurchaseDetails(ponumber,uniqueKey)
       .then((data) => {
         //console.log(JSON.stringify(data));
         this.response = JSON.parse(JSON.stringify(data));
@@ -563,7 +563,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   selectcount = 0;
   getPoDetails(pos: any) {
-    //this.fetchPurchaseDetails(pos.purchaseOrder);
+    //this.fetchPurchaseDetails(pos.purchaseOrder,pos.uniqueKey);
     this.fetchPurchaseDetailsTestData(pos.purchaseOrder);
     this.selectcount++;
   }
@@ -1204,7 +1204,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
   }
   resetPurchaseorderLine() {
-    this.fetchPurchaseDetails('');
+    this.fetchPurchaseDetails('','');
     this.headElements = [
       'Purchase Order',
       'Line Item',
