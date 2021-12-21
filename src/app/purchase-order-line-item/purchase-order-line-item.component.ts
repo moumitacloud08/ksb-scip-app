@@ -86,6 +86,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     console.log(' this.authToken In login ');
     console.log(this.authToken);
 
+    this.localStorageService.clear("orgporesult")
+    this.localStorageService.clear("modifieddata")
+
     this.headElements = [
       'Purchase Order',
       'Line Item',
@@ -122,7 +125,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.tableSize = event.target.value;
     this.page = 1;
     //this.fetchPurchaseDetails('');
-    this.fetchPurchaseDetailsTestData('')
+    // this.fetchPurchaseDetailsTestData('')
   }
 
 
@@ -416,7 +419,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   resultsPDFData: purchasedetails[];
   fetchPurchaseDetails(poNum: string) {
     let ponumber;
-    if(poNum != ''){
+    if (poNum != '') {
       ponumber = Number(poNum)
     }
     this.purchaseOrderLineItemService
@@ -443,9 +446,6 @@ export class PurchaseOrderLineItemComponent implements OnInit {
             });
           }
         });
-
-
-
         this.results = tempList.map((item) => {
           return new purchasedetails(
             item.lineItemNumber,
@@ -468,9 +468,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           count++;
         })
         let poresult = [];
-        if(this.showToggleTable && poNum != ''){
+        if (this.showToggleTable && poNum != '') {
           this.results.forEach(function (value) {
-            if(value.purchaseOrderNumber == poNum){
+            if (value.purchaseOrderNumber == poNum) {
               poresult.push(value);
             }
           })
@@ -493,7 +493,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.purchaseOrderLineItemService
       .fetchPurchaseDetailsTestData()
       .then((data) => {
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
         this.response = JSON.parse(JSON.stringify(data));
         let tempList = []
         this.response.scipDetails.forEach(function (value) {
@@ -512,9 +512,6 @@ export class PurchaseOrderLineItemComponent implements OnInit {
             });
           }
         });
-
-
-
         this.results = tempList.map((item) => {
           return new purchasedetails(
             item.lineItemNumber,
@@ -536,41 +533,87 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           value.rowId = count;
           count++;
         })
+
         let poresult = [];
-        if(this.showToggleTable && poNum != ''){
+        if (this.showToggleTable && poNum != '') {
           this.results.forEach(function (value) {
-            if(value.purchaseOrderNumber == poNum){
+            if (value.purchaseOrderNumber == poNum) {
               poresult.push(value);
             }
           })
+
           this.results = Object.assign([], poresult);
+          this.localStorageService.store("orgporesult", this.results)
+
+        } else if (!this.showToggleTable && (poNum == '' || poNum == undefined)) {
+          this.localStorageService.store("orgresult", this.results)
         }
+
         this.resultsTemp = Object.assign([], this.results);
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
 
         this.resultsPDFData = Object.assign([], this.results);
         this.resultsPDFData = JSON.parse(JSON.stringify(this.resultsPDFData));
 
-        // this.configurepagination();
         this.count = this.results.length
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
-
+  selectcount = 0;
   getPoDetails(pos: any) {
     //this.fetchPurchaseDetails(pos.purchaseOrder);
     this.fetchPurchaseDetailsTestData(pos.purchaseOrder);
+    this.selectcount++;
   }
 
+  toggleTable() {
+    this.showToggleTable = !this.showToggleTable;
+    console.log("showToggleTable : " + this.showToggleTable);
+
+    this.page = 1;
+    this.count = 0;
+    this.tableSize = 5;
+
+    if (!this.showToggleTable && this.selectcount > 0) {
+      let result = Object.assign([], this.results);
+      let modifieddata = [];
+      let orgporesult = Object.assign([], this.localStorageService.retrieve("orgporesult"));
+
+      let resultIndex = 0
+      result.forEach(function (value) {
+        let orgporesultIndex = 0
+        orgporesult.forEach(function (value2) {
+          if ((value.lineItemNumber == value2.lineItemNumber && resultIndex == orgporesultIndex) && (value.scipNumber != value2.scipNumber
+            || value.statisticalGoodsNumber != value2.statisticalGoodsNumber
+            || value.casNumber != value2.casNumber
+            || value.materialCategory != value2.materialCategory ||
+            value.scipRelavent != value2.scipRelavent)) {
+            modifieddata.push(value);
+          }
+          orgporesultIndex++
+        })
+        resultIndex++
+      })
+
+      this.localStorageService.store("modifieddata", modifieddata);
+      // console.log(this.localStorageService.retrieve("modifieddata"));
+      this.results = Object.assign([], this.localStorageService.retrieve("modifiedOrgdata"));
+      this.resultsTemp = Object.assign([], this.results);
+    } else if (this.showToggleTable) {
+      this.localStorageService.store("modifiedOrgdata", this.results);
+      this.resultsTemp = Object.assign([], this.results);
+    }
+
+  }
 
   fetchPOSListData() {
     this.purchaseOrderLineItemService
       .fetcPOSList()
       .then((data) => {
         console.log(JSON.stringify(data));
-        this.response = JSON.parse(JSON.stringify(data));  
+        this.response = JSON.parse(JSON.stringify(data));
 
         this.posList = this.response.posData.map((item) => {
           return new posdetails(
@@ -585,7 +628,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.posList.forEach(function (value) {
           value.rowId = count;
           count++;
-        })       
+        })
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
@@ -715,8 +758,50 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     //console.log(dataList);
 
     let uniqueDataList = this.removeDuplicates(dataList, "rowId");
-    console.log(" <======uniqueDataList========>")
-    console.log(uniqueDataList)
+    if (!this.showToggleTable) {
+      console.log("modifieddata==========")
+      console.log(this.localStorageService.retrieve("modifieddata"));
+
+      let modifieddataList = this.localStorageService.retrieve("modifieddata")
+      modifieddataList.forEach(function (value) {
+        uniqueDataList.push(value);
+      })
+
+    } else if (this.showToggleTable) {
+
+
+
+      let result = Object.assign([], this.results);
+      let modifieddata = [];
+      let orgporesult = Object.assign([], this.localStorageService.retrieve("orgporesult"));
+
+      let resultIndex = 0
+      result.forEach(function (value) {
+        let orgporesultIndex = 0
+        orgporesult.forEach(function (value2) {
+          if ((value.lineItemNumber == value2.lineItemNumber && resultIndex == orgporesultIndex) && (value.scipNumber != value2.scipNumber
+            || value.statisticalGoodsNumber != value2.statisticalGoodsNumber
+            || value.casNumber != value2.casNumber
+            || value.materialCategory != value2.materialCategory ||
+            value.scipRelavent != value2.scipRelavent)) {
+            modifieddata.push(value);
+          }
+          orgporesultIndex++
+        })
+        resultIndex++
+      })
+
+      console.log("modifieddata==========")
+      console.log(modifieddata);
+
+      uniqueDataList = this.removeDuplicates(modifieddata, "rowId");
+      let modifiedOrgdata = this.localStorageService.retrieve("modifiedOrgdata")
+      modifiedOrgdata.forEach(function (value) {
+        uniqueDataList.push(value);
+      })
+    }
+    //console.log(" <======uniqueDataList========>")
+    //console.log(uniqueDataList)
 
     let lineItemList = []
     uniqueDataList.forEach(function (value) {
@@ -767,43 +852,46 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     }
 
     console.log("<=========params==============>")
-    console.log(JSON.stringify(params));
+    console.log(params);
+    // console.log(this.localStorageService.retrieve("modifieddata"));
+    //console.log(this.localStorageService.retrieve("modifiedOrgdata"));
+
     //console.log(params)
-    if (!this.isAllDataCleared) {
-      this.purchaseOrderLineItemService
-        .savePurchaseorderLine(params)
-        .then((data) => {
-          console.log(JSON.stringify(data));
-          this.response = JSON.parse(JSON.stringify(data));
-          this.responseCode = this.response.code;
-          //this.responseCode = '200';
-          if (this.responseCode == '200') {
-            this.localStorageService.store('savedData', dataListFinal)
+    // if (!this.isAllDataCleared) {
+    //   this.purchaseOrderLineItemService
+    //     .savePurchaseorderLine(params)
+    //     .then((data) => {
+    //       console.log(JSON.stringify(data));
+    //       this.response = JSON.parse(JSON.stringify(data));
+    //       this.responseCode = this.response.code;
+    //       //this.responseCode = '200';
+    //       if (this.responseCode == '200') {
+    //         this.localStorageService.store('savedData', dataListFinal)
 
-            // this.localStorageService.clear('user');
-            // this.localStorageService.clear('api_token');
-            this.isPurchaseOrderSaved = true;
-            this.isAllDataCleared = false;
-            this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
-            this.router.navigateByUrl('/record-success');
-          } else {
-            this.isPurchaseOrderSaved = false;
-            this.errorMessage = 'Something went wrong . Please try after something';
-          }
-        }).catch((error) => {
-          this.isPurchaseOrderSaved = false;
-          this.errorMessage = 'Something went wrong . Please try after something';
-          console.log('Promise rejected with ' + JSON.stringify(error));
-        });
-    } else {
-      if (dataListFinal.length == 0) {
-        this.isLengthZero = true;
-        setTimeout(() => {                           // <<<---using ()=> syntax
-          this.isLengthZero = false;
-        }, 1500);
-      }
+    //         // this.localStorageService.clear('user');
+    //         // this.localStorageService.clear('api_token');
+    //         this.isPurchaseOrderSaved = true;
+    //         this.isAllDataCleared = false;
+    //         this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
+    //         this.router.navigateByUrl('/record-success');
+    //       } else {
+    //         this.isPurchaseOrderSaved = false;
+    //         this.errorMessage = 'Something went wrong . Please try after something';
+    //       }
+    //     }).catch((error) => {
+    //       this.isPurchaseOrderSaved = false;
+    //       this.errorMessage = 'Something went wrong . Please try after something';
+    //       console.log('Promise rejected with ' + JSON.stringify(error));
+    //     });
+    // } else {
+    //   if (dataListFinal.length == 0) {
+    //     this.isLengthZero = true;
+    //     setTimeout(() => {                           // <<<---using ()=> syntax
+    //       this.isLengthZero = false;
+    //     }, 1500);
+    //   }
 
-    }
+    // }
   }
 
   validateRow(results) {
@@ -856,7 +944,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     });
     return results;
   }
- 
+
   isRowDuplicated: boolean = false;
   editPurchaseorderLine(parentIndex: number, rowId: number) {
     // this.results[parentIndex].isAddShow = false;
@@ -1000,8 +1088,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   invalidRowCount = 0
   checkRowvalidity() {
-    console.log("===========");
-    console.log(this.results);
+    // console.log("===========");
+    // console.log(this.results);
     this.invalidRowCount = 0
     let invalidRowCount = this.invalidRowCount;
     this.results.forEach(function (value) {
@@ -1246,8 +1334,5 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // Download PDF document  
     doc.save('table.pdf');
   }
-  toggleTable() {
-    this.showToggleTable = !this.showToggleTable;
-    console.log("showToggleTable : "+this.showToggleTable);
-  }
+
 }
