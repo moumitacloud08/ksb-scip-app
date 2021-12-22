@@ -1,0 +1,80 @@
+{
+    "code": 200,
+    "type": "STRING",
+    "message": "SUCCESS",
+    "scipDetails": [
+        {
+            "lineItemNumber": "04010",
+            "lineItemDetails": [
+                {
+                    "casNumber": "1221123123",
+                    "materialCategory": "12312321",
+                    "statisticalGoodsNumber": "12312123",
+                    "lineItemNo": "00010"
+                }             
+            ],
+            "purchaseOrderNumber": "4501109219",
+            "scipNumber": "ASAS1",
+            "scipRelavent": "2",
+            "submitStatus": "Fully Submitted"
+        },
+        {
+            "lineItemNumber": "03030",
+            "lineItemDetails": [
+              
+                {
+                    "casNumber": "111111",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "11113333333",
+                    "lineItemNo": "00030"
+                },
+                {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": "00030"
+                }
+            ],
+            "purchaseOrderNumber": "4500339019",
+            "scipNumber": "DFDF2",
+            "scipRelavent": "1",
+            "submitStatus": "New"
+        },
+        {
+            "lineItemNumber": "01090",
+            "lineItemDetails": [
+                {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": null
+                }
+            ],
+            "purchaseOrderNumber": "45007609228",
+            "scipNumber": "",
+            "scipRelavent": "1",
+            "submitStatus": "New"
+        },
+        {
+            "lineItemNumber": "02110",
+            "lineItemDetails": [
+                {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": "00110"
+                },            
+                {
+                    "casNumber": "11111111",
+                    "materialCategory": "Q1",
+                    "statisticalGoodsNumber": "11111111",
+                    "lineItemNo": "00110"
+                }
+            ],
+            "purchaseOrderNumber": "45034509228",
+            "scipNumber": "",
+            "scipRelavent": "1",
+            "submitStatus": "New"
+        }
+    ]
+}

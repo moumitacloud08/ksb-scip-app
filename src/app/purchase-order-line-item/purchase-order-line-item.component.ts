@@ -102,7 +102,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     ];
 
     //this.fetchPurchaseDetails('');
-    this.fetchPurchaseDetailsTestData('')
+    this.fetchPurchaseDetailsTestData('','')
 
     //this.fetchPOSListData()
     this.fetchPOSListTestData()
@@ -489,9 +489,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
-  fetchPurchaseDetailsTestData(poNum) {
+  fetchPurchaseDetailsTestData(poNum,uniqueKey) {
     this.purchaseOrderLineItemService
-      .fetchPurchaseDetailsTestData()
+      .fetchPurchaseDetailsTestData(poNum,uniqueKey)
       .then((data) => {
         //console.log(JSON.stringify(data));
         this.response = JSON.parse(JSON.stringify(data));
@@ -565,7 +565,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   selectedRow : Number;
   getPoDetails(pos: any, index) {
     //this.fetchPurchaseDetails(pos.purchaseOrder,pos.uniqueKey);
-    this.fetchPurchaseDetailsTestData(pos.purchaseOrder);
+    this.fetchPurchaseDetailsTestData(pos.purchaseOrder,pos.uniqueKey);
     this.selectcount++;
     this.selectedRow = index;
   }

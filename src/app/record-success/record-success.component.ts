@@ -73,7 +73,7 @@ export class RecordSuccessComponent implements OnInit {
   }
   fetchPurchaseDetailsTestData() {
     this.purchaseOrderLineItemService
-      .fetchPurchaseDetailsTestData()
+      .fetchPurchaseDetailsTestData('','')
       .then((data) => {
         console.log(JSON.stringify(data));
         this.response = JSON.parse(JSON.stringify(data));

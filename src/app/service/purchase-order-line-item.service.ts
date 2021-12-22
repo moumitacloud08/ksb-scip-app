@@ -13,7 +13,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class PurchaseOrderLineItemService {
-  constructor(private http: HttpClient,private localStorageService: LocalStorageService) {}
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService) { }
   setAuthToken() {
     let authToken: String = this.localStorageService.retrieve('user').authToken;
     return authToken;
@@ -22,53 +22,57 @@ export class PurchaseOrderLineItemService {
     let apiToken: string = this.localStorageService.retrieve('api_token');
     return apiToken;
   }
- 
-  getPONum(){
+
+  getPONum() {
     let key = this.localStorageService.retrieve("key")
     return key;
   }
-  
-  
- 
-  fetchPurchaseDetails(poNum:string,uniqueKey:string) {
-    let purchaseOrderURL="";
-    purchaseOrderURL = cons.BASE_URL + '/purchaseorders/'+uniqueKey;
-    if(poNum == null || poNum == '' || poNum == undefined){
-      purchaseOrderURL = cons.BASE_URL + '/purchaseorders/'+this.getPONum();
-    }
-   
-     
-    httpOptions.headers = new HttpHeaders({
-        api_token: this.setAPIToken(),
-        'Content-Type': 'application/json',
-        Authorization: 'Basic ' + this.setAuthToken(),
-      });
-    return this.http.get(purchaseOrderURL,httpOptions).toPromise();
-  }
-  fetchPurchaseDetailsTestData() {
-   return this.http.get('./assets/purchasedetail.json').toPromise();
- }
 
- fetcPOSList() {
-  let posURL = cons.BASE_URL + '/purchaseorders/pos/'+this.getPONum();
-   httpOptions.headers = new HttpHeaders({
+
+
+  fetchPurchaseDetails(poNum: string, uniqueKey: string) {
+    let purchaseOrderURL = "";
+    purchaseOrderURL = cons.BASE_URL + '/purchaseorders/' + uniqueKey;
+    if (poNum == null || poNum == '' || poNum == undefined) {
+      purchaseOrderURL = cons.BASE_URL + '/purchaseorders/' + this.getPONum();
+    }
+
+
+    httpOptions.headers = new HttpHeaders({
       api_token: this.setAPIToken(),
       'Content-Type': 'application/json',
       Authorization: 'Basic ' + this.setAuthToken(),
     });
-  return this.http.get(posURL,httpOptions).toPromise();
-}
- fetchPOSListTestData() {
-  return this.http.get('./assets/pos.json').toPromise();
-}
+    return this.http.get(purchaseOrderURL, httpOptions).toPromise();
+  }
+  fetchPurchaseDetailsTestData(poNum: String, uniqueKey: string) {
+    console.log("uniqueKey : "+uniqueKey);
+    if (uniqueKey! = '')
+      console.log("uniqueKey inside: "+uniqueKey);
+      return this.http.get('./assets/singlePOOrderDetail.json').toPromise();
+    return this.http.get('./assets/purchasedetail.json').toPromise();
+  }
+
+  fetcPOSList() {
+    let posURL = cons.BASE_URL + '/purchaseorders/pos/' + this.getPONum();
+    httpOptions.headers = new HttpHeaders({
+      api_token: this.setAPIToken(),
+      'Content-Type': 'application/json',
+      Authorization: 'Basic ' + this.setAuthToken(),
+    });
+    return this.http.get(posURL, httpOptions).toPromise();
+  }
+  fetchPOSListTestData() {
+    return this.http.get('./assets/pos.json').toPromise();
+  }
 
   savePurchaseorderLine(paramObj) {
-    let purchaseOrderUpdateURL = cons.BASE_URL + '/purchaseorders/'+this.getPONum()+'/updatelineitems';
+    let purchaseOrderUpdateURL = cons.BASE_URL + '/purchaseorders/' + this.getPONum() + '/updatelineitems';
     httpOptions.headers = new HttpHeaders({
-       api_token: this.setAPIToken(),
-       'Content-Type': 'application/json',
-       Authorization: 'Basic ' + this.setAuthToken(),
-     });
-   return this.http.put(purchaseOrderUpdateURL,paramObj,httpOptions).toPromise();
- }
+      api_token: this.setAPIToken(),
+      'Content-Type': 'application/json',
+      Authorization: 'Basic ' + this.setAuthToken(),
+    });
+    return this.http.put(purchaseOrderUpdateURL, paramObj, httpOptions).toPromise();
+  }
 }
