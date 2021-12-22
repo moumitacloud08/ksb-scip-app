@@ -562,10 +562,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       });
   }
   selectcount = 0;
-  getPoDetails(pos: any) {
+  selectedRow : Number;
+  getPoDetails(pos: any, index) {
     //this.fetchPurchaseDetails(pos.purchaseOrder,pos.uniqueKey);
     this.fetchPurchaseDetailsTestData(pos.purchaseOrder);
     this.selectcount++;
+    this.selectedRow = index;
   }
 
   toggleTable() {

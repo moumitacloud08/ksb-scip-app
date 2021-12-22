@@ -744,3 +744,7 @@ a.page-style:hover {
 /* .my-pagination::ng-deep .ngx-pagination .disabled {
   color: white !important;
   } */
+  .table tr.active td {
+    background-color:#639eda !important;
+    color: white;
+  }
