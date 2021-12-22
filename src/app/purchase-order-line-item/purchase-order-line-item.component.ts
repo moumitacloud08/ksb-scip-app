@@ -587,7 +587,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.count = 0;
     this.tableSize = 5;
 
-    if (!this.showToggleTable && this.selectcount > 0) {
+    if (!this.showToggleTable && this.selectcount != -1) {
       let result = Object.assign([], this.results);
       let modifieddata = [];
       let orgporesult = Object.assign([], this.localStorageService.retrieve("orgporesult"));
