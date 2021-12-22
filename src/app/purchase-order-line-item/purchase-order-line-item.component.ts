@@ -607,17 +607,22 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         })
         resultIndex++
       })
-
+      if(modifieddata.length == 0)
+        modifieddata = Object.assign([], this.localStorageService.retrieve("orgporesult"));
       this.localStorageService.store("modifieddata", modifieddata);
-      // console.log(this.localStorageService.retrieve("modifieddata"));
+
       this.results = Object.assign([], this.localStorageService.retrieve("modifiedOrgdata"));
       this.resultsTemp = Object.assign([], this.results);
+      if(this.selectedRow == 0)
+        this.selectedRow = -1
+
     } else if (this.showToggleTable) {
       this.localStorageService.store("modifiedOrgdata", this.results);
       this.resultsTemp = Object.assign([], this.results);
 
-      if (this.posList.length > 0) {
+      this.results = Object.assign([], this.localStorageService.retrieve("modifieddata"));
 
+      if (this.posList.length > 0 && this.selectedRow == -1) {
         //this.fetchPurchaseDetails(this.posList[0].purchaseOrder,this.posList[0].uniqueKey);
         this.fetchPurchaseDetailsTestData(this.posList[0].purchaseOrder, this.posList[0].uniqueKey);
         this.selectedRow = 0;
@@ -1106,6 +1111,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       resultTemp[parentIndex].isClearData = true;
     }
     this.validatSingleRow(parentIndex)
+    if(this.showToggleTable){
+      this.localStorageService.store("modifieddata",this.results)
+
+    }else if(!this.showToggleTable){
+      this.localStorageService.store("modifiedOrgdata",this.results)
+    }
   }
   invalidRowCount = 0
   checkRowvalidity() {
@@ -1177,7 +1188,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     }
     this.results = results
+    if(this.showToggleTable){
+      this.localStorageService.store("modifieddata",this.results)
 
+    }else if(!this.showToggleTable){
+      this.localStorageService.store("modifiedOrgdata",this.results)
+    }
     // this.results = Object.assign([], results);
     // this.results = JSON.parse(JSON.stringify(this.results));
   }
@@ -1199,6 +1215,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       }
       this.results = Object.assign([], resultTemp)
       //this.resultsTemp = Object.assign([], this.results);
+      if(this.showToggleTable){
+        this.localStorageService.store("modifieddata",this.results)
+  
+      }else if(!this.showToggleTable){
+        this.localStorageService.store("modifiedOrgdata",this.results)
+      }
     }
     this.count = this.results.length
     this.deleteRowIndex = -1
