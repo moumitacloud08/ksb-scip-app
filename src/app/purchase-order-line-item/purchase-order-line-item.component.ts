@@ -88,6 +88,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     this.localStorageService.clear("orgporesult")
     this.localStorageService.clear("modifieddata")
+    
+    this.localStorageService.clear("orgresult")
+    this.localStorageService.clear("modifiedOrgdata");
+
 
     this.headElements = [
       'Purchase Order',
@@ -102,7 +106,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     ];
 
     //this.fetchPurchaseDetails('');
-    this.fetchPurchaseDetailsTestData('','')
+    this.fetchPurchaseDetailsTestData('', '')
 
     //this.fetchPOSListData()
     this.fetchPOSListTestData()
@@ -417,13 +421,13 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   response: any;
   resultsTemp: purchasedetails[];
   resultsPDFData: purchasedetails[];
-  fetchPurchaseDetails(poNum: string,uniqueKey: string) {
+  fetchPurchaseDetails(poNum: string, uniqueKey: string) {
     let ponumber;
     if (poNum != '') {
       ponumber = Number(poNum)
     }
     this.purchaseOrderLineItemService
-      .fetchPurchaseDetails(ponumber,uniqueKey)
+      .fetchPurchaseDetails(ponumber, uniqueKey)
       .then((data) => {
         //console.log(JSON.stringify(data));
         this.response = JSON.parse(JSON.stringify(data));
@@ -474,7 +478,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
               poresult.push(value);
             }
           })
+
           this.results = Object.assign([], poresult);
+          this.localStorageService.store("orgporesult", this.results)
+
+        } else if (!this.showToggleTable && (poNum == '' || poNum == undefined)) {
+          this.localStorageService.store("orgresult", this.results)
         }
         // this.resultsTemp = this.results
         this.resultsTemp = Object.assign([], this.results);
@@ -489,9 +498,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
-  fetchPurchaseDetailsTestData(poNum,uniqueKey) {
+  fetchPurchaseDetailsTestData(poNum, uniqueKey) {
     this.purchaseOrderLineItemService
-      .fetchPurchaseDetailsTestData(poNum,uniqueKey)
+      .fetchPurchaseDetailsTestData(poNum, uniqueKey)
       .then((data) => {
         //console.log(JSON.stringify(data));
         this.response = JSON.parse(JSON.stringify(data));
@@ -562,10 +571,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       });
   }
   selectcount = 0;
-  selectedRow : Number;
+  selectedRow: Number = -1;
   getPoDetails(pos: any, index) {
     //this.fetchPurchaseDetails(pos.purchaseOrder,pos.uniqueKey);
-    this.fetchPurchaseDetailsTestData(pos.purchaseOrder,pos.uniqueKey);
+    this.fetchPurchaseDetailsTestData(pos.purchaseOrder, pos.uniqueKey);
     this.selectcount++;
     this.selectedRow = index;
   }
@@ -606,6 +615,16 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     } else if (this.showToggleTable) {
       this.localStorageService.store("modifiedOrgdata", this.results);
       this.resultsTemp = Object.assign([], this.results);
+
+      if (this.posList.length > 0) {
+
+        //this.fetchPurchaseDetails(this.posList[0].purchaseOrder,this.posList[0].uniqueKey);
+        this.fetchPurchaseDetailsTestData(this.posList[0].purchaseOrder, this.posList[0].uniqueKey);
+        this.selectedRow = 0;
+      } else if (this.posList.length == 0) {
+        this.results = []
+      }
+
     }
 
   }
@@ -859,41 +878,41 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     //console.log(this.localStorageService.retrieve("modifiedOrgdata"));
 
     //console.log(params)
-    if (!this.isAllDataCleared) {
-      this.purchaseOrderLineItemService
-        .savePurchaseorderLine(params)
-        .then((data) => {
-          console.log(JSON.stringify(data));
-          this.response = JSON.parse(JSON.stringify(data));
-          this.responseCode = this.response.code;
-          //this.responseCode = '200';
-          if (this.responseCode == '200') {
-            this.localStorageService.store('savedData', dataListFinal)
+    // if (!this.isAllDataCleared) {
+    //   this.purchaseOrderLineItemService
+    //     .savePurchaseorderLine(params)
+    //     .then((data) => {
+    //       console.log(JSON.stringify(data));
+    //       this.response = JSON.parse(JSON.stringify(data));
+    //       this.responseCode = this.response.code;
+    //       //this.responseCode = '200';
+    //       if (this.responseCode == '200') {
+    //         this.localStorageService.store('savedData', dataListFinal)
 
-            // this.localStorageService.clear('user');
-            // this.localStorageService.clear('api_token');
-            this.isPurchaseOrderSaved = true;
-            this.isAllDataCleared = false;
-            this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
-            this.router.navigateByUrl('/record-success');
-          } else {
-            this.isPurchaseOrderSaved = false;
-            this.errorMessage = 'Something went wrong . Please try after something';
-          }
-        }).catch((error) => {
-          this.isPurchaseOrderSaved = false;
-          this.errorMessage = 'Something went wrong . Please try after something';
-          console.log('Promise rejected with ' + JSON.stringify(error));
-        });
-    } else {
-      if (dataListFinal.length == 0) {
-        this.isLengthZero = true;
-        setTimeout(() => {                           // <<<---using ()=> syntax
-          this.isLengthZero = false;
-        }, 1500);
-      }
+    //         // this.localStorageService.clear('user');
+    //         // this.localStorageService.clear('api_token');
+    //         this.isPurchaseOrderSaved = true;
+    //         this.isAllDataCleared = false;
+    //         this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
+    //         this.router.navigateByUrl('/record-success');
+    //       } else {
+    //         this.isPurchaseOrderSaved = false;
+    //         this.errorMessage = 'Something went wrong . Please try after something';
+    //       }
+    //     }).catch((error) => {
+    //       this.isPurchaseOrderSaved = false;
+    //       this.errorMessage = 'Something went wrong . Please try after something';
+    //       console.log('Promise rejected with ' + JSON.stringify(error));
+    //     });
+    // } else {
+    //   if (dataListFinal.length == 0) {
+    //     this.isLengthZero = true;
+    //     setTimeout(() => {                           // <<<---using ()=> syntax
+    //       this.isLengthZero = false;
+    //     }, 1500);
+    //   }
 
-    }
+    // }
   }
 
   validateRow(results) {
@@ -1206,7 +1225,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
   }
   resetPurchaseorderLine() {
-    this.fetchPurchaseDetails('','');
+    this.fetchPurchaseDetails('', '');
     this.headElements = [
       'Purchase Order',
       'Line Item',
