@@ -866,41 +866,41 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     //console.log(this.localStorageService.retrieve("modifiedOrgdata"));
 
     //console.log(params)
-    // if (!this.isAllDataCleared) {
-    //   this.purchaseOrderLineItemService
-    //     .savePurchaseorderLine(params)
-    //     .then((data) => {
-    //       console.log(JSON.stringify(data));
-    //       this.response = JSON.parse(JSON.stringify(data));
-    //       this.responseCode = this.response.code;
-    //       //this.responseCode = '200';
-    //       if (this.responseCode == '200') {
-    //         this.localStorageService.store('savedData', dataListFinal)
+    if (!this.isAllDataCleared) {
+      this.purchaseOrderLineItemService
+        .savePurchaseorderLine(params)
+        .then((data) => {
+          console.log(JSON.stringify(data));
+          this.response = JSON.parse(JSON.stringify(data));
+          this.responseCode = this.response.code;
+          //this.responseCode = '200';
+          if (this.responseCode == '200') {
+            this.localStorageService.store('savedData', dataListFinal)
 
-    //         // this.localStorageService.clear('user');
-    //         // this.localStorageService.clear('api_token');
-    //         this.isPurchaseOrderSaved = true;
-    //         this.isAllDataCleared = false;
-    //         this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
-    //         this.router.navigateByUrl('/record-success');
-    //       } else {
-    //         this.isPurchaseOrderSaved = false;
-    //         this.errorMessage = 'Something went wrong . Please try after something';
-    //       }
-    //     }).catch((error) => {
-    //       this.isPurchaseOrderSaved = false;
-    //       this.errorMessage = 'Something went wrong . Please try after something';
-    //       console.log('Promise rejected with ' + JSON.stringify(error));
-    //     });
-    // } else {
-    //   if (dataListFinal.length == 0) {
-    //     this.isLengthZero = true;
-    //     setTimeout(() => {                           // <<<---using ()=> syntax
-    //       this.isLengthZero = false;
-    //     }, 1500);
-    //   }
+            // this.localStorageService.clear('user');
+            // this.localStorageService.clear('api_token');
+            this.isPurchaseOrderSaved = true;
+            this.isAllDataCleared = false;
+            this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
+            this.router.navigateByUrl('/record-success');
+          } else {
+            this.isPurchaseOrderSaved = false;
+            this.errorMessage = 'Something went wrong . Please try after something';
+          }
+        }).catch((error) => {
+          this.isPurchaseOrderSaved = false;
+          this.errorMessage = 'Something went wrong . Please try after something';
+          console.log('Promise rejected with ' + JSON.stringify(error));
+        });
+    } else {
+      if (dataListFinal.length == 0) {
+        this.isLengthZero = true;
+        setTimeout(() => {                           // <<<---using ()=> syntax
+          this.isLengthZero = false;
+        }, 1500);
+      }
 
-    // }
+    }
   }
 
   validateRow(results) {
