@@ -47,8 +47,7 @@ export class PurchaseOrderLineItemService {
   }
   fetchPurchaseDetailsTestData(poNum: String, uniqueKey: string) {
     console.log("uniqueKey : "+uniqueKey);
-    if (uniqueKey! = '')
-      console.log("uniqueKey inside: "+uniqueKey);
+    if (uniqueKey != '')
       return this.http.get('./assets/singlePOOrderDetail.json').toPromise();
     return this.http.get('./assets/purchasedetail.json').toPromise();
   }
