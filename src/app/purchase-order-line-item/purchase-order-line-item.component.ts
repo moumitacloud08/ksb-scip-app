@@ -590,26 +590,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     if (!this.showToggleTable && this.selectcount != -1) {
       let result = Object.assign([], this.results);
       let modifieddata = [];
-      let orgporesult = Object.assign([], this.localStorageService.retrieve("orgporesult"));
-
-      let resultIndex = 0
-      result.forEach(function (value) {
-        let orgporesultIndex = 0
-        orgporesult.forEach(function (value2) {
-          if ((value.lineItemNumber == value2.lineItemNumber && resultIndex == orgporesultIndex) && (value.scipNumber != value2.scipNumber
-            || value.statisticalGoodsNumber != value2.statisticalGoodsNumber
-            || value.casNumber != value2.casNumber
-            || value.materialCategory != value2.materialCategory ||
-            value.scipRelavent != value2.scipRelavent)) {
-            modifieddata.push(value);
-          }
-          orgporesultIndex++
-        })
-        resultIndex++
-      })
       if(modifieddata.length == 0)
         modifieddata = Object.assign([], this.localStorageService.retrieve("orgporesult"));
-      this.localStorageService.store("modifieddata", modifieddata);
+      this.localStorageService.store("modifieddata", this.results);
 
       this.results = Object.assign([], this.localStorageService.retrieve("modifiedOrgdata"));
       this.resultsTemp = Object.assign([], this.results);
@@ -1129,6 +1112,23 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         invalidRowCount++
       }
     })
+   
+    if (this.showToggleTable) {
+      let results = this.localStorageService.retrieve("modifiedOrgdata");
+      results.forEach(function (value) {
+        if (value.isRowInvalid == true) {
+          invalidRowCount++
+        }
+      })
+
+    }else if (!this.showToggleTable) {
+      let results = this.localStorageService.retrieve("modifieddata");
+      results.forEach(function (value) {
+        if (value.isRowInvalid == true) {
+          invalidRowCount++
+        }
+      })
+    }
     this.invalidRowCount = invalidRowCount
   }
   validatSingleRow(parentIndex) {
