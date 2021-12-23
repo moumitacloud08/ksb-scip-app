@@ -88,7 +88,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     this.localStorageService.clear("orgporesult")
     this.localStorageService.clear("modifieddata")
-    
+
     this.localStorageService.clear("orgresult")
     this.localStorageService.clear("modifiedOrgdata");
 
@@ -588,15 +588,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.tableSize = 5;
 
     if (!this.showToggleTable && this.selectcount != -1) {
-      let result = Object.assign([], this.results);
-      let modifieddata = [];
-      if(modifieddata.length == 0)
-        modifieddata = Object.assign([], this.localStorageService.retrieve("orgporesult"));
+
       this.localStorageService.store("modifieddata", this.results);
 
       this.results = Object.assign([], this.localStorageService.retrieve("modifiedOrgdata"));
       this.resultsTemp = Object.assign([], this.results);
-      if(this.selectedRow == 0)
+      if (this.selectedRow == 0)
         this.selectedRow = -1
 
     } else if (this.showToggleTable) {
@@ -728,10 +725,58 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     }
     return newArray;
   }
+
+  saveSinglePurchaseorderLine() {
+    let result = [];
+    let modifieddata = [];
+    let orgporesult = Object.assign([], this.localStorageService.retrieve("orgporesult"));
+    if (this.showToggleTable) {
+      result = Object.assign([], this.results);
+    } else if (!this.showToggleTable) {
+      result = Object.assign([], this.localStorageService.retrieve("modifieddata"));
+    }
+    if (result.length == orgporesult.length) {
+      let resultIndex = 0
+      result.forEach(function (value) {
+        let orgporesultIndex = 0
+        orgporesult.forEach(function (value2) {
+          if ((value.lineItemNumber == value2.lineItemNumber && !value.isSubRow && value.purchaseOrderNumber == value2.purchaseOrderNumber &&
+            value.parentRowId == -1 && value2.parentRowId == -1 && orgporesultIndex == resultIndex)
+            && (value.scipNumber != value2.scipNumber
+              || value.statisticalGoodsNumber != value2.statisticalGoodsNumber
+              || value.casNumber != value2.casNumber
+              || value.materialCategory != value2.materialCategory ||
+              value.scipRelavent != value2.scipRelavent)) {
+            modifieddata.push(value);
+          }
+          orgporesultIndex++
+        })
+        resultIndex++
+      })
+    }
+
+    console.log("====== modifieddata ===");
+    console.log(modifieddata);
+  }
+
   errorMessage: string = '';
   updatedRecordCount: Number;
   isLengthZero: boolean = false;
   savePurchaseorderLine() {
+
+
+    let result = [];
+    let modifieddata = [];
+    let orgporesult = Object.assign([], this.localStorageService.retrieve("orgporesult"));
+    
+    if (this.showToggleTable) {
+      result = Object.assign([], this.results);
+      this.results = Object.assign([], this.localStorageService.retrieve("modifiedOrgdata"));
+    } else if (!this.showToggleTable) {
+      result = Object.assign([], this.localStorageService.retrieve("modifieddata"));
+    }
+
+
     let dataChangeCount = 0;
     let dataList = []
     let resultTemp = Object.assign([], this.resultsTemp);
@@ -766,49 +811,37 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     //console.log(dataList);
 
-    let uniqueDataList = this.removeDuplicates(dataList, "rowId");
-    if (!this.showToggleTable) {
-      console.log("modifieddata==========")
-      console.log(this.localStorageService.retrieve("modifieddata"));
+    let uniqueDataList = this.removeDuplicates(dataList, "rowId");  
 
-      let modifieddataList = this.localStorageService.retrieve("modifieddata")
-      modifieddataList.forEach(function (value) {
-        uniqueDataList.push(value);
-      })
+    //-------Single PO Data --------------//
 
-    } else if (this.showToggleTable) {
-
-
-
-      let result = Object.assign([], this.results);
-      let modifieddata = [];
-      let orgporesult = Object.assign([], this.localStorageService.retrieve("orgporesult"));
-
+   
+    if (result.length == orgporesult.length) {
       let resultIndex = 0
       result.forEach(function (value) {
         let orgporesultIndex = 0
         orgporesult.forEach(function (value2) {
-          if ((value.lineItemNumber == value2.lineItemNumber && resultIndex == orgporesultIndex) && (value.scipNumber != value2.scipNumber
-            || value.statisticalGoodsNumber != value2.statisticalGoodsNumber
-            || value.casNumber != value2.casNumber
-            || value.materialCategory != value2.materialCategory ||
-            value.scipRelavent != value2.scipRelavent)) {
+          if ((value.lineItemNumber == value2.lineItemNumber && !value.isSubRow && value.purchaseOrderNumber == value2.purchaseOrderNumber &&
+            value.parentRowId == -1 && value2.parentRowId == -1 && orgporesultIndex == resultIndex)
+            && (value.scipNumber != value2.scipNumber
+              || value.statisticalGoodsNumber != value2.statisticalGoodsNumber
+              || value.casNumber != value2.casNumber
+              || value.materialCategory != value2.materialCategory ||
+              value.scipRelavent != value2.scipRelavent)) {
             modifieddata.push(value);
           }
           orgporesultIndex++
         })
         resultIndex++
       })
-
-      console.log("modifieddata==========")
-      console.log(modifieddata);
-
-      uniqueDataList = this.removeDuplicates(modifieddata, "rowId");
-      let modifiedOrgdata = this.localStorageService.retrieve("modifiedOrgdata")
-      modifiedOrgdata.forEach(function (value) {
-        uniqueDataList.push(value);
-      })
     }
+    modifieddata.forEach(function (value) {
+      uniqueDataList.push(value)
+    })
+    //----END Single PO Data ------------//
+
+
+
     //console.log(" <======uniqueDataList========>")
     //console.log(uniqueDataList)
 
@@ -866,41 +899,41 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     //console.log(this.localStorageService.retrieve("modifiedOrgdata"));
 
     //console.log(params)
-    if (!this.isAllDataCleared) {
-      this.purchaseOrderLineItemService
-        .savePurchaseorderLine(params)
-        .then((data) => {
-          console.log(JSON.stringify(data));
-          this.response = JSON.parse(JSON.stringify(data));
-          this.responseCode = this.response.code;
-          //this.responseCode = '200';
-          if (this.responseCode == '200') {
-            this.localStorageService.store('savedData', dataListFinal)
+    // if (!this.isAllDataCleared) {
+    //   this.purchaseOrderLineItemService
+    //     .savePurchaseorderLine(params)
+    //     .then((data) => {
+    //       console.log(JSON.stringify(data));
+    //       this.response = JSON.parse(JSON.stringify(data));
+    //       this.responseCode = this.response.code;
+    //       //this.responseCode = '200';
+    //       if (this.responseCode == '200') {
+    //         this.localStorageService.store('savedData', dataListFinal)
 
-            // this.localStorageService.clear('user');
-            // this.localStorageService.clear('api_token');
-            this.isPurchaseOrderSaved = true;
-            this.isAllDataCleared = false;
-            this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
-            this.router.navigateByUrl('/record-success');
-          } else {
-            this.isPurchaseOrderSaved = false;
-            this.errorMessage = 'Something went wrong . Please try after something';
-          }
-        }).catch((error) => {
-          this.isPurchaseOrderSaved = false;
-          this.errorMessage = 'Something went wrong . Please try after something';
-          console.log('Promise rejected with ' + JSON.stringify(error));
-        });
-    } else {
-      if (dataListFinal.length == 0) {
-        this.isLengthZero = true;
-        setTimeout(() => {                           // <<<---using ()=> syntax
-          this.isLengthZero = false;
-        }, 1500);
-      }
+    //         // this.localStorageService.clear('user');
+    //         // this.localStorageService.clear('api_token');
+    //         this.isPurchaseOrderSaved = true;
+    //         this.isAllDataCleared = false;
+    //         this.utilService.updatedRecordCountFunc = dataListFinal.length.toString();
+    //         this.router.navigateByUrl('/record-success');
+    //       } else {
+    //         this.isPurchaseOrderSaved = false;
+    //         this.errorMessage = 'Something went wrong . Please try after something';
+    //       }
+    //     }).catch((error) => {
+    //       this.isPurchaseOrderSaved = false;
+    //       this.errorMessage = 'Something went wrong . Please try after something';
+    //       console.log('Promise rejected with ' + JSON.stringify(error));
+    //     });
+    // } else {
+    //   if (dataListFinal.length == 0) {
+    //     this.isLengthZero = true;
+    //     setTimeout(() => {                           // <<<---using ()=> syntax
+    //       this.isLengthZero = false;
+    //     }, 1500);
+    //   }
 
-    }
+    // }
   }
 
   validateRow(results) {
@@ -1094,11 +1127,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       resultTemp[parentIndex].isClearData = true;
     }
     this.validatSingleRow(parentIndex)
-    if(this.showToggleTable){
-      this.localStorageService.store("modifieddata",this.results)
+    if (this.showToggleTable) {
+      this.localStorageService.store("modifieddata", this.results)
 
-    }else if(!this.showToggleTable){
-      this.localStorageService.store("modifiedOrgdata",this.results)
+    } else if (!this.showToggleTable) {
+      this.localStorageService.store("modifiedOrgdata", this.results)
     }
   }
   invalidRowCount = 0
@@ -1112,7 +1145,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         invalidRowCount++
       }
     })
-   
+
     if (this.showToggleTable) {
       let results = this.localStorageService.retrieve("modifiedOrgdata");
       results.forEach(function (value) {
@@ -1121,7 +1154,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         }
       })
 
-    }else if (!this.showToggleTable) {
+    } else if (!this.showToggleTable) {
       let results = this.localStorageService.retrieve("modifieddata");
       results.forEach(function (value) {
         if (value.isRowInvalid == true) {
@@ -1188,11 +1221,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     }
     this.results = results
-    if(this.showToggleTable){
-      this.localStorageService.store("modifieddata",this.results)
+    if (this.showToggleTable) {
+      this.localStorageService.store("modifieddata", this.results)
 
-    }else if(!this.showToggleTable){
-      this.localStorageService.store("modifiedOrgdata",this.results)
+    } else if (!this.showToggleTable) {
+      this.localStorageService.store("modifiedOrgdata", this.results)
     }
     // this.results = Object.assign([], results);
     // this.results = JSON.parse(JSON.stringify(this.results));
@@ -1215,11 +1248,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       }
       this.results = Object.assign([], resultTemp)
       //this.resultsTemp = Object.assign([], this.results);
-      if(this.showToggleTable){
-        this.localStorageService.store("modifieddata",this.results)
-  
-      }else if(!this.showToggleTable){
-        this.localStorageService.store("modifiedOrgdata",this.results)
+      if (this.showToggleTable) {
+        this.localStorageService.store("modifieddata", this.results)
+
+      } else if (!this.showToggleTable) {
+        this.localStorageService.store("modifiedOrgdata", this.results)
       }
     }
     this.count = this.results.length
