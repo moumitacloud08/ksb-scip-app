@@ -92,6 +92,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.localStorageService.clear("orgresult")
     this.localStorageService.clear("modifiedOrgdata");
 
+    this.localStorageService.clear("orgresultsTemp")
+    this.localStorageService.clear("poorgresultsTemp");
+
 
     this.headElements = [
       'Purchase Order',
@@ -225,6 +228,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // console.log(" MOUSE ENTER " + this.prevIndex + " ---- " + parentIndex);
 
     if (this.prevIndex != parentIndex) {
+      if (!this.showToggleTable) {
+        this.resultsTemp =  Object.assign([], this.localStorageService.retrieve("orgresultsTemp")); 
+      }
       let resultTemp = this.resultsTemp
       for (var i = 0; i < resultTemp.length; i++) {
         if (i == this.prevIndex) {
@@ -559,6 +565,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         }
 
         this.resultsTemp = Object.assign([], this.results);
+        if (this.showToggleTable && poNum != '') {
+          this.localStorageService.store("poorgresultsTemp", this.resultsTemp)
+        }else if(!this.showToggleTable && (poNum == '' || poNum == undefined)){
+          this.localStorageService.store("orgresultsTemp", this.resultsTemp)
+        }
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
 
         this.resultsPDFData = Object.assign([], this.results);
@@ -590,18 +601,17 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     if (!this.showToggleTable && this.selectcount != -1) {
 
       this.localStorageService.store("modifieddata", this.results);
-
       this.results = Object.assign([], this.localStorageService.retrieve("modifiedOrgdata"));
       this.resultsTemp = Object.assign([], this.results);
+      this.localStorageService.store("orgresultsTemp", this.resultsTemp)
       if (this.selectedRow == 0)
         this.selectedRow = -1
 
     } else if (this.showToggleTable) {
       this.localStorageService.store("modifiedOrgdata", this.results);
       this.resultsTemp = Object.assign([], this.results);
-
+      this.localStorageService.store("poorgresultsTemp", this.resultsTemp)
       this.results = Object.assign([], this.localStorageService.retrieve("modifieddata"));
-
       if (this.posList.length > 0 && this.selectedRow == -1) {
         //this.fetchPurchaseDetails(this.posList[0].purchaseOrder,this.posList[0].uniqueKey);
         this.fetchPurchaseDetailsTestData(this.posList[0].purchaseOrder, this.posList[0].uniqueKey);
@@ -768,26 +778,31 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     let result = [];
     let modifieddata = [];
     let orgporesult = Object.assign([], this.localStorageService.retrieve("orgporesult"));
+    let orgResults = []
     
     if (this.showToggleTable) {
       result = Object.assign([], this.results);
-      this.results = Object.assign([], this.localStorageService.retrieve("modifiedOrgdata"));
+      orgResults = Object.assign([], this.localStorageService.retrieve("modifiedOrgdata"));
     } else if (!this.showToggleTable) {
       result = Object.assign([], this.localStorageService.retrieve("modifieddata"));
+      orgResults = Object.assign([], this.results);
     }
-
-
     let dataChangeCount = 0;
     let dataList = []
-    let resultTemp = Object.assign([], this.resultsTemp);
+    let resultTemp = [];
     let rowInvalidCount = 0;
 
-    this.results.forEach(function (valueNew) {
+    if (this.showToggleTable) {
+      resultTemp = Object.assign([], this.localStorageService.retrieve("orgresultsTemp"));
+    }else if (!this.showToggleTable) {
+      resultTemp = Object.assign([], this.resultsTemp);
+    }
+
+    orgResults.forEach(function (valueNew) {
       if (valueNew.scipNumber == '' && valueNew.statisticalGoodsNumber == '' &&
         valueNew.casnumber == '' && valueNew.materialCategory == '') {
         dataChangeCount++;
       }
-
       resultTemp.forEach(function (valueOld) {
         if (valueNew.rowId == valueOld.rowId) {
           if (valueNew.scipNumber != valueOld.scipNumber || valueNew.statisticalGoodsNumber != valueOld.statisticalGoodsNumber ||
@@ -810,12 +825,9 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     });
 
     //console.log(dataList);
-
     let uniqueDataList = this.removeDuplicates(dataList, "rowId");  
 
-    //-------Single PO Data --------------//
-
-   
+    //-------Single PO Data --------------//   
     if (result.length == orgporesult.length) {
       let resultIndex = 0
       result.forEach(function (value) {
@@ -1117,6 +1129,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.isRowDuplicated = true
     this.results = Object.assign([], resultTemp);
     this.resultsTemp = Object.assign([], this.results);
+   
     this.count = this.results.length
     setTimeout(() => {                           // <<<---using ()=> syntax
       this.isRowDuplicated = false;
@@ -1132,6 +1145,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     } else if (!this.showToggleTable) {
       this.localStorageService.store("modifiedOrgdata", this.results)
+      this.localStorageService.store("orgresultsTemp", this.resultsTemp)
     }
   }
   invalidRowCount = 0
@@ -1250,9 +1264,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       //this.resultsTemp = Object.assign([], this.results);
       if (this.showToggleTable) {
         this.localStorageService.store("modifieddata", this.results)
+        this.localStorageService.store("poorgresultsTemp", this.resultsTemp)
 
       } else if (!this.showToggleTable) {
         this.localStorageService.store("modifiedOrgdata", this.results)
+        this.localStorageService.store("orgresultsTemp", this.resultsTemp)
       }
     }
     this.count = this.results.length
