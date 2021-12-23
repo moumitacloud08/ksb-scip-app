@@ -491,10 +491,15 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         } else if (!this.showToggleTable && (poNum == '' || poNum == undefined)) {
           this.localStorageService.store("orgresult", this.results)
         }
-        // this.resultsTemp = this.results
+
         this.resultsTemp = Object.assign([], this.results);
+        if (this.showToggleTable && poNum != '') {
+          this.localStorageService.store("poorgresultsTemp", this.resultsTemp)
+        } else if (!this.showToggleTable && (poNum == '' || poNum == undefined)) {
+          this.localStorageService.store("orgresultsTemp", this.resultsTemp)
+        }
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
-        //this.configurepagination();
+
         this.resultsPDFData = Object.assign([], this.results);
         this.resultsPDFData = JSON.parse(JSON.stringify(this.resultsPDFData));
 
