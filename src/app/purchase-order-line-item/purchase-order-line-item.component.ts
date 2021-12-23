@@ -742,7 +742,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     } else if (!this.showToggleTable) {
       result = Object.assign([], this.localStorageService.retrieve("modifieddata"));
     }
-    console.log(result.length +" ----- "+ orgporesult.length);
+    console.log(result.length + " ----- " + orgporesult.length);
     if (result.length == orgporesult.length) {
       modifieddata = this.makeModifiedSinglePOData(result, orgporesult)
 
@@ -752,12 +752,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       console.log("result========")
       console.log(result)
       result.forEach(function (value) {
-        if(value.parentRowId == -1 && !value.isSubRow){
+        if (value.parentRowId == -1 && !value.isSubRow) {
           tempList.push(value)
-        }else  if(value.parentRowId > -1 && value.isSubRow){
+        } else if (value.parentRowId > -1 && value.isSubRow) {
           tempSubList.push(value)
         }
-          
+
       })
       modifieddata = this.makeModifiedSinglePOData(tempList, orgporesult)
       tempSubList.forEach(function (value) {
@@ -849,25 +849,25 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     //-------Single PO Data --------------//   
     if (result.length == orgporesult.length) {
-      let resultIndex = 0
-      result.forEach(function (value) {
-        let orgporesultIndex = 0
-        orgporesult.forEach(function (value2) {
-          if ((value.lineItemNumber == value2.lineItemNumber && !value.isSubRow && value.purchaseOrderNumber == value2.purchaseOrderNumber &&
-            value.parentRowId == -1 && value2.parentRowId == -1 && orgporesultIndex == resultIndex)
-            && (value.scipNumber != value2.scipNumber
-              || value.statisticalGoodsNumber != value2.statisticalGoodsNumber
-              || value.casNumber != value2.casNumber
-              || value.materialCategory != value2.materialCategory ||
-              value.scipRelavent != value2.scipRelavent)) {
-            modifieddata.push(value);
-          }
-          orgporesultIndex++
-        })
-        resultIndex++
-      })
-    } else if (orgporesult.length < result.length) {
+      modifieddata = this.makeModifiedSinglePOData(result, orgporesult)
 
+    } else if (orgporesult.length < result.length) {
+      let tempList = []
+      let tempSubList = []
+      console.log("result========")
+      console.log(result)
+      result.forEach(function (value) {
+        if (value.parentRowId == -1 && !value.isSubRow) {
+          tempList.push(value)
+        } else if (value.parentRowId > -1 && value.isSubRow) {
+          tempSubList.push(value)
+        }
+
+      })
+      modifieddata = this.makeModifiedSinglePOData(tempList, orgporesult)
+      tempSubList.forEach(function (value) {
+        modifieddata.push(value)
+      })
     }
     modifieddata.forEach(function (value) {
       uniqueDataList.push(value)
