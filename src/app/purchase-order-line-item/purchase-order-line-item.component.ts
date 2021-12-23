@@ -229,7 +229,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     if (this.prevIndex != parentIndex) {
       if (!this.showToggleTable) {
-        this.resultsTemp =  Object.assign([], this.localStorageService.retrieve("orgresultsTemp")); 
+        this.resultsTemp = Object.assign([], this.localStorageService.retrieve("orgresultsTemp"));
       }
       let resultTemp = this.resultsTemp
       for (var i = 0; i < resultTemp.length; i++) {
@@ -567,7 +567,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.resultsTemp = Object.assign([], this.results);
         if (this.showToggleTable && poNum != '') {
           this.localStorageService.store("poorgresultsTemp", this.resultsTemp)
-        }else if(!this.showToggleTable && (poNum == '' || poNum == undefined)){
+        } else if (!this.showToggleTable && (poNum == '' || poNum == undefined)) {
           this.localStorageService.store("orgresultsTemp", this.resultsTemp)
         }
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
@@ -588,6 +588,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.fetchPurchaseDetailsTestData(pos.purchaseOrder, pos.uniqueKey);
     this.selectcount++;
     this.selectedRow = index;
+    this.localStorageService.clear("singlepomodified")
   }
 
   toggleTable() {
@@ -678,10 +679,6 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       });
   }
 
-
-
-
-
   validateScip(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipNumber =
@@ -745,30 +742,53 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     } else if (!this.showToggleTable) {
       result = Object.assign([], this.localStorageService.retrieve("modifieddata"));
     }
+    console.log(result.length +" ----- "+ orgporesult.length);
     if (result.length == orgporesult.length) {
-      let resultIndex = 0
+      modifieddata = this.makeModifiedSinglePOData(result, orgporesult)
+
+    } else if (orgporesult.length < result.length) {
+      let tempList = []
+      let tempSubList = []
+      console.log("result========")
+      console.log(result)
       result.forEach(function (value) {
-        let orgporesultIndex = 0
-        orgporesult.forEach(function (value2) {
-          if ((value.lineItemNumber == value2.lineItemNumber && !value.isSubRow && value.purchaseOrderNumber == value2.purchaseOrderNumber &&
-            value.parentRowId == -1 && value2.parentRowId == -1 && orgporesultIndex == resultIndex)
-            && (value.scipNumber != value2.scipNumber
-              || value.statisticalGoodsNumber != value2.statisticalGoodsNumber
-              || value.casNumber != value2.casNumber
-              || value.materialCategory != value2.materialCategory ||
-              value.scipRelavent != value2.scipRelavent)) {
-            modifieddata.push(value);
-          }
-          orgporesultIndex++
-        })
-        resultIndex++
+        if(value.parentRowId == -1 && !value.isSubRow){
+          tempList.push(value)
+        }else  if(value.parentRowId > -1 && value.isSubRow){
+          tempSubList.push(value)
+        }
+          
+      })
+      modifieddata = this.makeModifiedSinglePOData(tempList, orgporesult)
+      tempSubList.forEach(function (value) {
+        modifieddata.push(value)
       })
     }
 
     console.log("====== modifieddata ===");
     console.log(modifieddata);
   }
-
+  makeModifiedSinglePOData(result, orgporesult) {
+    let modifieddata = []
+    let resultIndex = 0
+    result.forEach(function (value) {
+      let orgporesultIndex = 0
+      orgporesult.forEach(function (value2) {
+        if ((value.lineItemNumber == value2.lineItemNumber && !value.isSubRow && value.purchaseOrderNumber == value2.purchaseOrderNumber &&
+          value.parentRowId == -1 && value2.parentRowId == -1 && orgporesultIndex == resultIndex)
+          && (value.scipNumber != value2.scipNumber
+            || value.statisticalGoodsNumber != value2.statisticalGoodsNumber
+            || value.casNumber != value2.casNumber
+            || value.materialCategory != value2.materialCategory ||
+            value.scipRelavent != value2.scipRelavent)) {
+          modifieddata.push(value);
+        }
+        orgporesultIndex++
+      })
+      resultIndex++
+    })
+    return modifieddata
+  }
   errorMessage: string = '';
   updatedRecordCount: Number;
   isLengthZero: boolean = false;
@@ -779,7 +799,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     let modifieddata = [];
     let orgporesult = Object.assign([], this.localStorageService.retrieve("orgporesult"));
     let orgResults = []
-    
+
     if (this.showToggleTable) {
       result = Object.assign([], this.results);
       orgResults = Object.assign([], this.localStorageService.retrieve("modifiedOrgdata"));
@@ -794,7 +814,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     if (this.showToggleTable) {
       resultTemp = Object.assign([], this.localStorageService.retrieve("orgresultsTemp"));
-    }else if (!this.showToggleTable) {
+    } else if (!this.showToggleTable) {
       resultTemp = Object.assign([], this.resultsTemp);
     }
 
@@ -825,7 +845,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     });
 
     //console.log(dataList);
-    let uniqueDataList = this.removeDuplicates(dataList, "rowId");  
+    let uniqueDataList = this.removeDuplicates(dataList, "rowId");
 
     //-------Single PO Data --------------//   
     if (result.length == orgporesult.length) {
@@ -846,6 +866,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         })
         resultIndex++
       })
+    } else if (orgporesult.length < result.length) {
+
     }
     modifieddata.forEach(function (value) {
       uniqueDataList.push(value)
@@ -1119,7 +1141,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       resultTemp[lastIndex].statisticalGoodsNumber = ''
       resultTemp[lastIndex].casnumber = ''
       resultTemp[lastIndex].materialCategory = ''
-
+      resultTemp[lastIndex].parentRowId = parentIndex
     }
 
     for (var i = 0; i < resultTemp.length; i++) {
@@ -1129,7 +1151,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.isRowDuplicated = true
     this.results = Object.assign([], resultTemp);
     this.resultsTemp = Object.assign([], this.results);
-   
+
     this.count = this.results.length
     setTimeout(() => {                           // <<<---using ()=> syntax
       this.isRowDuplicated = false;
