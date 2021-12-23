@@ -95,6 +95,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.localStorageService.clear("orgresultsTemp")
     this.localStorageService.clear("poorgresultsTemp");
 
+    this.localStorageService.clear("poorgresultsPDFData")
+    this.localStorageService.clear("orgresultsPDFData");
+
+
+
 
     this.headElements = [
       'Purchase Order',
@@ -151,6 +156,11 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     } else if (scipRel == '1' || scipRel == '2') {
       if (!this.results[parentIndex].isSubRow) {
         let resultdata = this.results
+        if (this.showToggleTable) {
+          this.resultsPDFData = Object.assign([], this.localStorageService.retrieve("poorgresultsPDFData"));
+        } else if (!this.showToggleTable) {
+          this.resultsPDFData = Object.assign([], this.localStorageService.retrieve("orgresultsPDFData"));
+        }
         this.resultsPDFData.forEach(function (value) {
           if (value.lineItemNumber == resultdata[parentIndex].lineItemNumber) {
             console.log(value.lineItemNumber + " " + resultdata[parentIndex].lineItemNumber + " " + value.scipNumber);
@@ -258,6 +268,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       if (field == 'scip') {
 
         let results = this.results
+
+        if (this.showToggleTable) {
+          this.resultsPDFData = Object.assign([], this.localStorageService.retrieve("poorgresultsPDFData"));
+        } else if (!this.showToggleTable) {
+          this.resultsPDFData = Object.assign([], this.localStorageService.retrieve("orgresultsPDFData"));
+        }
         let resultsTemp = this.resultsPDFData
 
         var count = 0;
@@ -501,6 +517,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
 
         this.resultsPDFData = Object.assign([], this.results);
+        if (this.showToggleTable && poNum != '') {
+          this.localStorageService.store("poorgresultsPDFData", this.resultsPDFData)
+        } else if (!this.showToggleTable && (poNum == '' || poNum == undefined)) {
+          this.localStorageService.store("orgresultsPDFData", this.resultsPDFData)
+        }
+
         this.resultsPDFData = JSON.parse(JSON.stringify(this.resultsPDFData));
 
         this.count = this.results.length
@@ -578,6 +600,12 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.resultsTemp = JSON.parse(JSON.stringify(this.resultsTemp));
 
         this.resultsPDFData = Object.assign([], this.results);
+        if (this.showToggleTable && poNum != '') {
+          this.localStorageService.store("poorgresultsPDFData", this.resultsPDFData)
+        } else if (!this.showToggleTable && (poNum == '' || poNum == undefined)) {
+          this.localStorageService.store("orgresultsPDFData", this.resultsPDFData)
+        }
+
         this.resultsPDFData = JSON.parse(JSON.stringify(this.resultsPDFData));
 
         this.count = this.results.length
@@ -1342,6 +1370,13 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   generateDataForPDF() {
     let dataTemp = []
     let dataList = []
+
+    if (this.showToggleTable) {
+      this.resultsPDFData = Object.assign([], this.localStorageService.retrieve("poorgresultsPDFData"));
+    } else if (!this.showToggleTable) {
+      this.resultsPDFData = Object.assign([], this.localStorageService.retrieve("orgresultsPDFData"));
+    }
+
     this.resultsPDFData.forEach(function (value) {
       //console.log(value);
       if (value.scipRelavent == '' || value.scipRelavent == null || value.scipRelavent == '1') {
