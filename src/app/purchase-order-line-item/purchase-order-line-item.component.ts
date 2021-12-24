@@ -67,6 +67,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
   authToken;
   isPurchaseOrderSaved: boolean = false;
+  isSinglePurchaseOrderSaved: boolean = false;
   responseCode: String = '';
   headElements: any = [];
   searchedKeyword: string;
@@ -782,8 +783,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     } else if (orgporesult.length < result.length) {
       let tempList = []
       let tempSubList = []
-      console.log("result========")
-      console.log(result)
+      // console.log("result========")
+      // console.log(result)
       result.forEach(function (value) {
         if (value.parentRowId == -1 && !value.isSubRow) {
           tempList.push(value)
@@ -797,9 +798,72 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         modifieddata.push(value)
       })
     }
-
     console.log("====== modifieddata ===");
     console.log(modifieddata);
+
+    let uniqueDataList = []
+    let lineItemList = []
+    uniqueDataList.forEach(function (value) {
+      lineItemList.push(value.lineItemNumber);
+      lineItemList = [...new Set(lineItemList)];
+    })
+
+    let dataListFinal = []
+    lineItemList.forEach(function (lineItem) {
+      let dataTempList = []
+      var sciptNumber = ''
+      var purchaseOrderNumber = ''
+      var submitStatus = ''
+      uniqueDataList.forEach(function (value) {
+        if (lineItem == value.lineItemNumber) {
+          if (value.scipRelavent == null) {
+            value.scipRelavent = "1"
+          }
+          dataTempList.push({
+            "casnumber": value.casnumber,
+            "lineItemNo": value.lineItemNumber,
+            "materialCategory": value.materialCategory,
+            // "scipRelavent": value.scipRelavent,
+            "statisticalGoodsNumber": value.statisticalGoodsNumber
+          });
+          sciptNumber = value.scipNumber
+          purchaseOrderNumber = value.purchaseOrderNumber
+          submitStatus = value.submitStatus
+        }
+      });
+      var obj = {
+        "lineItemNumber": lineItem,
+        "lineItemDetails": dataTempList,
+        "scipNumber": sciptNumber,
+        "purchaseOrderNumber": purchaseOrderNumber,
+        "submitStatus": submitStatus,
+        "scipRelavent": 2,
+      }
+      dataListFinal.push(obj)
+    })
+
+    let params = { "scipDetails": dataListFinal }
+    console.log("<=========params==============>")
+    console.log(params);
+
+    // this.purchaseOrderLineItemService
+    //   .savePurchaseorderLine(params)
+    //   .then((data) => {
+    //     console.log(JSON.stringify(data));
+    //     this.response = JSON.parse(JSON.stringify(data));
+    //     this.responseCode = this.response.code;
+    //     if (this.responseCode == '200') {
+    //       this.isSinglePurchaseOrderSaved = true;
+    //     } else {
+    //       this.isSinglePurchaseOrderSaved = false;
+    //       this.errorMessage = 'Something went wrong . Please try after something';
+    //     }
+    //   }).catch((error) => {
+    //     this.isSinglePurchaseOrderSaved = false;
+    //     this.errorMessage = 'Something went wrong . Please try after something';
+    //     console.log('Promise rejected with ' + JSON.stringify(error));
+    //   });
+
   }
   makeModifiedSinglePOData(result, orgporesult) {
     let modifieddata = []
