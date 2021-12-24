@@ -801,7 +801,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     console.log("====== modifieddata ===");
     console.log(modifieddata);
 
-    let uniqueDataList = []
+    let uniqueDataList = this.removeDuplicates(modifieddata, "rowId");
+
     let lineItemList = []
     uniqueDataList.forEach(function (value) {
       lineItemList.push(value.lineItemNumber);
@@ -846,23 +847,23 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     console.log("<=========params==============>")
     console.log(params);
 
-    // this.purchaseOrderLineItemService
-    //   .savePurchaseorderLine(params)
-    //   .then((data) => {
-    //     console.log(JSON.stringify(data));
-    //     this.response = JSON.parse(JSON.stringify(data));
-    //     this.responseCode = this.response.code;
-    //     if (this.responseCode == '200') {
-    //       this.isSinglePurchaseOrderSaved = true;
-    //     } else {
-    //       this.isSinglePurchaseOrderSaved = false;
-    //       this.errorMessage = 'Something went wrong . Please try after something';
-    //     }
-    //   }).catch((error) => {
-    //     this.isSinglePurchaseOrderSaved = false;
-    //     this.errorMessage = 'Something went wrong . Please try after something';
-    //     console.log('Promise rejected with ' + JSON.stringify(error));
-    //   });
+    this.purchaseOrderLineItemService
+      .savePurchaseorderLine(params)
+      .then((data) => {
+        console.log(JSON.stringify(data));
+        this.response = JSON.parse(JSON.stringify(data));
+        this.responseCode = this.response.code;
+        if (this.responseCode == '200') {
+          this.isSinglePurchaseOrderSaved = true;
+        } else {
+          this.isSinglePurchaseOrderSaved = false;
+          this.errorMessage = 'Something went wrong . Please try after something';
+        }
+      }).catch((error) => {
+        this.isSinglePurchaseOrderSaved = false;
+        this.errorMessage = 'Something went wrong . Please try after something';
+        console.log('Promise rejected with ' + JSON.stringify(error));
+      });
 
   }
   makeModifiedSinglePOData(result, orgporesult) {
