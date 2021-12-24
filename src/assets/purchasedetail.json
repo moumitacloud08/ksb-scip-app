@@ -28,51 +28,9 @@
                     "lineItemNo": "00030"
                 },
                 {
-                    "casNumber": "111111",
-                    "materialCategory": "",
-                    "statisticalGoodsNumber": "11113333333",
-                    "lineItemNo": "00030"
-                },
-                {
                     "casNumber": "",
                     "materialCategory": "",
                     "statisticalGoodsNumber": "",
-                    "lineItemNo": "00030"
-                },
-                {
-                    "casNumber": "111111",
-                    "materialCategory": "",
-                    "statisticalGoodsNumber": "11113333333",
-                    "lineItemNo": "00030"
-                },
-                {
-                    "casNumber": "34535345",
-                    "materialCategory": "",
-                    "statisticalGoodsNumber": "34534534",
-                    "lineItemNo": "00030"
-                },
-                {
-                    "casNumber": "111111",
-                    "materialCategory": "",
-                    "statisticalGoodsNumber": "11113333333",
-                    "lineItemNo": "00030"
-                },
-                {
-                    "casNumber": "",
-                    "materialCategory": "",
-                    "statisticalGoodsNumber": "",
-                    "lineItemNo": "00030"
-                },
-                {
-                    "casNumber": "34535345",
-                    "materialCategory": "",
-                    "statisticalGoodsNumber": "34534534",
-                    "lineItemNo": "00030"
-                },
-                {
-                    "casNumber": "111111",
-                    "materialCategory": "",
-                    "statisticalGoodsNumber": "11113333333",
                     "lineItemNo": "00030"
                 },
                 {
@@ -134,48 +92,27 @@
                     "materialCategory": "",
                     "statisticalGoodsNumber": "",
                     "lineItemNo": "00110"
-                },
-                {
-                    "casNumber": "2345",
-                    "materialCategory": "23453",
-                    "statisticalGoodsNumber": "23452345345",
-                    "lineItemNo": "00110"
-                },
-                {
-                    "casNumber": "11111111",
-                    "materialCategory": "Q1",
-                    "statisticalGoodsNumber": "11111111",
-                    "lineItemNo": "00110"
-                },
-                {
-                    "casNumber": "",
-                    "materialCategory": "",
-                    "statisticalGoodsNumber": "",
-                    "lineItemNo": "00110"
-                },
-                {
-                    "casNumber": "2345",
-                    "materialCategory": "23453",
-                    "statisticalGoodsNumber": "23452345345",
-                    "lineItemNo": "00110"
-                },
-                {
-                    "casNumber": "11111111",
-                    "materialCategory": "Q1",
-                    "statisticalGoodsNumber": "11111111",
-                    "lineItemNo": "00110"
-                },
-                {
-                    "casNumber": "",
-                    "materialCategory": "",
-                    "statisticalGoodsNumber": "",
-                    "lineItemNo": "00110"
                 }
             ],
             "purchaseOrderNumber": "4500009228",
             "scipNumber": "",
             "scipRelavent": "1",
             "submitStatus": "New"
+        },
+        {
+            "lineItemNumber": "00090",
+            "lineItemDetails": [
+                {
+                    "casNumber": "1221123123",
+                    "materialCategory": "12312321",
+                    "statisticalGoodsNumber": "12312123",
+                    "lineItemNo": "00090"
+                }             
+            ],
+            "purchaseOrderNumber": "4500009219",
+            "scipNumber": "ASGS1",
+            "scipRelavent": "2",
+            "submitStatus": "Fully Submitted"
         }
     ]
 }
