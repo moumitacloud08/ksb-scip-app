@@ -231,6 +231,19 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   mouseLeaveRow(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].isRowHover = false
+    if(this.results[parentIndex+1] == undefined){
+       console.log("====undefined===");
+    }
+
+  }
+  mousePointerEnter() {
+    //parentIndex = (this.page - 1) * 5 + parentIndex
+    //this.results[parentIndex].isRowHover = false
+   // console.log("prev Index : "+this.prevIndex);
+    if(this.prevIndex != undefined && this.results[this.prevIndex+1] == undefined){
+       //console.log("====undefined===");
+       this.validatSingleRow(this.prevIndex)
+    }
 
   }
   prevIndex: number
