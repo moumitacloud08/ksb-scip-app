@@ -127,11 +127,20 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   count = 0;
   tableSize = 5;
 
+  
+  posPage = 1;
+  posCount = 0;
+  posTableSize = 5;
+
   onTableDataChange(event) {
     this.page = event;
     this.count = this.results.length;
     //this.fetchPurchaseDetails();
     // this.fetchPurchaseDetailsTestData()
+  }
+  onPOSTableDataChange(event) {
+    this.posPage = event;
+    this.posCount = this.posList.length;
   }
 
   onTableSizeChange(event): void {
@@ -645,6 +654,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.page = 1;
     this.count = 0;
     this.tableSize = 5;
+    
 
     if (!this.showToggleTable && this.selectcount != -1) {
 
@@ -693,6 +703,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           value.rowId = count;
           count++;
         })
+        this.posCount = this.posList.length
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
@@ -720,6 +731,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           value.rowId = count;
           count++;
         })
+        this.posCount = this.posList.length
+        console.log("this.posCount  :: "+this.posCount )
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));

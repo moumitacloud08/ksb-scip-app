@@ -62,13 +62,35 @@
                     "casNumber": "",
                     "materialCategory": "",
                     "statisticalGoodsNumber": "",
-                    "lineItemNo": "00110"
+                    "lineItemNo": "02110"
+                },            
+                {
+                    "casNumber": "11111111",
+                    "materialCategory": "Q1",
+                    "statisticalGoodsNumber": "1199111",
+                    "lineItemNo": "02110"
+                }, {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": "02110"
+                },            
+                {
+                    "casNumber": "11111111",
+                    "materialCategory": "Q1",
+                    "statisticalGoodsNumber": "1117711",
+                    "lineItemNo": "02110"
+                }, {
+                    "casNumber": "",
+                    "materialCategory": "",
+                    "statisticalGoodsNumber": "",
+                    "lineItemNo": "02110"
                 },            
                 {
                     "casNumber": "11111111",
                     "materialCategory": "Q1",
                     "statisticalGoodsNumber": "11111111",
-                    "lineItemNo": "00110"
+                    "lineItemNo": "02110"
                 }
             ],
             "purchaseOrderNumber": "45034509228",

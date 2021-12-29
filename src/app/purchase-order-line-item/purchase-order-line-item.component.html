@@ -39,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="table-row" *ngFor="let pos of posList; let i = index" [class.active]="i == selectedRow">
+          <tr class="table-row"  id="positem_{{parentIndex}}" *ngFor="let pos of posList | paginate : {id: 'pagination1',itemsPerPage: posTableSize,currentPage: posPage,totalItems: posCount}; let i = index" >
             <td><a (click)="getPoDetails(pos,i)" style="cursor:pointer">{{pos.purchaseOrder}}</a></td>
             <td>{{pos.poDate}}</td>
             <td *ngIf="pos.scipStatus == 2">
@@ -56,13 +56,13 @@
             </td>
           </tr>
         </tbody>
-      </table>
-      <!-- <div class="table-footer sticky-footer">
+      </table><br>
+      <div class="table-footer sticky-footer">
         <div class="d-flex justify-content-right my-pagination flex">
-          <pagination-controls responsive="true" previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
+          <pagination-controls id="pagination1" responsive="true" previousLabel="" nextLabel="" (pageChange)="onPOSTableDataChange($event)">
           </pagination-controls>
         </div>
-      </div> -->
+      </div>
     </div>
     <div class="table-detail pb-5">
       <div class="toggle-btn-container" [ngClass]="showToggleTable ? 'open' : 'close'" (click)="toggleTable()">
@@ -105,7 +105,7 @@
         </thead>
         <tbody>
           <tr [ngClass]="{'hover':el.isDeleteShow}"
-            *ngFor="let el of results |  filter:searchedKeyword | paginate : {itemsPerPage: tableSize,currentPage: page,totalItems: count};index as parentIndex; "
+            *ngFor="let el of results |  filter:searchedKeyword | paginate : {id: 'pagination2',itemsPerPage: tableSize,currentPage: page,totalItems: count};index as parentIndex; "
             class="table-row" id="item_{{parentIndex}}">
             <!-- {{ el.rowId }} -->
             <td width="9%">
@@ -304,7 +304,7 @@
       </table>
       <div class="table-footer sticky-footer">
         <div class="d-flex justify-content-right my-pagination flex">
-          <pagination-controls responsive="true" previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
+          <pagination-controls id="pagination2" responsive="true" previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
           </pagination-controls>
         </div>
       </div>
