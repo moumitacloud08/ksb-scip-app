@@ -39,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="table-row"  id="positem_{{parentIndex}}" *ngFor="let pos of posList | paginate : {id: 'pagination1',itemsPerPage: posTableSize,currentPage: posPage,totalItems: posCount}; let i = index" >
+          <tr class="table-row"  id="positem_{{parentIndex}}" *ngFor="let pos of posList | paginate : {id: 'pagination1',itemsPerPage: posTableSize,currentPage: posPage,totalItems: posCount}; let i = index" [class.active]="i == selectedRow">
             <td><a (click)="getPoDetails(pos,i)" style="cursor:pointer">{{pos.purchaseOrder}}</a></td>
             <td>{{pos.poDate}}</td>
             <td *ngIf="pos.scipStatus == 2">
