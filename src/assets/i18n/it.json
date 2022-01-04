@@ -9,6 +9,7 @@
     "Line_Item_col":"Tipo di riga posizione",
     "SCIP_Relevant_col":"Rilevante per SCIP",
     "SCIP_No_col":"N. SCIP",
+    "Status_col":"Stato",
     "Statistical_Goods_No_col":"N. prodotto statistico",
     "CAS_No_col":"N. CAS",
     "Material_Category_col":"Categoria materiale",

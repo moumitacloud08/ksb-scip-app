@@ -9,6 +9,7 @@
     "Line_Item_col":"Line Item",
     "SCIP_Relevant_col":"SCIP Relevant",
     "SCIP_No_col":"SCIP No",
+    "Status_col":"Statut",
     "Statistical_Goods_No_col":"Statistical Goods No",
     "CAS_No_col":"CAS No",
     "Material_Category_col":"Material Category",

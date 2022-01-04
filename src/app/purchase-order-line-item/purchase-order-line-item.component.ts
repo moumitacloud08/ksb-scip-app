@@ -64,7 +64,16 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.posList = [];
     translate.addLangs(cons.langArray);
     translate.setDefaultLang(cons.DEFAULT_LANG);
+    
   }
+  Purchase_Order_col: string;
+  Line_Item_col: string;
+  SCIP_Relevant_col: string;
+  SCIP_No_col: string;
+  Statistical_Goods_No_col: string;
+  CAS_No_col: string;
+  Material_Category_col:string;
+  Status_col:string;
   authToken;
   isPurchaseOrderSaved: boolean = false;
   isSinglePurchaseOrderSaved: boolean = false;
@@ -83,6 +92,32 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.lang = this.localStorageService.retrieve("lang")
     this.translate.use(this.lang);
 
+   
+    this.translate.stream('Purchase_Order_col').subscribe(res => {
+      this.Purchase_Order_col = res;
+    });  
+    this.translate.stream('Line_Item_col').subscribe(res => {
+      this.Line_Item_col = res;
+    });
+    this.translate.stream('SCIP_Relevant_col').subscribe(res => {
+      this.SCIP_Relevant_col = res;
+    });  
+    this.translate.stream('SCIP_No_col').subscribe(res => {
+      this.SCIP_No_col = res;
+    }); 
+    this.translate.stream('Statistical_Goods_No_col').subscribe(res => {
+      this.Statistical_Goods_No_col = res;
+    }); 
+    this.translate.stream('CAS_No_col').subscribe(res => {
+      this.CAS_No_col = res;
+    });
+    this.translate.stream('Material_Category_col').subscribe(res => {
+      this.Material_Category_col = res;
+    }); 
+    this.translate.stream('Status_col').subscribe(res => {
+      this.Status_col = res;
+    }); 
+    
     this.authToken = this.localStorageService.retrieve('user').authToken;
     console.log(' this.authToken In login ');
     console.log(this.authToken);
@@ -98,9 +133,6 @@ export class PurchaseOrderLineItemComponent implements OnInit {
 
     this.localStorageService.clear("poorgresultsPDFData")
     this.localStorageService.clear("orgresultsPDFData");
-
-
-
 
     this.headElements = [
       'Purchase Order',
@@ -127,7 +159,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   count = 0;
   tableSize = 5;
 
-  
+
   posPage = 1;
   posCount = 0;
   posTableSize = 5;
@@ -240,18 +272,18 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   mouseLeaveRow(parentIndex) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].isRowHover = false
-    if(this.results[parentIndex+1] == undefined){
-       console.log("====undefined===");
+    if (this.results[parentIndex + 1] == undefined) {
+      console.log("====undefined===");
     }
 
   }
   mousePointerEnter() {
     //parentIndex = (this.page - 1) * 5 + parentIndex
     //this.results[parentIndex].isRowHover = false
-   // console.log("prev Index : "+this.prevIndex);
-    if(this.prevIndex != undefined && this.results[this.prevIndex+1] == undefined){
-       //console.log("====undefined===");
-       this.validatSingleRow(this.prevIndex)
+    // console.log("prev Index : "+this.prevIndex);
+    if (this.prevIndex != undefined && this.results[this.prevIndex + 1] == undefined) {
+      //console.log("====undefined===");
+      this.validatSingleRow(this.prevIndex)
     }
 
   }
@@ -654,7 +686,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.page = 1;
     this.count = 0;
     this.tableSize = 5;
-    
+
 
     if (!this.showToggleTable && this.selectcount != -1) {
 
@@ -732,7 +764,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
           count++;
         })
         this.posCount = this.posList.length
-        console.log("this.posCount  :: "+this.posCount )
+        console.log("this.posCount  :: " + this.posCount)
       })
       .catch((error) => {
         console.log('Promise rejected with ' + JSON.stringify(error));
@@ -1492,14 +1524,14 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   generateHeaderForPDF() {
     let head = []
     let headElements = [
-      'Purchase Order',
-      'Line Item',
-      'SCIP Relevant',
-      'SCIP No.',
-      'Statistical Goods No',
-      'CAS No',
-      'Material Category',
-      'Status'
+      this.Purchase_Order_col,
+      this.Line_Item_col,
+      this.SCIP_Relevant_col,
+      this.SCIP_No_col,
+      this.Statistical_Goods_No_col,
+      this.CAS_No_col,
+      this.Material_Category_col,
+      this.Status_col
     ];
     head = [headElements]
     return head;

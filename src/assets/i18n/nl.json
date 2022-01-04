@@ -9,6 +9,7 @@
     "Line_Item_col":"Regelitem",
     "SCIP_Relevant_col":"SCIP-relevant",
     "SCIP_No_col":"SCIP-nummer",
+    "Status_col":"Toestand",
     "Statistical_Goods_No_col":"Statistische goederen Nee",
     "CAS_No_col":"CAS-nr",
     "Material_Category_col":"Materiaal categorie",

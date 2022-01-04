@@ -9,6 +9,7 @@
     "Line_Item_col":"Zeilentyp Position",
     "SCIP_Relevant_col":"SCIP-relevant",
     "SCIP_No_col":"SCIP-Nr.",
+    "Status_col":"Status",
     "Statistical_Goods_No_col":"Statistische Warennr.",
     "CAS_No_col":"CAS-Nr.",
     "Material_Category_col":"Materialkategorie",
