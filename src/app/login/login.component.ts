@@ -132,7 +132,8 @@ export class LoginComponent implements OnInit {
 
           } if (this.response.code == 404) {
 
-            this.message = this.response.message + this.response.blockedUntilDateTime;
+            this.message = "Request is Blocked! till date:" + this.response.blockedUntilDateTime.split('-')[0]+
+            ' and time: '+this.response.blockedUntilDateTime.split('-')[1];
             this.isWrongInput = true;
             this.isBlankInput = false;
 
