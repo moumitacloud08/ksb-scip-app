@@ -191,6 +191,9 @@ export class LoginComponent implements OnInit {
         } else if (this.response.code == 400) {
           this.isSentEmail = false
           this.errorMessage = this.response.message          
+        }else if (this.response.code == 404) {
+          this.isSentEmail = false
+          this.errorMessage = this.response.message  +" "+this.response.blockedUntilDateTime        
         }  else {
           this.isSentEmail = false
           this.errorMessage = this.response.message
