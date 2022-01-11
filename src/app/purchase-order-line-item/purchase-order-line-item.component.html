@@ -40,7 +40,7 @@
         </thead>
         <tbody>
           <tr class="table-row"  id="positem_{{parentIndex}}" *ngFor="let pos of posList | paginate : {id: 'pagination1',itemsPerPage: posTableSize,currentPage: posPage,totalItems: posCount}; let i = index" [class.active]="i == selectedRow">
-            <td><a (click)="getPoDetails(pos,i)" style="cursor:pointer">{{pos.purchaseOrder}}</a></td>
+            <td><a (click)="getPoDetails(pos,i)" style="cursor:pointer" data-toggle="modal" data-target="#modalsavechanges">{{pos.purchaseOrder}}</a></td>
             <td>{{pos.poDate}}</td>
             <td *ngIf="pos.scipStatus == 2">
               <div class="open-icon"></div>
@@ -255,7 +255,7 @@
                 <div class="form-group" *ngIf="el.isMatEditShow == true">
                   <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
                     class="table-text-border-class" style="width:99%" [(ngModel)]="el.materialCategory"
-                    (click)="clickevent(parentIndex)" />
+                    (click)="clickevent(parentIndex)"  (keyup)="validateMat(parentIndex)" (keydown)="validateMat(parentIndex)" />
                   <a (click)="clearMatCat(parentIndex)" style="cursor: pointer" *ngIf="el.materialCategory != ''">
                     <img class="icon-cross-mat-class" [src]="iconCross" [alt]="iconCross" />
                   </a>
@@ -333,6 +333,29 @@
   </div>
   <div class="alert alert-danger danger-row-alert-class" role="alert" *ngIf="isLengthZero">
     {{'fill_data_submit_text' | translate}}
+  </div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="modalsavechanges" *ngIf="isModifiedValue">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body modal-body-cutom">
+        <div class="row">
+          <div class="col-md-12 col-part1"> 
+            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">You have Unsaved line items. To Save changes click "Yes" and 
+              click the Submit button. On clicking No your changes will be lost</p>
+          </div>
+          <div class="col-md-12 col-part2">
+            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('Y')"
+              >Yes</button>
+            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('N')"
+             >No</button>           
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

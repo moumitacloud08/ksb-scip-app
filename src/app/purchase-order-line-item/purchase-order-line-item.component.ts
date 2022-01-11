@@ -64,7 +64,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.posList = [];
     translate.addLangs(cons.langArray);
     translate.setDefaultLang(cons.DEFAULT_LANG);
-    
+
   }
   Purchase_Order_col: string;
   Line_Item_col: string;
@@ -72,8 +72,8 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   SCIP_No_col: string;
   Statistical_Goods_No_col: string;
   CAS_No_col: string;
-  Material_Category_col:string;
-  Status_col:string;
+  Material_Category_col: string;
+  Status_col: string;
   authToken;
   isPurchaseOrderSaved: boolean = false;
   isSinglePurchaseOrderSaved: boolean = false;
@@ -92,32 +92,32 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     this.lang = this.localStorageService.retrieve("lang")
     this.translate.use(this.lang);
 
-   
+
     this.translate.stream('Purchase_Order_col').subscribe(res => {
       this.Purchase_Order_col = res;
-    });  
+    });
     this.translate.stream('Line_Item_col').subscribe(res => {
       this.Line_Item_col = res;
     });
     this.translate.stream('SCIP_Relevant_col').subscribe(res => {
       this.SCIP_Relevant_col = res;
-    });  
+    });
     this.translate.stream('SCIP_No_col').subscribe(res => {
       this.SCIP_No_col = res;
-    }); 
+    });
     this.translate.stream('Statistical_Goods_No_col').subscribe(res => {
       this.Statistical_Goods_No_col = res;
-    }); 
+    });
     this.translate.stream('CAS_No_col').subscribe(res => {
       this.CAS_No_col = res;
     });
     this.translate.stream('Material_Category_col').subscribe(res => {
       this.Material_Category_col = res;
-    }); 
+    });
     this.translate.stream('Status_col').subscribe(res => {
       this.Status_col = res;
-    }); 
-    
+    });
+
     this.authToken = this.localStorageService.retrieve('user').authToken;
     console.log(' this.authToken In login ');
     console.log(this.authToken);
@@ -669,14 +669,32 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
+  selectOption(selectedValue: string) {
+    if (selectedValue == 'Y') {
+
+    } else if (selectedValue == 'N') {
+      this.isModifiedValue= false;
+     this.getPoDetails(this.posTemp,this.indexTemp);
+    }
+  }
+
   selectcount = 0;
   selectedRow: Number = -1;
+  isModifiedValue: boolean = false;
+  posTemp:any;
+  indexTemp:any;
   getPoDetails(pos: any, index) {
-    //this.fetchPurchaseDetails(pos.purchaseOrder,pos.uniqueKey);
-    this.fetchPurchaseDetailsTestData(pos.purchaseOrder, pos.uniqueKey);
-    this.selectcount++;
-    this.selectedRow = index;
-    this.localStorageService.clear("singlepomodified")
+    
+    if (!this.isModifiedValue) {
+      //this.fetchPurchaseDetails(pos.purchaseOrder,pos.uniqueKey);
+      this.fetchPurchaseDetailsTestData(pos.purchaseOrder, pos.uniqueKey);
+      this.selectcount++;
+      this.selectedRow = index;
+      this.localStorageService.clear("singlepomodified")
+    } else if (this.isModifiedValue) {
+      this.posTemp = pos
+      this.indexTemp = index
+    }
   }
 
   toggleTable() {
@@ -770,7 +788,10 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
-
+  validateMat(parentIndex: number) {
+    parentIndex = (this.page - 1) * 5 + parentIndex
+    this.isModifiedValue = true
+  }
   validateScip(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].scipNumber =
@@ -779,6 +800,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       this.results[parentIndex].scipNumber = this.results[parentIndex].scipNumber.slice(0, -1);
     }
     this.prevIndex = parentIndex
+    this.isModifiedValue = true
   }
   validateStatGood(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
@@ -789,6 +811,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       this.results[parentIndex].statisticalGoodsNumber = this.results[parentIndex].statisticalGoodsNumber.slice(0, -1);
     }
     this.prevIndex = parentIndex
+    this.isModifiedValue = true
   }
   validateCASNo(parentIndex: number) {
     parentIndex = (this.page - 1) * 5 + parentIndex
@@ -799,6 +822,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
       this.results[parentIndex].casnumber = this.results[parentIndex].casnumber.slice(0, -1);
     }
     this.prevIndex = parentIndex
+    this.isModifiedValue = true
   }
   selectMaterial(item: any, parentIndex: any, elements: any) {
     this.isCatergoryList = true;
