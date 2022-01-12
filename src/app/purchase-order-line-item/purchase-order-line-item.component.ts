@@ -225,7 +225,7 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         this.results[parentIndex].isStatEmpty = true
       }
     }
-
+    this.isModifiedValue = true;
     // this.results[parentIndex].isSCIPSpanShow = true;
     // this.results[parentIndex].isSCIPEditShow = false;
 
