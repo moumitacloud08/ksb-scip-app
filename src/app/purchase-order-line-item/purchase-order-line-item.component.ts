@@ -669,22 +669,33 @@ export class PurchaseOrderLineItemComponent implements OnInit {
         console.log('Promise rejected with ' + JSON.stringify(error));
       });
   }
-  selectOption(selectedValue: string) {
-    if (selectedValue == 'Y') {
+  selectOption(selectedValue: string, clickOption: string) {
+    if (clickOption == 'poClicked') {
+      console.log(clickOption);
+      if (selectedValue == 'Y') {
 
-    } else if (selectedValue == 'N') {
-      this.isModifiedValue= false;
-     this.getPoDetails(this.posTemp,this.indexTemp);
+      } else if (selectedValue == 'N') {
+        this.isModifiedValue = false;
+        this.getPoDetails(this.posTemp, this.indexTemp);
+      }
+    } else if (clickOption == 'toggleClicked') {
+      console.log(clickOption);
+      if (selectedValue == 'N') {
+        this.isModifiedValue = false;
+        this.toggleTable();
+      }
+
     }
+
   }
 
   selectcount = 0;
   selectedRow: Number = -1;
   isModifiedValue: boolean = false;
-  posTemp:any;
-  indexTemp:any;
+  posTemp: any;
+  indexTemp: any;
   getPoDetails(pos: any, index) {
-    
+
     if (!this.isModifiedValue) {
       //this.fetchPurchaseDetails(pos.purchaseOrder,pos.uniqueKey);
       this.fetchPurchaseDetailsTestData(pos.purchaseOrder, pos.uniqueKey);
@@ -698,37 +709,40 @@ export class PurchaseOrderLineItemComponent implements OnInit {
   }
 
   toggleTable() {
-    this.showToggleTable = !this.showToggleTable;
-    console.log("showToggleTable : " + this.showToggleTable);
+    if (!this.isModifiedValue) {
+      this.showToggleTable = !this.showToggleTable;
+      console.log("showToggleTable : " + this.showToggleTable);
 
-    this.page = 1;
-    this.count = 0;
-    this.tableSize = 5;
+      this.page = 1;
+      this.count = 0;
+      this.tableSize = 5;
 
 
-    if (!this.showToggleTable && this.selectcount != -1) {
+      if (!this.showToggleTable && this.selectcount != -1) {
 
-      this.localStorageService.store("modifieddata", this.results);
-      this.results = Object.assign([], this.localStorageService.retrieve("modifiedOrgdata"));
-      this.resultsTemp = Object.assign([], this.results);
-      this.localStorageService.store("orgresultsTemp", this.resultsTemp)
-      if (this.selectedRow == 0)
-        this.selectedRow = -1
+        this.localStorageService.store("modifieddata", this.results);
+        this.results = Object.assign([], this.localStorageService.retrieve("modifiedOrgdata"));
+        this.resultsTemp = Object.assign([], this.results);
+        this.localStorageService.store("orgresultsTemp", this.resultsTemp)
+        if (this.selectedRow == 0)
+          this.selectedRow = -1
 
-    } else if (this.showToggleTable) {
-      this.localStorageService.store("modifiedOrgdata", this.results);
-      this.resultsTemp = Object.assign([], this.results);
-      this.localStorageService.store("poorgresultsTemp", this.resultsTemp)
-      this.results = Object.assign([], this.localStorageService.retrieve("modifieddata"));
-      if (this.posList.length > 0 && this.selectedRow == -1) {
-        //this.fetchPurchaseDetails(this.posList[0].purchaseOrder,this.posList[0].uniqueKey);
-        this.fetchPurchaseDetailsTestData(this.posList[0].purchaseOrder, this.posList[0].uniqueKey);
-        this.selectedRow = 0;
-      } else if (this.posList.length == 0) {
-        this.results = []
+      } else if (this.showToggleTable) {
+        this.localStorageService.store("modifiedOrgdata", this.results);
+        this.resultsTemp = Object.assign([], this.results);
+        this.localStorageService.store("poorgresultsTemp", this.resultsTemp)
+        this.results = Object.assign([], this.localStorageService.retrieve("modifieddata"));
+        if (this.posList.length > 0 && this.selectedRow == -1) {
+          //this.fetchPurchaseDetails(this.posList[0].purchaseOrder,this.posList[0].uniqueKey);
+          this.fetchPurchaseDetailsTestData(this.posList[0].purchaseOrder, this.posList[0].uniqueKey);
+          this.selectedRow = 0;
+        } else if (this.posList.length == 0) {
+          this.results = []
+        }
+
       }
-
     }
+
 
   }
 

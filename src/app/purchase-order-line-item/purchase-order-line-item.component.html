@@ -65,7 +65,7 @@
       </div>
     </div>
     <div class="table-detail pb-5">
-      <div class="toggle-btn-container" [ngClass]="showToggleTable ? 'open' : 'close'" (click)="toggleTable()">
+      <div class="toggle-btn-container" [ngClass]="showToggleTable ? 'open' : 'close'" (click)="toggleTable()" data-toggle="modal" data-target="#modaltoggleTable">
         <span><img src="../../assets/images/arrow-icon.png" width="24px"></span>
       </div>
       <div class="d-flex">
@@ -338,6 +338,28 @@
 
 
 <!-- The Modal -->
+<div class="modal" id="modaltoggleTable" *ngIf="isModifiedValue">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body modal-body-cutom">
+        <div class="row">
+          <div class="col-md-12 col-part1"> 
+            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">You have Unsaved line items. To Save changes click "Yes" and 
+              click the Submit button. On clicking No your changes will be lost</p>
+          </div>
+          <div class="col-md-12 col-part2">
+            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('Y','toggleClicked')"
+              >Yes</button>
+            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('N','toggleClicked')"
+             >No</button>           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
 <div class="modal" id="modalsavechanges" *ngIf="isModifiedValue">
   <div class="modal-dialog  modal-dialog-centered">
     <div class="modal-content">
@@ -348,9 +370,9 @@
               click the Submit button. On clicking No your changes will be lost</p>
           </div>
           <div class="col-md-12 col-part2">
-            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('Y')"
+            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('Y','poClicked')"
               >Yes</button>
-            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('N')"
+            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('N','poClicked')"
              >No</button>           
           </div>
         </div>
