@@ -7,7 +7,7 @@
             "lineItemNumber": "00010",
             "lineItemDetails": [
                 {
-                    "casNumber": "1221123123",
+                    "casNumber": "A",
                     "materialCategory": "12312321",
                     "statisticalGoodsNumber": "12312123",
                     "lineItemNo": "00010"
@@ -22,7 +22,7 @@
             "lineItemNumber": "00030",
             "lineItemDetails": [
                 {
-                    "casNumber": "34535345",
+                    "casNumber": "A",
                     "materialCategory": "",
                     "statisticalGoodsNumber": "34534534",
                     "lineItemNo": "00030"
@@ -34,7 +34,7 @@
                     "lineItemNo": "00030"
                 },
                 {
-                    "casNumber": "",
+                    "casNumber": "B",
                     "materialCategory": "",
                     "statisticalGoodsNumber": "",
                     "lineItemNo": "00030"
@@ -49,7 +49,7 @@
             "lineItemNumber": "00090",
             "lineItemDetails": [
                 {
-                    "casNumber": "",
+                    "casNumber": "C",
                     "materialCategory": "",
                     "statisticalGoodsNumber": "",
                     "lineItemNo": null
@@ -70,13 +70,13 @@
                     "lineItemNo": "00110"
                 },
                 {
-                    "casNumber": "11111111",
+                    "casNumber": "A",
                     "materialCategory": "Q1",
                     "statisticalGoodsNumber": "11111111",
                     "lineItemNo": "00110"
                 },
                 {
-                    "casNumber": "2345",
+                    "casNumber": "A",
                     "materialCategory": "23453",
                     "statisticalGoodsNumber": "23452345345",
                     "lineItemNo": "00110"
@@ -103,7 +103,7 @@
             "lineItemNumber": "00090",
             "lineItemDetails": [
                 {
-                    "casNumber": "1221123123",
+                    "casNumber": "B",
                     "materialCategory": "12312321",
                     "statisticalGoodsNumber": "12312123",
                     "lineItemNo": "00090"

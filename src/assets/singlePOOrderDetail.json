@@ -7,7 +7,7 @@
             "lineItemNumber": "04010",
             "lineItemDetails": [
                 {
-                    "casNumber": "1221123123",
+                    "casNumber": "A",
                     "materialCategory": "12312321",
                     "statisticalGoodsNumber": "12312123",
                     "lineItemNo": "00010"
@@ -23,7 +23,7 @@
             "lineItemDetails": [
               
                 {
-                    "casNumber": "111111",
+                    "casNumber": "A",
                     "materialCategory": "",
                     "statisticalGoodsNumber": "11113333333",
                     "lineItemNo": "00030"
@@ -59,24 +59,24 @@
             "lineItemNumber": "02110",
             "lineItemDetails": [
                 {
-                    "casNumber": "",
+                    "casNumber": "C",
                     "materialCategory": "",
                     "statisticalGoodsNumber": "",
                     "lineItemNo": "02110"
                 },            
                 {
-                    "casNumber": "11111111",
+                    "casNumber": "C",
                     "materialCategory": "Q1",
                     "statisticalGoodsNumber": "1199111",
                     "lineItemNo": "02110"
                 }, {
-                    "casNumber": "",
+                    "casNumber": "C",
                     "materialCategory": "",
                     "statisticalGoodsNumber": "",
                     "lineItemNo": "02110"
                 },            
                 {
-                    "casNumber": "11111111",
+                    "casNumber": "A",
                     "materialCategory": "Q1",
                     "statisticalGoodsNumber": "1117711",
                     "lineItemNo": "02110"
@@ -87,7 +87,7 @@
                     "lineItemNo": "02110"
                 },            
                 {
-                    "casNumber": "11111111",
+                    "casNumber": "B",
                     "materialCategory": "Q1",
                     "statisticalGoodsNumber": "11111111",
                     "lineItemNo": "02110"
