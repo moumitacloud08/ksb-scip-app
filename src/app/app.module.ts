@@ -22,6 +22,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { KsbTooltipComponent } from './ksb-tooltip/ksb-tooltip.component';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
 
 
 @NgModule({
@@ -43,6 +45,7 @@ import { KsbTooltipComponent } from './ksb-tooltip/ksb-tooltip.component';
     FontAwesomeModule,
     Ng2SearchPipeModule,
     NgxPaginationModule,
+    AutocompleteLibModule,
     NgxWebstorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {

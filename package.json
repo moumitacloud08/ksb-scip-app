@@ -24,6 +24,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "ajv": "^6.9.1",
+    "angular-ng-autocomplete": "^2.0.5",
     "faker": "^5.5.3",
     "find-array-duplicates": "^1.0.6",
     "flag-icon-css": "^3.5.0",

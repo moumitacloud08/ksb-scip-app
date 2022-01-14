@@ -182,6 +182,87 @@ export class PurchaseOrderLineItemComponent implements OnInit {
     // this.fetchPurchaseDetailsTestData('')
   }
 
+  keyword = 'name';
+  casNoList = [
+    {
+      "id": "1",
+      "name": "PIT-102"
+    },
+    {
+      "id": "2",
+      "name": "CAS-992"
+    },
+    {
+      "id": "3",
+      "name": "AAP-552"
+    },
+    {
+      "id": "4",
+      "name": "SIS-972"
+    }
+  ];
+
+
+  selectEvent(parentIndex,item) {
+    // do something with selected item
+    console.log("selected");
+    console.log(item);
+
+    parentIndex = (this.page - 1) * 5 + parentIndex
+    this.results[parentIndex].casnumber = item.name
+   
+      if (!this.results[parentIndex].isSubRow) {
+        let resultdata = this.results
+        if (this.showToggleTable) {
+          this.resultsPDFData = Object.assign([], this.localStorageService.retrieve("poorgresultsPDFData"));
+        } else if (!this.showToggleTable) {
+          this.resultsPDFData = Object.assign([], this.localStorageService.retrieve("orgresultsPDFData"));
+        }
+        this.resultsPDFData.forEach(function (value) {
+          if (value.lineItemNumber == resultdata[parentIndex].lineItemNumber) {
+            console.log(value.lineItemNumber + " " + resultdata[parentIndex].lineItemNumber + " " + value.scipNumber);
+            resultdata[parentIndex].scipNumber = value.scipNumber
+            resultdata[parentIndex].statisticalGoodsNumber = value.statisticalGoodsNumber
+           // resultdata[parentIndex].casnumber = value.casnumber
+            resultdata[parentIndex].materialCategory = value.materialCategory
+          }
+        })
+        this.results = resultdata
+      }
+      this.results[parentIndex].isbuttonDisabled = false
+      // if (this.results[parentIndex].casnumber == '') {
+      //   this.results[parentIndex].isCASNumberEmpty = true
+      // }
+      if (this.results[parentIndex].scipNumber == '') {
+        this.results[parentIndex].isSCIPEmpty = true
+      }
+      if (this.results[parentIndex].statisticalGoodsNumber == '') {
+        this.results[parentIndex].isStatEmpty = true
+      }
+    
+    this.isModifiedValue = true;
+    // this.results[parentIndex].isSCIPSpanShow = true;
+    // this.results[parentIndex].isSCIPEditShow = false;
+
+    // this.results[parentIndex].isStatSpanShow = true;
+    // this.results[parentIndex].isStatEditShow = false;
+
+    // this.results[parentIndex].isCasSpanShow = true;
+    // this.results[parentIndex].isCasEditShow = false;
+
+    // this.results[parentIndex].isMatSpanShow = true;
+    // this.results[parentIndex].isMatEditShow = false;
+  }
+
+  onChangeSearch(val: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+  
+  onFocused(e){
+    // do something when input is focused
+  }
+
   getCASNo(parentIndex, casnumber) {
     parentIndex = (this.page - 1) * 5 + parentIndex
     this.results[parentIndex].casnumber = casnumber

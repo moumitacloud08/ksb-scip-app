@@ -39,8 +39,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="table-row"  id="positem_{{parentIndex}}" *ngFor="let pos of posList | paginate : {id: 'pagination1',itemsPerPage: posTableSize,currentPage: posPage,totalItems: posCount}; let i = index" [class.active]="i == selectedRow">
-            <td><a (click)="getPoDetails(pos,i)" style="cursor:pointer" data-toggle="modal" data-target="#modalsavechanges">{{pos.purchaseOrder}}</a></td>
+          <tr class="table-row" id="positem_{{parentIndex}}"
+            *ngFor="let pos of posList | paginate : {id: 'pagination1',itemsPerPage: posTableSize,currentPage: posPage,totalItems: posCount}; let i = index"
+            [class.active]="i == selectedRow">
+            <td><a (click)="getPoDetails(pos,i)" style="cursor:pointer" data-toggle="modal"
+                data-target="#modalsavechanges">{{pos.purchaseOrder}}</a></td>
             <td>{{pos.poDate}}</td>
             <td *ngIf="pos.scipStatus == 2">
               <div class="open-icon"></div>
@@ -59,13 +62,15 @@
       </table><br>
       <div class="table-footer sticky-footer">
         <div class="d-flex justify-content-right my-pagination flex">
-          <pagination-controls id="pagination1" responsive="true" previousLabel="" nextLabel="" (pageChange)="onPOSTableDataChange($event)">
+          <pagination-controls id="pagination1" responsive="true" previousLabel="" nextLabel=""
+            (pageChange)="onPOSTableDataChange($event)">
           </pagination-controls>
         </div>
       </div>
     </div>
     <div class="table-detail pb-5">
-      <div class="toggle-btn-container" [ngClass]="showToggleTable ? 'open' : 'close'" (click)="toggleTable()" data-toggle="modal" data-target="#modaltoggleTable">
+      <div class="toggle-btn-container" [ngClass]="showToggleTable ? 'open' : 'close'" (click)="toggleTable()"
+        data-toggle="modal" data-target="#modaltoggleTable">
         <span><img src="../../assets/images/arrow-icon.png" width="24px"></span>
       </div>
       <div class="d-flex">
@@ -239,32 +244,40 @@
               <ksb-tooltip
                 [showTooltip]="el.isCasEditShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)"
                 [tooltipText]="'Please enter Cas No.'"></ksb-tooltip> -->
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span style="font-size:  0.875rem;"
-                      *ngIf="el.casnumber == '' || el.casnumber == null">{{'Select_option' | translate}}</span>
-                    <span *ngIf="el.casnumber == 'A'">A</span>
-                    <span *ngIf="el.casnumber == 'B'">B</span>
-                    <span *ngIf="el.casnumber == 'C'">C</span>                    
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <button *ngIf="el.casnumber != '' && el.casnumber != null" class="dropdown-item" type="button"
-                      (click)="getCASNo(parentIndex,'')" >
-                      <span style="font-size:  0.875rem;">{{'Select_option' | translate}}</span>
-                    </button>
-                    <button class="dropdown-item" type="button" (click)="getCASNo(parentIndex,'A')">
-                      <span style="font-size:  0.875rem;">A</span>
-                    </button>
-                    <button class="dropdown-item" type="button" (click)="getCASNo(parentIndex,'B')">
-                      <span style="font-size:  0.875rem;">B</span>
-                    </button>
-                    <button class="dropdown-item" type="button" (click)="getCASNo(parentIndex,'C')">
-                      <span style="font-size:  0.875rem;">C</span>
-                    </button>
+
+
+              <div (mouseenter)="mouseEnter(parentIndex,'cas') " (mouseleave)="mouseLeave(parentIndex,'cas')">
+                <div *ngIf="el.isCasSpanShow == true" class="ellipsis" style="margin: 0 auto;max-width: 66%;">
+                  <span *ngIf="!el.casnumber || el.casnumber==''" class="text-class">text</span>
+                  <span>{{ el.casnumber }}
+                    <img *ngIf="((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)"
+                      [src]="iconWarning" [alt]="iconWarningdAlt" class="icon-warning-span-class" />
+                  </span>
+                </div>
+                <div class="form-group" *ngIf="el.isCasEditShow == true">
+                  <div class="ng-autocomplete">
+                    <ng-autocomplete [data]="casNoList" [searchKeyword]="keyword"
+                      (selected)='selectEvent(parentIndex,$event)' (inputChanged)='onChangeSearch($event)'
+                      (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+                      [notFoundTemplate]="notFoundTemplate">
+                    </ng-autocomplete>
+
+                    <ng-template #itemTemplate let-item>
+                      <a [innerHTML]="item.name"></a>
+                    </ng-template>
+
+                    <ng-template #notFoundTemplate let-notFound>
+                      <div [innerHTML]="notFound"></div>
+                    </ng-template>
                   </div>
                 </div>
-              
+              </div>
+              <ksb-tooltip
+                [showTooltip]="el.isCasEditShow && ((!el.isSCIPEmpty || el.isSCIPEmpty) && !el.isStatEmpty && el.isCASNumberEmpty)"
+                [tooltipText]="'Please enter Cas No.'"></ksb-tooltip>
+
+
+
             </td>
             <td width="9%">
               <div (mouseenter)="mouseEnter(parentIndex,'mat') " (mouseleave)="mouseLeave(parentIndex,'mat')"
@@ -276,7 +289,8 @@
                 <div class="form-group" *ngIf="el.isMatEditShow == true">
                   <input type="text" name="materialCategory{{parentIndex}}" id="materialCategory{{parentIndex}}"
                     class="table-text-border-class" style="width:99%" [(ngModel)]="el.materialCategory"
-                    (click)="clickevent(parentIndex)"  (keyup)="validateMat(parentIndex)" (keydown)="validateMat(parentIndex)" />
+                    (click)="clickevent(parentIndex)" (keyup)="validateMat(parentIndex)"
+                    (keydown)="validateMat(parentIndex)" />
                   <a (click)="clearMatCat(parentIndex)" style="cursor: pointer" *ngIf="el.materialCategory != ''">
                     <img class="icon-cross-mat-class" [src]="iconCross" [alt]="iconCross" />
                   </a>
@@ -325,7 +339,8 @@
       </table>
       <div class="table-footer sticky-footer">
         <div class="d-flex justify-content-right my-pagination flex">
-          <pagination-controls id="pagination2" responsive="true" previousLabel="" nextLabel="" (pageChange)="onTableDataChange($event)">
+          <pagination-controls id="pagination2" responsive="true" previousLabel="" nextLabel=""
+            (pageChange)="onTableDataChange($event)">
           </pagination-controls>
         </div>
       </div>
@@ -364,15 +379,16 @@
     <div class="modal-content">
       <div class="modal-body modal-body-cutom">
         <div class="row">
-          <div class="col-md-12 col-part1"> 
-            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">You have Unsaved line items. To Save changes click "Yes" and 
+          <div class="col-md-12 col-part1">
+            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">You have Unsaved line items. To
+              Save changes click "Yes" and
               click the Submit button. On clicking No your changes will be lost</p>
           </div>
           <div class="col-md-12 col-part2">
-            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('Y','toggleClicked')"
-              >Yes</button>
-            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('N','toggleClicked')"
-             >No</button>           
+            <button type="button" class="button blue-button-modal" data-dismiss="modal"
+              (click)="selectOption('Y','toggleClicked')">Yes</button>
+            <button type="button" class="button blue-button-modal" data-dismiss="modal"
+              (click)="selectOption('N','toggleClicked')">No</button>
           </div>
         </div>
       </div>
@@ -386,15 +402,16 @@
     <div class="modal-content">
       <div class="modal-body modal-body-cutom">
         <div class="row">
-          <div class="col-md-12 col-part1"> 
-            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">You have Unsaved line items. To Save changes click "Yes" and 
+          <div class="col-md-12 col-part1">
+            <p style="color:#616161;font-size: 16px;font-family: 'Roboto', sans-serif;">You have Unsaved line items. To
+              Save changes click "Yes" and
               click the Submit button. On clicking No your changes will be lost</p>
           </div>
           <div class="col-md-12 col-part2">
-            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('Y','poClicked')"
-              >Yes</button>
-            <button type="button" class="button blue-button-modal" data-dismiss="modal" (click)="selectOption('N','poClicked')"
-             >No</button>           
+            <button type="button" class="button blue-button-modal" data-dismiss="modal"
+              (click)="selectOption('Y','poClicked')">Yes</button>
+            <button type="button" class="button blue-button-modal" data-dismiss="modal"
+              (click)="selectOption('N','poClicked')">No</button>
           </div>
         </div>
       </div>

@@ -748,3 +748,6 @@ a.page-style:hover {
     background-color:#639eda !important;
     color: white;
   }
+  .ng-autocomplete {
+    width: 100px;
+}
